@@ -1,0 +1,6 @@
+{
+  "name": "Memoir Tale",
+  "description": "India's premier memoir book creation service. We craft beautifully written, professionally designed life story books, tributes, and anniversary memoirs printed as elegant hardcovers.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

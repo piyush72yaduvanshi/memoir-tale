@@ -1,0 +1,37 @@
+{
+  "entities": {
+    "Inquiry": {
+      "title": "Inquiry",
+      "description": "A customer story inquiry submission",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "fullName": { "type": "string" },
+        "phone": { "type": "string" },
+        "email": { "type": "string" },
+        "cityState": { "type": "string" },
+        "service": { "type": "string" },
+        "aboutWhom": { "type": "string" },
+        "briefStory": { "type": "string" },
+        "preferredTime": { "type": "string" },
+        "status": {
+          "type": "string",
+          "enum": ["Pending", "Meeting Scheduled", "Work In Progress", "Project Completed", "Additional Information Required"]
+        },
+        "ticketNo": { "type": "string" },
+        "attachments": {
+          "type": "array"
+        },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["fullName", "phone", "email", "ticketNo", "status"]
+    }
+  },
+  "firestore": {
+    "/inquiries/{inquiryId}": {
+      "schema": "Inquiry",
+      "description": "Collection of user-submitted life story details and uploaded assets"
+    }
+  }
+}

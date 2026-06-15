@@ -1,0 +1,58 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Global Safety Net Default Deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+    
+    // Checks if user is authenticated
+    function isSignedIn() {
+      return request.auth != null;
+    }
+    
+    // Verified admin checklist (using bootstrapped email and dynamic reference)
+    function isAdmin() {
+      return isSignedIn() && (
+        request.auth.token.email_verified == true && (
+          request.auth.token.email == 'ourdealsofficial@gmail.com' ||
+          exists(/databases/$(database)/documents/admins/$(request.auth.uid))
+        )
+      );
+    }
+    
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+    
+    // Validation helper for Inquiry Entity
+    function isValidInquiry(data) {
+      return data.fullName is string && data.fullName.size() > 0 && data.fullName.size() <= 200 &&
+             data.phone is string && data.phone.size() >= 10 && data.phone.size() <= 30 &&
+             data.email is string && data.email.size() > 0 && data.email.size() <= 200 &&
+             data.ticketNo is string && data.ticketNo.size() <= 50 &&
+             data.status in ["Pending", "Meeting Scheduled", "Work In Progress", "Project Completed", "Additional Information Required"];
+    }
+
+    match /inquiries/{inquiryId} {
+      // Anonymous prospects are allowed to submit inquiries
+      allow create: if isValidId(inquiryId) && 
+                      isValidInquiry(request.resource.data) &&
+                      request.resource.data.status == "Pending";
+                      
+      // Read, Update, Delete are restricted strictly to Admins
+      allow read: if isAdmin();
+      allow delete: if isAdmin();
+      
+      // Updates allowed for state transitions and modifications carried out by Admin
+      allow update: if isAdmin() && 
+                      isValidInquiry(request.resource.data);
+    }
+    
+    // Seeding/Admin mapping path
+    match /admins/{adminId} {
+      allow read, write: if isAdmin();
+    }
+  }
+}
