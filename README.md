@@ -27,6 +27,7 @@ A beautiful, modern web application for preserving life stories and creating leg
 ### Prerequisites
 - Node.js 18+ 
 - npm or yarn
+- Firebase project (for backend features)
 
 ### Installation
 
@@ -38,11 +39,46 @@ cd memoir-tale
 # Install dependencies
 npm install
 
+# Configure Firebase Environment Variables
+# IMPORTANT: Set up your Firebase keys before running the app
+# 1. Copy the example file
+cp .env.example .env
+
+# 2. Get your Firebase config from Firebase Console:
+#    https://console.firebase.google.com/ > Project Settings > Your apps
+# 3. Update the .env file with your actual Firebase keys
+
 # Start development server
 npm run dev
 ```
 
 The app will run on `http://localhost:3000/`
+
+### ⚠️ Important: Firebase Environment Setup
+
+**Never commit your `.env` file to GitHub!** It contains sensitive Firebase keys.
+
+1. **Copy the template**:
+   ```bash
+   cp .env.example .env
+   ```
+
+2. **Get your Firebase keys**:
+   - Go to [Firebase Console](https://console.firebase.google.com/)
+   - Select your project → Project Settings → Your apps
+   - Copy the configuration values
+
+3. **Update `.env` with your keys**:
+   ```env
+   VITE_FIREBASE_API_KEY=AIzaSy...
+   VITE_FIREBASE_AUTH_DOMAIN=your-project.firebaseapp.com
+   VITE_FIREBASE_PROJECT_ID=your-project-id
+   VITE_FIREBASE_STORAGE_BUCKET=your-project.firebasestorage.app
+   VITE_FIREBASE_MESSAGING_SENDER_ID=123456789
+   VITE_FIREBASE_APP_ID=1:123456789:web:abc123
+   ```
+
+4. **Verify setup**: The app will fail to load if Firebase keys are missing or incorrect.
 
 ### Build for Production
 
@@ -148,10 +184,35 @@ The app supports:
 
 ## 🔥 Firebase Integration
 
-Configuration in `src/lib/firebase.ts`:
-- **Firestore** - Store inquiries and user data
-- **Auth** - Admin authentication
+**Security Note**: Firebase configuration is now loaded from environment variables.
+
+### Setup
+1. Configuration file: `src/lib/firebase.ts`
+2. Environment variables in `.env` (never commit this file!)
+3. Template provided in `.env.example`
+
+### Services Used
+- **Firestore** - Store contact inquiries and user data
+- **Auth** - Admin authentication for dashboard
 - **Security Rules** - Defined in `firestore.rules`
+
+### Environment Variables
+All Firebase keys are stored in `.env` and loaded via Vite:
+```typescript
+const firebaseConfig = {
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+};
+```
+
+**Important**: 
+- `.env` is in `.gitignore` and will NOT be committed to GitHub
+- Use `.env.example` as a template for your local `.env` file
+- Each developer needs their own `.env` file with Firebase credentials
 
 ## 📦 Scripts
 
