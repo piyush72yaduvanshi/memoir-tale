@@ -13,7 +13,7 @@ import { jsPDF } from "jspdf";
 export default function AdminDashboard() {
   // Authentication states
   const [user, setUser] = useState<User | null>(null);
-  const [email, setEmail] = useState("ourdealsofficial@gmail.com");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [authMode, setAuthMode] = useState<"login" | "register">("login");
   const [authError, setAuthError] = useState("");

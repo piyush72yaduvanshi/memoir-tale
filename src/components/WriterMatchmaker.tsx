@@ -63,7 +63,11 @@ const WRITERS: Writer[] = [
   },
 ];
 
-export default function WriterMatchmaker() {
+interface WriterMatchmakerProps {
+  onMatchWriter?: (writerName: string) => void;
+}
+
+export default function WriterMatchmaker({ onMatchWriter }: WriterMatchmakerProps) {
   const [step, setStep] = useState(1);
   const [genre, setGenre] = useState<Genre>('');
   const [language, setLanguage] = useState<Language>('');
@@ -131,7 +135,13 @@ export default function WriterMatchmaker() {
 
             <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
               <button
-                onClick={() => window.scrollTo({ top: document.getElementById('contact')?.offsetTop || 0, behavior: 'smooth' })}
+                onClick={() => {
+                  if (onMatchWriter) {
+                    onMatchWriter(matchedWriter.name);
+                  } else {
+                    window.scrollTo({ top: document.getElementById('contact')?.offsetTop || 0, behavior: 'smooth' });
+                  }
+                }}
                 className="px-8 py-4 bg-[#8B5CF6] hover:bg-white/88 text-white font-semibold rounded-full transition-all duration-300 hover:scale-105 shadow-lg flex items-center justify-center gap-2"
               >
                 <span>Book This Writer</span>

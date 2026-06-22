@@ -40,7 +40,7 @@ export default function TestimonialsSection() {
             <div className="rounded-xl overflow-hidden border shadow-xl relative aspect-video sm:aspect-square flex items-center justify-center max-h-[480px] group bg-[#fcedca]/20 border-accent-purple/20">
               {/* Background image */}
               <img
-                src="https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&q=80&w=800"
+                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=800"
                 alt="Happy elderly person reading memoir book"
                 className={`absolute inset-0 w-full h-full object-cover transition-all duration-[8s] select-none ${
                   isVideoPlaying ? 'scale-105 brightness-50' : 'scale-100 group-hover:scale-102 brightness-[0.85]'
@@ -173,7 +173,7 @@ export default function TestimonialsSection() {
               <div className="text-center space-y-6 my-4">
                 <div className="w-24 h-24 rounded-full overflow-hidden mx-auto border-2 border-accent-purple select-none flex">
                   <img
-                    src="https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&q=80&w=200"
+                    src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=200"
                     alt="Sardar Gurdev Singh Sidhu"
                     className="w-full h-full object-cover"
                     referrerPolicy="no-referrer"

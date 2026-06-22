@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Phone, X, Calendar } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { collection, addDoc } from 'firebase/firestore';
-import { db } from '../lib/firebase';
+import { db, isFirebaseReady } from '../lib/firebase';
 
 export default function FloatingCallbackButton() {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,6 +19,28 @@ export default function FloatingCallbackButton() {
     e.preventDefault();
     setIsSubmitting(true);
     setErrorMsg('');
+    
+    // Check if Firebase is ready
+    if (!isFirebaseReady()) {
+      setErrorMsg('Firebase service is not available. Please try again later.');
+      setIsSubmitting(false);
+      return;
+    }
+    
+    // Additional null check for db
+    if (!db) {
+      setErrorMsg('Service is currently unavailable. Please call us directly at 9889011174.');
+      setIsSubmitting(false);
+      return;
+    }
+
+    // Check for duplicate submissions (cooldown period: 1 hour)
+    const lastSubmit = localStorage.getItem('mt-callback-ts');
+    if (lastSubmit && Date.now() - parseInt(lastSubmit) < 3600000) {
+      setErrorMsg('You already submitted a callback request. We will call you soon!');
+      setIsSubmitting(false);
+      return;
+    }
 
     try {
       // Generate ticket number
@@ -37,6 +59,9 @@ export default function FloatingCallbackButton() {
       });
 
       console.log('Callback Request Saved:', { ticketNo, ...formData });
+      
+      // Store timestamp to prevent duplicate submissions
+      localStorage.setItem('mt-callback-ts', Date.now().toString());
       
       setIsSubmitting(false);
       setIsSuccess(true);
@@ -66,19 +91,21 @@ export default function FloatingCallbackButton() {
       {/* Floating Button */}
       <motion.button
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-8 right-8 z-50 h-16 px-6 rounded-full bg-gradient-to-r from-[#8B5CF6] to-[#7C3AED] text-white shadow-[0_8px_32px_rgba(139,92,246,0.4)] hover:shadow-[0_12px_40px_rgba(139,92,246,0.5)] transition-all duration-300 flex items-center justify-center gap-3 group cursor-pointer"
+        className={`fixed bottom-20 md:bottom-8 right-8 z-50 h-16 px-6 rounded-full bg-gradient-to-r from-[#8B5CF6] to-[#7C3AED] text-white shadow-[0_8px_32px_rgba(139,92,246,0.4)] hover:shadow-[0_12px_40px_rgba(139,92,246,0.5)] transition-all duration-300 items-center justify-center gap-3 group cursor-pointer ${
+          isOpen ? 'hidden' : 'flex'
+        }`}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        animate={{
+        animate={!isOpen ? {
           y: [0, -10, 0],
-        }}
-        transition={{
+        } : {}}
+        transition={!isOpen ? {
           y: {
             duration: 2,
             repeat: Infinity,
             ease: "easeInOut",
           },
-        }}
+        } : {}}
       >
         <Phone className="h-5 w-5 group-hover:rotate-12 transition-transform duration-300" />
         <span className="font-bold text-sm tracking-wide whitespace-nowrap">BOOK FREE CALL</span>

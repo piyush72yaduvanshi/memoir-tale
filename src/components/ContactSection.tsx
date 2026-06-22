@@ -3,16 +3,17 @@ import { Phone, Mail, MapPin, Clock, CheckCircle2, ShieldCheck, Lock, FileSignat
 import { useLanguage } from "../context/LanguageContext";
 import { motion, AnimatePresence } from "motion/react";
 import { collection, doc, setDoc } from "firebase/firestore";
-import { db, handleFirestoreError, OperationType } from "../lib/firebase";
+import { db, handleFirestoreError, OperationType, isFirebaseReady } from "../lib/firebase";
 import FadeIn from "./FadeIn";
 
 interface ContactSectionProps {
   selectedService: string;
   matchedWriter?: string | null;
   onClearMatchedWriter?: () => void;
+  darkMode: boolean;
 }
 
-export default function ContactSection({ selectedService, matchedWriter, onClearMatchedWriter }: ContactSectionProps) {
+export default function ContactSection({ selectedService, matchedWriter, onClearMatchedWriter, darkMode }: ContactSectionProps) {
   const { lang, t } = useLanguage();
   const isHindi = lang === "HI";
   
@@ -52,10 +53,30 @@ export default function ContactSection({ selectedService, matchedWriter, onClear
     }
   }, [matchedWriter, isHindi]);
 
-  // Handle local file selections to Base64
+  // Handle local file selections to Base64 with size validation
   const handleFileSelection = (files: FileList | null) => {
     if (!files) return;
+    
+    const MAX_FILE_SIZE = 50 * 1024 * 1024; // 50MB
+    const MAX_TOTAL_SIZE = 100 * 1024 * 1024; // 100MB total
+    
+    let totalCurrentSize = attachedFiles.reduce((acc, f) => acc + f.size, 0);
+    
     Array.from(files).forEach((file) => {
+      // Check individual file size
+      if (file.size > MAX_FILE_SIZE) {
+        setErrorMsg(`File "${file.name}" exceeds 50MB limit. Please choose a smaller file.`);
+        return;
+      }
+      
+      // Check total size
+      if (totalCurrentSize + file.size > MAX_TOTAL_SIZE) {
+        setErrorMsg('Total attachment size exceeds 100MB. Please remove some files before adding more.');
+        return;
+      }
+      
+      totalCurrentSize += file.size;
+      
       const reader = new FileReader();
       reader.onloadend = () => {
         setAttachedFiles((prev) => [
@@ -98,16 +119,33 @@ export default function ContactSection({ selectedService, matchedWriter, onClear
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMsg("");
+    
+    // Check if Firebase is ready
+    if (!isFirebaseReady()) {
+      setErrorMsg(isHindi ? "Firebase सेवा उपलब्ध नहीं है। कृपया बाद में पुनः प्रयास करें।" : "Firebase service is not available. Please try again later.");
+      return;
+    }
+    
+    // Additional null check for db
+    if (!db) {
+      setErrorMsg(isHindi ? 'सेवा वर्तमान में उपलब्ध नहीं है। कृपया सीधे 9889011174 पर कॉल करें।' : 'Service is currently unavailable. Please call us directly at 9889011174.');
+      return;
+    }
 
     // Simple Form Validation
     if (!fullName.trim()) {
       setErrorMsg(isHindi ? "कृपया अपना पूरा नाम दर्ज करें" : "Please enter your full name (Aapka pura naam)");
       return;
     }
-    if (!phone.trim() || phone.length < 10) {
-      setErrorMsg(isHindi ? "कृपया एक मान्य फोन नंबर दर्ज करें" : "Please enter a valid (+91) Phone Number (Mobile number)");
+    
+    // Improved Indian phone validation
+    const cleanPhone = phone.replace(/[\s\-\+]/g, '');
+    const indianPhoneRegex = /^(\+91|91|0)?[6-9]\d{9}$/;
+    if (!phone.trim() || !indianPhoneRegex.test(cleanPhone)) {
+      setErrorMsg(isHindi ? "कृपया एक मान्य भारतीय मोबाइल नंबर दर्ज करें (+91 XXXXX XXXXX)" : "Please enter a valid Indian mobile number (+91 XXXXX XXXXX)");
       return;
     }
+    
     if (!email.trim() || !email.includes("@")) {
       setErrorMsg(isHindi ? "कृपया एक मान्य ईमेल पता दर्ज करें" : "Please enter a valid email address.");
       return;
@@ -117,32 +155,13 @@ export default function ContactSection({ selectedService, matchedWriter, onClear
     const ticket = "MT-" + Math.floor(100000 + Math.random() * 900000);
 
     try {
-      // 1. Upload files securely to backend servers under /uploads
-      const uploadedAttachments: any[] = [];
-      for (const attached of attachedFiles) {
-        try {
-          const uploadRes = await fetch("/api/upload", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              filename: attached.name,
-              fileType: attached.type,
-              base64Data: attached.dataUrl,
-            }),
-          });
-          const uploadData = await uploadRes.json();
-          if (uploadData.success) {
-            uploadedAttachments.push({
-              name: attached.name,
-              url: uploadData.fileUrl,
-              type: attached.type,
-              size: attached.size,
-            });
-          }
-        } catch (uploadErr) {
-          console.error(`Skipping upload of file ${attached.name} due to error:`, uploadErr);
-        }
-      }
+      // 1. Store file metadata only (no backend upload API on Vercel static deployment)
+      const uploadedAttachments = attachedFiles.map(f => ({
+        name: f.name,
+        type: f.type,
+        size: f.size,
+        note: 'File attached locally — team will request via WhatsApp'
+      }));
 
       // 2. Transmit details and file references securely into Firestore inquires
       const now = new Date().toISOString();
@@ -202,6 +221,11 @@ export default function ContactSection({ selectedService, matchedWriter, onClear
       setCityState("");
       setBriefStory("");
       setAttachedFiles([]);
+      
+      // Reset form dropdown fields
+      setService('Life Story Book');
+      setAboutWhom('My Parent');
+      setPreferredTime('Anytime');
     } catch (dbErr: any) {
       console.error("Critical submission flow occurred:", dbErr);
       setErrorMsg(isHindi ? "जमा करते समय एक त्रुटि हुई। कृपया पुनः प्रयास करें।" : "Database submission failed. Please try again.");
@@ -214,7 +238,11 @@ export default function ContactSection({ selectedService, matchedWriter, onClear
   return (
     <section
       id="contact"
-      className="relative bg-gradient-to-b from-[#FAF6F0] via-[#FCFBF7] to-[#FAF8F5] py-16 lg:py-24 text-[#190F26] overflow-hidden border-b border-[#E3DDE9]/40"
+      className={`relative py-16 lg:py-24 overflow-hidden ${
+        darkMode 
+          ? 'bg-[#1f1030] text-[#F5F0F8] border-b border-white/10' 
+          : 'bg-gradient-to-b from-[#FAF6F0] via-[#FCFBF7] to-[#FAF8F5] text-[#190F26] border-b border-[#E3DDE9]/40'
+      }`}
     >
       {/* Decorative Blur Ellipse per guidelines */}
       <div className="absolute bottom-[5%] right-[-120px] w-[500px] h-[500px] bg-[#8B5CF6]/4 rounded-full blurred-ellipse pointer-events-none" />
@@ -224,14 +252,22 @@ export default function ContactSection({ selectedService, matchedWriter, onClear
         
         {/* SUB-SECTION A: Bold Stats Row with FadeIn */}
         <FadeIn>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 bg-white border border-[#E3DDE9]/60 rounded-2xl p-6 lg:p-8 mb-20 text-center relative z-10 shadow-[0_8px_30px_rgba(69,20,122,0.04)]">
+          <div className={`grid grid-cols-2 lg:grid-cols-4 gap-6 rounded-2xl p-6 lg:p-8 mb-20 text-center relative z-10 shadow-[0_8px_30px_rgba(69,20,122,0.04)] ${
+            darkMode 
+              ? 'bg-[#2D1B36] border border-white/10'
+              : 'bg-white border border-[#E3DDE9]/60'
+          }`}>
             
             {/* Stat 1 */}
             <div className="flex flex-col items-center justify-center p-3">
-              <div className="bg-[#FAF6F0] p-2.5 rounded-full text-[#8B5CF6] mb-3 border border-[#E3DDE9]">
+              <div className={`p-2.5 rounded-full text-[#8B5CF6] mb-3 border ${
+                darkMode ? 'bg-[#3A2447] border-white/10' : 'bg-[#FAF6F0] border-[#E3DDE9]'
+              }`}>
                 <Phone className="h-5 w-5" />
               </div>
-              <span className="font-serif font-bold text-lg sm:text-xl lg:text-[22px] text-[#190F26]">
+              <span className={`font-serif font-bold text-lg sm:text-xl lg:text-[22px] ${
+                darkMode ? 'text-white' : 'text-[#190F26]'
+              }`}>
                 9889011174
               </span>
               <span className="font-sans font-semibold text-[11px] sm:text-xs text-[#8B5CF6] uppercase tracking-wider mt-1">
@@ -240,8 +276,12 @@ export default function ContactSection({ selectedService, matchedWriter, onClear
             </div>
 
             {/* Stat 2 */}
-            <div className="flex flex-col items-center justify-center p-3 border-l border-[#E3DDE9] lg:border-l">
-              <div className="bg-[#FAF6F0] p-2.5 rounded-full text-[#8B5CF6] mb-3 border border-[#E3DDE9]">
+            <div className={`flex flex-col items-center justify-center p-3 border-l lg:border-l ${
+              darkMode ? 'border-white/10' : 'border-[#E3DDE9]'
+            }`}>
+              <div className={`p-2.5 rounded-full text-[#8B5CF6] mb-3 border ${
+                darkMode ? 'bg-[#3A2447] border-white/10' : 'bg-[#FAF6F0] border-[#E3DDE9]'
+              }`}>
                 <Mail className="h-5 w-5" />
               </div>
               <span className="font-serif font-bold text-sm sm:text-base lg:text-[18px] text-[#190F26] truncate max-w-full">

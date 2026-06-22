@@ -4,15 +4,13 @@ import { BOOK_COVERS, TRANSLATIONS } from "../data";
 import { useLanguage } from "../context/LanguageContext";
 import { motion } from "motion/react";
 
-const heroImage = "/src/assets/images/memoir_hero_book.png";
-
 // Background images for slideshow - suitable for biography/memoir website
 const BACKGROUND_IMAGES = [
-  'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&q=80&w=1920', // Old books on shelf
-  'https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&q=80&w=1920', // Book stack with vintage feel
-  'https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&q=80&w=1920', // Open book with glasses
-  'https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&q=80&w=1920', // Elderly person with memories
-  'https://images.unsplash.com/photo-1457369804613-52c61a468e7d?auto=format&fit=crop&q=80&w=1920', // Old photographs vintage
+  'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&q=80&w=1280', // Old books on shelf
+  'https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&q=80&w=1280', // Book stack with vintage feel
+  'https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&q=80&w=1280', // Open book with glasses
+  'https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&q=80&w=1280', // Elderly person with memories
+  'https://images.unsplash.com/photo-1457369804613-52c61a468e7d?auto=format&fit=crop&q=80&w=1280', // Old photographs vintage
 ];
 
 interface HeroProps {
@@ -53,7 +51,7 @@ export default function Hero({ darkMode, onStartStoryClick, onViewBooksClick, is
   };
 
   return (
-    <section className="relative w-full h-screen min-h-[650px] overflow-hidden flex items-center justify-center">
+    <section className="relative w-full h-screen min-h-[650px] overflow-hidden flex items-center justify-center bg-[#2D1B36]">
       
       {/* Background Image Container with Slideshow */}
       <div className="absolute inset-0 z-0">

@@ -44,6 +44,20 @@ export default function Navbar({
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      const dropdown = document.getElementById('services-dropdown');
+      if (dropdown && !dropdown.contains(e.target as Node)) {
+        setDropdownOpen(false);
+      }
+    };
+    if (dropdownOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [dropdownOpen]);
+
   const scrollToSection = (id: string) => {
     setMobileMenuOpen(false);
     setDropdownOpen(false);
@@ -116,7 +130,7 @@ export default function Navbar({
             </button>
 
             {/* Services Dropdown Trigger */}
-            <div className="relative">
+            <div className="relative" id="services-dropdown">
               <button
                 onClick={() => setDropdownOpen(!dropdownOpen)}
                 onMouseEnter={() => setDropdownOpen(true)}
@@ -361,10 +375,18 @@ export default function Navbar({
             {/* Mobile Drawer Footer */}
             <div className="flex flex-col items-center gap-4 text-center">
               <div className="flex items-center gap-4 text-white/80">
-                <Facebook className="w-5 h-5" />
-                <Instagram className="w-5 h-5" />
-                <Linkedin className="w-5 h-5" />
-                <Twitter className="w-5 h-5" />
+                <a href="https://facebook.com/memoirtale" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                  <Facebook className="w-5 h-5 hover:text-white transition-colors cursor-pointer" />
+                </a>
+                <a href="https://instagram.com/memoirtale" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                  <Instagram className="w-5 h-5 hover:text-white transition-colors cursor-pointer" />
+                </a>
+                <a href="https://linkedin.com/company/memoirtale" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                  <Linkedin className="w-5 h-5 hover:text-white transition-colors cursor-pointer" />
+                </a>
+                <a href="https://twitter.com/memoirtale" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+                  <Twitter className="w-5 h-5 hover:text-white transition-colors cursor-pointer" />
+                </a>
               </div>
               <p className="text-white/40 text-xs font-sans">
                 © {new Date().getFullYear()} MemoirTale Pvt. Ltd. | All Rights Reserved.

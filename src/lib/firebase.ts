@@ -51,6 +51,11 @@ try {
 
 export { db, auth };
 
+// Helper to check if Firebase is ready
+export const isFirebaseReady = () => {
+  return db !== null && auth !== null;
+};
+
 export enum OperationType {
   CREATE = 'create',
   UPDATE = 'update',
