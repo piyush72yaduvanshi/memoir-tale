@@ -24,6 +24,7 @@ export default function AdminDashboard() {
   const [loadingInquiries, setLoadingInquiries] = useState(true);
   const [searchText, setSearchText] = useState("");
   const [statusFilter, setStatusFilter] = useState<string>("All");
+  const [typeFilter, setTypeFilter] = useState<string>("All"); // New: Filter by type
   
   // Selected single inquiry for detailed audit
   const [selectedInquiry, setSelectedInquiry] = useState<any | null>(null);
@@ -42,26 +43,57 @@ export default function AdminDashboard() {
     return () => unsubscribe();
   }, []);
 
-  // Real-time Firestore document sync
+  // Real-time Firestore document sync - Fetch BOTH inquiries and callbacks
   useEffect(() => {
     if (!user) return;
     setLoadingInquiries(true);
 
     try {
-      const q = query(collection(db, "inquiries"), orderBy("createdAt", "desc"));
-      const unsubscribe = onSnapshot(q, (snapshot) => {
-        const list: any[] = [];
+      // Fetch inquiries (contact form)
+      const qInquiries = query(collection(db, "inquiries"), orderBy("createdAt", "desc"));
+      const unsubInquiries = onSnapshot(qInquiries, (snapshot) => {
+        const inquiriesList: any[] = [];
         snapshot.forEach((doc) => {
-          list.push({ id: doc.id, ...doc.data() });
+          inquiriesList.push({ 
+            id: doc.id, 
+            ...doc.data(),
+            collectionType: 'inquiry' // Add type identifier
+          });
         });
-        setInquiries(list);
-        setLoadingInquiries(false);
+
+        // Fetch callbacks (book free call)
+        const qCallbacks = query(collection(db, "callbacks"), orderBy("createdAt", "desc"));
+        const unsubCallbacks = onSnapshot(qCallbacks, (snapshot) => {
+          const callbacksList: any[] = [];
+          snapshot.forEach((doc) => {
+            callbacksList.push({ 
+              id: doc.id, 
+              ...doc.data(),
+              collectionType: 'callback' // Add type identifier
+            });
+          });
+
+          // Merge both lists and sort by createdAt
+          const merged = [...inquiriesList, ...callbacksList].sort((a, b) => {
+            const dateA = new Date(a.createdAt || 0).getTime();
+            const dateB = new Date(b.createdAt || 0).getTime();
+            return dateB - dateA; // Newest first
+          });
+
+          setInquiries(merged);
+          setLoadingInquiries(false);
+        }, (err) => {
+          console.error("Failed to subscribe to callbacks collection:", err);
+          setLoadingInquiries(false);
+        });
+
+        return () => unsubCallbacks();
       }, (err) => {
         console.error("Failed to subscribe to inquiries collection:", err);
         setLoadingInquiries(false);
       });
 
-      return () => unsubscribe();
+      return () => unsubInquiries();
     } catch (e) {
       console.error(e);
       setLoadingInquiries(false);
@@ -182,6 +214,8 @@ export default function AdminDashboard() {
 
   // Statistics Computations
   const totalInquiriesCount = inquiries.length;
+  const inquiriesCount = inquiries.filter(i => i.collectionType === 'inquiry').length;
+  const callbacksCount = inquiries.filter(i => i.collectionType === 'callback').length;
   const pendingCount = inquiries.filter(i => i.status === "Pending" || !i.status).length;
   const activeCount = inquiries.filter(i => i.status === "Work In Progress" || i.status === "Meeting Scheduled").length;
   const completedCount = inquiries.filter(i => i.status === "Project Completed").length;
@@ -195,7 +229,13 @@ export default function AdminDashboard() {
       (i.phone || "").toLowerCase().includes(searchText.toLowerCase());
 
     const matchesStatus = statusFilter === "All" || i.status === statusFilter;
-    return matchesSearch && matchesStatus;
+    
+    // New: Filter by type (inquiry vs callback)
+    const matchesType = typeFilter === "All" || 
+                       (typeFilter === "Inquiries" && i.collectionType === "inquiry") ||
+                       (typeFilter === "Callbacks" && i.collectionType === "callback");
+    
+    return matchesSearch && matchesStatus && matchesType;
   });
 
   // Safe file visualizer helper
@@ -535,8 +575,27 @@ export default function AdminDashboard() {
                 />
               </div>
 
+              {/* TYPE FILTER TABS (Inquiries vs Callbacks) */}
+              <div className="flex gap-2 pt-3 border-t border-slate-200 mt-3">
+                {["All", "Inquiries", "Callbacks"].map((type) => (
+                  <button
+                    key={type}
+                    onClick={() => setTypeFilter(type)}
+                    className={`flex-1 px-4 py-2 rounded-lg text-xs font-sans font-bold uppercase tracking-wider transition-all cursor-pointer ${
+                      typeFilter === type
+                        ? "bg-[var(--wp-block-synced-color,#7a00df)] text-white shadow-md"
+                        : "bg-white hover:bg-[#f6f7f7] text-slate-700 border border-slate-300"
+                    }`}
+                  >
+                    {type === "Inquiries" && "📋 "}
+                    {type === "Callbacks" && "📞 "}
+                    {type}
+                  </button>
+                ))}
+              </div>
+
               {/* STATUS MULTI-SELECT CHIP ROWS */}
-              <div className="flex flex-wrap gap-1.5 pt-1">
+              <div className="flex flex-wrap gap-1.5 pt-3">
                 {["All", "Pending", "Meeting Scheduled", "Work In Progress", "Project Completed", "Additional Information Required"].map((filt) => (
                   <button
                     key={filt}
@@ -613,8 +672,21 @@ export default function AdminDashboard() {
                         : "bg-white hover:bg-[#f6f7f7] border-slate-200 shadow-sm"
                     }`}
                   >
-                    <div className="flex items-center justify-between gap-2">
-                      <span className="font-mono text-xs font-bold text-[var(--wp-admin-theme-color,#007cba)] tracking-wider relative z-10">#{inq.ticketNo}</span>
+                    <div className="flex items-center justify-between gap-2 flex-wrap">
+                      <div className="flex items-center gap-2">
+                        <span className="font-mono text-xs font-bold text-[var(--wp-admin-theme-color,#007cba)] tracking-wider relative z-10">#{inq.ticketNo}</span>
+                        {/* Type Badge (Inquiry vs Callback) */}
+                        {inq.collectionType === 'callback' && (
+                          <span className="px-2 py-0.5 rounded-full text-[8px] font-sans font-bold uppercase tracking-wider bg-purple-100 text-purple-700 border border-purple-200">
+                            📞 Callback
+                          </span>
+                        )}
+                        {inq.collectionType === 'inquiry' && (
+                          <span className="px-2 py-0.5 rounded-full text-[8px] font-sans font-bold uppercase tracking-wider bg-blue-100 text-blue-700 border border-blue-200">
+                            📋 Inquiry
+                          </span>
+                        )}
+                      </div>
                       <span className={`px-2.5 py-0.5 rounded-full text-[9px] font-sans font-bold uppercase tracking-wider ${statusBadgeCss}`}>
                         {inq.status || "Pending"}
                       </span>
@@ -782,50 +854,78 @@ export default function AdminDashboard() {
                     </p>
                   </div>
 
-                  {/* ACTIVE ACTION BUTTON CELL */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-                    
-                    {/* BUTTON 1: Meeting Scheduled (Premium warm purple instead of blue) */}
-                    <button
-                      onClick={() => handleOneClickUpdate(selectedInquiry, "Meeting Scheduled")}
-                      disabled={updatingTicket !== null}
-                      className="h-12 bg-white hover:bg-purple-50 border border-purple-200 text-purple-700 font-sans font-semibold text-xs rounded-xl flex items-center justify-center space-x-2 transition-all cursor-pointer shadow-sm hover:scale-[1.01] active:translate-y-0.5 disabled:opacity-50"
-                    >
-                      <Calendar className="h-4 w-4 shrink-0" />
-                      <span>{updatingTicket === selectedInquiry.ticketNo ? "Dispatching..." : "Meeting Scheduled"}</span>
-                    </button>
+                  {/* ACTIVE ACTION BUTTON CELL - Different buttons for Inquiry vs Callback */}
+                  {selectedInquiry.collectionType === 'callback' ? (
+                    // CALLBACK: Only 2 buttons (Meeting Scheduled + Completed)
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                      
+                      {/* BUTTON 1: Meeting Scheduled */}
+                      <button
+                        onClick={() => handleOneClickUpdate(selectedInquiry, "Meeting Scheduled")}
+                        disabled={updatingTicket !== null}
+                        className="h-12 bg-white hover:bg-purple-50 border border-purple-200 text-purple-700 font-sans font-semibold text-xs rounded-xl flex items-center justify-center space-x-2 transition-all cursor-pointer shadow-sm hover:scale-[1.01] active:translate-y-0.5 disabled:opacity-50"
+                      >
+                        <Calendar className="h-4 w-4 shrink-0" />
+                        <span>{updatingTicket === selectedInquiry.ticketNo ? "Dispatching..." : "Meeting Scheduled"}</span>
+                      </button>
 
-                    {/* BUTTON 2: Work In Progress (Premium amber/orange instead of indigo) */}
-                    <button
-                      onClick={() => handleOneClickUpdate(selectedInquiry, "Work In Progress")}
-                      disabled={updatingTicket !== null}
-                      className="h-12 bg-white hover:bg-orange-50 border border-orange-200 text-orange-700 font-sans font-semibold text-xs rounded-xl flex items-center justify-center space-x-2 transition-all cursor-pointer shadow-sm hover:scale-[1.01] active:translate-y-0.5 disabled:opacity-50"
-                    >
-                      <RefreshCw className="h-4 w-4 shrink-0" />
-                      <span>{updatingTicket === selectedInquiry.ticketNo ? "Dispatching..." : "Work In Progress"}</span>
-                    </button>
+                      {/* BUTTON 2: Completed */}
+                      <button
+                        onClick={() => handleOneClickUpdate(selectedInquiry, "Completed")}
+                        disabled={updatingTicket !== null}
+                        className="h-12 bg-white hover:bg-emerald-50 border border-emerald-500 text-emerald-800 font-sans font-bold text-xs rounded-xl flex items-center justify-center space-x-2 transition-all cursor-pointer shadow-sm hover:scale-[1.01] active:translate-y-0.5 disabled:opacity-50"
+                      >
+                        <CheckCircle className="h-4 w-4 shrink-0 text-emerald-600" />
+                        <span>{updatingTicket === selectedInquiry.ticketNo ? "Dispatching..." : "Completed"}</span>
+                      </button>
 
-                    {/* BUTTON 3: Project Completed */}
-                    <button
-                      onClick={() => handleOneClickUpdate(selectedInquiry, "Project Completed")}
-                      disabled={updatingTicket !== null}
-                      className="h-12 bg-white hover:bg-emerald-50 border border-emerald-500 text-emerald-800 font-sans font-bold text-xs rounded-xl flex items-center justify-center space-x-2 transition-all cursor-pointer shadow-sm hover:scale-[1.01] active:translate-y-0.5 disabled:opacity-50"
-                    >
-                      <CheckCircle className="h-4 w-4 shrink-0 text-emerald-600" />
-                      <span>{updatingTicket === selectedInquiry.ticketNo ? "Dispatching..." : "Project Completed"}</span>
-                    </button>
+                    </div>
+                  ) : (
+                    // INQUIRY: All 4 buttons (Meeting Scheduled + Work In Progress + Project Completed + Info Required)
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                      
+                      {/* BUTTON 1: Meeting Scheduled */}
+                      <button
+                        onClick={() => handleOneClickUpdate(selectedInquiry, "Meeting Scheduled")}
+                        disabled={updatingTicket !== null}
+                        className="h-12 bg-white hover:bg-purple-50 border border-purple-200 text-purple-700 font-sans font-semibold text-xs rounded-xl flex items-center justify-center space-x-2 transition-all cursor-pointer shadow-sm hover:scale-[1.01] active:translate-y-0.5 disabled:opacity-50"
+                      >
+                        <Calendar className="h-4 w-4 shrink-0" />
+                        <span>{updatingTicket === selectedInquiry.ticketNo ? "Dispatching..." : "Meeting Scheduled"}</span>
+                      </button>
 
-                    {/* BUTTON 4: Additional Information Required */}
-                    <button
-                      onClick={() => handleOneClickUpdate(selectedInquiry, "Additional Information Required")}
-                      disabled={updatingTicket !== null}
-                      className="h-12 bg-white hover:bg-amber-50 border border-amber-300 text-amber-700 font-sans font-semibold text-xs rounded-xl flex items-center justify-center space-x-2 transition-all cursor-pointer shadow-sm hover:scale-[1.01] active:translate-y-0.5 disabled:opacity-50"
-                    >
-                      <AlertTriangle className="h-4 w-4 shrink-0" />
-                      <span>{updatingTicket === selectedInquiry.ticketNo ? "Dispatching..." : "Info Required"}</span>
-                    </button>
+                      {/* BUTTON 2: Work In Progress */}
+                      <button
+                        onClick={() => handleOneClickUpdate(selectedInquiry, "Work In Progress")}
+                        disabled={updatingTicket !== null}
+                        className="h-12 bg-white hover:bg-orange-50 border border-orange-200 text-orange-700 font-sans font-semibold text-xs rounded-xl flex items-center justify-center space-x-2 transition-all cursor-pointer shadow-sm hover:scale-[1.01] active:translate-y-0.5 disabled:opacity-50"
+                      >
+                        <RefreshCw className="h-4 w-4 shrink-0" />
+                        <span>{updatingTicket === selectedInquiry.ticketNo ? "Dispatching..." : "Work In Progress"}</span>
+                      </button>
 
-                  </div>
+                      {/* BUTTON 3: Project Completed */}
+                      <button
+                        onClick={() => handleOneClickUpdate(selectedInquiry, "Project Completed")}
+                        disabled={updatingTicket !== null}
+                        className="h-12 bg-white hover:bg-emerald-50 border border-emerald-500 text-emerald-800 font-sans font-bold text-xs rounded-xl flex items-center justify-center space-x-2 transition-all cursor-pointer shadow-sm hover:scale-[1.01] active:translate-y-0.5 disabled:opacity-50"
+                      >
+                        <CheckCircle className="h-4 w-4 shrink-0 text-emerald-600" />
+                        <span>{updatingTicket === selectedInquiry.ticketNo ? "Dispatching..." : "Project Completed"}</span>
+                      </button>
+
+                      {/* BUTTON 4: Additional Information Required */}
+                      <button
+                        onClick={() => handleOneClickUpdate(selectedInquiry, "Additional Information Required")}
+                        disabled={updatingTicket !== null}
+                        className="h-12 bg-white hover:bg-amber-50 border border-amber-300 text-amber-700 font-sans font-semibold text-xs rounded-xl flex items-center justify-center space-x-2 transition-all cursor-pointer shadow-sm hover:scale-[1.01] active:translate-y-0.5 disabled:opacity-50"
+                      >
+                        <AlertTriangle className="h-4 w-4 shrink-0" />
+                        <span>{updatingTicket === selectedInquiry.ticketNo ? "Dispatching..." : "Info Required"}</span>
+                      </button>
+
+                    </div>
+                  )}
 
                   {/* AUTOMATION RESPONSE GRAPHICS FEEDBACK */}
                   <AnimatePresence>

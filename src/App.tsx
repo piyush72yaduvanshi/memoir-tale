@@ -9,20 +9,38 @@ import TopicsSection from './components/TopicsSection';
 import HowItWorksSection from './components/HowItWorksSection';
 import WriterMatchmaker from './components/WriterMatchmaker';
 import ServicesSection from './components/ServicesSection';
-import FeatureIconsGrid from './components/FeatureIconsGrid';
-import AboutStripSection from './components/AboutStripSection';
-import WhyMemoirSection from './components/WhyMemoirSection';
 import GallerySection from './components/GallerySection';
-import PortfolioGallery from './components/PortfolioGallery';
-import EventSection from './components/EventSection';
 import TestimonialsSection from './components/TestimonialsSection';
 import ContactSection from './components/ContactSection';
 import FAQSection from './components/FAQSection';
 import FooterSection from './components/FooterSection';
 import FloatingCallbackButton from './components/FloatingCallbackButton';
+import AdminDashboard from './components/AdminDashboard';
 
 export default function App() {
   const [darkMode, setDarkMode] = useState<boolean>(true);
+  const [showAdmin, setShowAdmin] = useState<boolean>(false);
+
+  // Check URL for admin path
+  useEffect(() => {
+    const checkAdminRoute = () => {
+      const path = window.location.pathname;
+      if (path.includes('/admin') || window.location.hash === '#admin') {
+        setShowAdmin(true);
+      } else {
+        setShowAdmin(false);
+      }
+    };
+
+    checkAdminRoute();
+    window.addEventListener('popstate', checkAdminRoute);
+    window.addEventListener('hashchange', checkAdminRoute);
+
+    return () => {
+      window.removeEventListener('popstate', checkAdminRoute);
+      window.removeEventListener('hashchange', checkAdminRoute);
+    };
+  }, []);
 
   useEffect(() => {
     if (darkMode) {
@@ -38,6 +56,11 @@ export default function App() {
       element.scrollIntoView({ behavior: 'smooth' });
     }
   };
+
+  // If admin panel requested, show only AdminDashboard
+  if (showAdmin) {
+    return <AdminDashboard />;
+  }
 
   return (
     <div className={`min-h-screen overflow-x-hidden ${darkMode ? 'bg-[#2D1B36] text-[#F5F0F8]' : 'bg-[#faf7f0] text-[#1B101E]'}`}>
@@ -62,8 +85,6 @@ export default function App() {
       <div id="about">
         <AboutSection onLearnMoreClick={() => scrollToSection('how-it-works')} />
       </div>
-      <AboutStripSection darkMode={darkMode} />
-      <WhyMemoirSection />
       <MarqueeSection />
       <TopicsSection />
       <div id="how-it-works">
@@ -71,21 +92,18 @@ export default function App() {
       </div>
       <WriterMatchmaker />
       <TrustStatsStrip />
-      <FeatureIconsGrid darkMode={darkMode} />
       <div id="services">
-        <ServicesSection />
+        <ServicesSection onChoosePackage={(pkg) => scrollToSection('contact')} />
       </div>
       <div id="gallery">
         <GallerySection darkMode={darkMode} />
       </div>
-      <PortfolioGallery />
-      <EventSection />
       <TestimonialsSection />
       <FAQSection />
       <div id="contact">
-        <ContactSection />
+        <ContactSection selectedService="" />
       </div>
-      <FooterSection />
+      <FooterSection onQuoteClick={() => scrollToSection('contact')} isMobilePreview={false} />
       
       {/* Floating Callback Button */}
       <FloatingCallbackButton />

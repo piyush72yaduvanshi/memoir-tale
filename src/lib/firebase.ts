@@ -13,9 +13,43 @@ const firebaseConfig = {
   measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID || '',
 };
 
-const app = initializeApp(firebaseConfig);
-export const db = getFirestore(app);
-export const auth = getAuth(app);
+// Validate Firebase config before initializing
+const validateFirebaseConfig = () => {
+  const requiredKeys = ['apiKey', 'authDomain', 'projectId', 'storageBucket', 'messagingSenderId', 'appId'];
+  const missingKeys = requiredKeys.filter(key => !firebaseConfig[key as keyof typeof firebaseConfig]);
+  
+  if (missingKeys.length > 0) {
+    console.error('❌ Missing Firebase environment variables:', missingKeys.map(k => `VITE_FIREBASE_${k.toUpperCase()}`).join(', '));
+    console.error('Please check your .env file');
+    return false;
+  }
+  
+  console.log('✅ Firebase config validated');
+  return true;
+};
+
+// Initialize Firebase only if config is valid
+let app;
+let db;
+let auth;
+
+try {
+  if (validateFirebaseConfig()) {
+    app = initializeApp(firebaseConfig);
+    db = getFirestore(app);
+    auth = getAuth(app);
+    console.log('✅ Firebase initialized successfully');
+  } else {
+    throw new Error('Invalid Firebase configuration');
+  }
+} catch (error) {
+  console.error('❌ Firebase initialization failed:', error);
+  // Create dummy objects to prevent app crashes
+  db = null as any;
+  auth = null as any;
+}
+
+export { db, auth };
 
 export enum OperationType {
   CREATE = 'create',

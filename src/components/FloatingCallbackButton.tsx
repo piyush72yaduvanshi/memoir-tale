@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Phone, X, Calendar } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import { collection, addDoc } from 'firebase/firestore';
+import { db } from '../lib/firebase';
 
 export default function FloatingCallbackButton() {
   const [isOpen, setIsOpen] = useState(false);
@@ -11,24 +13,45 @@ export default function FloatingCallbackButton() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setErrorMsg('');
 
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    try {
+      // Generate ticket number
+      const ticketNo = `CB-${Math.floor(100000 + Math.random() * 900000)}`;
+      
+      // Save to Firestore in 'callbacks' collection
+      await addDoc(collection(db, 'callbacks'), {
+        fullName: formData.name,
+        phone: formData.phone,
+        callbackTime: formData.callbackTime,
+        ticketNo: ticketNo,
+        status: 'Pending',
+        type: 'Callback Request',
+        createdAt: new Date().toISOString(),
+        source: 'Floating Callback Button',
+      });
 
-    console.log('Callback Request:', formData);
-    setIsSubmitting(false);
-    setIsSuccess(true);
+      console.log('Callback Request Saved:', { ticketNo, ...formData });
+      
+      setIsSubmitting(false);
+      setIsSuccess(true);
 
-    // Reset after 3 seconds
-    setTimeout(() => {
-      setIsSuccess(false);
-      setIsOpen(false);
-      setFormData({ name: '', phone: '', callbackTime: '' });
-    }, 3000);
+      // Reset after 3 seconds
+      setTimeout(() => {
+        setIsSuccess(false);
+        setIsOpen(false);
+        setFormData({ name: '', phone: '', callbackTime: '' });
+      }, 3000);
+    } catch (error) {
+      console.error('Failed to save callback request:', error);
+      setErrorMsg('Failed to submit request. Please try again.');
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -178,6 +201,13 @@ export default function FloatingCallbackButton() {
                           </div>
                         </div>
                       </div>
+
+                      {/* Error Message */}
+                      {errorMsg && (
+                        <div className="p-3 bg-red-500/10 border border-red-500/30 rounded-lg text-red-200 text-sm">
+                          {errorMsg}
+                        </div>
+                      )}
 
                       {/* Submit Button */}
                       <button
