@@ -8,15 +8,23 @@
   --color-accent: #FFFFFF;
   --color-accent-light: rgba(255, 255, 255, 0.88);
   --color-accent-soft: rgba(255, 255, 255, 0.08);
-  --color-accent-purple: #8B5CF6;
-  --color-accent-purple-light: #A78BFA;
-  --color-accent-purple-dark: #7C3AED;
+  --color-accent-purple: #2E1B5D;
+  --color-accent-purple-light: #4D3778;
+  --color-accent-purple-dark: #1F1240;
   --color-cream: #faf7f0;
   --color-ivory: #fffcf5;
   --color-charcoal: #1B101E;
   --color-text-muted: rgba(255, 255, 255, 0.72);
   --color-border-soft: rgba(255, 255, 255, 0.12);
   --color-surface: rgba(255, 255, 255, 0.05);
+  
+  /* Tailwind utility classes for the new purple color */
+  --color-purple-50: rgba(46, 27, 93, 0.1);
+  --color-purple-100: rgba(46, 27, 93, 0.15);
+  --color-purple-200: rgba(46, 27, 93, 0.3);
+  --color-purple-500: #2E1B5D;
+  --color-purple-600: #2E1B5D;
+  --color-purple-700: #2E1B5D;
   
   --font-serif: "Playfair Display", Georgia, Cambria, serif;
   --font-serif-sub: "Cormorant Garamond", Georgia, serif;

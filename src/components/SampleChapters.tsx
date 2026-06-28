@@ -112,16 +112,16 @@ export default function SampleChapters() {
       className="bg-[#FCFBF7] py-16 lg:py-24 text-[#190F26] relative overflow-hidden"
     >
       {/* Decorative subtle background lighting lines */}
-      <div className="absolute top-[20%] right-[-100px] w-96 h-96 bg-[#8B5CF6]/3 rounded-full blur-[110px] pointer-events-none" />
+      <div className="absolute top-[20%] right-[-100px] w-96 h-96 bg-[#2E1B5D]/3 rounded-full blur-[110px] pointer-events-none" />
       <div className="absolute bottom-[10%] left-[-100px] w-96 h-96 bg-[#8B3CDC]/2 rounded-full blur-[110px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Header Block */}
         <div className="flex flex-col items-center text-center mb-12">
-          <div className="w-[60px] h-[3px] bg-[#8B5CF6] rounded-[2px] mb-4" />
-          <span className="font-sans font-semibold text-[11px] uppercase tracking-[3px] text-[#8B5CF6] mb-3 flex items-center gap-1.5 justify-center">
-            <BookOpen className="h-4 w-4 text-[#8B5CF6]" /> {labels.tagline}
+          <div className="w-[60px] h-[3px] bg-[#2E1B5D] rounded-[2px] mb-4" />
+          <span className="font-sans font-semibold text-[11px] uppercase tracking-[3px] text-[#2E1B5D] mb-3 flex items-center gap-1.5 justify-center">
+            <BookOpen className="h-4 w-4 text-[#2E1B5D]" /> {labels.tagline}
           </span>
           <h2 className="font-serif font-bold text-3xl sm:text-4xl text-[#190F26] leading-tight">
             {labels.title}
@@ -140,7 +140,7 @@ export default function SampleChapters() {
               onClick={() => setActiveExcerptIndex(idx)}
               className={`px-5 py-2.5 rounded-full text-xs font-sans font-bold border transition-all cursor-pointer select-none outline-none focus:outline-none flex items-center space-x-1.5 ${
                 activeExcerptIndex === idx
-                  ? "bg-[#8B5CF6] text-[#190F26] border-[#8B5CF6] shadow-[0_6px_20px_rgba(139, 92, 246,0.25)] scale-105"
+                  ? "bg-[#2E1B5D] text-[#190F26] border-[#2E1B5D] shadow-[0_6px_20px_rgba(139, 92, 246,0.25)] scale-105"
                   : "bg-white text-slate-600 border-[#E3DDE9]/60 hover:bg-[#FAF6F0] hover:text-[#190F26]"
               }`}
             >
@@ -159,17 +159,17 @@ export default function SampleChapters() {
               animate={{ opacity: 1, rotateY: 0, x: 0, filter: "blur(0px)" }}
               exit={{ opacity: 0, rotateY: 12, x: 30, filter: "blur(4px)" }}
               transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-              className="bg-[#FAF6F0] text-[#190F26] rounded-3xl p-6 sm:p-12 shadow-[0_30px_70px_rgba(0,0,0,0.55)] border-t-[8px] border-t-[#8B5CF6] relative transform-gpu"
+              className="bg-[#FAF6F0] text-[#190F26] rounded-3xl p-6 sm:p-12 shadow-[0_30px_70px_rgba(0,0,0,0.55)] border-t-[8px] border-t-[#2E1B5D] relative transform-gpu"
               style={{ perspective: 1200 }}
             >
               {/* Gold Ribbon Bookmarker Accent */}
-              <div className="absolute right-12 top-0 w-6 h-20 bg-[#8B5CF6] rounded-b-lg shadow-md hidden sm:block">
+              <div className="absolute right-12 top-0 w-6 h-20 bg-[#2E1B5D] rounded-b-lg shadow-md hidden sm:block">
                 <div className="absolute bottom-1 left-1.5 right-1.5 h-1 border-b-2 border-dashed border-[#FAF6F0]/50" />
               </div>
 
               {/* Book Header (Showing simulated book context) */}
               <div className="w-full border-b border-[#E3DDE9] pb-4 mb-6 sm:mb-8 flex flex-col sm:flex-row justify-between items-center text-xs text-[#554466]/60 font-mono tracking-wider space-y-2 sm:space-y-0">
-                <span className="font-serif italic text-sm text-[#8B5CF6] font-bold">
+                <span className="font-serif italic text-sm text-[#2E1B5D] font-bold">
                   📖 {isHindi ? activeExcerpt.bookTitleHindi : activeExcerpt.bookTitle}
                 </span>
                 <span className="font-sans font-bold uppercase text-[10px]">
@@ -185,12 +185,12 @@ export default function SampleChapters() {
 
                 {/* Left Page Column */}
                 <div className="space-y-4 text-left">
-                  <h3 className="font-serif font-bold text-2xl sm:text-3xl text-[#190F26] leading-tight mb-2 selection:bg-[#8B5CF6]/20">
+                  <h3 className="font-serif font-bold text-2xl sm:text-3xl text-[#190F26] leading-tight mb-2 selection:bg-[#2E1B5D]/20">
                     {isHindi ? activeExcerpt.excerptTitleHindi : activeExcerpt.excerptTitle}
                   </h3>
                   <p className="font-serif text-sm sm:text-base text-[#190F26]/90 leading-relaxed indent-0 first-line:tracking-wide">
                     {/* Large Drop Cap Accent */}
-                    <span className="float-left text-5xl sm:text-6xl font-serif font-bold text-[#8B5CF6] mr-3 mt-1.5 line-height-none bg-[#8B5CF6]/10 px-2 rounded-md border border-[#8B5CF6]/10 font-bold select-none">
+                    <span className="float-left text-5xl sm:text-6xl font-serif font-bold text-[#2E1B5D] mr-3 mt-1.5 line-height-none bg-[#2E1B5D]/10 px-2 rounded-md border border-[#2E1B5D]/10 font-bold select-none">
                       {activeExcerpt.dropCap}
                     </span>
                     {isHindi ? activeExcerpt.proseLeftHindi : activeExcerpt.proseLeft}
@@ -205,7 +205,7 @@ export default function SampleChapters() {
                     </p>
 
                     {/* Highly aesthetic quote container panel inside pages */}
-                    <div className="border-l-4 border-[#8B5CF6] bg-[#8B5CF6]/5 p-4 rounded-r-xl italic font-serif text-[#190F26]/85 text-sm sm:text-base pl-5 my-6 leading-relaxed">
+                    <div className="border-l-4 border-[#2E1B5D] bg-[#2E1B5D]/5 p-4 rounded-r-xl italic font-serif text-[#190F26]/85 text-sm sm:text-base pl-5 my-6 leading-relaxed">
                       "{isHindi ? activeExcerpt.quoteHindi : activeExcerpt.quote}"
                     </div>
                   </div>
@@ -215,7 +215,7 @@ export default function SampleChapters() {
                     <span className="font-mono text-[10.5px] uppercase tracking-wider bg-[#E3DDE9]/35 px-2.5 py-1 rounded">
                       Legacy Series
                     </span>
-                    <span className="font-sans font-bold tracking-wide italic text-[#8B5CF6]">
+                    <span className="font-sans font-bold tracking-wide italic text-[#2E1B5D]">
                       {isHindi ? activeExcerpt.authorSignHindi : activeExcerpt.authorSign}
                     </span>
                   </div>
@@ -236,8 +236,8 @@ export default function SampleChapters() {
                       onClick={() => setActiveExcerptIndex(i)}
                       className={`h-2.5 rounded-full transition-all duration-300 ${
                         activeExcerptIndex === i 
-                          ? "w-8 bg-[#8B5CF6]" 
-                          : "w-2.5 bg-[#E3DDE9] hover:bg-[#8B5CF6]/40"
+                          ? "w-8 bg-[#2E1B5D]" 
+                          : "w-2.5 bg-[#E3DDE9] hover:bg-[#2E1B5D]/40"
                       }`}
                       aria-label={`Go to page ${i + 1}`}
                     />
@@ -253,3 +253,6 @@ export default function SampleChapters() {
     </section>
   );
 }
+
+
+

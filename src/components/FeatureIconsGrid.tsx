@@ -66,7 +66,7 @@ export default function FeatureIconsGrid({ darkMode }: FeatureIconsGridProps) {
             {t.heading}
           </h2>
           <p className={`mt-4 font-sans text-xs md:text-sm leading-relaxed ${
-            darkMode ? 'text-white/60' : 'text-text-muted'
+            darkMode ? 'text-white/60' : 'text-black'
           }`}>
             {t.subtitle}
           </p>
@@ -120,3 +120,5 @@ export default function FeatureIconsGrid({ darkMode }: FeatureIconsGridProps) {
     </section>
   );
 }
+
+

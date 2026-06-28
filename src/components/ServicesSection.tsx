@@ -91,7 +91,7 @@ export default function ServicesSection({
       id="services"
       className="bg-[#FAF6F0] py-16 lg:py-24 text-[#190F26] relative overflow-hidden border-b border-[#E3DDE9]/60"
     >
-      <div className="absolute top-1/4 left-[-100px] w-64 h-64 bg-[#8B5CF6]/4 rounded-full blurred-ellipse pointer-events-none" />
+      <div className="absolute top-1/4 left-[-100px] w-64 h-64 bg-[#2E1B5D]/4 rounded-full blurred-ellipse pointer-events-none" />
       <div className="absolute bottom-1/3 right-[-100px] w-72 h-72 bg-[#45147A]/3 rounded-full blurred-ellipse pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -99,8 +99,8 @@ export default function ServicesSection({
         {/* Header Block */}
         <FadeIn>
           <div className="flex flex-col items-center text-center mb-16">
-            <div className="w-[60px] h-[3px] bg-[#8B5CF6] rounded-[2px] mb-4" />
-            <span className="font-sans font-medium text-[12px] uppercase tracking-[3px] text-[#8B5CF6] mb-3">
+            <div className="w-[60px] h-[3px] bg-[#2E1B5D] rounded-[2px] mb-4" />
+            <span className="font-sans font-medium text-[12px] uppercase tracking-[3px] text-[#2E1B5D] mb-3">
               {t("servicesLabel")}
             </span>
             <h2 className="font-serif font-bold text-3xl sm:text-4xl lg:text-[48px] text-[#190F26] tracking-tight leading-tight">
@@ -133,11 +133,11 @@ export default function ServicesSection({
 
               let cardStyleClasses = "";
               if (isHighlighted) {
-                cardStyleClasses = "bg-stone-50 border-2 border-[#8B5CF6] ring-4 ring-[#8B5CF6]/40 shadow-[0_20px_50px_rgba(139, 92, 246,0.25)] scale-[1.03] relative z-20 transition-all duration-300";
+                cardStyleClasses = "bg-stone-50 border-2 border-[#2E1B5D] ring-4 ring-[#2E1B5D]/40 shadow-[0_20px_50px_rgba(139, 92, 246,0.25)] scale-[1.03] relative z-20 transition-all duration-300";
               } else if (isFeatured) {
-                cardStyleClasses = "bg-white text-[#190F26] border-2 border-[#8B5CF6] shadow-[0_12px_45px_rgba(139, 92, 246,0.12)] relative z-10 transition-all duration-300";
+                cardStyleClasses = "bg-white text-[#190F26] border-2 border-[#2E1B5D] shadow-[0_12px_45px_rgba(139, 92, 246,0.12)] relative z-10 transition-all duration-300";
               } else if (borderLeft) {
-                cardStyleClasses = "bg-white border-l-4 border-l-[#8B5CF6] border-y border-r border-[#E3DDE9]/70 shadow-[0_8px_30px_rgba(0,0,0,0.02)] transition-all duration-300";
+                cardStyleClasses = "bg-white border-l-4 border-l-[#2E1B5D] border-y border-r border-[#E3DDE9]/70 shadow-[0_8px_30px_rgba(0,0,0,0.02)] transition-all duration-300";
               } else {
                 cardStyleClasses = "bg-white border border-[#E3DDE9]/70 shadow-[0_8px_30px_rgba(0,0,0,0.02)] transition-all duration-300";
               }
@@ -152,7 +152,7 @@ export default function ServicesSection({
                 >
                   {/* Popular Corner Badge */}
                   {isFeatured && (
-                    <div className="absolute top-0 right-1/2 translate-x-1/2 -translate-y-1/2 bg-[#8B5CF6] text-white font-sans font-bold text-[10px] sm:text-[11px] px-4 py-1.5 rounded-full uppercase tracking-widest shadow-md">
+                    <div className="absolute top-0 right-1/2 translate-x-1/2 -translate-y-1/2 bg-[#2E1B5D] text-white font-sans font-bold text-[10px] sm:text-[11px] px-4 py-1.5 rounded-full uppercase tracking-widest shadow-md">
                       {badge}
                     </div>
                   )}
@@ -160,7 +160,7 @@ export default function ServicesSection({
                   <div>
                     {/* Badge Row (Non-Featured) */}
                     {!isFeatured && (
-                      <span className="inline-block bg-[#FAF6F0] border border-[#E3DDE9] text-[#8B5CF6] font-sans font-bold text-[10px] px-3 py-0.5 rounded-full mb-4">
+                      <span className="inline-block bg-[#FAF6F0] border border-[#E3DDE9] text-[#2E1B5D] font-sans font-bold text-[10px] px-3 py-0.5 rounded-full mb-4">
                         {badge}
                       </span>
                     )}
@@ -174,7 +174,7 @@ export default function ServicesSection({
                         </h3>
                       </div>
                       {isHighlighted && (
-                        <span className="text-[10px] bg-[#8B5CF6]/20 text-[#8B5CF6] border border-[#8B5CF6]/30 font-bold px-2 py-0.5 rounded uppercase tracking-wider animate-pulse whitespace-nowrap">
+                        <span className="text-[10px] bg-[#2E1B5D]/20 text-[#2E1B5D] border border-[#2E1B5D]/30 font-bold px-2 py-0.5 rounded uppercase tracking-wider animate-pulse whitespace-nowrap">
                           {isHindi ? "चयनित" : "Selected"}
                         </span>
                       )}
@@ -185,7 +185,7 @@ export default function ServicesSection({
                       <span className="text-xs uppercase tracking-wider block opacity-70 mb-1 text-[#554466]">
                         {isHindi ? "कुल पैकेज दर" : "Package Rate"}
                       </span>
-                      <span className="font-serif font-bold text-3xl sm:text-[36px] text-[#8B5CF6]">
+                      <span className="font-serif font-bold text-3xl sm:text-[36px] text-[#2E1B5D]">
                         {pkg.price}
                       </span>
                     </div>
@@ -197,7 +197,7 @@ export default function ServicesSection({
                     <ul className="space-y-3.5">
                       {features.map((feat, index) => (
                         <li key={index} className="flex items-start text-left space-x-2 text-sm">
-                          <Check className="h-4.5 w-4.5 shrink-0 mt-0.5 text-[#8B5CF6]" />
+                          <Check className="h-4.5 w-4.5 shrink-0 mt-0.5 text-[#2E1B5D]" />
                           <span className="text-[#554466]">{feat}</span>
                         </li>
                       ))}
@@ -212,7 +212,7 @@ export default function ServicesSection({
                       whileTap={{ scale: 0.98 }}
                       className={`w-full py-3.5 px-6 rounded-full font-sans font-bold text-sm transition-all cursor-pointer ${
                         isFeatured
-                          ? "bg-[#190F26] text-white hover:bg-[#8B5CF6] shadow-[0_4px_15px_rgba(25,15,38,0.15)]"
+                          ? "bg-[#190F26] text-white hover:bg-[#2E1B5D] shadow-[0_4px_15px_rgba(25,15,38,0.15)]"
                           : "border border-[#190F26] text-[#190F26] hover:bg-[#190F26] hover:text-white"
                       }`}
                     >
@@ -237,7 +237,7 @@ export default function ServicesSection({
           <div className="pt-6 border-t border-[#E3DDE9]/60">
             <div className="flex flex-col items-center">
               <h4 className="font-sans font-semibold text-base text-[#190F26] mb-4 flex items-center space-x-1.5 justify-center">
-                <Sparkles className="h-4.5 w-4.5 text-[#8B5CF6]" />
+                <Sparkles className="h-4.5 w-4.5 text-[#2E1B5D]" />
                 <span>
                   {isHindi 
                     ? "शीघ्र ही आ रही अन्य नवीन विरासत सेवाएँ" 
@@ -279,3 +279,6 @@ export default function ServicesSection({
     </section>
   );
 }
+
+
+

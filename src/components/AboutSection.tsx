@@ -16,8 +16,8 @@ export default function AboutSection({ onLearnMoreClick }: AboutSectionProps) {
       className="bg-[#FAF6F0] py-16 lg:py-24 text-[#190F26] relative overflow-hidden"
     >
       {/* Subtle overlay decorative elements */}
-      <div className="absolute top-[10%] right-[-50px] w-64 h-64 bg-[#8B5CF6]/5 rounded-full blurred-ellipse pointer-events-none" />
-      <div className="absolute bottom-5 left-[-20px] w-80 h-80 bg-[#45147A]/3 rounded-full blurred-ellipse pointer-events-none" />
+      <div className="absolute top-[10%] right-[-50px] w-64 h-64 bg-[#2E1B5D]/5 rounded-full blurred-ellipse pointer-events-none" />
+      <div className="absolute bottom-5 left-[-20px] w-80 h-80 bg-[#2E1B5D]/3 rounded-full blurred-ellipse pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <FadeIn>
@@ -26,10 +26,10 @@ export default function AboutSection({ onLearnMoreClick }: AboutSectionProps) {
             {/* Left Column (55% Desktop layout spacing) */}
             <div className="col-span-1 lg:col-span-7 flex flex-col items-start text-left">
               {/* Gold Line */}
-              <div className="w-[60px] h-[3px] bg-[#8B5CF6] rounded-[2px] mb-4" />
+              <div className="w-[60px] h-[3px] bg-[#2E1B5D] rounded-[2px] mb-4" />
 
               {/* Section Label */}
-              <span className="font-sans font-medium text-[12px] uppercase tracking-[3px] text-[#8B5CF6] mb-3 inline-block">
+              <span className="font-sans font-medium text-[12px] uppercase tracking-[3px] text-[#2E1B5D] mb-3 inline-block">
                 {t("aboutLabel")}
               </span>
 
@@ -40,7 +40,7 @@ export default function AboutSection({ onLearnMoreClick }: AboutSectionProps) {
               </h2>
 
               {/* Gold Underline Accent */}
-              <div className="w-[80px] h-[3px] bg-[#8B5CF6] rounded-[2px] mt-2 mb-8" />
+              <div className="w-[80px] h-[3px] bg-[#2E1B5D] rounded-[2px] mt-2 mb-8" />
 
               {/* Paragraphs */}
               <div className="space-y-5 text-sm sm:text-base text-[#554466] font-sans leading-relaxed max-w-[620px]">
@@ -70,7 +70,7 @@ export default function AboutSection({ onLearnMoreClick }: AboutSectionProps) {
               {/* CTA Arrow Link */}
               <button
                 onClick={onLearnMoreClick}
-                className="mt-8 group inline-flex items-center space-x-2 font-sans font-semibold text-base text-[#2D0F52] hover:text-[#8B5CF6] transition-colors cursor-pointer"
+                className="mt-8 group inline-flex items-center space-x-2 font-sans font-semibold text-base text-[#2D0F52] hover:text-[#2E1B5D] transition-colors cursor-pointer"
               >
                 <span className="group-hover:underline">{lang === "HI" ? "हमारे बारे में अधिक जानें" : "Learn More About Us"}</span>
                 <ArrowRight className="h-4 w-4 transform group-hover:translate-x-1.5 transition-transform" />
@@ -84,12 +84,12 @@ export default function AboutSection({ onLearnMoreClick }: AboutSectionProps) {
                 {/* Stat Card 1 */}
                 <div
                   id="stat-card-1"
-                  className="bg-white p-6 rounded-[20px] shadow-[0_8px_40px_rgba(69,20,122,0.08)] border border-[#E3DDE9]/60 hover:border-[#8B5CF6]/50 transition-all duration-300 transform hover:scale-[1.03]"
+                  className="bg-white p-6 rounded-[20px] shadow-[0_8px_40px_rgba(69,20,122,0.08)] border border-[#E3DDE9]/60 hover:border-[#2E1B5D]/50 transition-all duration-300 transform hover:scale-[1.03]"
                 >
-                  <div className="bg-[#FAF6F0] p-2 rounded-xl text-[#8B5CF6] w-fit mb-3">
+                  <div className="bg-[#FAF6F0] p-2 rounded-xl text-[#2E1B5D] w-fit mb-3">
                     <Award className="h-5 w-5" />
                   </div>
-                  <span className="block font-serif font-bold text-3xl sm:text-[46px] text-[#8B5CF6] leading-none mb-1">
+                  <span className="block font-serif font-bold text-3xl sm:text-[46px] text-[#2E1B5D] leading-none mb-1">
                     500+
                   </span>
                   <span className="block font-sans font-medium text-xs sm:text-sm text-[#554466]">
@@ -100,12 +100,12 @@ export default function AboutSection({ onLearnMoreClick }: AboutSectionProps) {
                 {/* Stat Card 2 */}
                 <div
                   id="stat-card-2"
-                  className="bg-white p-6 rounded-[20px] shadow-[0_8px_40px_rgba(69,20,122,0.08)] border border-[#E3DDE9]/60 hover:border-[#8B5CF6]/50 transition-all duration-300 transform hover:scale-[1.03]"
+                  className="bg-white p-6 rounded-[20px] shadow-[0_8px_40px_rgba(69,20,122,0.08)] border border-[#E3DDE9]/60 hover:border-[#2E1B5D]/50 transition-all duration-300 transform hover:scale-[1.03]"
                 >
-                  <div className="bg-[#FAF6F0] p-2 rounded-xl text-[#8B5CF6] w-fit mb-3">
+                  <div className="bg-[#FAF6F0] p-2 rounded-xl text-[#2E1B5D] w-fit mb-3">
                     <Heart className="h-5 w-5 text-red-500" />
                   </div>
-                  <span className="block font-serif font-bold text-3xl sm:text-[46px] text-[#8B5CF6] leading-none mb-1">
+                  <span className="block font-serif font-bold text-3xl sm:text-[46px] text-[#2E1B5D] leading-none mb-1">
                     100+
                   </span>
                   <span className="block font-sans font-medium text-xs sm:text-sm text-[#554466]">
@@ -116,12 +116,12 @@ export default function AboutSection({ onLearnMoreClick }: AboutSectionProps) {
                 {/* Stat Card 3 */}
                 <div
                   id="stat-card-3"
-                  className="bg-white p-6 rounded-[20px] shadow-[0_8px_40px_rgba(69,20,122,0.08)] border border-[#E3DDE9]/60 hover:border-[#8B5CF6]/50 transition-all duration-300 transform hover:scale-[1.03]"
+                  className="bg-white p-6 rounded-[20px] shadow-[0_8px_40px_rgba(69,20,122,0.08)] border border-[#E3DDE9]/60 hover:border-[#2E1B5D]/50 transition-all duration-300 transform hover:scale-[1.03]"
                 >
-                  <div className="bg-[#FAF6F0] p-2 rounded-xl text-[#8B5CF6] w-fit mb-3">
+                  <div className="bg-[#FAF6F0] p-2 rounded-xl text-[#2E1B5D] w-fit mb-3">
                     <Sparkles className="h-5 w-5" />
                   </div>
-                  <span className="block font-serif font-bold text-2xl sm:text-[40px] text-[#8B5CF6] leading-none mb-1">
+                  <span className="block font-serif font-bold text-2xl sm:text-[40px] text-[#2E1B5D] leading-none mb-1">
                     5 yrs+
                   </span>
                   <span className="block font-sans font-medium text-xs sm:text-sm text-[#554466]">
@@ -132,12 +132,12 @@ export default function AboutSection({ onLearnMoreClick }: AboutSectionProps) {
                 {/* Stat Card 4 */}
                 <div
                   id="stat-card-4"
-                  className="bg-white p-6 rounded-[20px] shadow-[0_8px_40px_rgba(69,20,122,0.08)] border border-[#E3DDE9]/60 hover:border-[#8B5CF6]/50 transition-all duration-300 transform hover:scale-[1.03]"
+                  className="bg-white p-6 rounded-[20px] shadow-[0_8px_40px_rgba(69,20,122,0.08)] border border-[#E3DDE9]/60 hover:border-[#2E1B5D]/50 transition-all duration-300 transform hover:scale-[1.03]"
                 >
-                  <div className="bg-[#FAF6F0] p-2 rounded-xl text-[#8B5CF6] w-fit mb-3 flex items-center justify-center">
+                  <div className="bg-[#FAF6F0] p-2 rounded-xl text-[#2E1B5D] w-fit mb-3 flex items-center justify-center">
                     <Star className="h-5 w-5 text-amber-500 fill-amber-500" />
                   </div>
-                  <span className="block font-serif font-bold text-3xl sm:text-[46px] text-[#8B5CF6] leading-none mb-1">
+                  <span className="block font-serif font-bold text-3xl sm:text-[46px] text-[#2E1B5D] leading-none mb-1">
                     4.9★
                   </span>
                   <span className="block font-sans font-medium text-xs sm:text-sm text-[#554466]">
@@ -154,3 +154,6 @@ export default function AboutSection({ onLearnMoreClick }: AboutSectionProps) {
     </section>
   );
 }
+
+
+

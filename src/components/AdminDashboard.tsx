@@ -243,7 +243,7 @@ export default function AdminDashboard() {
     if (type.startsWith("image/")) return <ImageIcon className="h-4 w-4 text-emerald-500" />;
     if (type.startsWith("video/")) return <Video className="h-4 w-4 text-indigo-500" />;
     if (type.startsWith("audio/")) return <Music className="h-4 w-4 text-amber-500" />;
-    return <File className="h-4 w-4 text-purple-500" />;
+    return <File className="h-4 w-4" style={{ color: '#8B5CF6' }} />;
   };
 
   // Export dynamically to UTF-8 CSV with Excel compatibility BOM (Zero blue color overhead)
@@ -301,7 +301,8 @@ export default function AdminDashboard() {
       doc.setFillColor(25, 15, 38); // #190F26 Luxury Charcoal
       doc.rect(0, 0, 297, 12, "F");
 
-      doc.setFillColor(229, 184, 72); // #8B5CF6 Purple Accent
+      // Custom purple accent color (#8B5CF6)
+      doc.setFillColor(46, 27, 93);
       doc.rect(0, 12, 297, 2, "F");
 
       doc.setFont("Helvetica", "bold");
@@ -366,7 +367,7 @@ export default function AdminDashboard() {
 
         doc.setFontSize(8.5);
         doc.setFont("Helvetica", "bold");
-        doc.setTextColor(200, 155, 42); // Purple violet color (#8B5CF6)
+        doc.setTextColor(46, 27, 93); // Custom purple color
         doc.text(`#${inq.ticketNo || ""}`, 18, y + 5.5);
 
         doc.setFont("Helvetica", "normal");
@@ -407,11 +408,11 @@ export default function AdminDashboard() {
       <div className="min-h-screen bg-[var(--wp-editor-canvas-background,#f0f0f1)] flex items-center justify-center p-4 selection:bg-[var(--wp-admin-theme-color,#007cba)] selection:text-white overflow-hidden relative">
         {/* Background Ambient Art with modern blue/purple gradients */}
         <div className="absolute top-[-20%] left-[-20%] w-[60%] h-[60%] bg-[var(--wp-admin-theme-color,#007cba)]/5 rounded-full blur-[120px] pointer-events-none" />
-        <div className="absolute bottom-[-20%] right-[-20%] w-[60%] h-[60%] bg-[var(--wp-block-synced-color,#7a00df)]/5 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute bottom-[-20%] right-[-20%] w-[60%] h-[60%] rounded-full blur-[120px] pointer-events-none" style={{ backgroundColor: 'rgba(46, 27, 93, 0.05)' }} />
 
         <div className="w-full max-w-md bg-white border border-slate-300 rounded-2xl p-8 relative z-10 wp-shadow-sharp text-slate-900">
           <div className="text-center mb-8">
-            <div className="h-14 w-14 bg-gradient-to-tr from-[var(--wp-admin-theme-color,#007cba)] to-[var(--wp-block-synced-color,#7a00df)] rounded-xl flex items-center justify-center mx-auto mb-4 border border-[var(--wp-admin-theme-color,#007cba)]/40 shadow-md">
+            <div className="h-14 w-14 rounded-xl flex items-center justify-center mx-auto mb-4 border shadow-md" style={{ background: 'linear-gradient(to top right, var(--wp-admin-theme-color, #007cba), #8B5CF6)', borderColor: 'rgba(0, 124, 186, 0.4)' }}>
               <Lock className="h-6 w-6 text-white" />
             </div>
             <h1 className="font-sans text-2xl font-bold tracking-tight text-slate-950 mb-2">Memoir Tale</h1>
@@ -543,8 +544,8 @@ export default function AdminDashboard() {
           </div>
 
           <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 text-left shadow-sm">
-            <p className="text-[10px] uppercase text-purple-600 font-mono tracking-wider font-semibold">Active Writing Stages</p>
-            <p className="text-2xl font-semibold text-[#7a00df] mt-1">{activeCount}</p>
+            <p className="text-[10px] uppercase font-mono tracking-wider font-semibold" style={{ color: '#8B5CF6' }}>Active Writing Stages</p>
+            <p className="text-2xl font-semibold mt-1" style={{ color: '#8B5CF6' }}>{activeCount}</p>
           </div>
 
           <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 text-left shadow-sm">
@@ -583,9 +584,10 @@ export default function AdminDashboard() {
                     onClick={() => setTypeFilter(type)}
                     className={`flex-1 px-4 py-2 rounded-lg text-xs font-sans font-bold uppercase tracking-wider transition-all cursor-pointer ${
                       typeFilter === type
-                        ? "bg-[var(--wp-block-synced-color,#7a00df)] text-white shadow-md"
+                        ? "text-white shadow-md"
                         : "bg-white hover:bg-[#f6f7f7] text-slate-700 border border-slate-300"
                     }`}
+                    style={typeFilter === type ? { backgroundColor: '#8B5CF6' } : {}}
                   >
                     {type === "Inquiries" && "📋 "}
                     {type === "Callbacks" && "📞 "}
@@ -629,7 +631,8 @@ export default function AdminDashboard() {
                   type="button"
                   onClick={exportToPDF}
                   title="Generate dynamic, beautifully customized printable report"
-                  className="flex-1 sm:flex-initial h-9 px-3 bg-[var(--wp-block-synced-color,#7a00df)] hover:bg-[#6000b4] text-white border border-[var(--wp-block-synced-color,#7a00df)] rounded-xl text-xs font-sans font-bold flex items-center justify-center space-x-1.5 transition-all shadow-sm cursor-pointer"
+                  className="flex-1 sm:flex-initial h-9 px-3 text-white rounded-xl text-xs font-sans font-bold flex items-center justify-center space-x-1.5 transition-all shadow-sm cursor-pointer hover:opacity-90"
+                  style={{ backgroundColor: '#8B5CF6', borderColor: '#8B5CF6', border: '1px solid' }}
                 >
                   <Download className="h-3.5 w-3.5 text-white" />
                   <span>A4 PDF</span>
@@ -654,9 +657,20 @@ export default function AdminDashboard() {
                 
                 // Colors corresponding to system state (completely beautiful warm colors, no blue or indigo)
                 let statusBadgeCss = "bg-amber-150 text-amber-800 border border-amber-200/60";
-                if (inq.status === "Meeting Scheduled") statusBadgeCss = "bg-purple-50 text-purple-700 border border-purple-200";
-                else if (inq.status === "Work In Progress") statusBadgeCss = "bg-orange-50 text-orange-850 border border-orange-200";
-                else if (inq.status === "Project Completed") statusBadgeCss = "bg-emerald-50 text-emerald-700 border border-emerald-200";
+                let meetingScheduledStyle = {};
+                
+                if (inq.status === "Meeting Scheduled") {
+                  statusBadgeCss = "border";
+                  meetingScheduledStyle = { 
+                    backgroundColor: 'rgba(46, 27, 93, 0.1)', 
+                    color: '#8B5CF6', 
+                    borderColor: 'rgba(46, 27, 93, 0.3)' 
+                  };
+                } else if (inq.status === "Work In Progress") {
+                  statusBadgeCss = "bg-orange-50 text-orange-850 border border-orange-200";
+                } else if (inq.status === "Project Completed") {
+                  statusBadgeCss = "bg-emerald-50 text-emerald-700 border border-emerald-200";
+                }
 
                 return (
                   <motion.div
@@ -677,7 +691,7 @@ export default function AdminDashboard() {
                         <span className="font-mono text-xs font-bold text-[var(--wp-admin-theme-color,#007cba)] tracking-wider relative z-10">#{inq.ticketNo}</span>
                         {/* Type Badge (Inquiry vs Callback) */}
                         {inq.collectionType === 'callback' && (
-                          <span className="px-2 py-0.5 rounded-full text-[8px] font-sans font-bold uppercase tracking-wider bg-purple-100 text-purple-700 border border-purple-200">
+                          <span className="px-2 py-0.5 rounded-full text-[8px] font-sans font-bold uppercase tracking-wider border" style={{ backgroundColor: 'rgba(46, 27, 93, 0.15)', color: '#8B5CF6', borderColor: 'rgba(46, 27, 93, 0.3)' }}>
                             📞 Callback
                           </span>
                         )}
@@ -687,7 +701,7 @@ export default function AdminDashboard() {
                           </span>
                         )}
                       </div>
-                      <span className={`px-2.5 py-0.5 rounded-full text-[9px] font-sans font-bold uppercase tracking-wider ${statusBadgeCss}`}>
+                      <span className={`px-2.5 py-0.5 rounded-full text-[9px] font-sans font-bold uppercase tracking-wider ${statusBadgeCss}`} style={meetingScheduledStyle}>
                         {inq.status || "Pending"}
                       </span>
                     </div>
@@ -800,12 +814,13 @@ export default function AdminDashboard() {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
                       {selectedInquiry.attachments.map((file: any, idx: number) => {
                         const isImg = file.type?.startsWith("image/");
+                        const hasError = file.error || !file.url;
                         return (
-                          <div key={idx} className="flex items-center justify-between p-3 bg-white border border-slate-200 rounded-xl relative group">
+                          <div key={idx} className={`flex items-center justify-between p-3 bg-white border rounded-xl relative group ${hasError ? 'border-amber-300 bg-amber-50' : 'border-slate-200'}`}>
                             <div className="flex items-center space-x-3 overflow-hidden">
                               <div className="w-10 h-10 rounded-lg overflow-hidden shrink-0 border border-slate-200">
-                                {isImg ? (
-                                  <img src={file.url} className="w-full h-full object-cover" />
+                                {isImg && file.url ? (
+                                  <img src={file.url} alt={file.name} className="w-full h-full object-cover" />
                                 ) : (
                                   <div className="w-full h-full bg-slate-200 flex items-center justify-center">
                                     {renderAttachmentIcon(file.type || "")}
@@ -819,19 +834,34 @@ export default function AdminDashboard() {
                                 <p className="text-[9px] text-[var(--wp-admin-theme-color,#007cba)] uppercase tracking-wider font-semibold">
                                   {file.type ? file.type.split("/")[1] : "Asset"}
                                 </p>
+                                {hasError && (
+                                  <p className="text-[8px] text-amber-600 font-semibold mt-0.5">
+                                    ⚠️ Upload incomplete
+                                  </p>
+                                )}
                               </div>
                             </div>
 
                             {/* Live download coordinate url link */}
-                            <a
-                              href={file.url}
-                              target="_blank"
-                              rel="noreferrer"
-                              className="p-1.5 bg-white border border-slate-200 rounded-lg text-[var(--wp-admin-theme-color,#007cba)] hover:bg-[var(--wp-admin-theme-color,#007cba)] hover:text-white transition-colors cursor-pointer"
-                              title="Download asset safely"
-                            >
-                              <Download className="h-3.5 w-3.5" />
-                            </a>
+                            {file.url ? (
+                              <a
+                                href={file.url}
+                                download={file.name}
+                                target="_blank"
+                                rel="noreferrer"
+                                className="p-1.5 bg-white border border-slate-200 rounded-lg text-[var(--wp-admin-theme-color,#007cba)] hover:bg-[var(--wp-admin-theme-color,#007cba)] hover:text-white transition-colors cursor-pointer"
+                                title="Download asset safely"
+                              >
+                                <Download className="h-3.5 w-3.5" />
+                              </a>
+                            ) : (
+                              <div
+                                className="p-1.5 bg-gray-100 border border-slate-200 rounded-lg text-gray-400 cursor-not-allowed"
+                                title="File URL not available"
+                              >
+                                <Download className="h-3.5 w-3.5" />
+                              </div>
+                            )}
                           </div>
                         );
                       })}
@@ -863,7 +893,13 @@ export default function AdminDashboard() {
                       <button
                         onClick={() => handleOneClickUpdate(selectedInquiry, "Meeting Scheduled")}
                         disabled={updatingTicket !== null}
-                        className="h-12 bg-white hover:bg-purple-50 border border-purple-200 text-purple-700 font-sans font-semibold text-xs rounded-xl flex items-center justify-center space-x-2 transition-all cursor-pointer shadow-sm hover:scale-[1.01] active:translate-y-0.5 disabled:opacity-50"
+                        className="h-12 bg-white border font-sans font-semibold text-xs rounded-xl flex items-center justify-center space-x-2 transition-all cursor-pointer shadow-sm hover:scale-[1.01] active:translate-y-0.5 disabled:opacity-50"
+                        style={{ 
+                          borderColor: 'rgba(46, 27, 93, 0.3)', 
+                          color: '#8B5CF6'
+                        }}
+                        onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(46, 27, 93, 0.1)'}
+                        onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'white'}
                       >
                         <Calendar className="h-4 w-4 shrink-0" />
                         <span>{updatingTicket === selectedInquiry.ticketNo ? "Dispatching..." : "Meeting Scheduled"}</span>
@@ -888,7 +924,13 @@ export default function AdminDashboard() {
                       <button
                         onClick={() => handleOneClickUpdate(selectedInquiry, "Meeting Scheduled")}
                         disabled={updatingTicket !== null}
-                        className="h-12 bg-white hover:bg-purple-50 border border-purple-200 text-purple-700 font-sans font-semibold text-xs rounded-xl flex items-center justify-center space-x-2 transition-all cursor-pointer shadow-sm hover:scale-[1.01] active:translate-y-0.5 disabled:opacity-50"
+                        className="h-12 bg-white border font-sans font-semibold text-xs rounded-xl flex items-center justify-center space-x-2 transition-all cursor-pointer shadow-sm hover:scale-[1.01] active:translate-y-0.5 disabled:opacity-50"
+                        style={{ 
+                          borderColor: 'rgba(46, 27, 93, 0.3)', 
+                          color: '#8B5CF6'
+                        }}
+                        onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(46, 27, 93, 0.1)'}
+                        onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'white'}
                       >
                         <Calendar className="h-4 w-4 shrink-0" />
                         <span>{updatingTicket === selectedInquiry.ticketNo ? "Dispatching..." : "Meeting Scheduled"}</span>
@@ -975,3 +1017,4 @@ export default function AdminDashboard() {
     </div>
   );
 }
+

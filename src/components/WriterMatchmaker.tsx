@@ -100,33 +100,33 @@ export default function WriterMatchmaker({ onMatchWriter }: WriterMatchmakerProp
       <section className="bg-[#2D1B36] py-16 lg:py-24">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-8">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#3A2447] border border-[#8B5CF6]/30 rounded-full mb-4">
-              <Sparkles className="h-4 w-4 text-[#A78BFA]" />
-              <span className="text-[#A78BFA] text-xs font-semibold uppercase tracking-wider">
+            <div className="inline-flex items-center gap-2 px-4 py-2 border rounded-full mb-4" style={{ backgroundColor: '#3A2447', borderColor: 'rgba(46, 27, 93, 0.3)' }}>
+              <Sparkles className="h-4 w-4" style={{ color: '#A78BFA' }} />
+              <span className="text-xs font-semibold uppercase tracking-wider" style={{ color: '#A78BFA' }}>
                 Perfect Match Found
               </span>
             </div>
             <h2 className="font-serif text-3xl lg:text-4xl font-bold text-white">
-              Your <span className="italic text-[#A78BFA]">Ideal</span> Writer
+              Your <span className="italic" style={{ color: '#A78BFA' }}>Ideal</span> Writer
             </h2>
           </div>
 
-          <div className="bg-[#3A2447] border border-[#8B5CF6]/30 rounded-2xl p-8 lg:p-10">
+          <div className="border rounded-2xl p-8 lg:p-10" style={{ backgroundColor: '#3A2447', borderColor: 'rgba(46, 27, 93, 0.3)' }}>
             <div className="flex flex-col lg:flex-row items-center gap-8">
-              <div className="h-32 w-32 rounded-full bg-[#2D1B36] border-4 border-[#8B5CF6]/40 flex items-center justify-center flex-shrink-0">
-                <User className="h-16 w-16 text-[#A78BFA]" />
+              <div className="h-32 w-32 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: '#2D1B36', border: '4px solid rgba(46, 27, 93, 0.4)' }}>
+                <User className="h-16 w-16" style={{ color: '#A78BFA' }} />
               </div>
               
               <div className="flex-1 text-center lg:text-left">
                 <h3 className="font-serif text-2xl lg:text-3xl font-bold text-white mb-2">
                   {matchedWriter.name}
                 </h3>
-                <p className="text-[#A78BFA] text-lg font-semibold mb-4">
+                <p className="text-lg font-semibold mb-4" style={{ color: '#A78BFA' }}>
                   {matchedWriter.specialty}
                 </p>
                 <div className="flex flex-wrap gap-3 justify-center lg:justify-start">
-                  <div className="flex items-center gap-2 px-3 py-1.5 bg-[#8B5CF6]/10 border border-[#8B5CF6]/30 rounded-full">
-                    <Award className="h-4 w-4 text-[#A78BFA]" />
+                  <div className="flex items-center gap-2 px-3 py-1.5 border rounded-full" style={{ backgroundColor: 'rgba(46, 27, 93, 0.1)', borderColor: 'rgba(46, 27, 93, 0.3)' }}>
+                    <Award className="h-4 w-4" style={{ color: '#A78BFA' }} />
                     <span className="text-white text-sm">{matchedWriter.experience}</span>
                   </div>
                 </div>
@@ -142,14 +142,21 @@ export default function WriterMatchmaker({ onMatchWriter }: WriterMatchmakerProp
                     window.scrollTo({ top: document.getElementById('contact')?.offsetTop || 0, behavior: 'smooth' });
                   }
                 }}
-                className="px-8 py-4 bg-[#8B5CF6] hover:bg-white/88 text-white font-semibold rounded-full transition-all duration-300 hover:scale-105 shadow-lg flex items-center justify-center gap-2"
+                className="px-8 py-4 hover:bg-white/88 text-white font-semibold rounded-full transition-all duration-300 hover:scale-105 shadow-lg flex items-center justify-center gap-2"
+                style={{ backgroundColor: '#8B5CF6' }}
               >
                 <span>Book This Writer</span>
                 <ArrowRight className="h-5 w-5" />
               </button>
               <button
                 onClick={resetForm}
-                className="px-8 py-4 bg-transparent border-2 border-[#8B5CF6]/50 hover:border-[#8B5CF6] text-[#A78BFA] hover:text-white font-semibold rounded-full transition-all duration-300"
+                className="px-8 py-4 bg-transparent border-2 font-semibold rounded-full transition-all duration-300 hover:text-white"
+                style={{ 
+                  borderColor: 'rgba(46, 27, 93, 0.5)',
+                  color: '#A78BFA'
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.borderColor = '#8B5CF6'}
+                onMouseLeave={(e) => e.currentTarget.style.borderColor = 'rgba(46, 27, 93, 0.5)'}
               >
                 Try Again
               </button>
@@ -347,3 +354,5 @@ export default function WriterMatchmaker({ onMatchWriter }: WriterMatchmakerProp
     </section>
   );
 }
+
+

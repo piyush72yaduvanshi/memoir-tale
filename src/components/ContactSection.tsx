@@ -3,7 +3,8 @@ import { Phone, Mail, MapPin, Clock, CheckCircle2, ShieldCheck, Lock, FileSignat
 import { useLanguage } from "../context/LanguageContext";
 import { motion, AnimatePresence } from "motion/react";
 import { collection, doc, setDoc } from "firebase/firestore";
-import { db, handleFirestoreError, OperationType, isFirebaseReady } from "../lib/firebase";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { db, storage, handleFirestoreError, OperationType, isFirebaseReady } from "../lib/firebase";
 import FadeIn from "./FadeIn";
 
 interface ContactSectionProps {
@@ -155,13 +156,43 @@ export default function ContactSection({ selectedService, matchedWriter, onClear
     const ticket = "MT-" + Math.floor(100000 + Math.random() * 900000);
 
     try {
-      // 1. Store file metadata only (no backend upload API on Vercel static deployment)
-      const uploadedAttachments = attachedFiles.map(f => ({
-        name: f.name,
-        type: f.type,
-        size: f.size,
-        note: 'File attached locally — team will request via WhatsApp'
-      }));
+      // 1. Upload files to Firebase Storage and get download URLs
+      const uploadedAttachments = [];
+      
+      for (const file of attachedFiles) {
+        try {
+          // Create a unique filename with timestamp to avoid collisions
+          const timestamp = Date.now();
+          const fileName = `${timestamp}_${file.name}`;
+          const storageRef = ref(storage, `inquiries/${ticket}/${fileName}`);
+          
+          // Upload file to Firebase Storage
+          await uploadBytes(storageRef, file);
+          
+          // Get the download URL
+          const downloadURL = await getDownloadURL(storageRef);
+          
+          // Store file metadata with download URL
+          uploadedAttachments.push({
+            name: file.name,
+            type: file.type,
+            size: file.size,
+            url: downloadURL,
+            uploadedAt: new Date().toISOString()
+          });
+        } catch (uploadErr) {
+          console.error("File upload failed for:", file.name, uploadErr);
+          // Continue with other files even if one fails
+          uploadedAttachments.push({
+            name: file.name,
+            type: file.type,
+            size: file.size,
+            url: '',
+            uploadedAt: new Date().toISOString(),
+            error: 'Upload failed'
+          });
+        }
+      }
 
       // 2. Transmit details and file references securely into Firestore inquires
       const now = new Date().toISOString();
@@ -245,7 +276,7 @@ export default function ContactSection({ selectedService, matchedWriter, onClear
       }`}
     >
       {/* Decorative Blur Ellipse per guidelines */}
-      <div className="absolute bottom-[5%] right-[-120px] w-[500px] h-[500px] bg-[#8B5CF6]/4 rounded-full blurred-ellipse pointer-events-none" />
+      <div className="absolute bottom-[5%] right-[-120px] w-[500px] h-[500px] bg-[#2E1B5D]/4 rounded-full blurred-ellipse pointer-events-none" />
       <div className="absolute top-[10%] left-[-100px] w-[400px] h-[400px] bg-[#8B3CDC]/4 rounded-full blurred-ellipse pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
@@ -260,7 +291,7 @@ export default function ContactSection({ selectedService, matchedWriter, onClear
             
             {/* Stat 1 */}
             <div className="flex flex-col items-center justify-center p-3">
-              <div className={`p-2.5 rounded-full text-[#8B5CF6] mb-3 border ${
+              <div className={`p-2.5 rounded-full text-[#2E1B5D] mb-3 border ${
                 darkMode ? 'bg-[#3A2447] border-white/10' : 'bg-[#FAF6F0] border-[#E3DDE9]'
               }`}>
                 <Phone className="h-5 w-5" />
@@ -270,7 +301,7 @@ export default function ContactSection({ selectedService, matchedWriter, onClear
               }`}>
                 9889011174
               </span>
-              <span className="font-sans font-semibold text-[11px] sm:text-xs text-[#8B5CF6] uppercase tracking-wider mt-1">
+              <span className="font-sans font-semibold text-[11px] sm:text-xs text-[#2E1B5D] uppercase tracking-wider mt-1">
                 {isHindi ? "कभी भी कॉल करें" : "Call Us Anytime"}
               </span>
             </div>
@@ -279,7 +310,7 @@ export default function ContactSection({ selectedService, matchedWriter, onClear
             <div className={`flex flex-col items-center justify-center p-3 border-l lg:border-l ${
               darkMode ? 'border-white/10' : 'border-[#E3DDE9]'
             }`}>
-              <div className={`p-2.5 rounded-full text-[#8B5CF6] mb-3 border ${
+              <div className={`p-2.5 rounded-full text-[#2E1B5D] mb-3 border ${
                 darkMode ? 'bg-[#3A2447] border-white/10' : 'bg-[#FAF6F0] border-[#E3DDE9]'
               }`}>
                 <Mail className="h-5 w-5" />
@@ -287,33 +318,33 @@ export default function ContactSection({ selectedService, matchedWriter, onClear
               <span className="font-serif font-bold text-sm sm:text-base lg:text-[18px] text-[#190F26] truncate max-w-full">
                 support@memoirtale.com
               </span>
-              <span className="font-sans font-semibold text-[11px] sm:text-xs text-[#8B5CF6] uppercase tracking-wider mt-1">
+              <span className="font-sans font-semibold text-[11px] sm:text-xs text-[#2E1B5D] uppercase tracking-wider mt-1">
                 {isHindi ? "हमें ईमेल करें" : "Email Us"}
               </span>
             </div>
 
             {/* Stat 3 */}
             <div className="flex flex-col items-center justify-center p-3 border-l border-[#E3DDE9] lg:border-l">
-              <div className="bg-[#FAF6F0] p-2.5 rounded-full text-[#8B5CF6] mb-3 border border-[#E3DDE9]">
+              <div className="bg-[#FAF6F0] p-2.5 rounded-full text-[#2E1B5D] mb-3 border border-[#E3DDE9]">
                 <MapPin className="h-5 w-5" />
               </div>
               <span className="font-serif font-bold text-lg sm:text-xl lg:text-[21px] text-[#190F26]">
                 {isHindi ? "झाँसी, उत्तर प्रदेश" : "Jhansi, UP"}
               </span>
-              <span className="font-sans font-semibold text-[11px] sm:text-xs text-[#8B5CF6] uppercase tracking-wider mt-1">
+              <span className="font-sans font-semibold text-[11px] sm:text-xs text-[#2E1B5D] uppercase tracking-wider mt-1">
                 {isHindi ? "हमारा केंद्र" : "Our Base"}
               </span>
             </div>
 
             {/* Stat 4 */}
             <div className="flex flex-col items-center justify-center p-3 border-l border-[#E3DDE9] lg:border-l">
-              <div className="bg-[#FAF6F0] p-2.5 rounded-full text-[#8B5CF6] mb-3 border border-[#E3DDE9]">
+              <div className="bg-[#FAF6F0] p-2.5 rounded-full text-[#2E1B5D] mb-3 border border-[#E3DDE9]">
                 <Clock className="h-5 w-5 animate-pulse" />
               </div>
               <span className="font-serif font-bold text-lg sm:text-xl lg:text-[22px] text-[#190F26]">
                 {isHindi ? "तत्काल संपर्क" : "24 Hours"}
               </span>
-              <span className="font-sans font-semibold text-[11px] sm:text-xs text-[#8B5CF6] uppercase tracking-wider mt-1">
+              <span className="font-sans font-semibold text-[11px] sm:text-xs text-[#2E1B5D] uppercase tracking-wider mt-1">
                 {isHindi ? "प्रतिक्रिया समय" : "Response Time"}
               </span>
             </div>
@@ -323,8 +354,8 @@ export default function ContactSection({ selectedService, matchedWriter, onClear
         {/* SUB-SECTION B: Section Heading with FadeIn */}
         <FadeIn>
           <div className="flex flex-col items-center text-center mb-12">
-            <div className="w-[60px] h-[3px] bg-[#8B5CF6] rounded-[2px] mb-4" />
-            <span className="font-sans font-semibold text-[12px] uppercase tracking-[3px] text-[#8B5CF6] mb-3">
+            <div className="w-[60px] h-[3px] bg-[#2E1B5D] rounded-[2px] mb-4" />
+            <span className="font-sans font-semibold text-[12px] uppercase tracking-[3px] text-[#2E1B5D] mb-3">
               {isHindi ? "निःशुल्क परामर्श" : "GET IN TOUCH"}
             </span>
             <h2 className="font-serif font-bold text-3xl sm:text-4xl lg:text-[52px] text-[#190F26] leading-tight">
@@ -353,7 +384,7 @@ export default function ContactSection({ selectedService, matchedWriter, onClear
                 {/* Row 1: 2 columns equal */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div className="flex flex-col text-left space-y-1.5">
-                    <label className="font-sans font-semibold text-[11px] text-[#8B5CF6] uppercase tracking-[1px]">
+                    <label className="font-sans font-semibold text-[11px] text-[#2E1B5D] uppercase tracking-[1px]">
                       {isHindi ? "पूरा नाम" : "Full Name"}
                     </label>
                     <input
@@ -362,12 +393,12 @@ export default function ContactSection({ selectedService, matchedWriter, onClear
                       value={fullName}
                       onChange={(e) => setFullName(e.target.value)}
                       placeholder={isHindi ? "यहाँ अपना पूरा नाम लिखें" : "Aapka pura naam"}
-                      className="w-full bg-[#FAF8F5] border border-[#E3DDE9] rounded-xl h-[52px] px-4 text-[#190F26] placeholder-[#554466]/40 font-sans text-sm focus:outline-none focus:border-[#8B5CF6] focus:bg-white transition-colors"
+                      className="w-full bg-[#FAF8F5] border border-[#E3DDE9] rounded-xl h-[52px] px-4 text-[#190F26] placeholder-[#554466]/40 font-sans text-sm focus:outline-none focus:border-[#2E1B5D] focus:bg-white transition-colors"
                     />
                   </div>
 
                   <div className="flex flex-col text-left space-y-1.5">
-                    <label className="font-sans font-semibold text-[11px] text-[#8B5CF6] uppercase tracking-[1px]">
+                    <label className="font-sans font-semibold text-[11px] text-[#2E1B5D] uppercase tracking-[1px]">
                       {isHindi ? "फ़ोन नंबर (WhatsApp)" : "Phone Number"}
                     </label>
                     <input
@@ -376,7 +407,7 @@ export default function ContactSection({ selectedService, matchedWriter, onClear
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
                       placeholder="+91 XXXXX XXXXX"
-                      className="w-full bg-[#FAF8F5] border border-[#E3DDE9] rounded-xl h-[52px] px-4 text-[#190F26] placeholder-[#554466]/40 font-sans text-sm focus:outline-none focus:border-[#8B5CF6] focus:bg-white transition-colors"
+                      className="w-full bg-[#FAF8F5] border border-[#E3DDE9] rounded-xl h-[52px] px-4 text-[#190F26] placeholder-[#554466]/40 font-sans text-sm focus:outline-none focus:border-[#2E1B5D] focus:bg-white transition-colors"
                     />
                   </div>
                 </div>
@@ -384,7 +415,7 @@ export default function ContactSection({ selectedService, matchedWriter, onClear
                 {/* Row 2: 2 columns equal */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div className="flex flex-col text-left space-y-1.5">
-                    <label className="font-sans font-semibold text-[11px] text-[#8B5CF6] uppercase tracking-[1px]">
+                    <label className="font-sans font-semibold text-[11px] text-[#2E1B5D] uppercase tracking-[1px]">
                       {isHindi ? "ईमेल पता" : "Email Address"}
                     </label>
                     <input
@@ -393,12 +424,12 @@ export default function ContactSection({ selectedService, matchedWriter, onClear
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="aapka@email.com"
-                      className="w-full bg-[#FAF8F5] border border-[#E3DDE9] rounded-xl h-[52px] px-4 text-[#190F26] placeholder-[#554466]/40 font-sans text-sm focus:outline-none focus:border-[#8B5CF6] focus:bg-white transition-colors"
+                      className="w-full bg-[#FAF8F5] border border-[#E3DDE9] rounded-xl h-[52px] px-4 text-[#190F26] placeholder-[#554466]/40 font-sans text-sm focus:outline-none focus:border-[#2E1B5D] focus:bg-white transition-colors"
                     />
                   </div>
 
                   <div className="flex flex-col text-left space-y-1.5">
-                    <label className="font-sans font-semibold text-[11px] text-[#8B5CF6] uppercase tracking-[1px]">
+                    <label className="font-sans font-semibold text-[11px] text-[#2E1B5D] uppercase tracking-[1px]">
                       {isHindi ? "शहर / राज्य" : "City / State"}
                     </label>
                     <input
@@ -406,21 +437,21 @@ export default function ContactSection({ selectedService, matchedWriter, onClear
                       value={cityState}
                       onChange={(e) => setCityState(e.target.value)}
                       placeholder={isHindi ? "जैसे: झाँसी, उत्तर प्रदेश" : "Jaise: Gorakhpur, UP"}
-                      className="w-full bg-[#FAF8F5] border border-[#E3DDE9] rounded-xl h-[52px] px-4 text-[#190F26] placeholder-[#554466]/40 font-sans text-sm focus:outline-none focus:border-[#8B5CF6] focus:bg-white transition-colors"
+                      className="w-full bg-[#FAF8F5] border border-[#E3DDE9] rounded-xl h-[52px] px-4 text-[#190F26] placeholder-[#554466]/40 font-sans text-sm focus:outline-none focus:border-[#2E1B5D] focus:bg-white transition-colors"
                     />
                   </div>
                 </div>
 
                 {/* Row 3: Which Service Are You Interested In? */}
                 <div className="flex flex-col text-left space-y-1.5">
-                  <label className="font-sans font-semibold text-[11px] text-[#8B5CF6] uppercase tracking-[1px]">
+                  <label className="font-sans font-semibold text-[11px] text-[#2E1B5D] uppercase tracking-[1px]">
                     {isHindi ? "आप किस बायोग्राफी सेवा में रुचि रखते हैं?" : "Which Memoir Service Are You Interested In?"}
                   </label>
                   <div className="relative">
                     <select
                       value={service}
                       onChange={(e) => setService(e.target.value)}
-                      className="w-full bg-[#FAF8F5] border border-[#E3DDE9] rounded-xl h-[52px] px-4 text-[#190F26] font-sans text-sm focus:outline-none focus:border-[#8B5CF6] focus:bg-white transition-colors appearance-none cursor-pointer"
+                      className="w-full bg-[#FAF8F5] border border-[#E3DDE9] rounded-xl h-[52px] px-4 text-[#190F26] font-sans text-sm focus:outline-none focus:border-[#2E1B5D] focus:bg-white transition-colors appearance-none cursor-pointer"
                     >
                       <option value="Life Story Book" className="text-[#190F26]">
                         {isHindi ? "जीवन कहानी पुस्तक (शुरुआत ₹24,999)" : "Life Story Book (Starting ₹24,999)"}
@@ -441,20 +472,20 @@ export default function ContactSection({ selectedService, matchedWriter, onClear
                         {isHindi ? "वंश-वृक्ष और वंशावली मानचित्र" : "Full Genealogy Family Tree Mapping"}
                       </option>
                     </select>
-                    <div className="absolute right-4 top-1/2 -translate-y-1/2 text-[#8B5CF6] pointer-events-none text-xs">▼</div>
+                    <div className="absolute right-4 top-1/2 -translate-y-1/2 text-[#2E1B5D] pointer-events-none text-xs">▼</div>
                   </div>
                 </div>
 
                 {/* Row 4: About Whom Is This Book? */}
                 <div className="flex flex-col text-[11px] text-left space-y-1.5">
-                  <label className="font-sans font-semibold text-[11px] text-[#8B5CF6] uppercase tracking-[1px]">
+                  <label className="font-sans font-semibold text-[11px] text-[#2E1B5D] uppercase tracking-[1px]">
                     {isHindi ? "यह पुस्तक किसके बारे में लिखी जानी है?" : "About Whom Is This Book?"}
                   </label>
                   <div className="relative">
                     <select
                       value={aboutWhom}
                       onChange={(e) => setAboutWhom(e.target.value)}
-                      className="w-full bg-[#FAF8F5] border border-[#E3DDE9] rounded-xl h-[52px] px-4 text-[#190F26] font-sans text-sm focus:outline-none focus:border-[#8B5CF6] focus:bg-white transition-colors appearance-none cursor-pointer"
+                      className="w-full bg-[#FAF8F5] border border-[#E3DDE9] rounded-xl h-[52px] px-4 text-[#190F26] font-sans text-sm focus:outline-none focus:border-[#2E1B5D] focus:bg-white transition-colors appearance-none cursor-pointer"
                     >
                       <option value="Myself">{isHindi ? "मेरे अपने बारे में (अपनी कहानी)" : "About Myself (Apni Kahani)"}</option>
                       <option value="My Parent">{isHindi ? "मेरे माता / पिता के लिए" : "My Parent (Mata / Pita Ke Liye)"}</option>
@@ -463,46 +494,46 @@ export default function ContactSection({ selectedService, matchedWriter, onClear
                       <option value="My Child">{isHindi ? "मेरे बच्चों के लिए" : "My Child"}</option>
                       <option value="Other Family Member">{isHindi ? "परिवार के अन्य आदरणीय सदस्य के लिए" : "Other Respected Family Member"}</option>
                     </select>
-                    <div className="absolute right-4 top-1/2 -translate-y-1/2 text-[#8B5CF6] pointer-events-none text-xs">▼</div>
+                    <div className="absolute right-4 top-1/2 -translate-y-1/2 text-[#2E1B5D] pointer-events-none text-xs">▼</div>
                   </div>
                 </div>
 
                 {/* Row 5: Your Story */}
                 <div className="flex flex-col text-left space-y-1.5">
-                  <label className="font-sans font-semibold text-[11px] text-[#8B5CF6] uppercase tracking-[1px]">
+                  <label className="font-sans font-semibold text-[11px] text-[#2E1B5D] uppercase tracking-[1px]">
                     {isHindi ? "संक्षिप्त रूपरेखा / जिन कहानियों व यादों को आप संजोना चाहते हैं" : "Brief Outline / Stories to Preserve"}
                   </label>
                   <textarea
                     value={briefStory}
                     onChange={(e) => setBriefStory(e.target.value)}
                     placeholder={isHindi ? "अपनी कहानी के बारे में संक्षेप में बताएं — वे कौन से मुख्य मील के पत्थर, उपलब्धियां या जीवन मूल्य हैं जिन्हें आप हमेशा के लिए सुरक्षित रखना चाहते हैं?" : "Aapki kahani ke baare mein thoda bataiye — key milestones, achievements, or values you wish to preserve forever?"}
-                    className="w-full bg-[#FAF8F5] border border-[#E3DDE9] rounded-xl h-24 p-4 text-[#190F26] placeholder-[#554466]/40 font-sans text-sm focus:outline-none focus:border-[#8B5CF6] focus:bg-white transition-colors resize-none"
+                    className="w-full bg-[#FAF8F5] border border-[#E3DDE9] rounded-xl h-24 p-4 text-[#190F26] placeholder-[#554466]/40 font-sans text-sm focus:outline-none focus:border-[#2E1B5D] focus:bg-white transition-colors resize-none"
                   />
                 </div>
 
                 {/* Row 6: Preferred Contact Time */}
                 <div className="flex flex-col text-[11px] text-left space-y-1.5">
-                  <label className="font-sans font-semibold text-[11px] text-[#8B5CF6] uppercase tracking-[1px]">
+                  <label className="font-sans font-semibold text-[11px] text-[#2E1B5D] uppercase tracking-[1px]">
                     {isHindi ? "बातचीत के लिए आपका पसंदीदा समय" : "Preferred Contact Time"}
                   </label>
                   <div className="relative">
                     <select
                       value={preferredTime}
                       onChange={(e) => setPreferredTime(e.target.value)}
-                      className="w-full bg-[#FAF8F5] border border-[#E3DDE9] rounded-xl h-[52px] px-4 text-[#190F26] font-sans text-sm focus:outline-none focus:border-[#8B5CF6] focus:bg-white transition-colors appearance-none cursor-pointer"
+                      className="w-full bg-[#FAF8F5] border border-[#E3DDE9] rounded-xl h-[52px] px-4 text-[#190F26] font-sans text-sm focus:outline-none focus:border-[#2E1B5D] focus:bg-white transition-colors appearance-none cursor-pointer"
                     >
                       <option value="Morning (9am–12pm)">{isHindi ? "सुबह का समय (9 am – 12 pm)" : "Morning Slots (9 am – 12 pm)"}</option>
                       <option value="Afternoon (12pm–4pm)">{isHindi ? "दोपहर का समय (12 pm – 4 pm)" : "Afternoon Slots (12 pm – 4 pm)"}</option>
                       <option value="Evening (4pm–8pm)">{isHindi ? "शाम का समय (4 pm – 8 pm)" : "Evening Slots (4 pm – 8 pm)"}</option>
                       <option value="Anytime">{isHindi ? "कभी भी (पूरे दिन में किसी भी समय)" : "Anytime (Pure Din Mein Kabhi Bhi)"}</option>
                     </select>
-                    <div className="absolute right-4 top-1/2 -translate-y-1/2 text-[#8B5CF6] pointer-events-none text-xs">▼</div>
+                    <div className="absolute right-4 top-1/2 -translate-y-1/2 text-[#2E1B5D] pointer-events-none text-xs">▼</div>
                   </div>
                 </div>
 
                 {/* PREMIUM DRAG & DROP FILE VAULT MODULE (Images, Videos, Audio, etc) */}
                 <div className="flex flex-col text-left space-y-2">
-                  <label className="font-sans font-semibold text-[11px] text-[#8B5CF6] uppercase tracking-[1.5px] flex items-center justify-between">
+                  <label className="font-sans font-semibold text-[11px] text-[#2E1B5D] uppercase tracking-[1.5px] flex items-center justify-between">
                     <span>{isHindi ? "फ़ाइलें / तस्वीरें / ऑडियो / वीडियो संलग्न करें (वैकल्पिक)" : "Attach Media & Timelines (Optional)"}</span>
                     <span className="text-[10px] text-slate-500 font-mono lower-case">Max 50MB</span>
                   </label>
@@ -514,8 +545,8 @@ export default function ContactSection({ selectedService, matchedWriter, onClear
                     onDrop={handleDrop}
                     className={`border-2 border-dashed rounded-2xl p-6 text-center cursor-pointer transition-all duration-200 relative ${
                       dragActive
-                        ? "border-[#8B5CF6] bg-[#8B5CF6]/5 scale-[1.01]"
-                        : "border-[#E3DDE9] bg-[#FAF8F5] hover:border-[#8B5CF6]/50 hover:bg-[#FAF6F0]"
+                        ? "border-[#2E1B5D] bg-[#2E1B5D]/5 scale-[1.01]"
+                        : "border-[#E3DDE9] bg-[#FAF8F5] hover:border-[#2E1B5D]/50 hover:bg-[#FAF6F0]"
                     }`}
                   >
                     <input
@@ -525,7 +556,7 @@ export default function ContactSection({ selectedService, matchedWriter, onClear
                       className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                     />
                     <div className="flex flex-col items-center space-y-2">
-                      <div className="p-3 bg-white border border-[#E3DDE9] rounded-full text-[#8B5CF6] shadow-sm">
+                      <div className="p-3 bg-white border border-[#E3DDE9] rounded-full text-[#2E1B5D] shadow-sm">
                         <UploadCloud className="h-6 w-6 animate-bounce" />
                       </div>
                       <p className="font-sans text-sm text-[#190F26] font-semibold">
@@ -566,7 +597,7 @@ export default function ContactSection({ selectedService, matchedWriter, onClear
                                       <img src={file.dataUrl} className="w-full h-full object-cover" />
                                     </div>
                                   ) : (
-                                    <div className="w-10 h-10 rounded-lg bg-[#FAF8F5] border border-[#E3DDE9] flex items-center justify-center text-[#8B5CF6] shrink-0">
+                                    <div className="w-10 h-10 rounded-lg bg-[#FAF8F5] border border-[#E3DDE9] flex items-center justify-center text-[#2E1B5D] shrink-0">
                                       {file.type.startsWith("audio/") ? (
                                         <Music className="h-5 w-5" />
                                       ) : file.type.startsWith("video/") ? (
@@ -580,7 +611,7 @@ export default function ContactSection({ selectedService, matchedWriter, onClear
                                     <p className="font-sans text-xs font-semibold text-[#190F26] truncate max-w-[150px]">
                                       {file.name}
                                     </p>
-                                    <p className="font-mono text-[9px] text-[#8B5CF6]">
+                                    <p className="font-mono text-[9px] text-[#2E1B5D]">
                                       {(file.size / 1024).toFixed(0)} KB
                                     </p>
                                   </div>
@@ -609,7 +640,7 @@ export default function ContactSection({ selectedService, matchedWriter, onClear
                     whileHover={{ scale: 1.03, boxShadow: "0px 10px 30px rgba(139, 92, 246,0.4)" }}
                     whileTap={{ scale: 0.98 }}
                     transition={{ type: "spring", stiffness: 400, damping: 15 }}
-                    className="w-full sm:w-fit min-w-[320px] h-[60px] rounded-full bg-[#8B5CF6] text-white font-sans font-bold text-base hover:bg-[#8B5CF6] transition-all cursor-pointer flex items-center justify-center space-x-2"
+                    className="w-full sm:w-fit min-w-[320px] h-[60px] rounded-full bg-[#2E1B5D] text-white font-sans font-bold text-base hover:bg-[#2E1B5D] transition-all cursor-pointer flex items-center justify-center space-x-2"
                   >
                     {isSubmitting ? (
                       <div className="h-5 w-5 border-2 border-t-transparent border-[#17063F] rounded-full animate-spin" />
@@ -621,7 +652,7 @@ export default function ContactSection({ selectedService, matchedWriter, onClear
                   {/* Dedicated Security & Data Protection Assurance Block */}
                   <div className="w-full mt-8 pt-8 border-t border-[#E3DDE9]/70">
                     <div className="flex items-center justify-center space-x-2 mb-6">
-                      <Lock className="h-4.5 w-4.5 text-[#8B5CF6]" />
+                      <Lock className="h-4.5 w-4.5 text-[#2E1B5D]" />
                       <span className="font-sans font-bold text-xs uppercase tracking-widest text-[#190F26]">
                         {isHindi ? "डेटा सुरक्षा और अत्यधिक गोपनीयता गारंटी" : "Story Vault — Privacy & Protection Guaranteed"}
                       </span>
@@ -634,7 +665,7 @@ export default function ContactSection({ selectedService, matchedWriter, onClear
                         transition={{ type: "spring", stiffness: 300, damping: 20 }}
                         className="bg-[#FAF8F5] border border-[#E3DDE9]/50 rounded-xl p-4 flex flex-col space-y-2 cursor-pointer transition-colors"
                       >
-                        <div className="flex items-center space-x-2 text-[#8B5CF6]">
+                        <div className="flex items-center space-x-2 text-[#2E1B5D]">
                           <ShieldCheck className="h-4.5 w-4.5 shrink-0" />
                           <h4 className="font-sans font-bold text-xs text-[#190F26] tracking-tight">
                             {isHindi ? "100% पूर्ण गोपनीयता" : "100% Confidential"}
@@ -653,7 +684,7 @@ export default function ContactSection({ selectedService, matchedWriter, onClear
                         transition={{ type: "spring", stiffness: 300, damping: 20 }}
                         className="bg-[#FAF8F5] border border-[#E3DDE9]/50 rounded-xl p-4 flex flex-col space-y-2 cursor-pointer transition-colors"
                       >
-                        <div className="flex items-center space-x-2 text-[#8B5CF6]">
+                        <div className="flex items-center space-x-2 text-[#2E1B5D]">
                           <FileSignature className="h-4.5 w-4.5 shrink-0" />
                           <h4 className="font-sans font-bold text-xs text-[#190F26] tracking-tight">
                             {isHindi ? "गैर-प्रकटीकरण अनुबंध (NDA)" : "Family NDAs Available"}
@@ -672,7 +703,7 @@ export default function ContactSection({ selectedService, matchedWriter, onClear
                         transition={{ type: "spring", stiffness: 300, damping: 20 }}
                         className="bg-[#FAF8F5] border border-[#E3DDE9]/50 rounded-xl p-4 flex flex-col space-y-2 cursor-pointer transition-colors"
                       >
-                        <div className="flex items-center space-x-2 text-[#8B5CF6]">
+                        <div className="flex items-center space-x-2 text-[#2E1B5D]">
                           <Trash2 className="h-4.5 w-4.5 shrink-0" />
                           <h4 className="font-sans font-bold text-xs text-[#190F26] tracking-tight">
                             {isHindi ? "डेटा हटाने का अधिकार" : "Data Erasure Guarantee"}
@@ -719,7 +750,7 @@ export default function ContactSection({ selectedService, matchedWriter, onClear
                 animate={{ scale: 1, opacity: 1, y: 0 }}
                 exit={{ scale: 0.9, opacity: 0, y: 30 }}
                 transition={{ type: "spring", stiffness: 300, damping: 25 }}
-                className="bg-white border-2 border-[#8B5CF6] rounded-[28px] max-w-lg w-full p-8 shadow-[0_12px_50px_rgba(139, 92, 246,0.25)] relative overflow-hidden"
+                className="bg-white border-2 border-[#2E1B5D] rounded-[28px] max-w-lg w-full p-8 shadow-[0_12px_50px_rgba(139, 92, 246,0.25)] relative overflow-hidden"
               >
                 <div className="absolute top-0 right-0 w-32 h-32 bg-[#E1D3F0]/10 rounded-full blurred-ellipse" />
                 
@@ -728,7 +759,7 @@ export default function ContactSection({ selectedService, matchedWriter, onClear
                     <CheckCircle2 className="h-10 w-10 fill-current animate-bounce" />
                   </div>
                   
-                  <span className="text-xs uppercase tracking-widest text-[#8B5CF6] font-bold bg-[#FAF6F0] px-3 py-1 rounded-full border border-[#E3DDE9]">
+                  <span className="text-xs uppercase tracking-widest text-[#2E1B5D] font-bold bg-[#FAF6F0] px-3 py-1 rounded-full border border-[#E3DDE9]">
                     {isHindi ? "बुकिंग टिकट:" : "REF TICKET:"} {submittedData.ticketNo}
                   </span>
 
@@ -766,7 +797,7 @@ export default function ContactSection({ selectedService, matchedWriter, onClear
                     )}
                     <div className="flex justify-between pb-0.5">
                       <span className="text-[#554466]/70">{isHindi ? "पसंदीदा कॉल स्लॉट:" : "Preferred Call Slot:"}</span>
-                      <span className="text-[#8B5CF6] font-bold">{submittedData.preferredTime}</span>
+                      <span className="text-[#2E1B5D] font-bold">{submittedData.preferredTime}</span>
                     </div>
                   </div>
 
@@ -778,7 +809,7 @@ export default function ContactSection({ selectedService, matchedWriter, onClear
                     onClick={() => setSubmittedData(null)}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className="w-full h-12 bg-[#8B5CF6] text-white font-sans font-bold text-sm rounded-full hover:bg-[#8B5CF6] transition-all cursor-pointer mt-4 shadow"
+                    className="w-full h-12 bg-[#2E1B5D] text-white font-sans font-bold text-sm rounded-full hover:bg-[#2E1B5D] transition-all cursor-pointer mt-4 shadow"
                   >
                     {isHindi ? "बहुत बढ़िया, बंद करें" : "Awesome, Close Receipt"}
                   </motion.button>
@@ -792,3 +823,6 @@ export default function ContactSection({ selectedService, matchedWriter, onClear
     </section>
   );
 }
+
+
+

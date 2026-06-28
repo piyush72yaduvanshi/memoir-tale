@@ -6,6 +6,7 @@ interface FadeInProps {
   delay?: number;
   duration?: number;
   yOffset?: number;
+  key?: React.Key;
 }
 
 export default function FadeIn({
@@ -29,3 +30,4 @@ export default function FadeIn({
     </motion.div>
   );
 }
+

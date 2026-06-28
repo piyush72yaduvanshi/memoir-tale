@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Menu, X, ChevronDown, Sparkles, Globe, Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
-import logoUrl from "../assets/images/memoir_logo_1780375728663.png";
 import { useLanguage } from "../context/LanguageContext";
 import { motion, AnimatePresence } from "motion/react";
+import logoUrl from "../assets/images/memoir_logo_1780375728663.png";
 
 interface NavbarProps {
   darkMode: boolean;
@@ -398,3 +398,5 @@ export default function Navbar({
     </>
   );
 }
+
+

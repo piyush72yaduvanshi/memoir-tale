@@ -23,19 +23,19 @@ const EVENT_IMAGES = [
   event8, event9, event10, event11, event12, event13
 ];
 
-function EventCard({ src, index, onClick }: { src: string; index: number; onClick: () => void }) {
+function EventCard({ src, index, onClick }: { src: string; index: number; onClick: () => void; key?: React.Key }) {
   const [loaded, setLoaded] = useState(false);
 
   return (
     <div
       onClick={onClick}
-      className="relative group overflow-hidden rounded-2xl border border-[#E3DDE9]/60 hover:border-[#8B5CF6]/60 shadow-[0_8px_30px_rgba(69,20,122,0.04)] hover:shadow-2xl cursor-pointer aspect-square transition-all duration-300 transform hover:-translate-y-2 bg-white select-none"
+      className="relative group overflow-hidden rounded-2xl border border-[#E3DDE9]/60 hover:border-[#2E1B5D]/60 shadow-[0_8px_30px_rgba(69,20,122,0.04)] hover:shadow-2xl cursor-pointer aspect-square transition-all duration-300 transform hover:-translate-y-2 bg-white select-none"
       style={{ animationDelay: `${index * 40}ms` }}
     >
       {/* Loading state */}
       {!loaded && (
         <div className="absolute inset-0 bg-[#FAF6F0] animate-pulse flex items-center justify-center">
-          <Sparkles className="h-5 w-5 text-[#8B5CF6]/40 animate-spin" style={{ animationDuration: '3s' }} />
+          <Sparkles className="h-5 w-5 text-[#2E1B5D]/40 animate-spin" style={{ animationDuration: '3s' }} />
         </div>
       )}
       
@@ -51,7 +51,7 @@ function EventCard({ src, index, onClick }: { src: string; index: number; onClic
       {/* Hover overlay */}
       <div className="absolute inset-0 bg-gradient-to-t from-[#190F26]/95 via-[#190F26]/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-5">
         <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-350 ease-out">
-          <div className="w-12 h-[2px] bg-[#8B5CF6] rounded mb-3" />
+          <div className="w-12 h-[2px] bg-[#2E1B5D] rounded mb-3" />
           <p className="font-sans text-xs text-white/80 uppercase tracking-wide">
             {index + 1} / {EVENT_IMAGES.length}
           </p>
@@ -71,8 +71,8 @@ function LightboxImage({ src, alt }: { src: string; alt: string }) {
   return (
     <div className="relative flex items-center justify-center w-full h-full">
       {!loaded && (
-        <div className="absolute inset-0 flex items-center justify-center bg-[#8B5CF6]/5">
-          <div className="animate-spin rounded-full h-8 w-8 border-2 border-t-[#8B5CF6] border-r-transparent border-b-[#8B5CF6] border-l-transparent" />
+        <div className="absolute inset-0 flex items-center justify-center bg-[#2E1B5D]/5">
+          <div className="animate-spin rounded-full h-8 w-8 border-2 border-t-[#2E1B5D] border-r-transparent border-b-[#2E1B5D] border-l-transparent" />
         </div>
       )}
       <img
@@ -169,7 +169,7 @@ export default function EventSection() {
       className="bg-[#FCFBF7] py-20 lg:py-28 text-[#190F26] relative overflow-hidden border-b border-[#E3DDE9]/40"
     >
       {/* Background decorative elements */}
-      <div className="absolute top-[10%] right-[-80px] w-96 h-96 bg-[#8B5CF6]/4 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute top-[10%] right-[-80px] w-96 h-96 bg-[#2E1B5D]/4 rounded-full blur-[100px] pointer-events-none" />
       <div className="absolute bottom-[10%] left-[-80px] w-80 h-80 bg-[#8B3CDC]/4 rounded-full blur-[80px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -177,8 +177,8 @@ export default function EventSection() {
         {/* Header Section */}
         <FadeIn>
           <div className="flex flex-col items-center text-center mb-12">
-            <div className="w-[60px] h-[3px] bg-[#8B5CF6] rounded-[2px] mb-4" />
-            <span className="font-sans font-semibold text-[11px] uppercase tracking-[3px] text-[#8B5CF6] mb-3 flex items-center gap-1.5">
+            <div className="w-[60px] h-[3px] bg-[#2E1B5D] rounded-[2px] mb-4" />
+            <span className="font-sans font-semibold text-[11px] uppercase tracking-[3px] text-[#2E1B5D] mb-3 flex items-center gap-1.5">
               <Calendar className="h-4 w-4" /> {labels.label}
             </span>
             <h2 className="font-serif font-bold text-3xl sm:text-4.5xl lg:text-[48px] text-[#190F26] tracking-tight leading-tight">
@@ -194,15 +194,15 @@ export default function EventSection() {
         <FadeIn delay={0.1}>
           <div className="flex flex-wrap justify-center gap-6 mb-12">
             <div className="flex items-center gap-2 bg-white px-5 py-3 rounded-full border border-[#E3DDE9]/60 shadow-sm">
-              <Calendar className="h-4 w-4 text-[#8B5CF6]" />
+              <Calendar className="h-4 w-4 text-[#2E1B5D]" />
               <span className="font-sans text-sm font-medium text-[#190F26]">{labels.eventDate}</span>
             </div>
             <div className="flex items-center gap-2 bg-white px-5 py-3 rounded-full border border-[#E3DDE9]/60 shadow-sm">
-              <MapPin className="h-4 w-4 text-[#8B5CF6]" />
+              <MapPin className="h-4 w-4 text-[#2E1B5D]" />
               <span className="font-sans text-sm font-medium text-[#190F26]">{labels.eventLocation}</span>
             </div>
             <div className="flex items-center gap-2 bg-white px-5 py-3 rounded-full border border-[#E3DDE9]/60 shadow-sm">
-              <Users className="h-4 w-4 text-[#8B5CF6]" />
+              <Users className="h-4 w-4 text-[#2E1B5D]" />
               <span className="font-sans text-sm font-medium text-[#190F26]">{labels.eventAttendees}</span>
             </div>
           </div>
@@ -231,7 +231,7 @@ export default function EventSection() {
                 e.preventDefault();
                 setActiveImageIndex(0);
               }}
-              className="px-8 py-3.5 rounded-full border border-[#8B5CF6] text-[#8B5CF6] font-sans font-bold text-sm hover:bg-[#8B5CF6] hover:text-[#FCFBF7] transition-all duration-300 shadow-[0_4px_12px_rgba(139,92,246,0.05)] hover:shadow-[0_8px_24px_rgba(139,92,246,0.2)] cursor-pointer hover:scale-105 select-none"
+              className="px-8 py-3.5 rounded-full border border-[#2E1B5D] text-[#2E1B5D] font-sans font-bold text-sm hover:bg-[#2E1B5D] hover:text-[#FCFBF7] transition-all duration-300 shadow-[0_4px_12px_rgba(139,92,246,0.05)] hover:shadow-[0_8px_24px_rgba(139,92,246,0.2)] cursor-pointer hover:scale-105 select-none"
             >
               {labels.viewAll} ({EVENT_IMAGES.length}) →
             </button>
@@ -262,14 +262,14 @@ export default function EventSection() {
                     e.stopPropagation();
                     setActiveImageIndex(null);
                   }}
-                  className="px-5 py-2.5 bg-[#8B5CF6] hover:bg-[#7C3AED] text-white font-sans font-bold text-xs rounded-full transition-all duration-200 cursor-pointer shadow-[0_4px_16px_rgba(139,92,246,0.3)] flex items-center space-x-1.5 hover:scale-105 active:scale-95"
+                  className="px-5 py-2.5 bg-[#2E1B5D] hover:bg-[#1F1240] text-white font-sans font-bold text-xs rounded-full transition-all duration-200 cursor-pointer shadow-[0_4px_16px_rgba(139,92,246,0.3)] flex items-center space-x-1.5 hover:scale-105 active:scale-95"
                 >
                   <X className="h-3.5 w-3.5" />
                   <span>{labels.back}</span>
                 </button>
 
                 <div className="flex items-center space-x-2 bg-white/10 border border-white/20 px-3.5 py-1.5 rounded-full text-white font-mono text-xs font-semibold backdrop-blur-sm select-none">
-                  <span className="text-[#8B5CF6] font-bold uppercase tracking-wider">
+                  <span className="text-[#2E1B5D] font-bold uppercase tracking-wider">
                     {isHindi ? "कार्यक्रम" : "EVENT"}
                   </span>
                   <span className="text-white/40">•</span>
@@ -285,7 +285,7 @@ export default function EventSection() {
                 <button
                   type="button"
                   onClick={handlePrev}
-                  className="absolute left-2 sm:left-[-70px] text-white/85 hover:text-[#8B5CF6] hover:bg-white/10 bg-black/40 p-3 sm:p-4 rounded-full transition-all cursor-pointer z-30"
+                  className="absolute left-2 sm:left-[-70px] text-white/85 hover:text-[#2E1B5D] hover:bg-white/10 bg-black/40 p-3 sm:p-4 rounded-full transition-all cursor-pointer z-30"
                   aria-label="Previous Image"
                 >
                   <ChevronLeft className="h-6 w-6 sm:h-8 sm:w-8" />
@@ -305,7 +305,7 @@ export default function EventSection() {
                 <button
                   type="button"
                   onClick={handleNext}
-                  className="absolute right-2 sm:right-[-70px] text-white/85 hover:text-[#8B5CF6] hover:bg-white/10 bg-black/40 p-3 sm:p-4 rounded-full transition-all cursor-pointer z-30"
+                  className="absolute right-2 sm:right-[-70px] text-white/85 hover:text-[#2E1B5D] hover:bg-white/10 bg-black/40 p-3 sm:p-4 rounded-full transition-all cursor-pointer z-30"
                   aria-label="Next Image"
                 >
                   <ChevronRight className="h-6 w-6 sm:h-8 sm:w-8" />
@@ -323,7 +323,7 @@ export default function EventSection() {
                     onClick={() => setActiveImageIndex(index)}
                     className={`relative w-12 h-12 rounded-lg overflow-hidden border-2 transition-all duration-300 cursor-pointer shrink-0 ${
                       index === activeImageIndex
-                        ? "border-[#8B5CF6] scale-110 shadow-lg shadow-[#8B5CF6]/20"
+                        ? "border-[#2E1B5D] scale-110 shadow-lg shadow-[#2E1B5D]/20"
                         : "border-white/10 opacity-60 hover:opacity-100"
                     }`}
                   >
@@ -339,12 +339,12 @@ export default function EventSection() {
               {/* Bottom Info Card */}
               <div 
                 onClick={(e) => e.stopPropagation()}
-                className="w-full max-w-2xl mt-5 p-5 sm:p-6 bg-[#190F26] border border-[#8B5CF6]/30 rounded-2xl text-left shadow-2xl mx-auto select-none"
+                className="w-full max-w-2xl mt-5 p-5 sm:p-6 bg-[#190F26] border border-[#2E1B5D]/30 rounded-2xl text-left shadow-2xl mx-auto select-none"
               >
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center space-x-2">
-                    <span className="h-2 w-2 rounded-full bg-[#8B5CF6] animate-pulse" />
-                    <span className="text-[10px] font-mono font-bold tracking-widest text-[#8B5CF6] uppercase bg-[#8B5CF6]/10 px-2 py-0.5 rounded border border-[#8B5CF6]/20">
+                    <span className="h-2 w-2 rounded-full bg-[#2E1B5D] animate-pulse" />
+                    <span className="text-[10px] font-mono font-bold tracking-widest text-[#2E1B5D] uppercase bg-[#2E1B5D]/10 px-2 py-0.5 rounded border border-[#2E1B5D]/20">
                       {labels.eventDate}
                     </span>
                   </div>
@@ -357,7 +357,7 @@ export default function EventSection() {
                   <h3 className="font-serif font-bold text-lg sm:text-2xl text-[#FCFBF7] tracking-tight">
                     {labels.heading}
                   </h3>
-                  <p className="text-[#8B5CF6] font-sans font-medium text-xs sm:text-sm tracking-wide">
+                  <p className="text-[#2E1B5D] font-sans font-medium text-xs sm:text-sm tracking-wide">
                     {labels.eventLocation}
                   </p>
                 </div>
@@ -370,14 +370,14 @@ export default function EventSection() {
                 <div className="mt-4 pt-4 border-t border-white/10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2.5">
                   <div className="text-[10px] text-white/45 font-mono space-y-1">
                     <div className="flex items-center gap-1.5">
-                      <span className="text-[#8B5CF6]">💡</span> {labels.proTip}
+                      <span className="text-[#2E1B5D]">💡</span> {labels.proTip}
                     </div>
                     <div>
-                      <span className="text-[#8B5CF6]">⌨️</span> {labels.escTip}
+                      <span className="text-[#2E1B5D]">⌨️</span> {labels.escTip}
                     </div>
                   </div>
                   
-                  <span className="text-[9px] uppercase tracking-wider font-mono text-[#8B5CF6]/70 font-semibold bg-[#8B5CF6]/5 border border-[#8B5CF6]/20 px-2 py-1 rounded inline-block self-start sm:self-auto">
+                  <span className="text-[9px] uppercase tracking-wider font-mono text-[#2E1B5D]/70 font-semibold bg-[#2E1B5D]/5 border border-[#2E1B5D]/20 px-2 py-1 rounded inline-block self-start sm:self-auto">
                     {isHindi ? "मेमोयरटेल" : "MEMOIRTALE"}
                   </span>
                 </div>
@@ -391,3 +391,6 @@ export default function EventSection() {
     </section>
   );
 }
+
+
+

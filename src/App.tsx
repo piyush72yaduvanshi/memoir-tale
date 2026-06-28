@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import PhilosophyStrip from './components/PhilosophyStrip';
 import TrustStrip from './components/TrustStrip';
 import TrustStatsStrip from './components/TrustStatsStrip';
 import AboutSection from './components/AboutSection';
@@ -8,10 +9,10 @@ import AboutStripSection from './components/AboutStripSection';
 import MarqueeSection from './components/MarqueeSection';
 import TopicsSection from './components/TopicsSection';
 import HowItWorksSection from './components/HowItWorksSection';
+import MemoirLifestyle from './components/MemoirLifestyle';
 import FeatureIconsGrid from './components/FeatureIconsGrid';
 import WriterMatchmaker from './components/WriterMatchmaker';
 import WhyMemoirSection from './components/WhyMemoirSection';
-import ServicesSection from './components/ServicesSection';
 import GallerySection from './components/GallerySection';
 import SampleChapters from './components/SampleChapters';
 import TestimonialsSection from './components/TestimonialsSection';
@@ -105,6 +106,10 @@ export default function App() {
         onViewBooksClick={() => scrollToSection('gallery')}
         isMobilePreview={false}
       />
+      
+      {/* Philosophy Separator */}
+      <PhilosophyStrip />
+      
       <TrustStrip />
       <div id="about">
         <AboutSection onLearnMoreClick={() => scrollToSection('how-it-works')} />
@@ -112,28 +117,38 @@ export default function App() {
       <AboutStripSection darkMode={darkMode} />
       <MarqueeSection />
       <TopicsSection />
+      
+      {/* The 5 Step Timeline Process */}
       <div id="how-it-works">
-        <HowItWorksSection onCtaClick={() => scrollToSection('contact')} />
+        <HowItWorksSection onCtaClick={() => scrollToSection('contact')} darkMode={darkMode} />
       </div>
+      
+      {/* Feature Details Grid */}
       <FeatureIconsGrid darkMode={darkMode} />
+      
+      {/* Writer Matchmaker */}
       <WriterMatchmaker 
         onMatchWriter={(writer) => {
           setMatchedWriter(writer);
           scrollToSection('contact');
         }}
       />
-      <WhyMemoirSection />
+      
+      {/* Comparison & Difference Core */}
+      <WhyMemoirSection darkMode={darkMode} />
+      
+      {/* Trust Counters */}
       <TrustStatsStrip />
+      
+      {/* Our Services Slider */}
       <div id="services">
-        <ServicesSection 
-          onChoosePackage={(pkg) => {
-            setSelectedService(pkg);
-            scrollToSection('contact');
-          }}
-          highlightedPackageId={highlightedPackageId}
-          setHighlightedPackageId={setHighlightedPackageId}
+        <MemoirLifestyle 
+          darkMode={darkMode} 
+          onCtaClick={() => scrollToSection('contact')} 
         />
       </div>
+      
+      {/* Legacy Gallery */}
       <div id="gallery">
         <GallerySection darkMode={darkMode} />
       </div>

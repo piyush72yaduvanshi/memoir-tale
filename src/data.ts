@@ -1,5 +1,50 @@
 // Memoir Tale - Content Data Store
 
+import { Service } from './types';
+
+export const SERVICES: Service[] = [
+  {
+    id: 'life-story',
+    title: 'Life Story Books',
+    tagline: 'Legacy Biography',
+    description: 'A full-length biography elegantly bound in fine leather, tracing your ancestry, childhood, and life milestones.',
+    image: 'https://picsum.photos/seed/mem_lifestory/600/400',
+    linkText: 'Learn More'
+  },
+  {
+    id: 'obituaries',
+    title: 'Obituaries & Tribute Books',
+    tagline: 'Honor A Life Well-Lived',
+    description: 'A dedicated tribute book compiling eulogies, letters of affection, and historic family portraits for memorial services.',
+    image: 'https://picsum.photos/seed/mem_tribute/600/400',
+    linkText: 'Learn More'
+  },
+  {
+    id: 'animated-films',
+    title: 'Animated Short Films',
+    tagline: 'Visual Heritage',
+    description: 'Custom animated memoirs recreating key family moments and stories with professional voiceovers and cinematic hand-drawn art.',
+    image: 'https://picsum.photos/seed/mem_animation/600/400',
+    linkText: 'Explore Film'
+  },
+  {
+    id: 'ai-memory-bot',
+    title: 'Personalized AI Memory Bot',
+    tagline: 'Conversational Continuity',
+    description: 'A comforting conversational assistant, trained on your letters and records, allowing descendants to talk to your memories (Coming Soon).',
+    image: 'https://picsum.photos/seed/mem_aibot/600/400',
+    linkText: 'Join Waitlist'
+  },
+  {
+    id: 'family-trees',
+    title: 'Family Legacy Trees',
+    tagline: 'Visual Genealogy',
+    description: 'Spectacular visual genealogy art hand-drafted by expert designers, perfect for framing and displaying in your family estate.',
+    image: 'https://picsum.photos/seed/mem_tree/600/400',
+    linkText: 'View Designs'
+  }
+];
+
 export interface Topic {
   id: number;
   icon: string;
@@ -328,8 +373,17 @@ export const FAQS: FAQItem[] = [
   }
 ];
 
+export interface BookCover {
+  id: number;
+  title: string;
+  author: string;
+  bg: string;
+  accent: string;
+  image?: string;
+}
+
 // Aesthetic mock book covers with Indian memoir motifs for our custom carousel
-export const BOOK_COVERS = [
+export const BOOK_COVERS: BookCover[] = [
   { id: 1, title: "Threads of Time", author: "Devi Prasad Sen", bg: "from-[#4E1015] to-[#230205]", accent: "rgba(229,184,72,0.8)" },
   { id: 2, title: "The Coal Merchant's Son", author: "Hiralal Gupta", bg: "from-[#743A15] to-[#421D05]", accent: "rgba(229,184,72,0.9)" },
   { id: 3, title: "Whispers of the Banyan", author: "Lilavati Rao", bg: "from-[#0F3624] to-[#051F13]", accent: "rgba(255,255,255,0.7)" },
@@ -512,65 +566,7 @@ export const TRANSLATIONS: SectionTranslations = {
       { title: 'Entrepreneur\'s Journey', description: 'Document the risks, failures, and triumphs' },
       { title: 'Family Tree Legacy', description: 'Connect generations through shared history' }
     ],
-    topicsFooter: "Don't see your story type? We craft custom memoirs for every unique journey.",
-    // Portfolio Section
-    portfolio: {
-      label: "PORTFOLIO",
-      heading: "Stories We've Helped",
-      headingItalic: "Tell",
-      subtitle: "Click on any volume below to open our immersive storybook interactive reader and experience the literary depth and formatting of a finished MemoirTale chapter.",
-      readExcerpt: "Read Story Excerpt",
-      clickToOpen: "Click to Open",
-      customBind: "Custom Bind",
-      bookCta: "Book Your Autobiography",
-      modalChronicle: "A MemoirTale Chronicle",
-      modalLifeArchives: "The life archives of",
-      modalCommission: "Commission My Book",
-      stories: [
-        {
-          title: 'The Whispering Pines of Jhansi',
-          subject: 'Rameshwar Nath Prasad',
-          year: '2024 Release',
-          excerpt: 'A brilliant account of an ambitious student finding his purpose in pre-independence UP, setting up a telegraph line across small villages.',
-          pageCount: '194 Pages'
-        },
-        {
-          title: 'Threads of the Silk Loom',
-          subject: 'Anjali Deshmukh',
-          year: '2025 Release',
-          excerpt: 'Three generations of silk weavers preserved in an epic tapestry of heirloom stories, color dye recipes, and family letters.',
-          pageCount: '240 Pages'
-        },
-        {
-          title: "The Navigator's Hourglass",
-          subject: 'Capt. Hector Sterling',
-          year: '2024 Release',
-          excerpt: "A sea captain's journals recounting ocean voyages, high-seas squalls, and the tranquil starlight of the Southern Hemisphere.",
-          pageCount: '312 Pages'
-        },
-        {
-          title: 'Echoes from the Railway Quarters',
-          subject: 'Balwant Singh Rathore',
-          year: '2025 Release',
-          excerpt: 'A railwayman\'s memoir spanning four decades of service, documenting the evolution of Indian Railways and countless journeys across the subcontinent.',
-          pageCount: '256 Pages'
-        },
-        {
-          title: 'The Herbalist\'s Daughter',
-          subject: 'Dr. Meera Kulkarni',
-          year: '2024 Release',
-          excerpt: 'From traditional Ayurvedic remedies to modern medicine, a pioneering woman doctor\'s journey breaking barriers in rural Maharashtra.',
-          pageCount: '218 Pages'
-        },
-        {
-          title: 'Letters from the Himalayan Outpost',
-          subject: 'Col. Rajendra Thapa',
-          year: '2025 Release',
-          excerpt: 'A decorated army officer\'s chronicles from the highest military posts, blending duty with deep spiritual reflection in the mountain solitude.',
-          pageCount: '289 Pages'
-        }
-      ]
-    }
+    topicsFooter: "Don't see your story type? We craft custom memoirs for every unique journey."
   },
   HI: {
     // Hero Section
@@ -639,64 +635,6 @@ export const TRANSLATIONS: SectionTranslations = {
       { title: 'उद्यमी की यात्रा', description: 'जोखिम, असफलताओं और विजय का दस्तावेज़ीकरण' },
       { title: 'पारिवारिक वृक्ष की विरासत', description: 'साझा इतिहास के माध्यम से पीढ़ियों को जोड़ें' }
     ],
-    topicsFooter: "अपनी कहानी का प्रकार नहीं दिखा? हम हर अनोखी यात्रा के लिए कस्टम संस्मरण तैयार करते हैं।",
-    // Portfolio Section
-    portfolio: {
-      label: "पोर्टफोलियो",
-      heading: "जो कहानियाँ हमने बताने में मदद की",
-      headingItalic: "",
-      subtitle: "हमारे इमर्सिव स्टोरीबुक इंटरैक्टिव रीडर को खोलने और एक समाप्त मेमोयरटेल अध्याय की साहित्यिक गहराई का अनुभव करने के लिए नीचे किसी भी वॉल्यूम पर क्लिक करें।",
-      readExcerpt: "कहानी का अंश पढ़ें",
-      clickToOpen: "खोलने के लिए क्लिक करें",
-      customBind: "कस्टम बाइंड",
-      bookCta: "अपनी आत्मकथा बुक करें",
-      modalChronicle: "एक मेमोयरटेल क्रॉनिकल",
-      modalLifeArchives: "के जीवन अभिलेख",
-      modalCommission: "मेरी पुस्तक कमीशन करें",
-      stories: [
-        {
-          title: 'झांसी के फुसफुसाते पाइंस',
-          subject: 'रामेश्वर नाथ प्रसाद',
-          year: '2024 रिलीज',
-          excerpt: 'स्वतंत्रता-पूर्व यूपी में अपने उद्देश्य को खोजते एक महत्वाकांक्षी छात्र का शानदार विवरण, जो छोटे गांवों में टेलीग्राफ लाइन स्थापित कर रहा था।',
-          pageCount: '194 पृष्ठ'
-        },
-        {
-          title: 'रेशम करघे के धागे',
-          subject: 'अंजलि देशमुख',
-          year: '2025 रिलीज',
-          excerpt: 'रेशम बुनकरों की तीन पीढ़ियां विरासती कहानियों, रंग रसायन व्यंजनों और पारिवारिक पत्रों की एक महाकाव्य टेपेस्ट्री में संरक्षित।',
-          pageCount: '240 पृष्ठ'
-        },
-        {
-          title: 'नाविक की रेतघड़ी',
-          subject: 'कैप्टन हेक्टर स्टर्लिंग',
-          year: '2024 रिलीज',
-          excerpt: 'एक समुद्री कप्तान की पत्रिकाएं जो महासागर यात्राओं, उच्च-समुद्र तूफानों और दक्षिणी गोलार्ध की शांत तारों की रोशनी का वर्णन करती हैं।',
-          pageCount: '312 पृष्ठ'
-        },
-        {
-          title: 'रेलवे क्वार्टर से गूंज',
-          subject: 'बलवंत सिंह राठौर',
-          year: '2025 रिलीज',
-          excerpt: 'चार दशकों की सेवा का एक रेलवे कर्मचारी का संस्मरण, भारतीय रेलवे के विकास और उपमहाद्वीप में अनगिनत यात्राओं का दस्तावेजीकरण।',
-          pageCount: '256 पृष्ठ'
-        },
-        {
-          title: 'हर्बलिस्ट की बेटी',
-          subject: 'डॉ. मीरा कुलकर्णी',
-          year: '2024 रिलीज',
-          excerpt: 'पारंपरिक आयुर्वेदिक उपचार से आधुनिक चिकित्सा तक, ग्रामीण महाराष्ट्र में बाधाओं को तोड़ती एक अग्रणी महिला डॉक्टर की यात्रा।',
-          pageCount: '218 पृष्ठ'
-        },
-        {
-          title: 'हिमालयी चौकी से पत्र',
-          subject: 'कर्नल राजेंद्र थापा',
-          year: '2025 रिलीज',
-          excerpt: 'एक सजाए गए सेना अधिकारी का उच्चतम सैन्य चौकियों से वृत्तांत, पहाड़ी एकांत में कर्तव्य को गहन आध्यात्मिक चिंतन के साथ मिश्रित करते हुए।',
-          pageCount: '289 पृष्ठ'
-        }
-      ]
-    }
+    topicsFooter: "अपनी कहानी का प्रकार नहीं दिखा? हम हर अनोखी यात्रा के लिए कस्टम संस्मरण तैयार करते हैं।"
   }
 };

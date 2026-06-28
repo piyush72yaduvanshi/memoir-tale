@@ -130,6 +130,7 @@ export default function PortfolioGallery() {
                   src={story.image}
                   alt={story.title}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  referrerPolicy="no-referrer"
                 />
                 <div className="absolute inset-0 bg-[#2d1e2f]/50 opacity-40 group-hover:opacity-10 transition-opacity duration-300" />
                 

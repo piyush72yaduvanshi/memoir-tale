@@ -1,6 +1,7 @@
-import { initializeApp } from 'firebase/app';
-import { getAuth } from 'firebase/auth';
-import { getFirestore } from 'firebase/firestore';
+import { initializeApp, FirebaseApp } from 'firebase/app';
+import { getAuth, Auth } from 'firebase/auth';
+import { getFirestore, Firestore } from 'firebase/firestore';
+import { getStorage, FirebaseStorage } from 'firebase/storage';
 
 // Firebase configuration from environment variables
 const firebaseConfig = {
@@ -29,15 +30,17 @@ const validateFirebaseConfig = () => {
 };
 
 // Initialize Firebase only if config is valid
-let app;
-let db;
-let auth;
+let app: FirebaseApp;
+let db: Firestore;
+let auth: Auth;
+let storage: FirebaseStorage;
 
 try {
   if (validateFirebaseConfig()) {
     app = initializeApp(firebaseConfig);
     db = getFirestore(app);
     auth = getAuth(app);
+    storage = getStorage(app);
     console.log('✅ Firebase initialized successfully');
   } else {
     throw new Error('Invalid Firebase configuration');
@@ -47,13 +50,14 @@ try {
   // Create dummy objects to prevent app crashes
   db = null as any;
   auth = null as any;
+  storage = null as any;
 }
 
-export { db, auth };
+export { db, auth, storage };
 
 // Helper to check if Firebase is ready
 export const isFirebaseReady = () => {
-  return db !== null && auth !== null;
+  return db !== null && auth !== null && storage !== null;
 };
 
 export enum OperationType {

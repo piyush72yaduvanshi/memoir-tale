@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Phone, X, Calendar } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { collection, addDoc } from 'firebase/firestore';
@@ -91,7 +91,7 @@ export default function FloatingCallbackButton() {
       {/* Floating Button */}
       <motion.button
         onClick={() => setIsOpen(true)}
-        className={`fixed bottom-20 md:bottom-8 right-8 z-50 h-16 px-6 rounded-full bg-gradient-to-r from-[#8B5CF6] to-[#7C3AED] text-white shadow-[0_8px_32px_rgba(139,92,246,0.4)] hover:shadow-[0_12px_40px_rgba(139,92,246,0.5)] transition-all duration-300 items-center justify-center gap-3 group cursor-pointer ${
+        className={`fixed bottom-20 md:bottom-8 right-8 z-50 h-16 px-6 rounded-full bg-gradient-to-r from-[#2E1B5D] to-[#1F1240] text-white shadow-[0_8px_32px_rgba(139,92,246,0.4)] hover:shadow-[0_12px_40px_rgba(139,92,246,0.5)] transition-all duration-300 items-center justify-center gap-3 group cursor-pointer ${
           isOpen ? 'hidden' : 'flex'
         }`}
         whileHover={{ scale: 1.05 }}
@@ -111,7 +111,7 @@ export default function FloatingCallbackButton() {
         <span className="font-bold text-sm tracking-wide whitespace-nowrap">BOOK FREE CALL</span>
         
         {/* Pulse Ring */}
-        <span className="absolute inset-0 rounded-full bg-[#A78BFA] opacity-75 animate-ping" />
+        <span className="absolute inset-0 rounded-full bg-[#4D3778] opacity-75 animate-ping" />
       </motion.button>
 
       {/* Modal Overlay */}
@@ -145,7 +145,7 @@ export default function FloatingCallbackButton() {
 
                 {/* Header */}
                 <div className="text-center mb-6">
-                  <div className="h-12 w-12 rounded-full bg-gradient-to-r from-[#8B5CF6] to-[#7C3AED] flex items-center justify-center mx-auto mb-4">
+                  <div className="h-12 w-12 rounded-full bg-gradient-to-r from-[#2E1B5D] to-[#1F1240] flex items-center justify-center mx-auto mb-4">
                     <Phone className="h-6 w-6 text-white" />
                   </div>
                   <h2 className="font-serif text-2xl font-bold text-white mb-2">
@@ -240,7 +240,7 @@ export default function FloatingCallbackButton() {
                       <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="w-full h-12 bg-gradient-to-r from-[#8B5CF6] to-[#7C3AED] text-white font-bold rounded-lg hover:brightness-110 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2 cursor-pointer mt-6 shadow-lg"
+                        className="w-full h-12 bg-gradient-to-r from-[#2E1B5D] to-[#1F1240] text-white font-bold rounded-lg hover:brightness-110 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2 cursor-pointer mt-6 shadow-lg"
                       >
                         {isSubmitting ? (
                           <>
@@ -263,7 +263,7 @@ export default function FloatingCallbackButton() {
                     animate={{ opacity: 1, scale: 1 }}
                     className="text-center py-8"
                   >
-                    <div className="h-16 w-16 rounded-full bg-gradient-to-r from-[#8B5CF6] to-[#7C3AED] flex items-center justify-center mx-auto mb-4">
+                    <div className="h-16 w-16 rounded-full bg-gradient-to-r from-[#2E1B5D] to-[#1F1240] flex items-center justify-center mx-auto mb-4">
                       <svg className="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
@@ -284,3 +284,6 @@ export default function FloatingCallbackButton() {
     </>
   );
 }
+
+
+

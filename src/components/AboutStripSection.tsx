@@ -66,7 +66,7 @@ export default function AboutStripSection({ darkMode }: AboutStripSectionProps) 
             </h2>
 
             <p className={`font-sans text-xs md:text-sm leading-relaxed mb-6 ${
-              darkMode ? 'text-white/70' : 'text-text-muted'
+              darkMode ? 'text-white/70' : 'text-black'
             }`}>
               {t.para1}
             </p>
@@ -111,3 +111,5 @@ export default function AboutStripSection({ darkMode }: AboutStripSectionProps) 
     </section>
   );
 }
+
+
