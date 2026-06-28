@@ -56,14 +56,14 @@ export default function MemoirLifestyle({ darkMode, onCtaClick }: MemoirLifestyl
         {/* Section Header with Left/Right Controls alignment */}
         <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-6 mb-12 md:mb-16">
           <div className="text-left max-w-2xl">
-            <span className="font-sans text-[11px] font-bold tracking-[3px] uppercase text-[#2E1B5D] dark:text-[#A78BFA] block mb-3">
+            <span className="font-sans text-[11px] font-bold tracking-[3px] uppercase text-[rgb(46,27,93)] dark:text-[rgb(46,27,93)] block mb-3">
               Our Services
             </span>
             <h2 className={`font-serif font-bold text-3xl sm:text-4xl md:text-5xl leading-tight ${
               darkMode ? 'text-[#F5F0F8]' : 'text-[#190F26]'
             }`}>
               Every Story Deserves a <br />
-              <span className="font-serif italic text-[#2E1B5D] dark:text-[#A78BFA]">Beautiful Home</span>
+              <span className="font-serif italic text-[rgb(46,27,93)] dark:text-[rgb(46,27,93)]">Beautiful Home</span>
             </h2>
           </div>
           
@@ -73,8 +73,8 @@ export default function MemoirLifestyle({ darkMode, onCtaClick }: MemoirLifestyl
               onClick={scrollPrev}
               className={`w-12 h-12 rounded-full border flex items-center justify-center transition-all cursor-pointer ${
                 darkMode
-                  ? 'border-white/10 hover:border-[#A78BFA] text-white hover:text-[#A78BFA] bg-[#3a2244]'
-                  : 'border-[#E3DDE9]/60 hover:border-[#2E1B5D] text-[#190F26] hover:text-[#2E1B5D] bg-[#FAF6F0]'
+                  ? 'border-white/10 hover:border-[rgb(46,27,93)] text-white hover:text-[rgb(46,27,93)] bg-[#3a2244]'
+                  : 'border-[#E3DDE9]/60 hover:border-[rgb(46,27,93)] text-[#190F26] hover:text-[rgb(46,27,93)] bg-[#FAF6F0]'
               }`}
               title="Previous Service"
             >
@@ -84,8 +84,8 @@ export default function MemoirLifestyle({ darkMode, onCtaClick }: MemoirLifestyl
               onClick={scrollNext}
               className={`w-12 h-12 rounded-full border flex items-center justify-center transition-all cursor-pointer ${
                 darkMode
-                  ? 'border-white/10 hover:border-[#A78BFA] text-white hover:text-[#A78BFA] bg-[#3a2244]'
-                  : 'border-[#E3DDE9]/60 hover:border-[#2E1B5D] text-[#190F26] hover:text-[#2E1B5D] bg-[#FAF6F0]'
+                  ? 'border-white/10 hover:border-[rgb(46,27,93)] text-white hover:text-[rgb(46,27,93)] bg-[#3a2244]'
+                  : 'border-[#E3DDE9]/60 hover:border-[rgb(46,27,93)] text-[#190F26] hover:text-[rgb(46,27,93)] bg-[#FAF6F0]'
               }`}
               title="Next Service"
             >
@@ -116,8 +116,8 @@ export default function MemoirLifestyle({ darkMode, onCtaClick }: MemoirLifestyl
               >
                 <div className={`rounded-xl overflow-hidden shadow-lg border relative transition-all duration-300 group ${
                   darkMode 
-                    ? 'bg-[#24152b] border-white/5 hover:border-[#A78BFA]/45' 
-                    : 'bg-white border-[#E3DDE9]/60 hover:border-[#2E1B5D]/45'
+                    ? 'bg-[#24152b] border-white/5 hover:border-[rgb(46,27,93)]/45' 
+                    : 'bg-white border-[#E3DDE9]/60 hover:border-[rgb(46,27,93)]/45'
                 }`}>
                   
                   {/* Photo Slot */}
@@ -133,7 +133,7 @@ export default function MemoirLifestyle({ darkMode, onCtaClick }: MemoirLifestyl
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90" />
                     
                     {/* Tag badge */}
-                    <div className="absolute top-4 left-4 py-1 px-2.5 bg-[#2E1B5D]/85 backdrop-blur-md rounded border border-[#A78BFA]/30 text-[10px] uppercase tracking-widest font-sans font-bold text-white">
+                    <div className="absolute top-4 left-4 py-1 px-2.5 bg-[rgb(46,27,93)]/85 backdrop-blur-md rounded border border-[rgb(46,27,93)]/30 text-[10px] uppercase tracking-widest font-sans font-bold text-white">
                       {svc.tagline}
                     </div>
 
@@ -152,11 +152,11 @@ export default function MemoirLifestyle({ darkMode, onCtaClick }: MemoirLifestyl
                       {svc.description}
                     </p>
 
-                    <div className="h-px w-full bg-[#2E1B5D]/25 mb-4" />
+                    <div className="h-px w-full bg-[rgb(46,27,93)]/25 mb-4" />
 
                     <button
                       onClick={handleCtaClick}
-                      className="inline-flex items-center gap-1 text-xs uppercase font-sans font-bold tracking-wider text-[#2E1B5D] dark:text-[#A78BFA] cursor-pointer hover:brightness-110 group/learn"
+                      className="inline-flex items-center gap-1 text-xs uppercase font-sans font-bold tracking-wider text-[rgb(46,27,93)] dark:text-[rgb(46,27,93)] cursor-pointer hover:brightness-110 group/learn"
                     >
                       {svc.linkText}
                       <ArrowUpRight className="w-3.5 h-3.5 group-hover/learn:translate-x-0.5 group-hover/learn:-translate-y-0.5 transition-transform" />
@@ -176,7 +176,7 @@ export default function MemoirLifestyle({ darkMode, onCtaClick }: MemoirLifestyl
               onClick={() => setCurrentIndex(i)}
               className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
                 currentIndex === i 
-                  ? 'w-8 bg-[#2E1B5D] dark:bg-[#A78BFA]' 
+                  ? 'w-8 bg-[rgb(46,27,93)] dark:bg-[rgb(46,27,93)]' 
                   : `w-2 ${darkMode ? 'bg-white/20' : 'bg-[#E3DDE9]'}`
               }`}
               title={`Slide to service ${i+1}`}

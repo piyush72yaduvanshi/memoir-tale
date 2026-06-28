@@ -40,14 +40,14 @@ export default function WhyMemoirSection({ darkMode }: WhyMemoirProps) {
           <div className="lg:col-span-7 flex flex-col justify-center">
             
             {/* Tag */}
-            <span className="font-sans text-[11px] font-bold tracking-[3px] uppercase text-[#2E1B5D] dark:text-[#A78BFA] block mb-3">
+            <span className="font-sans text-[11px] font-bold tracking-[3px] uppercase text-[rgb(46,27,93)] dark:text-[rgb(46,27,93)] block mb-3">
               The Memoir Difference
             </span>
             
             {/* Heading */}
             <h2 className="font-serif font-bold text-3xl sm:text-4xl md:text-5xl leading-tight mb-6">
               What fades from memory...<br />
-              <span className="font-serif italic text-[#2E1B5D] dark:text-[#A78BFA]">lives forever in a book.</span>
+              <span className="font-serif italic text-[rgb(46,27,93)] dark:text-[rgb(46,27,93)]">lives forever in a book.</span>
             </h2>
 
             {/* Description */}
@@ -101,18 +101,18 @@ export default function WhyMemoirSection({ darkMode }: WhyMemoirProps) {
                 transition={{ duration: 0.6, delay: 0.1 }}
                 className={`p-6 rounded-xl border transition-all duration-300 shadow-md ${
                   darkMode 
-                    ? 'bg-[#24152b] hover:scale-101 border-[#A78BFA]/30' 
-                    : 'bg-white hover:scale-101 border-[#2E1B5D]/40'
+                    ? 'bg-[#24152b] hover:scale-101 border-[rgb(46,27,93)]/30' 
+                    : 'bg-white hover:scale-101 border-[rgb(46,27,93)]/40'
                 }`}
               >
-                <div className="mb-4 inline-flex p-3 rounded-full bg-[#2E1B5D]/15 text-[#2E1B5D] dark:text-[#A78BFA]">
+                <div className="mb-4 inline-flex p-3 rounded-full bg-[rgb(46,27,93)]/15 text-[rgb(46,27,93)] dark:text-[rgb(46,27,93)]">
                   <Sparkles className="w-5 h-5" />
                 </div>
-                <h3 className="font-serif font-bold text-lg mb-4 text-[#2E1B5D] dark:text-[#A78BFA]">Memoir Book</h3>
+                <h3 className="font-serif font-bold text-lg mb-4 text-[rgb(46,27,93)] dark:text-[rgb(46,27,93)]">Memoir Book</h3>
                 <ul className="space-y-4">
                   {bookPoints.map((pt, idx) => (
                     <li key={idx} className="flex gap-2.5 text-left">
-                      <span className="text-[#2E1B5D] dark:text-[#A78BFA] font-sans font-bold text-xs mt-0.5">✓</span>
+                      <span className="text-[rgb(46,27,93)] dark:text-[rgb(46,27,93)] font-sans font-bold text-xs mt-0.5">✓</span>
                       <div>
                         <span className={`font-sans font-bold text-xs uppercase tracking-wider block ${darkMode ? 'text-white/90' : 'text-[#190F26]'}`}>
                           {pt.text}
@@ -136,7 +136,7 @@ export default function WhyMemoirSection({ darkMode }: WhyMemoirProps) {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="w-full h-full rounded-xl overflow-hidden relative border-l-4 border-[#2E1B5D] dark:border-[#A78BFA] min-h-[450px] shadow-2xl group flex"
+              className="w-full h-full rounded-xl overflow-hidden relative border-l-4 border-[rgb(46,27,93)] dark:border-[rgb(46,27,93)] min-h-[450px] shadow-2xl group flex"
             >
               <img
                 src="https://picsum.photos/seed/mem_why/800/1000"
@@ -144,17 +144,17 @@ export default function WhyMemoirSection({ darkMode }: WhyMemoirProps) {
                 className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 select-none brightness-95"
                 referrerPolicy="no-referrer"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#2E1B5D]/95 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-500" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[rgb(46,27,93)]/95 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-500" />
               
               {/* Decorative purple gradient overlay */}
               <div className="absolute inset-0 bg-[#8b3cdc]/5 pointer-events-none mix-blend-color-burn" />
 
               {/* Float narrative quote card on the image */}
-              <div className="absolute bottom-6 left-6 right-6 p-4 backdrop-blur-md bg-[#2E1B5D]/80 rounded-lg border border-[#A78BFA]/25">
+              <div className="absolute bottom-6 left-6 right-6 p-4 backdrop-blur-md bg-[rgb(46,27,93)]/80 rounded-lg border border-[rgb(46,27,93)]/25">
                 <span className="font-serif italic text-white text-xs block leading-relaxed">
                   "We preserve the whispers of your childhood, the courage of your migration, and the deep, rich wisdom of your twilight years."
                 </span>
-                <span className="font-sans font-bold text-[9px] uppercase tracking-wider text-[#A78BFA] mt-2 block">
+                <span className="font-sans font-bold text-[9px] uppercase tracking-wider text-[rgb(46,27,93)] mt-2 block">
                   — Lead Biographer, MemoirTale
                 </span>
               </div>

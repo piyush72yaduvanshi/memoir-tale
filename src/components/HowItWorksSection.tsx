@@ -170,7 +170,7 @@ export default function HowItWorksSection({ darkMode = false, onCtaClick }: HowI
       }`}
     >
       {/* Decorative lens leaks in branding purple/indigo instead of gold */}
-      <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-[#2E1B5D]/5 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-[rgb(46,27,93)]/5 rounded-full blur-[140px] pointer-events-none" />
       <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-[#8B3CDC]/4 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute inset-0 opacity-[0.12] pointer-events-none paper-grain z-10" />
 
@@ -179,9 +179,9 @@ export default function HowItWorksSection({ darkMode = false, onCtaClick }: HowI
         {/* Section Header with badge and layout centering */}
         <div className="text-center max-w-3xl mx-auto mb-16 md:mb-24">
           <div className="inline-flex items-center justify-center gap-3 flex-wrap mb-4" id="process-timeline-status-badge">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 bg-[#2E1B5D]/10 dark:bg-[#A78BFA]/10 border border-[#2E1B5D]/25 dark:border-[#A78BFA]/25 rounded-full">
-              <Compass className={`w-3.5 h-3.5 text-[#2E1B5D] dark:text-[#A78BFA] ${autoplay ? 'animate-spin-slow' : ''}`} style={{ animationDuration: '8s' }} />
-              <span className="font-sans text-[10px] font-bold tracking-[2px] uppercase text-[#2E1B5D] dark:text-[#A78BFA]">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 bg-[rgb(46,27,93)]/10 dark:bg-[rgb(46,27,93)]/10 border border-[rgb(46,27,93)]/25 dark:border-[rgb(46,27,93)]/25 rounded-full">
+              <Compass className={`w-3.5 h-3.5 text-[rgb(46,27,93)] dark:text-[rgb(46,27,93)] ${autoplay ? 'animate-spin-slow' : ''}`} style={{ animationDuration: '8s' }} />
+              <span className="font-sans text-[10px] font-bold tracking-[2px] uppercase text-[rgb(46,27,93)] dark:text-[rgb(46,27,93)]">
                 {isHindi ? 'विशिष्ट समयरेखा' : 'Bespoke Timeline'}
               </span>
             </div>
@@ -203,9 +203,9 @@ export default function HowItWorksSection({ darkMode = false, onCtaClick }: HowI
           
           <h2 className="font-serif font-bold text-3xl sm:text-4xl md:text-5xl leading-tight">
             {isHindi ? (
-              <>हम आपकी जीवन की कहानियों को <br /><span className="font-serif italic text-[#2E1B5D] dark:text-[#A78BFA]">साहित्यिक कला में कैसे बदलते हैं</span></>
+              <>हम आपकी जीवन की कहानियों को <br /><span className="font-serif italic text-[rgb(46,27,93)] dark:text-[rgb(46,27,93)]">साहित्यिक कला में कैसे बदलते हैं</span></>
             ) : (
-              <>How We Transform Your Life Stories <br /><span className="font-serif italic text-[#2E1B5D] dark:text-[#A78BFA]">Into Literary Art</span></>
+              <>How We Transform Your Life Stories <br /><span className="font-serif italic text-[rgb(46,27,93)] dark:text-[rgb(46,27,93)]">Into Literary Art</span></>
             )}
           </h2>
           <p className={`mt-4 font-sans text-xs md:text-sm leading-relaxed max-w-xl mx-auto ${
@@ -226,11 +226,11 @@ export default function HowItWorksSection({ darkMode = false, onCtaClick }: HowI
             
             {/* Elegant vertical continuous progress line in theme purple */}
             <div className={`absolute left-8 top-10 bottom-10 w-0.5 pointer-events-none z-0 ${
-              darkMode ? 'bg-white/15' : 'bg-[#2E1B5D]/15'
+              darkMode ? 'bg-white/15' : 'bg-[rgb(46,27,93)]/15'
             }`}>
               {/* Purple filling line based on state index */}
               <motion.div 
-                className="w-full bg-gradient-to-b from-[#2E1B5D] to-[#8B3CDC] origin-top"
+                className="w-full bg-gradient-to-b from-[rgb(46,27,93)] to-[#8B3CDC] origin-top"
                 animate={{ height: `${(activeStep / (stepsDetails.length - 1)) * 100}%` }}
                 transition={{ duration: 0.4 }}
                 style={{ height: '0%' }}
@@ -249,19 +249,19 @@ export default function HowItWorksSection({ darkMode = false, onCtaClick }: HowI
                   className={`w-full p-5 rounded-xl border flex items-start gap-4 transition-all duration-300 relative z-10 cursor-pointer outline-none text-left select-none group overflow-hidden ${
                     isActive
                       ? darkMode
-                        ? 'border-[#A78BFA]/45 bg-[#3A2447] shadow-lg shadow-[#2E1B5D]/10 pb-6'
-                        : 'border-[#2E1B5D]/45 bg-white shadow-lg pb-6'
+                        ? 'border-[rgb(46,27,93)]/45 bg-[#3A2447] shadow-lg shadow-[rgb(46,27,93)]/10 pb-6'
+                        : 'border-[rgb(46,27,93)]/45 bg-white shadow-lg pb-6'
                       : darkMode
                       ? 'border-white/5 bg-[#2D1B36]/45 hover:bg-[#3A2447]/60 hover:border-white/15'
-                      : 'border-[#E3DDE9]/60 bg-white/45 hover:bg-white hover:border-[#2E1B5D]/40'
+                      : 'border-[#E3DDE9]/60 bg-white/45 hover:bg-white hover:border-[rgb(46,27,93)]/40'
                   }`}
                   id={`process-step-trigger-${step.number}`}
                 >
                   {/* Subtle filling progress bar inside the active card footer */}
                   {isActive && autoplay && (
-                    <div className="absolute bottom-0 left-0 right-0 h-1 bg-[#2E1B5D]/10 dark:bg-[#A78BFA]/10 overflow-hidden">
+                    <div className="absolute bottom-0 left-0 right-0 h-1 bg-[rgb(46,27,93)]/10 dark:bg-[rgb(46,27,93)]/10 overflow-hidden">
                       <motion.div 
-                        className="h-full bg-gradient-to-r from-[#2E1B5D] via-[#8B3CDC] to-[#2E1B5D] dark:from-[#A78BFA] dark:via-[#C4B5FD] dark:to-[#A78BFA]"
+                        className="h-full bg-gradient-to-r from-[rgb(46,27,93)] via-[#8B3CDC] to-[rgb(46,27,93)] dark:from-[rgb(46,27,93)] dark:via-[#C4B5FD] dark:to-[rgb(46,27,93)]"
                         style={{ width: `${progress}%` }}
                       />
                     </div>
@@ -270,10 +270,10 @@ export default function HowItWorksSection({ darkMode = false, onCtaClick }: HowI
                   {/* Steps Number / Bubble */}
                   <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 border font-serif font-bold text-xs relative z-10 transition-all ${
                     isActive
-                      ? 'bg-gradient-to-r from-[#2E1B5D] to-[#8B3CDC] text-white border-[#2E1B5D] scale-110 shadow-md shadow-[#2E1B5D]/20'
+                      ? 'bg-gradient-to-r from-[rgb(46,27,93)] to-[#8B3CDC] text-white border-[rgb(46,27,93)] scale-110 shadow-md shadow-[rgb(46,27,93)]/20'
                       : darkMode
                       ? 'bg-[#3A2447] text-[#F5F0F8]/50 border-white/10'
-                      : 'bg-[#FAF6F0] text-[#2E1B5D]/50 border-[#E3DDE9]/60'
+                      : 'bg-[#FAF6F0] text-[rgb(46,27,93)]/50 border-[#E3DDE9]/60'
                   }`}>
                     {step.number}
                   </div>
@@ -283,7 +283,7 @@ export default function HowItWorksSection({ darkMode = false, onCtaClick }: HowI
                     <div className="flex items-center justify-between gap-2">
                       <span className={`font-serif font-bold text-sm sm:text-base leading-none transition-colors ${
                         isActive 
-                          ? 'text-[#2E1B5D] dark:text-[#A78BFA]' 
+                          ? 'text-[rgb(46,27,93)] dark:text-[rgb(46,27,93)]' 
                           : darkMode 
                           ? 'text-[#F5F0F8]/80 group-hover:text-white' 
                           : 'text-[#190F26]/80 group-hover:text-[#190F26]'
@@ -298,7 +298,7 @@ export default function HowItWorksSection({ darkMode = false, onCtaClick }: HowI
                             initial={{ scale: 0 }}
                             animate={{ scale: 1 }}
                             exit={{ scale: 0 }}
-                            className="w-2 h-2 rounded-full bg-[#2E1B5D] dark:bg-[#A78BFA] animate-pulse"
+                            className="w-2 h-2 rounded-full bg-[rgb(46,27,93)] dark:bg-[rgb(46,27,93)] animate-pulse"
                           />
                         )}
                       </AnimatePresence>
@@ -332,9 +332,9 @@ export default function HowItWorksSection({ darkMode = false, onCtaClick }: HowI
                 }`}
               >
                 {/* Horizontal Live Progress Bar at the top of the details frame */}
-                <div className="w-full h-1 bg-[#2E1B5D]/10 dark:bg-[#A78BFA]/10 relative overflow-hidden shrink-0 z-20">
+                <div className="w-full h-1 bg-[rgb(46,27,93)]/10 dark:bg-[rgb(46,27,93)]/10 relative overflow-hidden shrink-0 z-20">
                   <div 
-                    className="h-full bg-gradient-to-r from-[#2E1B5D] via-[#8B3CDC] to-[#2E1B5D] dark:from-[#A78BFA] dark:via-[#C4B5FD] dark:to-[#A78BFA] transition-all duration-30"
+                    className="h-full bg-gradient-to-r from-[rgb(46,27,93)] via-[#8B3CDC] to-[rgb(46,27,93)] dark:from-[rgb(46,27,93)] dark:via-[#C4B5FD] dark:to-[rgb(46,27,93)] transition-all duration-30"
                     style={{ width: `${progress}%` }}
                   />
                 </div>
@@ -357,14 +357,14 @@ export default function HowItWorksSection({ darkMode = false, onCtaClick }: HowI
                   <div className="absolute inset-0 bg-[#1e102f]/50 dark:bg-[#1f102b]/75 opacity-80 pointer-events-none" />
                   
                   {/* Purple tone blend */}
-                  <div className="absolute inset-0 bg-[#2E1B5D]/10 mix-blend-color-burn pointer-events-none" />
+                  <div className="absolute inset-0 bg-[rgb(46,27,93)]/10 mix-blend-color-burn pointer-events-none" />
 
                   {/* Dark block gradient at bottom */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent pointer-events-none" />
 
                   {/* Top Header metadata */}
                   <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-10">
-                    <span className="py-1 px-3 bg-black/50 backdrop-blur-md rounded border border-[#2E1B5D]/20 text-[9px] uppercase tracking-widest font-sans font-bold text-[#A78BFA] shadow-md">
+                    <span className="py-1 px-3 bg-black/50 backdrop-blur-md rounded border border-[rgb(46,27,93)]/20 text-[9px] uppercase tracking-widest font-sans font-bold text-[rgb(46,27,93)] shadow-md">
                       {isHindi ? `चरण ${currentStepData.number} / 05` : `STAGE ${currentStepData.number} OF 05`}
                     </span>
                     <span className="py-1 px-3 bg-[#3A2447]/90 text-[#FAF6F0] text-[9px] uppercase tracking-[1.5px] font-sans font-bold rounded shadow-md border border-white/10">
@@ -375,14 +375,14 @@ export default function HowItWorksSection({ darkMode = false, onCtaClick }: HowI
                   {/* Selected step floating graphic description overlay */}
                   <div className="absolute bottom-5 left-5 right-5 z-10">
                     <div className="flex items-center gap-3">
-                      <div className="p-3 bg-gradient-to-r from-[#2E1B5D] to-[#8B3CDC] rounded-xl text-white shadow-lg shadow-[#2E1B5D]/20 flex select-none">
+                      <div className="p-3 bg-gradient-to-r from-[rgb(46,27,93)] to-[#8B3CDC] rounded-xl text-white shadow-lg shadow-[rgb(46,27,93)]/20 flex select-none">
                         <StepIcon className="w-5 h-5 text-white" />
                       </div>
                       <div>
                         <h3 className="font-serif font-bold text-xl text-white select-none">
                           {isHindi ? currentStepData.titleHi : currentStepData.title}
                         </h3>
-                        <span className="font-sans text-[10px] uppercase font-bold tracking-[1.5px] text-[#A78BFA] block mt-0.5 select-none">
+                        <span className="font-sans text-[10px] uppercase font-bold tracking-[1.5px] text-[rgb(46,27,93)] block mt-0.5 select-none">
                           {isHindi ? currentStepData.subValueHi : currentStepData.subValue}
                         </span>
                       </div>
@@ -404,18 +404,18 @@ export default function HowItWorksSection({ darkMode = false, onCtaClick }: HowI
                   {/* Custom Biographer Hand-written styled Notes Box in theme purple */}
                   <div className={`p-4 rounded-xl border border-dashed text-left transition-colors relative overflow-hidden flex items-start gap-3.5 ${
                     darkMode 
-                      ? 'bg-[#2E1B5D]/5 border-[#A78BFA]/20 text-[#F5F0F8]/90' 
-                      : 'bg-[#2E1B5D]/5 border-[#2E1B5D]/30 text-[#190F26]'
+                      ? 'bg-[rgb(46,27,93)]/5 border-[rgb(46,27,93)]/20 text-[#F5F0F8]/90' 
+                      : 'bg-[rgb(46,27,93)]/5 border-[rgb(46,27,93)]/30 text-[#190F26]'
                   }`}>
                     {/* Decorative purple spiral on left border */}
-                    <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-[#2E1B5D] to-[#8B3CDC]" />
+                    <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-[rgb(46,27,93)] to-[#8B3CDC]" />
                     
-                    <div className="p-2 bg-gradient-to-r from-[#2E1B5D] to-[#8B3CDC] rounded-lg text-white font-bold shrink-0 shadow-sm">
+                    <div className="p-2 bg-gradient-to-r from-[rgb(46,27,93)] to-[#8B3CDC] rounded-lg text-white font-bold shrink-0 shadow-sm">
                       <Sparkles className="w-3.5 h-3.5 text-white" />
                     </div>
 
                     <div className="space-y-1">
-                      <span className="font-sans text-[9px] uppercase tracking-[2px] font-bold text-[#2E1B5D] dark:text-[#A78BFA] block">
+                      <span className="font-sans text-[9px] uppercase tracking-[2px] font-bold text-[rgb(46,27,93)] dark:text-[rgb(46,27,93)] block">
                         {isHindi ? 'जीवनीकार पुरालेख निर्देशिका' : 'Biographer Archival Guideline'}
                       </span>
                       <p className="font-serif-sub italic text-xs leading-normal font-light text-[#554466] dark:text-[#F5F0F8]/80">
@@ -435,7 +435,7 @@ export default function HowItWorksSection({ darkMode = false, onCtaClick }: HowI
 
                     <button
                       onClick={onCtaClick}
-                      className="inline-flex items-center gap-2 py-2.5 px-5 bg-gradient-to-r from-[#2E1B5D] to-[#1F1240] text-white hover:brightness-110 font-sans font-bold text-[10px] uppercase tracking-wider rounded transition-all cursor-pointer shadow-md hover:scale-105 active:scale-95"
+                      className="inline-flex items-center gap-2 py-2.5 px-5 bg-gradient-to-r from-[rgb(46,27,93)] to-[#1F1240] text-white hover:brightness-110 font-sans font-bold text-[10px] uppercase tracking-wider rounded transition-all cursor-pointer shadow-md hover:scale-105 active:scale-95"
                     >
                       {isHindi ? 'इस चरण को बुक करें' : 'Commission This Phase'}
                       <ArrowRight className="w-3.5 h-3.5" />

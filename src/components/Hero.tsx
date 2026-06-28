@@ -90,7 +90,7 @@ export default function Hero({ darkMode, onStartStoryClick, onViewBooksClick }: 
 
       {/* Right side decoration */}
       <div className="hidden lg:flex absolute right-8 h-1/2 flex-col items-center justify-center gap-6 z-10">
-        <div className="w-px h-28 bg-gradient-to-t from-[#A78BFA]/60 to-transparent" />
+        <div className="w-px h-28 bg-gradient-to-t from-[rgb(46,27,93)]/60 to-transparent" />
         <span className="font-serif italic text-xs tracking-widest text-[#FAF6F0]/70 select-none">
           MemoirTale Publishing
         </span>
@@ -104,10 +104,10 @@ export default function Hero({ darkMode, onStartStoryClick, onViewBooksClick }: 
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-[#2E1B5D]/20 dark:bg-[#A78BFA]/15 rounded-full border border-[#2E1B5D]/25 dark:border-[#A78BFA]/25 mb-6"
+          className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-[#2E1B5D]/20 dark:bg-[rgb(46,27,93)]/15 rounded-full border border-[#2E1B5D]/25 dark:border-[rgb(46,27,93)]/25 mb-6"
         >
-          <Award className="w-3.5 h-3.5 text-[#A78BFA] animate-pulse" />
-          <span className="font-sans text-[11px] font-bold text-[#FAF6F0] dark:text-[#A78BFA] tracking-[3px] uppercase">
+          <Award className="w-3.5 h-3.5 text-[rgb(46,27,93)] animate-pulse" />
+          <span className="font-sans text-[11px] font-bold text-[#FAF6F0] dark:text-[rgb(46,27,93)] tracking-[3px] uppercase">
             {t.badge || "Preserving Memories Since 2024"}
           </span>
         </motion.div>
@@ -120,7 +120,7 @@ export default function Hero({ darkMode, onStartStoryClick, onViewBooksClick }: 
           className="font-serif text-white font-semibold text-4xl sm:text-6xl md:text-7xl leading-[1.1] tracking-tight text-center"
         >
           {t.heading1 || "Turn Your Life Into"} <br />
-          <span className="font-serif italic text-[#A78BFA] block mt-2 text-5xl sm:text-7xl md:text-8xl">
+          <span className="font-serif italic text-[rgb(46,27,93)] block mt-2 text-5xl sm:text-7xl md:text-8xl">
             {t.heading2 || "A Masterpiece"}
           </span>
         </motion.h1>
@@ -145,7 +145,7 @@ export default function Hero({ darkMode, onStartStoryClick, onViewBooksClick }: 
           {/* Main filled button in purple */}
           <button
             onClick={handleStartClick}
-            className="w-full sm:w-auto py-3.5 px-8 bg-gradient-to-r from-[#2E1B5D] to-[#8B3CDC] text-white hover:brightness-110 active:scale-[0.98] font-sans font-bold text-xs uppercase tracking-[3px] rounded-md transition-all duration-300 shadow-lg hover:shadow-[#2E1B5D]/30 flex items-center justify-center gap-2 cursor-pointer border border-[#A78BFA]/30"
+            className="w-full sm:w-auto py-3.5 px-8 bg-gradient-to-r from-[rgb(46,27,93)] to-[#8B3CDC] text-white hover:brightness-110 active:scale-[0.98] font-sans font-bold text-xs uppercase tracking-[3px] rounded-md transition-all duration-300 shadow-lg hover:shadow-[rgb(46,27,93)]/30 flex items-center justify-center gap-2 cursor-pointer border border-[rgb(46,27,93)]/30"
           >
             {t.cta1 || t.ctaPrimary || "Start Your Memoir"}
             <ArrowRight className="w-4 h-4" />
@@ -154,7 +154,7 @@ export default function Hero({ darkMode, onStartStoryClick, onViewBooksClick }: 
           {/* Secondary outlined button */}
           <button
             onClick={handleViewClick}
-            className="w-full sm:w-auto py-3.5 px-8 bg-white/5 border border-white/20 hover:bg-white/10 hover:border-[#A78BFA] text-white font-sans font-bold text-xs uppercase tracking-[3px] rounded-md transition-all duration-300 backdrop-blur-sm cursor-pointer flex items-center justify-center gap-2"
+            className="w-full sm:w-auto py-3.5 px-8 bg-white/5 border border-white/20 hover:bg-white/10 hover:border-[rgb(46,27,93)] text-white font-sans font-bold text-xs uppercase tracking-[3px] rounded-md transition-all duration-300 backdrop-blur-sm cursor-pointer flex items-center justify-center gap-2"
           >
             {t.cta2 || t.ctaSecondary || "See Our Work"}
           </button>
@@ -167,7 +167,7 @@ export default function Hero({ darkMode, onStartStoryClick, onViewBooksClick }: 
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.8, y: [0, 8, 0] }}
         transition={{ duration: 2, repeat: Infinity, delay: 1.2 }}
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 p-2 hover:opacity-100 text-[#A78BFA] z-10 transition-opacity cursor-pointer flex flex-col items-center gap-1"
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 p-2 hover:opacity-100 text-[rgb(46,27,93)] z-10 transition-opacity cursor-pointer flex flex-col items-center gap-1"
       >
         <span className="font-sans text-[9px] font-semibold tracking-[4px] uppercase text-[#FAF6F0] opacity-80 z-10">
           {t.scroll || "Scroll"}

@@ -243,7 +243,7 @@ export default function GallerySection() {
                 }}
                 className={`flex items-center space-x-2 px-5 py-2.5 rounded-full font-sans text-xs font-bold tracking-wide transition-all duration-300 cursor-pointer ${
                   activeCategory === cat.id
-                    ? "bg-[#2E1B5D] text-[#190F26] shadow-[0_4px_20px_rgba(139, 92, 246,0.25)] scale-105"
+                    ? "bg-[#2E1B5D] text-white shadow-[0_4px_20px_rgba(139, 92, 246,0.25)] scale-105"
                     : "bg-white hover:bg-[#FAF6F0] border border-[#E3DDE9]/60 text-[#190F26]"
                 }`}
               >
