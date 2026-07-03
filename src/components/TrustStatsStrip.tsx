@@ -75,46 +75,71 @@ export default function TrustStatsStrip() {
   return (
     <section 
       ref={sectionRef}
-      className="bg-[#1B101E] py-12 lg:py-16 border-y border-[#8B5CF6]/20"
+      className="relative py-12 lg:py-16 bg-gradient-to-b from-[#0F0C09] via-[#1A1410] to-[#0F0C09] border-y border-[#D4AF37]/30 overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Decorative Background Elements */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute top-0 left-1/4 w-64 h-64 bg-[#D4AF37] rounded-full blur-[120px]"></div>
+        <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-[#E5C463] rounded-full blur-[120px]"></div>
+      </div>
+
+      {/* Subtle Grain Texture */}
+      <div className="absolute inset-0 paper-grain-dark opacity-40"></div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
           {STATS.map((stat, index) => {
             const Icon = stat.icon;
             return (
               <div 
                 key={stat.id} 
-                className="text-center relative"
+                className="text-center relative group"
                 style={{
                   animation: isVisible ? `fade-in 0.6s ease-out ${index * 0.1}s forwards` : 'none',
                   opacity: isVisible ? 1 : 0,
                 }}
               >
                 <div className="flex flex-col items-center">
-                  <div className="h-12 w-12 rounded-full bg-[#3A2447] border-2 border-[#8B5CF6]/40 flex items-center justify-center mb-4">
-                    <Icon className="h-6 w-6 text-[#A78BFA]" />
+                  {/* Icon Container with Gold Glow */}
+                  <div className="relative h-14 w-14 mb-4 transition-transform duration-300 group-hover:scale-110">
+                    <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[#D4AF37] to-[#B8941F] opacity-20 blur-md group-hover:opacity-40 transition-opacity"></div>
+                    <div className="relative h-full w-full rounded-full bg-[#2A211A] border-2 border-[#D4AF37]/50 flex items-center justify-center shadow-lg shadow-[#D4AF37]/20">
+                      <Icon className="h-6 w-6 text-[#E5C463]" />
+                    </div>
                   </div>
-                  <div className="font-serif text-4xl lg:text-5xl font-bold text-[#A78BFA] mb-2">
+
+                  {/* Stat Number */}
+                  <div className="font-serif text-4xl lg:text-5xl font-bold bg-gradient-to-br from-[#E5C463] via-[#D4AF37] to-[#B8941F] bg-clip-text text-transparent mb-2 drop-shadow-[0_2px_8px_rgba(212,175,55,0.3)]">
                     {isVisible ? (
                       <CountUp end={stat.value} suffix={stat.suffix} />
                     ) : (
                       `0${stat.suffix}`
                     )}
                   </div>
-                  <p className="text-white/60 text-sm font-sans font-semibold">
+
+                  {/* Label */}
+                  <p className="text-white/70 text-sm font-sans font-semibold tracking-wide uppercase group-hover:text-[#E5C463]/90 transition-colors">
                     {stat.label}
                   </p>
+
+                  {/* Decorative Underline */}
+                  <div className="mt-2 h-px w-12 bg-gradient-to-r from-transparent via-[#D4AF37]/40 to-transparent"></div>
                 </div>
 
-                {/* Divider (except last item) */}
+                {/* Enhanced Divider (except last item) */}
                 {index < STATS.length - 1 && (
-                  <div className="hidden lg:block absolute top-1/2 -right-6 transform -translate-y-1/2 h-16 w-px bg-[#8B5CF6]/30" />
+                  <div className="hidden lg:block absolute top-1/2 -right-6 transform -translate-y-1/2">
+                    <div className="h-20 w-px bg-gradient-to-b from-transparent via-[#D4AF37]/40 to-transparent"></div>
+                  </div>
                 )}
               </div>
             );
           })}
         </div>
       </div>
+
+      {/* Bottom Shine Effect */}
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#D4AF37]/50 to-transparent"></div>
     </section>
   );
 }

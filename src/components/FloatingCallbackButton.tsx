@@ -87,32 +87,40 @@ export default function FloatingCallbackButton() {
   };
 
   return (
-    <>
-      {/* Floating Button */}
-      <motion.button
-        onClick={() => setIsOpen(true)}
-        className={`fixed bottom-20 md:bottom-8 right-8 z-50 h-16 px-6 rounded-full bg-gradient-to-r from-[#2E1B5D] to-[#1F1240] text-white shadow-[0_8px_32px_rgba(139,92,246,0.4)] hover:shadow-[0_12px_40px_rgba(139,92,246,0.5)] transition-all duration-300 items-center justify-center gap-3 group cursor-pointer ${
-          isOpen ? 'hidden' : 'flex'
-        }`}
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-        animate={!isOpen ? {
-          y: [0, -10, 0],
-        } : {}}
-        transition={!isOpen ? {
-          y: {
-            duration: 2,
-            repeat: Infinity,
-            ease: "easeInOut",
-          },
-        } : {}}
-      >
-        <Phone className="h-5 w-5 group-hover:rotate-12 transition-transform duration-300" />
-        <span className="font-bold text-sm tracking-wide whitespace-nowrap">BOOK FREE CALL</span>
-        
-        {/* Pulse Ring */}
-        <span className="absolute inset-0 rounded-full bg-[#4D3778] opacity-75 animate-ping" />
-      </motion.button>
+    <div>
+      {/* Floating Button - Call Icon Only - GUARANTEED VISIBLE */}
+      {!isOpen && (
+        <button
+          onClick={() => setIsOpen(true)}
+          style={{ 
+            position: 'fixed',
+            bottom: '32px',
+            right: '32px',
+            zIndex: 9999,
+            width: '64px',
+            height: '64px',
+            borderRadius: '50%',
+            background: 'linear-gradient(135deg, #D4AF37 0%, #E5C463 50%, #B8941F 100%)',
+            border: 'none',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            boxShadow: '0 8px 32px rgba(212, 175, 55, 0.6)',
+            transition: 'all 0.3s ease'
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = 'scale(1.1) rotate(5deg)';
+            e.currentTarget.style.boxShadow = '0 12px 40px rgba(212, 175, 55, 0.8)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = 'scale(1) rotate(0deg)';
+            e.currentTarget.style.boxShadow = '0 8px 32px rgba(212, 175, 55, 0.6)';
+          }}
+        >
+          <Phone style={{ width: '28px', height: '28px', color: 'white' }} />
+        </button>
+      )}
 
       {/* Modal Overlay */}
       <AnimatePresence>
@@ -134,18 +142,18 @@ export default function FloatingCallbackButton() {
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
               className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 w-full max-w-md"
             >
-              <div className="bg-[#2D1B36] border border-white/10 rounded-2xl p-8 shadow-2xl relative">
+              <div className="bg-[#1A1410] border border-[#D4AF37]/20 rounded-2xl p-8 shadow-2xl relative">
                 {/* Close Button */}
                 <button
                   onClick={() => setIsOpen(false)}
-                  className="absolute top-4 right-4 h-8 w-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors cursor-pointer"
+                  className="absolute top-4 right-4 h-8 w-8 rounded-full bg-white/10 hover:bg-[#D4AF37]/20 flex items-center justify-center transition-colors cursor-pointer"
                 >
                   <X className="h-4 w-4 text-white" />
                 </button>
 
                 {/* Header */}
                 <div className="text-center mb-6">
-                  <div className="h-12 w-12 rounded-full bg-gradient-to-r from-[#2E1B5D] to-[#1F1240] flex items-center justify-center mx-auto mb-4">
+                  <div className="h-12 w-12 rounded-full bg-gradient-to-br from-[#D4AF37] to-[#B8941F] flex items-center justify-center mx-auto mb-4 shadow-lg shadow-[#D4AF37]/30">
                     <Phone className="h-6 w-6 text-white" />
                   </div>
                   <h2 className="font-serif text-2xl font-bold text-white mb-2">
@@ -177,7 +185,7 @@ export default function FloatingCallbackButton() {
                           onChange={handleChange}
                           required
                           placeholder="Enter your full name"
-                          className="w-full h-12 px-4 bg-[#3A2447] border border-white/15 rounded-lg text-white placeholder-white/30 focus:outline-none focus:border-white/40 focus:ring-1 focus:ring-white/20 transition-all"
+                          className="w-full h-12 px-4 bg-[#2A211A] border border-[#D4AF37]/20 rounded-lg text-white placeholder-white/30 focus:outline-none focus:border-[#D4AF37]/60 focus:ring-1 focus:ring-[#D4AF37]/30 transition-all"
                         />
                       </div>
 
@@ -194,7 +202,7 @@ export default function FloatingCallbackButton() {
                           required
                           placeholder="+91 98890 11174"
                           pattern="[0-9+\s-]+"
-                          className="w-full h-12 px-4 bg-[#3A2447] border border-white/15 rounded-lg text-white placeholder-white/30 focus:outline-none focus:border-white/40 focus:ring-1 focus:ring-white/20 transition-all"
+                          className="w-full h-12 px-4 bg-[#2A211A] border border-[#D4AF37]/20 rounded-lg text-white placeholder-white/30 focus:outline-none focus:border-[#D4AF37]/60 focus:ring-1 focus:ring-[#D4AF37]/30 transition-all"
                         />
                         <p className="text-white/40 text-xs mt-1">
                           Call hours operate 09:00 - 18:00 IST • Monday to Saturday
@@ -213,7 +221,7 @@ export default function FloatingCallbackButton() {
                             value={formData.callbackTime}
                             onChange={handleChange}
                             required
-                            className="w-full h-12 pl-12 pr-4 bg-[#3A2447] border border-white/15 rounded-lg text-white appearance-none focus:outline-none focus:border-white/40 focus:ring-1 focus:ring-white/20 transition-all cursor-pointer"
+                            className="w-full h-12 pl-12 pr-4 bg-[#2A211A] border border-[#D4AF37]/20 rounded-lg text-white appearance-none focus:outline-none focus:border-[#D4AF37]/60 focus:ring-1 focus:ring-[#D4AF37]/30 transition-all cursor-pointer"
                           >
                             <option value="">Select preferred time slot</option>
                             <option value="09:00-11:00">Morning (09:00 - 11:00 IST)</option>
@@ -240,7 +248,7 @@ export default function FloatingCallbackButton() {
                       <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="w-full h-12 bg-gradient-to-r from-[#2E1B5D] to-[#1F1240] text-white font-bold rounded-lg hover:brightness-110 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2 cursor-pointer mt-6 shadow-lg"
+                        className="w-full h-12 bg-gradient-to-r from-[#D4AF37] via-[#E5C463] to-[#B8941F] text-white font-bold rounded-lg hover:brightness-110 hover:shadow-lg hover:shadow-[#D4AF37]/40 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2 cursor-pointer mt-6 shadow-md"
                       >
                         {isSubmitting ? (
                           <>
@@ -263,7 +271,7 @@ export default function FloatingCallbackButton() {
                     animate={{ opacity: 1, scale: 1 }}
                     className="text-center py-8"
                   >
-                    <div className="h-16 w-16 rounded-full bg-gradient-to-r from-[#2E1B5D] to-[#1F1240] flex items-center justify-center mx-auto mb-4">
+                    <div className="h-16 w-16 rounded-full bg-gradient-to-br from-[#D4AF37] to-[#B8941F] flex items-center justify-center mx-auto mb-4 shadow-lg shadow-[#D4AF37]/40">
                       <svg className="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
@@ -281,7 +289,7 @@ export default function FloatingCallbackButton() {
           </>
         )}
       </AnimatePresence>
-    </>
+    </div>
   );
 }
 
