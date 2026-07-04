@@ -2,7 +2,7 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: rgb(30, 25, 35);
+  --color-primary: rgb(38, 22, 45);
   --color-primary-light: #3A2447;
   --color-primary-hover: #4A2D5E;
   --color-accent: #FFFFFF;
@@ -96,7 +96,7 @@
 
 body {
   font-family: var(--font-sans);
-  background-color: rgb(30, 25, 35);
+  background-color: rgb(38, 22, 45);
   color: #FFFFFF;
   overflow-x: hidden;
 }

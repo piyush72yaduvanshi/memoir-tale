@@ -66,13 +66,13 @@ export default function Hero({ darkMode, onStartStoryClick, onViewBooksClick }: 
           referrerPolicy="no-referrer"
         />
         
-        {/* Dynamic Overlay Gradient - Dark charcoal tone like reference image */}
+        {/* Dynamic Overlay Gradient - Dark purple tone */}
         <div 
           className="absolute inset-0 transition-colors duration-500" 
           style={{
             background: darkMode
-              ? 'linear-gradient(135deg, rgba(30, 25, 35, 0.95) 10%, rgba(35, 28, 40, 0.92) 40%, rgba(30, 25, 35, 0.96) 100%)'
-              : 'linear-gradient(135deg, rgba(30, 25, 35, 0.92) 10%, rgba(35, 28, 40, 0.88) 50%, rgba(30, 25, 35, 0.94) 100%)'
+              ? 'linear-gradient(135deg, rgba(38, 22, 45, 0.95) 10%, rgba(38, 22, 45, 0.92) 40%, rgba(38, 22, 45, 0.96) 100%)'
+              : 'linear-gradient(135deg, rgba(38, 22, 45, 0.92) 10%, rgba(38, 22, 45, 0.88) 50%, rgba(38, 22, 45, 0.94) 100%)'
           }}
         />
 
