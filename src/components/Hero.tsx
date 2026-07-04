@@ -66,13 +66,13 @@ export default function Hero({ darkMode, onStartStoryClick, onViewBooksClick }: 
           referrerPolicy="no-referrer"
         />
         
-        {/* Dynamic Overlay Gradient - Purple tone matching body */}
+        {/* Dynamic Overlay Gradient - Dark charcoal tone like reference image */}
         <div 
           className="absolute inset-0 transition-colors duration-500" 
           style={{
             background: darkMode
-              ? 'linear-gradient(135deg, rgba(45, 27, 54, 0.92) 10%, rgba(45, 27, 54, 0.88) 40%, rgba(45, 27, 54, 0.94) 100%)'
-              : 'linear-gradient(135deg, rgba(45, 27, 54, 0.88) 10%, rgba(45, 27, 54, 0.85) 50%, rgba(45, 27, 54, 0.92) 100%)'
+              ? 'linear-gradient(135deg, rgba(30, 25, 35, 0.95) 10%, rgba(35, 28, 40, 0.92) 40%, rgba(30, 25, 35, 0.96) 100%)'
+              : 'linear-gradient(135deg, rgba(30, 25, 35, 0.92) 10%, rgba(35, 28, 40, 0.88) 50%, rgba(30, 25, 35, 0.94) 100%)'
           }}
         />
 
@@ -142,10 +142,10 @@ export default function Hero({ darkMode, onStartStoryClick, onViewBooksClick }: 
           transition={{ duration: 0.8, delay: 0.7 }}
           className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 w-full"
         >
-          {/* Main gold button */}
+          {/* Main gold button with dark text */}
           <button
             onClick={handleStartClick}
-            className="w-full sm:w-auto py-3.5 px-8 bg-gradient-to-r from-[#D4AF37] via-[#E5C463] to-[#D4AF37] text-white hover:brightness-110 hover:shadow-lg hover:shadow-[#D4AF37]/30 active:scale-[0.98] font-sans font-bold text-xs uppercase tracking-[2.5px] rounded-md transition-all duration-300 flex items-center justify-center gap-2.5 cursor-pointer border border-[#B8941F]/20"
+            className="w-full sm:w-auto py-3.5 px-8 bg-gradient-to-r from-[#D4AF37] via-[#E5C463] to-[#D4AF37] text-[#1A1410] hover:brightness-110 hover:shadow-lg hover:shadow-[#D4AF37]/30 active:scale-[0.98] font-sans font-bold text-xs uppercase tracking-[2.5px] rounded-md transition-all duration-300 flex items-center justify-center gap-2.5 cursor-pointer border border-[#B8941F]/20"
           >
             {t.cta1 || t.ctaPrimary || "START YOUR MEMOIR"}
             <ArrowRight className="w-4 h-4" />
