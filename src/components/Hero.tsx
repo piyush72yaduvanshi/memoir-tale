@@ -61,7 +61,7 @@ export default function Hero({ darkMode, onStartStoryClick, onViewBooksClick }: 
       <div className="absolute inset-0 z-0">
         <img
           src={heroImage}
-          alt="Memoir Book"
+          alt=""
           className="w-full h-full object-cover select-none scale-102 hover:scale-105 transition-transform duration-[12s] ease-out"
           referrerPolicy="no-referrer"
         />
