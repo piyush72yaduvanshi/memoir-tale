@@ -29,13 +29,13 @@ const translations: Record<Language, Record<string, string>> = {
     moreSoon: "MORE COMING SOON",
 
     // Hero
-    preservingSince: "PRESERVING LEGACIES SINCE 2024",
-    turnLifeInto: "Turn Your Life Into",
-    masterpiece: "A Masterpiece",
+    preservingSince: "PRESERVING LEGACIES SINCE 2023",
+    turnLifeInto: "Turning Lives Into",
+    masterpiece: "Timeless Legacies",
     tagline: '"Stories Unfolded, Memories Preserved."',
-    heroBody: "We craft beautifully written, professionally designed memoir books that preserve your life stories for generations to come. Told by expert writers. Printed as hardcover books. Delivered with elite care across India.",
-    startStory: "Start Your Story",
-    viewBooks: "View Our Books",
+    heroBody: "We preserve your stories, memories, and milestones in beautifully crafted legacy books that families will cherish for generations.",
+    startStory: "Begin Your Legacy",
+    viewBooks: "Explore Our Collection",
 
     // About Section
     aboutLabel: "WHO WE ARE",
@@ -157,13 +157,13 @@ const translations: Record<Language, Record<string, string>> = {
     moreSoon: "जल्द ही और आ रहा है",
 
     // Hero
-    preservingSince: "वर्ष 2024 से विरासतों को संजोते हुए",
-    turnLifeInto: "अपने जीवन को बदलें",
-    masterpiece: "एक उत्कृष्ट कृति में",
+    preservingSince: "वर्ष 2023 से विरासतों को संजोते हुए",
+    turnLifeInto: "जीवन को बदलते हैं",
+    masterpiece: "कालजयी विरासतों में",
     tagline: '"अनकही कहानियाँ, सहेजी गयी यादें।"',
-    heroBody: "हम आपके जीवन की कहानियों को आने वाली पीढ़ियों के लिए सुरक्षित रखने के लिए खूबसूरती से लिखी गई, पेशेवर रूप से डिज़ाइन की गई संस्मरण पुस्तकें तैयार करते हैं। जीवनी लेखकों व शोधकर्ताओं द्वारा लिखित। हार्डकवर पुस्तकों के रूप में मुद्रित। भारत भर में विशिष्ट देखभाल के साथ वितरित।",
-    startStory: "अपनी कहानी शुरू करें",
-    viewBooks: "हमारी पुस्तकें देखें",
+    heroBody: "हम आपकी कहानियों, यादों और मील के पत्थरों को खूबसूरती से तैयार की गई विरासत पुस्तकों में संरक्षित करते हैं जिन्हें परिवार पीढ़ियों तक संजोएंगे।",
+    startStory: "अपनी विरासत शुरू करें",
+    viewBooks: "हमारा संग्रह देखें",
 
     // About Section
     aboutLabel: "हम कौन हैं",

@@ -108,13 +108,6 @@ export default function Navbar({
               }`}>
                 Memoir<span className="text-accent-purple">Tale</span>
               </span>
-              <span className={`block font-sans text-[9px] uppercase tracking-[3px] font-semibold -mt-1 transition-colors duration-300 ${
-                scrolled
-                  ? darkMode ? 'text-accent-purple' : 'text-accent-purple-dark'
-                  : 'text-white/80'
-              }`}>
-                Storykeepers
-              </span>
             </div>
           </button>
 
