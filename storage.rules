@@ -1,0 +1,46 @@
+rules_version = '2';
+
+// Firebase Storage Security Rules for MemoirTale
+service firebase.storage {
+  match /b/{bucket}/o {
+    
+    // Helper function to check if user is admin
+    function isAdmin() {
+      return request.auth != null && 
+             firestore.get(/databases/(default)/documents/users/$(request.auth.uid)).data.role == 'admin' &&
+             firestore.get(/databases/(default)/documents/users/$(request.auth.uid)).data.isActive == true;
+    }
+    
+    // Inquiries folder - Anyone can upload (public contact form attachments)
+    match /inquiries/{ticketNo}/{fileName} {
+      // Allow anyone to upload files (for contact form submissions)
+      allow create: if request.resource.size < 50 * 1024 * 1024 && // Max 50MB per file
+                       request.resource.contentType.matches('image/.*|video/.*|audio/.*|application/pdf|application/msword|application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+      
+      // Only admins can read, update, and delete
+      allow read: if isAdmin();
+      allow update, delete: if isAdmin();
+    }
+    
+    // Callbacks folder - Anyone can upload (public callback attachments if any)
+    match /callbacks/{ticketNo}/{fileName} {
+      // Allow anyone to upload files
+      allow create: if request.resource.size < 50 * 1024 * 1024 && // Max 50MB per file
+                       request.resource.contentType.matches('image/.*|video/.*|audio/.*|application/pdf|application/msword|application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+      
+      // Only admins can read, update, and delete
+      allow read: if isAdmin();
+      allow update, delete: if isAdmin();
+    }
+    
+    // Admin uploads folder (if needed in future)
+    match /admin/{allPaths=**} {
+      allow read, write: if isAdmin();
+    }
+    
+    // Deny all other paths by default
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}

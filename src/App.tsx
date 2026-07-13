@@ -22,7 +22,7 @@ import ContactSection from './components/ContactSection';
 import FAQSection from './components/FAQSection';
 import FooterSection from './components/FooterSection';
 import FloatingCallbackButton from './components/FloatingCallbackButton';
-import AdminDashboard from './components/AdminDashboard';
+import AdminDashboardSecure from './components/AdminDashboardSecure';
 
 export default function App() {
   // Dark mode with localStorage persistence (defaults to light mode)
@@ -79,9 +79,9 @@ export default function App() {
     }
   };
 
-  // If admin panel requested, show only AdminDashboard
+  // If admin panel requested, show only AdminDashboardSecure
   if (showAdmin) {
-    return <AdminDashboard />;
+    return <AdminDashboardSecure />;
   }
 
   return (

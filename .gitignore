@@ -8,3 +8,6 @@ coverage/
 !.env.example
 dist
 .vscode
+scripts
+ADMIN_SETUP_GUIDE.md
+FIREBASE_STORAGE_SETUP.md

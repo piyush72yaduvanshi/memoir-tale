@@ -29,7 +29,7 @@ export default function ContactSection({ selectedService, matchedWriter, onClear
   const [preferredTime, setPreferredTime] = useState("Anytime");
 
   // File attachments state managers
-  const [attachedFiles, setAttachedFiles] = useState<{ name: string; type: string; size: number; dataUrl: string }[]>([]);
+  const [attachedFiles, setAttachedFiles] = useState<File[]>([]);
   const [dragActive, setDragActive] = useState(false);
 
   // Status handlers
@@ -78,19 +78,8 @@ export default function ContactSection({ selectedService, matchedWriter, onClear
       
       totalCurrentSize += file.size;
       
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setAttachedFiles((prev) => [
-          ...prev,
-          {
-            name: file.name,
-            type: file.type,
-            size: file.size,
-            dataUrl: reader.result as string,
-          },
-        ]);
-      };
-      reader.readAsDataURL(file);
+      // Store the actual File object instead of base64
+      setAttachedFiles((prev) => [...prev, file]);
     });
   };
 
@@ -583,6 +572,8 @@ export default function ContactSection({ selectedService, matchedWriter, onClear
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                           {attachedFiles.map((file, idx) => {
                             const isImg = file.type.startsWith("image/");
+                            const previewUrl = isImg ? URL.createObjectURL(file) : null;
+                            
                             return (
                               <motion.div
                                 key={idx}
@@ -592,9 +583,9 @@ export default function ContactSection({ selectedService, matchedWriter, onClear
                                 className="flex items-center justify-between p-3 bg-white border border-[#E3DDE9]/60 rounded-xl shadow-sm text-[#190F26]"
                               >
                                 <div className="flex items-center space-x-3 overflow-hidden">
-                                  {isImg ? (
+                                  {isImg && previewUrl ? (
                                     <div className="w-10 h-10 rounded-lg overflow-hidden border border-[#E3DDE9] shrink-0">
-                                      <img src={file.dataUrl} className="w-full h-full object-cover" />
+                                      <img src={previewUrl} className="w-full h-full object-cover" alt={file.name} />
                                     </div>
                                   ) : (
                                     <div className="w-10 h-10 rounded-lg bg-[#FAF8F5] border border-[#E3DDE9] flex items-center justify-center text-[#2E1B5D] shrink-0">
@@ -645,7 +636,7 @@ export default function ContactSection({ selectedService, matchedWriter, onClear
                     {isSubmitting ? (
                       <div className="h-5 w-5 border-2 border-t-transparent border-[#17063F] rounded-full animate-spin" />
                     ) : (
-                      <span>{isHindi ? "विवरण जमा करें और नि:शुल्क परामर्श प्राप्त करें" : "Submit & Get My Free Quote"}</span>
+                      <span>{isHindi ? "विवरण जमा करें और परामर्श प्राप्त करें" : "Submit & Get My Quote"}</span>
                     )}
                   </motion.button>
 
