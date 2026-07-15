@@ -97,10 +97,10 @@ export default function WriterMatchmaker({ onMatchWriter }: WriterMatchmakerProp
 
   if (matchedWriter) {
     return (
-      <section className="bg-[#2D1B36] py-16 lg:py-24">
+      <section className="bg-[#220E24] py-16 lg:py-24">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-8">
-            <div className="inline-flex items-center gap-2 px-4 py-2 border rounded-full mb-4" style={{ backgroundColor: '#3A2447', borderColor: 'rgba(46, 27, 93, 0.3)' }}>
+            <div className="inline-flex items-center gap-2 px-4 py-2 border rounded-full mb-4" style={{ backgroundColor: '#341738', borderColor: 'rgba(46, 27, 93, 0.3)' }}>
               <Sparkles className="h-4 w-4" style={{ color: '#A78BFA' }} />
               <span className="text-xs font-semibold uppercase tracking-wider" style={{ color: '#A78BFA' }}>
                 Perfect Match Found
@@ -111,9 +111,9 @@ export default function WriterMatchmaker({ onMatchWriter }: WriterMatchmakerProp
             </h2>
           </div>
 
-          <div className="border rounded-2xl p-8 lg:p-10" style={{ backgroundColor: '#3A2447', borderColor: 'rgba(46, 27, 93, 0.3)' }}>
+          <div className="border rounded-2xl p-8 lg:p-10" style={{ backgroundColor: '#341738', borderColor: 'rgba(46, 27, 93, 0.3)' }}>
             <div className="flex flex-col lg:flex-row items-center gap-8">
-              <div className="h-32 w-32 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: '#2D1B36', border: '4px solid rgba(46, 27, 93, 0.4)' }}>
+              <div className="h-32 w-32 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: '#220E24', border: '4px solid rgba(46, 27, 93, 0.4)' }}>
                 <User className="h-16 w-16" style={{ color: '#A78BFA' }} />
               </div>
               
@@ -168,7 +168,7 @@ export default function WriterMatchmaker({ onMatchWriter }: WriterMatchmakerProp
   }
 
   return (
-    <section className="bg-[#2D1B36] py-16 lg:py-24">
+    <section className="bg-[#220E24] py-16 lg:py-24">
       <div className="max-w-4xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-12">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-500/20 to-pink-500/20 border border-purple-400/30 rounded-full mb-4 backdrop-blur-sm">
@@ -187,7 +187,7 @@ export default function WriterMatchmaker({ onMatchWriter }: WriterMatchmakerProp
 
         {/* Progress Bar */}
         <div className="mb-8">
-          <div className="h-2 bg-[#3A2447] rounded-full overflow-hidden">
+          <div className="h-2 bg-[#341738] rounded-full overflow-hidden">
             <div 
               className="h-full bg-gradient-to-r from-purple-500 to-pink-500 transition-all duration-500"
               style={{ width: `${progress}%` }}
@@ -200,7 +200,7 @@ export default function WriterMatchmaker({ onMatchWriter }: WriterMatchmakerProp
 
         {/* Step 1: Genre */}
         {step === 1 && (
-          <div className="bg-[#3A2447] border border-[#A78BFA]/30 rounded-2xl p-8 lg:p-10">
+          <div className="bg-[#341738] border border-[#A78BFA]/30 rounded-2xl p-8 lg:p-10">
             <h3 className="font-serif text-2xl font-bold text-white mb-6 text-center">
               What type of story is this?
             </h3>
@@ -271,7 +271,7 @@ export default function WriterMatchmaker({ onMatchWriter }: WriterMatchmakerProp
 
         {/* Step 2: Language */}
         {step === 2 && (
-          <div className="bg-[#3A2447] border border-[#A78BFA]/30 rounded-2xl p-8 lg:p-10">
+          <div className="bg-[#341738] border border-[#A78BFA]/30 rounded-2xl p-8 lg:p-10">
             <h3 className="font-serif text-2xl font-bold text-white mb-6 text-center">
               Preferred language for your book?
             </h3>
@@ -344,7 +344,7 @@ export default function WriterMatchmaker({ onMatchWriter }: WriterMatchmakerProp
 
         {/* Step 3: Tone */}
         {step === 3 && (
-          <div className="bg-[#3A2447] border border-[#A78BFA]/30 rounded-2xl p-8 lg:p-10">
+          <div className="bg-[#341738] border border-[#A78BFA]/30 rounded-2xl p-8 lg:p-10">
             <h3 className="font-serif text-2xl font-bold text-white mb-6 text-center">
               What tone do you prefer?
             </h3>

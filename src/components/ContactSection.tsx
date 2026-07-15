@@ -260,7 +260,7 @@ export default function ContactSection({ selectedService, matchedWriter, onClear
       id="contact"
       className={`relative py-16 lg:py-24 overflow-hidden ${
         darkMode 
-          ? 'bg-[#1f1030] text-[#F5F0F8] border-b border-white/10' 
+          ? 'bg-[#220E24] text-[#F5F0F8] border-b border-white/10' 
           : 'bg-gradient-to-b from-[#FAF6F0] via-[#FCFBF7] to-[#FAF8F5] text-[#190F26] border-b border-[#E3DDE9]/40'
       }`}
     >
@@ -274,14 +274,14 @@ export default function ContactSection({ selectedService, matchedWriter, onClear
         <FadeIn>
           <div className={`grid grid-cols-2 lg:grid-cols-4 gap-6 rounded-2xl p-6 lg:p-8 mb-20 text-center relative z-10 shadow-[0_8px_30px_rgba(69,20,122,0.04)] ${
             darkMode 
-              ? 'bg-[#2D1B36] border border-white/10'
+              ? 'bg-[#220E24] border border-white/10'
               : 'bg-white border border-[#E3DDE9]/60'
           }`}>
             
             {/* Stat 1 */}
             <div className="flex flex-col items-center justify-center p-3">
               <div className={`p-2.5 rounded-full text-[#2E1B5D] mb-3 border ${
-                darkMode ? 'bg-[#3A2447] border-white/10' : 'bg-[#FAF6F0] border-[#E3DDE9]'
+                darkMode ? 'bg-[#341738] border-white/10' : 'bg-[#FAF6F0] border-[#E3DDE9]'
               }`}>
                 <Phone className="h-5 w-5" />
               </div>
@@ -300,7 +300,7 @@ export default function ContactSection({ selectedService, matchedWriter, onClear
               darkMode ? 'border-white/10' : 'border-[#E3DDE9]'
             }`}>
               <div className={`p-2.5 rounded-full text-[#2E1B5D] mb-3 border ${
-                darkMode ? 'bg-[#3A2447] border-white/10' : 'bg-[#FAF6F0] border-[#E3DDE9]'
+                darkMode ? 'bg-[#341738] border-white/10' : 'bg-[#FAF6F0] border-[#E3DDE9]'
               }`}>
                 <Mail className="h-5 w-5" />
               </div>

@@ -69,8 +69,8 @@ export default function Hero({ darkMode, onStartStoryClick, onViewBooksClick }: 
           className="absolute inset-0 transition-colors duration-500" 
           style={{
             background: darkMode
-              ? 'linear-gradient(135deg, rgba(38, 22, 45, 0.95) 10%, rgba(38, 22, 45, 0.92) 40%, rgba(38, 22, 45, 0.96) 100%)'
-              : 'linear-gradient(135deg, rgba(38, 22, 45, 0.92) 10%, rgba(38, 22, 45, 0.88) 50%, rgba(38, 22, 45, 0.94) 100%)'
+              ? 'linear-gradient(135deg, rgba(34, 14, 36, 0.95) 10%, rgba(34, 14, 36, 0.92) 40%, rgba(34, 14, 36, 0.96) 100%)'
+              : 'linear-gradient(135deg, rgba(34, 14, 36, 0.92) 10%, rgba(34, 14, 36, 0.88) 50%, rgba(34, 14, 36, 0.94) 100%)'
           }}
         />
 
@@ -120,7 +120,7 @@ export default function Hero({ darkMode, onStartStoryClick, onViewBooksClick }: 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
-          className="mt-7 text-white/80 font-serif-sub text-base sm:text-xl md:text-[17px] font-light leading-relaxed max-w-2xl mx-auto italic"
+          className="mt-7 text-white/90 font-serif-sub text-xl sm:text-2xl md:text-[23px] lg:text-[24px] font-light leading-relaxed max-w-2xl mx-auto italic"
         >
           {t("heroBody")}
         </motion.p>

@@ -61,7 +61,7 @@ export default function TopicsSection() {
   ];
   
   return (
-    <section className="bg-[#2D1B36] py-16 lg:py-24">
+    <section className="bg-[#220E24] py-16 lg:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <div className="inline-block px-4 py-2 bg-gradient-to-r from-purple-500/20 to-blue-500/20 border border-purple-400/30 rounded-full mb-4 backdrop-blur-sm">
@@ -85,7 +85,7 @@ export default function TopicsSection() {
                 key={index}
                 className={`bg-gradient-to-br ${gradientColors[index]} rounded-xl p-6 border transition-all duration-300 group cursor-pointer backdrop-blur-sm`}
               >
-                <div className={`h-14 w-14 rounded-full bg-[#2D1B36] border-2 ${borderColors[index]} flex items-center justify-center mb-4 group-hover:scale-110 transition-all duration-300 shadow-lg`}>
+                <div className={`h-14 w-14 rounded-full bg-[#220E24] border-2 ${borderColors[index]} flex items-center justify-center mb-4 group-hover:scale-110 transition-all duration-300 shadow-lg`}>
                   <Icon className={`h-7 w-7 ${iconColors[index]}`} />
                 </div>
                 <h3 className={`text-white font-serif font-semibold text-base mb-2 group-hover:${iconColors[index]} transition-colors`}>

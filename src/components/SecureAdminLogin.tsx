@@ -48,7 +48,7 @@ export default function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginPro
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#2D1B36] via-[#1B101E] to-[#2D1B36] flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-[#220E24] via-[#1B101E] to-[#220E24] flex items-center justify-center p-4">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -97,7 +97,7 @@ export default function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginPro
                   onChange={(e) => setEmail(e.target.value)}
                   required
                   placeholder="admin@memoirtale.com"
-                  className="w-full h-12 pl-12 pr-4 bg-[#2D1B36] border border-white/15 rounded-lg text-white placeholder-white/30 focus:outline-none focus:border-[#D4AF37]/60 focus:ring-1 focus:ring-[#D4AF37]/30 transition-all"
+                  className="w-full h-12 pl-12 pr-4 bg-[#220E24] border border-white/15 rounded-lg text-white placeholder-white/30 focus:outline-none focus:border-[#D4AF37]/60 focus:ring-1 focus:ring-[#D4AF37]/30 transition-all"
                   disabled={loading}
                 />
               </div>
@@ -116,7 +116,7 @@ export default function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginPro
                   onChange={(e) => setPassword(e.target.value)}
                   required
                   placeholder="Enter your password"
-                  className="w-full h-12 pl-12 pr-4 bg-[#2D1B36] border border-white/15 rounded-lg text-white placeholder-white/30 focus:outline-none focus:border-[#D4AF37]/60 focus:ring-1 focus:ring-[#D4AF37]/30 transition-all"
+                  className="w-full h-12 pl-12 pr-4 bg-[#220E24] border border-white/15 rounded-lg text-white placeholder-white/30 focus:outline-none focus:border-[#D4AF37]/60 focus:ring-1 focus:ring-[#D4AF37]/30 transition-all"
                   disabled={loading}
                 />
               </div>

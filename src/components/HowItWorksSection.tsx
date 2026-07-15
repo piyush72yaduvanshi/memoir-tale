@@ -165,7 +165,7 @@ export default function HowItWorksSection({ darkMode = false, onCtaClick }: HowI
       id="how-it-works"
       className={`py-20 md:py-28 transition-colors duration-500 overflow-hidden relative border-t border-b ${
         darkMode 
-          ? 'bg-[#2D1B36] border-white/5 text-[#F5F0F8]' 
+          ? 'bg-[#220E24] border-white/5 text-[#F5F0F8]' 
           : 'bg-gradient-to-b from-[#FAF8F5] via-[#FCFBF7] to-[#FAF6F0] border-[#E3DDE9]/50 text-[#190F26]'
       }`}
     >
@@ -249,10 +249,10 @@ export default function HowItWorksSection({ darkMode = false, onCtaClick }: HowI
                   className={`w-full p-5 rounded-xl border flex items-start gap-4 transition-all duration-300 relative z-10 cursor-pointer outline-none text-left select-none group overflow-hidden ${
                     isActive
                       ? darkMode
-                        ? 'border-[rgb(46,27,93)]/45 bg-[#3A2447] shadow-lg shadow-[rgb(46,27,93)]/10 pb-6'
+                        ? 'border-[rgb(46,27,93)]/45 bg-[#341738] shadow-lg shadow-[rgb(46,27,93)]/10 pb-6'
                         : 'border-[rgb(46,27,93)]/45 bg-white shadow-lg pb-6'
                       : darkMode
-                      ? 'border-white/5 bg-[#2D1B36]/45 hover:bg-[#3A2447]/60 hover:border-white/15'
+                      ? 'border-white/5 bg-[#220E24]/45 hover:bg-[#341738]/60 hover:border-white/15'
                       : 'border-[#E3DDE9]/60 bg-white/45 hover:bg-white hover:border-[rgb(46,27,93)]/40'
                   }`}
                   id={`process-step-trigger-${step.number}`}
@@ -272,7 +272,7 @@ export default function HowItWorksSection({ darkMode = false, onCtaClick }: HowI
                     isActive
                       ? 'bg-gradient-to-r from-[rgb(46,27,93)] to-[#8B3CDC] text-white border-[rgb(46,27,93)] scale-110 shadow-md shadow-[rgb(46,27,93)]/20'
                       : darkMode
-                      ? 'bg-[#3A2447] text-[#F5F0F8]/50 border-white/10'
+                      ? 'bg-[#341738] text-[#F5F0F8]/50 border-white/10'
                       : 'bg-[#FAF6F0] text-[rgb(46,27,93)]/50 border-[#E3DDE9]/60'
                   }`}>
                     {step.number}
@@ -328,7 +328,7 @@ export default function HowItWorksSection({ darkMode = false, onCtaClick }: HowI
                 exit={{ opacity: 0, y: -15, scale: 0.98 }}
                 transition={{ duration: 0.45 }}
                 className={`rounded-2xl border overflow-hidden shadow-2xl text-left relative flex flex-col group ${
-                  darkMode ? 'bg-[#2D1B36] border-white/10' : 'bg-white border-[#E3DDE9]/60'
+                  darkMode ? 'bg-[#220E24] border-white/10' : 'bg-white border-[#E3DDE9]/60'
                 }`}
               >
                 {/* Horizontal Live Progress Bar at the top of the details frame */}
@@ -367,7 +367,7 @@ export default function HowItWorksSection({ darkMode = false, onCtaClick }: HowI
                     <span className="py-1 px-3 bg-black/50 backdrop-blur-md rounded border border-[rgb(46,27,93)]/20 text-[9px] uppercase tracking-widest font-sans font-bold text-[rgb(46,27,93)] shadow-md">
                       {isHindi ? `चरण ${currentStepData.number} / 05` : `STAGE ${currentStepData.number} OF 05`}
                     </span>
-                    <span className="py-1 px-3 bg-[#3A2447]/90 text-[#FAF6F0] text-[9px] uppercase tracking-[1.5px] font-sans font-bold rounded shadow-md border border-white/10">
+                    <span className="py-1 px-3 bg-[#341738]/90 text-[#FAF6F0] text-[9px] uppercase tracking-[1.5px] font-sans font-bold rounded shadow-md border border-white/10">
                       {isHindi ? currentStepData.statusHi : currentStepData.status}
                     </span>
                   </div>

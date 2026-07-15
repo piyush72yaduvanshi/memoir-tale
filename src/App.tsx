@@ -85,7 +85,7 @@ export default function App() {
   }
 
   return (
-    <div className={`min-h-screen overflow-x-hidden ${darkMode ? 'bg-[#2D1B36] text-[#F5F0F8]' : 'bg-[#faf7f0] text-[#1B101E]'}`}>
+    <div className={`min-h-screen overflow-x-hidden ${darkMode ? 'bg-[#220E24] text-[#F5F0F8]' : 'bg-[#faf7f0] text-[#1B101E]'}`}>
       <Navbar 
         darkMode={darkMode} 
         setDarkMode={setDarkMode}
