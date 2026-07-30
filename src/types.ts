@@ -6,10 +6,14 @@
 export interface Service {
   id: string;
   title: string;
+  titleHi?: string;
   tagline: string;
+  taglineHi?: string;
   description: string;
+  descriptionHi?: string;
   image: string;
   linkText: string;
+  linkTextHi?: string;
 }
 
 export interface Step {

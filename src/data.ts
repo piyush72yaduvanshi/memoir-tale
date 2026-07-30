@@ -6,42 +6,98 @@ export const SERVICES: Service[] = [
   {
     id: 'life-story',
     title: 'Life Story Books',
-    tagline: 'Legacy Biography',
-    description: 'A full-length biography elegantly bound in fine leather, tracing your ancestry, childhood, and life milestones.',
+    titleHi: 'जीवन कहानी पुस्तक',
+    tagline: 'Personal Memoir',
+    taglineHi: 'व्यक्तिगत संस्मरण',
+    description: 'A beautifully written memoir that captures a lifetime of memories, milestones, and wisdom.',
+    descriptionHi: 'एक सुंदर ढंग से लिखा गया संस्मरण जो जीवन भर की यादों, मील के पत्थरों और ज्ञान को संजोता है।',
     image: 'https://picsum.photos/seed/mem_lifestory/600/400',
-    linkText: 'Learn More'
+    linkText: 'Learn More',
+    linkTextHi: 'और जानें'
   },
   {
-    id: 'obituaries',
-    title: 'Obituaries & Tribute Books',
-    tagline: 'Honor A Life Well-Lived',
-    description: 'A dedicated tribute book compiling eulogies, letters of affection, and historic family portraits for memorial services.',
-    image: 'https://picsum.photos/seed/mem_tribute/600/400',
-    linkText: 'Learn More'
-  },
-  {
-    id: 'animated-films',
-    title: 'Animated Short Films',
-    tagline: 'Visual Heritage',
-    description: 'Custom animated memoirs recreating key family moments and stories with professional voiceovers and cinematic hand-drawn art.',
-    image: 'https://picsum.photos/seed/mem_animation/600/400',
-    linkText: 'Explore Film'
-  },
-  {
-    id: 'ai-memory-bot',
-    title: 'Personalized AI Memory Bot',
-    tagline: 'Conversational Continuity',
-    description: 'A comforting conversational assistant, trained on your letters and records, allowing descendants to talk to your memories (Coming Soon).',
-    image: 'https://picsum.photos/seed/mem_aibot/600/400',
-    linkText: 'Join Waitlist'
-  },
-  {
-    id: 'family-trees',
-    title: 'Family Legacy Trees',
-    tagline: 'Visual Genealogy',
-    description: 'Spectacular visual genealogy art hand-drafted by expert designers, perfect for framing and displaying in your family estate.',
+    id: 'family-legacy',
+    title: 'Family Legacy Books',
+    titleHi: 'पारिवारिक विरासत पुस्तक',
+    tagline: 'Family Heritage',
+    taglineHi: 'पारिवारिक विरासत',
+    description: 'Preserve generations of stories, traditions, and family heritage in one timeless collection.',
+    descriptionHi: 'कहानियों, परंपराओं और पारिवारिक विरासत की पीढ़ियों को एक सदाबहार संग्रह में सुरक्षित रखें।',
     image: 'https://picsum.photos/seed/mem_tree/600/400',
-    linkText: 'View Designs'
+    linkText: 'Learn More',
+    linkTextHi: 'और जानें'
+  },
+  {
+    id: 'biography-autobiography',
+    title: 'Biography & Autobiography',
+    titleHi: 'जीवनी और आत्मकथा',
+    tagline: 'Remarkable Journeys',
+    taglineHi: 'अद्भुत यात्राएं',
+    description: 'Celebrate remarkable journeys with professionally written biographies that inspire future generations.',
+    descriptionHi: 'पेशेवर रूप से लिखी गई जीवनियों के साथ अद्भुत यात्राओं का जश्न मनाएं जो आने वाली पीढ़ियों को प्रेरित करती हैं।',
+    image: 'https://picsum.photos/seed/mem_biography/600/400',
+    linkText: 'Learn More',
+    linkTextHi: 'और जानें'
+  },
+  {
+    id: 'travel-journals',
+    title: 'Travel Journals',
+    titleHi: 'यात्रा संस्मरण',
+    tagline: 'Unforgettable Adventures',
+    taglineHi: 'अविस्मरणीय कारनामे',
+    description: 'Transform unforgettable adventures into beautifully designed keepsakes.',
+    descriptionHi: 'अविस्मरणीय रोमांचकारी कारनामों को सुंदर ढंग से डिज़ाइन किए गए स्मृति चिन्हों में बदलें।',
+    image: 'https://picsum.photos/seed/mem_travel/600/400',
+    linkText: 'Learn More',
+    linkTextHi: 'और जानें'
+  },
+  {
+    id: 'tribute-memorial',
+    title: 'Tribute & Memorial Books',
+    titleHi: 'श्रद्धांजलि व संस्मरण ग्रंथ',
+    tagline: 'Honor A Loved One',
+    taglineHi: 'प्रियजन का सम्मान',
+    description: "Honor a loved one's life through stories, photographs, letters, and cherished memories.",
+    descriptionHi: 'कहानियों, तस्वीरों, पत्रों और संजोई हुई यादों के माध्यम से अपने प्रियजन के जीवन का सम्मान करें।',
+    image: 'https://picsum.photos/seed/mem_tribute/600/400',
+    linkText: 'Learn More',
+    linkTextHi: 'और जानें'
+  },
+  {
+    id: 'coffee-table',
+    title: 'Coffee Table Books',
+    titleHi: 'कॉफी टेबल बुक्स',
+    tagline: 'Visual Storytelling',
+    taglineHi: 'विज़ुअल स्टोरीटेलिंग',
+    description: 'Elegant visual storytelling crafted for families, founders, artists, and collectors.',
+    descriptionHi: 'परिवारों, संस्थापकों, कलाकारों और संग्रहकर्ताओं के लिए तैयार की गई सुंदर दृश्य कथा (विज़ुअल स्टोरीटेलिंग)।',
+    image: 'https://picsum.photos/seed/mem_coffeetable/600/400',
+    linkText: 'Learn More',
+    linkTextHi: 'और जानें'
+  },
+  {
+    id: 'corporate-founder',
+    title: 'Corporate & Founder Stories',
+    titleHi: 'कॉर्पोरेट और संस्थापक गाथाएं',
+    tagline: 'Business Heritage',
+    taglineHi: 'व्यावसायिक विरासत',
+    description: 'Document the vision, milestones, and legacy behind businesses and organizations.',
+    descriptionHi: 'व्यवसायों और संगठनों के पीछे के दृष्टिकोण, मील के पत्थरों और विरासत को दस्तावेज़ में संजोएं।',
+    image: 'https://picsum.photos/seed/mem_corporate/600/400',
+    linkText: 'Learn More',
+    linkTextHi: 'और जानें'
+  },
+  {
+    id: 'digital-legacy',
+    title: 'Digital Legacy Collection',
+    titleHi: 'डिजिटल आर्काइव संग्रह',
+    tagline: 'Digital Archive',
+    taglineHi: 'डिजिटल आर्काइव',
+    description: "Secure your family's stories, photographs, videos, and memories for generations to come.",
+    descriptionHi: 'आने वाली पीढ़ियों के लिए अपने परिवार की कहानियों, तस्वीरों, वीडियो और यादों को सुरक्षित रखें।',
+    image: 'https://picsum.photos/seed/mem_aibot/600/400',
+    linkText: 'Learn More',
+    linkTextHi: 'और जानें'
   }
 ];
 
@@ -78,6 +134,7 @@ export interface GalleryItem {
   url: string;
   title: string;
   type: string;
+  category?: string;
   span?: string; // for masonry grid variety
 }
 
@@ -95,7 +152,7 @@ export interface FAQItem {
   id: number;
   question: string;
   answer: string;
-  category: 'process' | 'shipping' | 'privacy' | 'general';
+  category: 'process' | 'pricing' | 'privacy' | 'shipping' | 'ownership' | 'support' | 'general';
 }
 
 export const TOPICS: Topic[] = [
@@ -254,53 +311,61 @@ export const PACKAGES: Package[] = [
 export const GALLERY_ITEMS: GalleryItem[] = [
   {
     id: 1,
-    url: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&q=80&w=500", // editorial book reading
-    title: "Elegantly Crafted Hardcover",
-    type: "Book Showcase",
+    url: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&q=80&w=600",
+    title: "The Life & Journey of Major General V. K. Sharma",
+    type: "Life Memoirs",
+    category: "LIFE_MEMOIRS",
     span: "col-span-1 md:col-span-2"
   },
   {
     id: 2,
-    url: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&q=80&w=500", // warm library stack
-    title: "Preserving Wisdom on Shelves",
-    type: "Archival"
+    url: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&q=80&w=600",
+    title: "100 Years of the Kapoor Ancestry & Estate",
+    type: "Family Legacies",
+    category: "FAMILY_LEGACIES"
   },
   {
     id: 3,
-    url: "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&q=80&w=500", // premium gold foil book covers
-    title: "Exquisite Print Quality",
-    type: "Craftsmanship"
+    url: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&q=80&w=600",
+    title: "Trans-Siberian & Himalayan Expeditions Journal",
+    type: "Travel Journals",
+    category: "TRAVEL_JOURNALS"
   },
   {
     id: 4,
-    url: "https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?auto=format&fit=crop&q=80&w=500", // reading older person hands
-    title: "Stories Held Dearly",
-    type: "Emotional Legacy",
+    url: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=600",
+    title: "50 Years of Textile Innovation & Enterprise",
+    type: "Founder Stories",
+    category: "FOUNDER_STORIES",
     span: "col-span-1 md:col-span-2"
   },
   {
     id: 5,
-    url: "https://images.unsplash.com/photo-1541963463532-d68292c34b19?auto=format&fit=crop&q=80&w=500", // book leather back
-    title: "Custom Binding Artistry",
-    type: "Design"
+    url: "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&q=80&w=600",
+    title: "In Loving Memory of Smt. Rukmini Devi",
+    type: "Tribute Books",
+    category: "TRIBUTE_BOOKS"
   },
   {
     id: 6,
-    url: "https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&q=80&w=500", // elder storytelling
-    title: "The Golden Era Narratives",
-    type: "Interviews"
+    url: "https://images.unsplash.com/photo-1541963463532-d68292c34b19?auto=format&fit=crop&q=80&w=600",
+    title: "An Heirloom Anthology of Fine Art & Architecture",
+    type: "Coffee Table Books",
+    category: "COFFEE_TABLE"
   },
   {
     id: 7,
-    url: "https://images.unsplash.com/photo-1553060146-71667aa3f223?auto=format&fit=crop&q=80&w=500", // open vintage book
-    title: "Timeless Keepsake Details",
-    type: "Heirloom"
+    url: "https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?auto=format&fit=crop&q=80&w=600",
+    title: "Memoirs of a Civil Servant: 1965-2005",
+    type: "Life Memoirs",
+    category: "LIFE_MEMOIRS"
   },
   {
     id: 8,
-    url: "https://images.unsplash.com/photo-1518375246755-cf6c8e30a629?auto=format&fit=crop&q=80&w=500", // happy senior laughter
-    title: "Honoring Indian Seniors",
-    type: "Family Smiles"
+    url: "https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&q=80&w=600",
+    title: "Four Generations of Heritage & Recipes",
+    type: "Family Legacies",
+    category: "FAMILY_LEGACIES"
   }
 ];
 
@@ -334,42 +399,79 @@ export const TESTIMONIALS: Testimonial[] = [
   }
 ];
 
+export interface FAQItem {
+  id: number;
+  question: string;
+  questionHi?: string;
+  answer: string;
+  answerHi?: string;
+  category?: 'process' | 'pricing' | 'privacy' | 'shipping' | 'ownership' | 'support' | 'general';
+}
+
 export const FAQS: FAQItem[] = [
   {
     id: 1,
-    question: "How does the interview and memory gathering process work?",
-    answer: "Our process is designed to be gentle and completely stress-free. After an initial consultation, one of our compassionate, professional human biographers will conduct a series of virtual or in-person conversational interviews (usually 3 to 6 sessions). We ask simple, evoking questions about your earliest memories, family lore, and life milestones.",
+    question: "How does the storytelling process begin?",
+    questionHi: "कहानी सुनाने की प्रक्रिया कैसे शुरू होती है?",
+    answer: "Every project starts with a personal consultation where we understand your story, goals, and vision. From there, our team guides you through interviews, writing, design, review, and final delivery.",
+    answerHi: "हर प्रोजेक्ट एक व्यक्तिगत परामर्श के साथ शुरू होता है जहां हम आपकी कहानी, लक्ष्यों और दृष्टिकोण को समझते हैं। वहां से, हमारी टीम आपको साक्षात्कार, लेखन, डिज़ाइन, समीक्षा और अंतिम डिलीवरी के माध्यम से मार्गदर्शन करती है।",
     category: 'process'
   },
   {
     id: 2,
-    question: "What materials can we include in the book?",
-    answer: "You can include almost any physical or digital item that holds meaning. This includes classic photographs, scans of handwritten letters, family recipes, journal snippets, diplomas, lineage documents, and newspaper clippings. Our team handles high-resolution digital restoration of faded or creased snapshots.",
+    question: "How long does it take to complete a memoir?",
+    questionHi: "एक संस्मरण को पूरा करने में कितना समय लगता है?",
+    answer: "Most projects are completed within 8–16 weeks, depending on the complexity, length, revisions, and selected services.",
+    answerHi: "ज्यादातर प्रोजेक्ट 8-16 सप्ताह के भीतर पूरे हो जाते हैं, जो जटिलता, लंबाई, संशोधन और चयनित सेवाओं पर निर्भर करता है।",
     category: 'process'
   },
   {
     id: 3,
-    question: "How long does the entire process take?",
-    answer: "Typically 8–12 weeks from your first interview call to the physical book delivery, depending on the volume of revisions and the package chosen.",
+    question: "Do I need to write anything myself?",
+    questionHi: "क्या मुझे खुद कुछ लिखने की जरूरत है?",
+    answer: "Not at all. Our experienced storytellers conduct interviews and transform your memories into a beautifully written narrative while preserving your authentic voice.",
+    answerHi: "बिल्कुल नहीं। हमारे अनुभवी लेखक साक्षात्कार आयोजित करते हैं और आपकी प्रामाणिक आवाज को बनाए रखते हुए आपकी यादों को एक सुंदर लिखित वर्णन में बदल देते हैं।",
     category: 'process'
   },
   {
     id: 4,
-    question: "Do you deliver outside my city?",
-    answer: "Absolutely! We provide premium, insured nationwide delivery across India. International shipping and distribution can also be arranged on request.",
-    category: 'shipping'
+    question: "Can the memoir be written in my preferred language?",
+    questionHi: "क्या संस्मरण मेरी पसंदीदा भाषा में लिखा जा सकता है?",
+    answer: "Yes. We offer multilingual storytelling and can create memoirs in multiple languages, depending on your preferences.",
+    answerHi: "हाँ। हम बहुभाषी कहानी सुनाने की सुविधा प्रदान करते हैं और आपकी प्राथमिकताओं के आधार पर कई भाषाओं (जैसे हिंदी, अंग्रेजी) में संस्मरण बना सकते हैं।",
+    category: 'support'
   },
   {
     id: 5,
-    question: "Can I order extra copies of my book?",
-    answer: "Yes, you can order additional archival copies of your memoir book anytime, both during initial production or months later, at a special discounted pricing of ₹2,999 per copy.",
-    category: 'shipping'
+    question: "Will my information remain private?",
+    questionHi: "क्या मेरी जानकारी निजी रहेगी?",
+    answer: "Absolutely. Every conversation, photograph, recording, and document is handled with complete confidentiality. Your story belongs to you.",
+    answerHi: "बिल्कुल। हर बातचीत, तस्वीर, रिकॉर्डिंग और दस्तावेज़ को पूर्ण गोपनीयता के साथ संभाला जाता है। आपकी कहानी केवल आपकी है।",
+    category: 'privacy'
   },
   {
     id: 6,
-    question: "Is my personal information and family stories kept confidential?",
-    answer: "Absolutely. We treat your family memories with the highest level of confidentiality and respect. All interviews, photos, and materials are stored securely with end-to-end encryption. We never share your content with third parties, and you retain full ownership of your story.",
-    category: 'privacy'
+    question: "Who owns the copyright?",
+    questionHi: "कॉपीराइट का मालिक कौन है?",
+    answer: "You do. Once your project is complete, the story and its rights remain yours unless otherwise agreed in writing.",
+    answerHi: "आप हैं। एक बार जब आपका प्रोजेक्ट पूरा हो जाता है, तो कहानी और उसके अधिकार आपके पास रहते हैं।",
+    category: 'ownership'
+  },
+  {
+    id: 7,
+    question: "Can family members contribute?",
+    questionHi: "क्या परिवार के सदस्य योगदान दे सकते हैं?",
+    answer: "Yes. We encourage family members, friends, and colleagues to share memories, photographs, and stories to create a richer and more complete legacy.",
+    answerHi: "हाँ। हम एक समृद्ध और अधिक संपूर्ण विरासत बनाने के लिए परिवार के सदस्यों, दोस्तों और सहकर्मियों को यादें, तस्वीरें और कहानियां साझा करने के लिए प्रोत्साहित करते हैं।",
+    category: 'support'
+  },
+  {
+    id: 8,
+    question: "Do you ship internationally?",
+    questionHi: "क्या आप अंतरराष्ट्रीय स्तर पर शिप करते हैं?",
+    answer: "Yes. We deliver premium memoirs and legacy books to clients around the world.",
+    answerHi: "हाँ। हम दुनिया भर के ग्राहकों को प्रीमियम संस्मरण और विरासत पुस्तकें पहुंचाते हैं।",
+    category: 'shipping'
   }
 ];
 
@@ -404,70 +506,70 @@ export interface Feature {
 
 export const FEATURES: Feature[] = [
   {
-    id: 'expert-editors',
-    title: 'Expert Human Editors',
-    description: 'Our literary biographers hold advanced degrees and handle each memory with profound sensitivity.',
+    id: 'personal-interviews',
+    title: 'Personal Story Interviews',
+    description: 'Every story begins with meaningful conversations that capture your voice, memories, and experiences.',
     iconName: 'Users'
   },
   {
-    id: 'layout-design',
-    title: 'Professional Layout Design',
-    description: 'Classic book typography crafted with deliberate margins to respect the natural rhythm of reading.',
-    iconName: 'Layout'
+    id: 'professional-writing',
+    title: 'Professional Writing',
+    description: 'Experienced storytellers transform memories into authentic and engaging narratives.',
+    iconName: 'PenTool'
   },
   {
-    id: 'archival-printing',
-    title: 'Archival-Grade Printing',
-    description: 'Acid-free German paper and heavy canvas covers designed to last over 300 years without yellowing.',
-    iconName: 'Award'
+    id: 'thoughtful-design',
+    title: 'Thoughtful Design',
+    description: 'Elegant layouts, premium typography, and bespoke visual storytelling.',
+    iconName: 'Palette'
   },
   {
     id: 'photo-restoration',
     title: 'Photo Restoration',
-    description: 'We manually remove dust scratches, balance contrast, and color-correct old family photographs.',
+    description: 'Restore treasured photographs with care while preserving their authenticity.',
     iconName: 'Sparkles'
   },
   {
-    id: 'audiobook-version',
-    title: 'Audiobook Version',
-    description: 'Exquisite ambient companion track so you can listen along or enjoy on late-night evenings.',
-    iconName: 'Volume2'
+    id: 'premium-printing',
+    title: 'Premium Printing',
+    description: 'Museum-quality materials and archival printing designed to last for generations.',
+    iconName: 'Award'
   },
   {
     id: 'custom-cover',
     title: 'Custom Cover Design',
-    description: 'Bespoke designs featuring linen textures, gilded gold foil stamping, and personalized monograms.',
-    iconName: 'Palette'
+    description: 'Every cover is uniquely designed to reflect your story and personality.',
+    iconName: 'Layout'
   },
   {
-    id: 'family-maps',
-    title: 'GPS-Tagged Family Maps',
-    description: 'Custom maps embedded within pages documenting the geographic migration of your ancestors.',
-    iconName: 'MapPin'
-  },
-  {
-    id: 'multilingual-support',
-    title: 'Multilingual Support',
-    description: 'Our team writes, translates, and edits beautifully in several major languages to unite diverse generations.',
+    id: 'multilingual-storytelling',
+    title: 'Multilingual Storytelling',
+    description: 'Create your memoir in the language that feels most natural to you.',
     iconName: 'Languages'
   },
   {
-    id: 'express-delivery',
-    title: 'Express Delivery Option',
-    description: 'Accelerated layout and binding processes for milestone birthdays or urgent memorial services.',
-    iconName: 'Truck'
-  },
-  {
-    id: 'digital-combo',
-    title: 'Digital + Print Combo',
-    description: 'Access an elegant, interactive digital storybook website accessible via a secure link or QR code.',
+    id: 'digital-archive',
+    title: 'Digital Legacy Archive',
+    description: 'Secure digital copies ensure your story remains accessible for future generations.',
     iconName: 'Laptop'
   },
   {
-    id: 'secure-vault',
-    title: 'Password-Protected Copy',
-    description: 'Top-tier cloud security and end-to-end encryption ensure your family journals stay strictly private.',
+    id: 'private-confidential',
+    title: 'Private & Confidential',
+    description: 'Your memories remain protected with complete privacy throughout the process.',
     iconName: 'Lock'
+  },
+  {
+    id: 'worldwide-delivery',
+    title: 'Worldwide Delivery',
+    description: 'Beautifully crafted legacy books delivered safely across the globe.',
+    iconName: 'Truck'
+  },
+  {
+    id: 'lifetime-keepsake',
+    title: 'Lifetime Keepsake',
+    description: 'More than a book—a timeless heirloom to share with future generations.',
+    iconName: 'Heart'
   }
 ];
 
@@ -481,9 +583,9 @@ export interface Founder {
 }
 
 export const FOUNDER: Founder = {
-  name: 'Devendra Nath Prasad',
+  name: 'Abhinav Shakya',
   title: 'Founder & Chief Storyteller',
-  quote: '"We are not a publishing company. We are guardians of human warmth. Every life contains a literary masterpiece, waiting to be bound, touched, and passed down. We ensure that what was loved is never truly lost."',
+  quote: '"Every Life is a Story Worth Telling."',
   avatar: 'https://picsum.photos/seed/founder_dev/300/300',
   linkedin: 'https://linkedin.com/'
 };
@@ -513,31 +615,33 @@ export const TRANSLATIONS: SectionTranslations = {
     // About Strip Section
     aboutStrip: {
       label: "Our Story",
-      heading: "Born from a desire to preserve what",
-      headingItalic: "matters most",
-      para1: "MemoirTale arose from a deeply personal realization. When Devendra Nath lost his grand-uncle Rameshwar, he searched for journals, photographs, and records, only to find scraps. The rich, historic Bundelkhand telegraph chronicles Rameshwar often told were lost to gravity, surviving only as fading oral fragments. To ensure no other family goes through this quiet erasure, MemoirTale was established.",
-      quote: "We are not a publishing company. We are guardians of human warmth. Every life contains a literary masterpiece, waiting to be bound, touched, and passed down. We ensure that what was loved is never truly lost.",
-      founderName: "Devendra Nath Prasad",
+      heading: "Memoir Tale was founded in 2023 with a simple belief:",
+      headingItalic: "every life deserves to be remembered.",
+      para1: "Inspired by a deeply personal experience, our founder, Abhinav Shakya, recognized that while time moves forward, the stories that shape our lives are often left untold. That realization sparked a mission to preserve those stories with the care, authenticity, and respect they deserve.",
+      para2: "Today, Memoir Tale helps individuals, families, and organizations celebrate life's most meaningful journeys through beautifully crafted legacy experiences.",
+      quote: "Every Life is a Story Worth Telling.",
+      founderName: "Abhinav Shakya",
       founderTitle: "Founder & Chief Storyteller"
     },
     // Marquee Section
     marquee: {
       heading: "Stories Across",
       headingItalic: "Generations",
-      subtitle: "Every book tells a unique story, preserving memories for future generations",
+      subtitle: "From extraordinary achievements to everyday moments, every life leaves behind a story worth preserving. Explore the diverse journeys we are proud to transform into timeless legacies.",
       by: "by"
     },
     // Topics Section
     topics: {
-      label: "Story Types We Craft",
+      label: "STORY CATEGORIES",
       heading: "Every Life Has a Story Worth Telling",
-      subtitle: "From freedom fighters to entrepreneurs, we help preserve every unique journey"
+      subtitle: "From family legacies and personal memoirs to entrepreneurial journeys and historic milestones, we preserve stories that deserve to be remembered for generations."
     },
     // Feature Icons Section
     features: {
-      label: "Pure Craftsmanship",
-      heading: "What Makes Every MemoirTale Book Special",
-      subtitle: "From historical research to acid-free binding materials, we marry classical print principles with cutting-edge technology to immortalize your memories for five generations."
+      label: "CRAFTED WITH PURPOSE",
+      heading: "Why Families Choose Memoir Tale",
+      subtitle: "Every legacy deserves exceptional care. From thoughtful storytelling and premium craftsmanship to secure preservation, every detail is designed to create a keepsake that will be cherished for generations.",
+      footer: "Every page is created with the same care and respect your story deserves."
     },
     // Event Section
     events: {
@@ -555,18 +659,20 @@ export const TRANSLATIONS: SectionTranslations = {
     },
     // Topics Section Items
     topicItems: [
-      { title: 'Freedom Fighter Legacy', description: 'Preserve the story of India\'s independence heroes' },
-      { title: 'Immigrant Journey', description: 'Document the journey across borders and cultures' },
-      { title: 'Business Empire Story', description: 'Chronicle the path from startup to success' },
-      { title: 'Partition Memories', description: 'Record the stories of 1947 and resilience' },
-      { title: 'Love & Marriage Chronicle', description: 'Celebrate a lifetime of love and partnership' },
-      { title: 'Village to City Migration', description: 'The journey from rural roots to urban dreams' },
-      { title: 'Military Service Memoir', description: 'Honor the sacrifice and service to the nation' },
-      { title: 'Teacher\'s Wisdom Book', description: 'Share decades of knowledge and inspiration' },
-      { title: 'Entrepreneur\'s Journey', description: 'Document the risks, failures, and triumphs' },
-      { title: 'Family Tree Legacy', description: 'Connect generations through shared history' }
+      { title: 'Family Legacy', description: 'Celebrate generations of love, traditions, and cherished memories.' },
+      { title: 'Personal Memoir', description: 'Capture a lifetime of experiences, lessons, and unforgettable moments.' },
+      { title: 'Biography', description: 'Document a remarkable life with authenticity, depth, and purpose.' },
+      { title: 'Travel Journal', description: 'Transform extraordinary journeys into beautifully crafted keepsakes.' },
+      { title: 'Tribute & Memorial', description: 'Honor the life, legacy, and memories of someone deeply cherished.' },
+      { title: 'Entrepreneur\'s Journey', description: 'Chronicle the vision, challenges, and milestones behind every success.' },
+      { title: 'Corporate Legacy', description: 'Preserve the history, culture, and evolution of an organization.' },
+      { title: 'Family History', description: 'Connect generations through stories that keep your heritage alive.' },
+      { title: 'Wedding & Love Story', description: 'Celebrate the journey of love, commitment, and shared memories.' },
+      { title: 'Military & Public Service', description: 'Recognize lives dedicated to courage, duty, and service.' },
+      { title: 'Teacher\'s Legacy', description: 'Celebrate educators whose wisdom continues to inspire generations.' },
+      { title: 'Historical & Community Stories', description: 'Preserve the people and events that have shaped communities and history.' }
     ],
-    topicsFooter: "Don't see your story type? We craft custom memoirs for every unique journey."
+    topicsFooter: "Whatever your journey, your story deserves to be preserved with the care, authenticity, and craftsmanship it deserves."
   },
   HI: {
     // Hero Section
@@ -582,31 +688,33 @@ export const TRANSLATIONS: SectionTranslations = {
     // About Strip Section
     aboutStrip: {
       label: "हमारी कहानी",
-      heading: "उन चीजों को संरक्षित करने की इच्छा से जन्मा जो",
-      headingItalic: "सबसे महत्वपूर्ण हैं",
-      para1: "मेमोयरटेल एक गहरे व्यक्तिगत एहसास से उत्पन्न हुआ। जब देवेंद्र नाथ ने अपने परदादा रामेश्वर को खो दिया, तो उन्होंने पत्रिकाओं, तस्वीरों और रिकॉर्ड की खोज की, केवल टुकड़े ही मिले। बुंदेलखंड के समृद्ध, ऐतिहासिक टेलीग्राफ इतिहास जो रामेश्वर अक्सर सुनाते थे, वे गुरुत्वाकर्षण में खो गए, केवल मौखिक टुकड़ों के रूप में बचे रहे। यह सुनिश्चित करने के लिए कि कोई अन्य परिवार इस शांत मिटने से न गुजरे, मेमोयरटेल की स्थापना की गई।",
-      quote: "हम एक प्रकाशन कंपनी नहीं हैं। हम मानवीय गर्मजोशी के संरक्षक हैं। हर जीवन में एक साहित्यिक कृति है, जो बंधी हुई, छुई हुई और पीढ़ियों तक पहुंचाई जाने के लिए प्रतीक्षारत है। हम सुनिश्चित करते हैं कि जो प्यार किया गया था वह कभी सच में खोया नहीं है।",
-      founderName: "देवेंद्र नाथ प्रसाद",
+      heading: "मेमोयर टेल की स्थापना 2023 में एक सरल विश्वास के साथ हुई थी:",
+      headingItalic: "हर जीवन याद रखे जाने योग्य है।",
+      para1: "एक गहरे व्यक्तिगत अनुभव से प्रेरित होकर, हमारे संस्थापक अभिनव शाक्य ने महसूस किया कि जहाँ समय आगे बढ़ता है, वहीं हमारे जीवन को आकार देने वाली कहानियाँ अक्सर अनकही रह जाती हैं। उसी अहसास ने उन कहानियों को उसी देखभाल, प्रामाणिकता और सम्मान के साथ सहेजने के मिशन को जन्म दिया जिसकी वे हकदार हैं।",
+      para2: "आज, मेमोयर टेल खूबसूरत विरासत अनुभवों के माध्यम से व्यक्तियों, परिवारों और संगठनों को जीवन की सबसे सार्थक यात्राओं का जश्न मनाने में मदद करता है।",
+      quote: "हर जीवन बताने योग्य एक कहानी है।",
+      founderName: "अभिनव शाक्य",
       founderTitle: "संस्थापक और मुख्य कहानीकार"
     },
     // Marquee Section
     marquee: {
       heading: "पीढ़ियों की",
       headingItalic: "कहानियाँ",
-      subtitle: "हर पुस्तक एक अनोखी कहानी बयां करती है, भविष्य की पीढ़ियों के लिए यादों को संरक्षित करती है",
+      subtitle: "असाधारण उपलब्धियों से लेकर रोज़मर्रा के क्षणों तक, हर जीवन अपने पीछे सहेजने योग्य एक कहानी छोड़ जाता है। उन विविध यात्राओं को देखें जिन्हें हम कालजयी विरासतों में बदलने पर गर्व महसूस करते हैं।",
       by: "द्वारा"
     },
     // Topics Section
     topics: {
-      label: "हम किस प्रकार की कहानियां तैयार करते हैं",
+      label: "कहानी की श्रेणियां",
       heading: "हर जीवन की एक कहानी है जो सुनाने योग्य है",
-      subtitle: "स्वतंत्रता सेनानियों से लेकर उद्यमियों तक, हम हर अनोखी यात्रा को संरक्षित करने में मदद करते हैं"
+      subtitle: "पारिवारिक विरासतों और व्यक्तिगत संस्मरणों से लेकर उद्यमशीलता यात्राओं और ऐतिहासिक मील के पत्थरों तक, हम उन कहानियों को सहेजते हैं जो पीढ़ियों तक याद रखने योग्य हैं।"
     },
     // Feature Icons Section
     features: {
-      label: "शुद्ध शिल्प कौशल",
-      heading: "हर मेमोयरटेल पुस्तक को विशेष क्या बनाता है",
-      subtitle: "ऐतिहासिक शोध से लेकर एसिड-फ्री बाइंडिंग सामग्री तक, हम पांच पीढ़ियों के लिए आपकी यादों को अमर बनाने के लिए शास्त्रीय प्रिंट सिद्धांतों को अत्याधुनिक तकनीक के साथ जोड़ते हैं।"
+      label: "उद्देश्य के साथ निर्मित",
+      heading: "परिवार मेमोयर टेल को क्यों चुनते हैं",
+      subtitle: "हर विरासत असाधारण देखभाल की हकदार है। विचारशील कहानी कहने और प्रीमियम शिल्प कौशल से लेकर सुरक्षित संरक्षण तक, हर विवरण एक ऐसी याद तैयार करने के लिए डिज़ाइन किया गया है जिसे पीढ़ियों तक संजोकर रखा जाएगा।",
+      footer: "हर पृष्ठ उसी देखभाल और सम्मान के साथ तैयार किया गया है जिसकी आपकी कहानी हकदार है।"
     },
     // Event Section
     events: {
@@ -624,17 +732,19 @@ export const TRANSLATIONS: SectionTranslations = {
     },
     // Topics Section Items
     topicItems: [
-      { title: 'स्वतंत्रता सेनानी की विरासत', description: 'भारत के स्वतंत्रता नायकों की कहानी संजोएं' },
-      { title: 'प्रवासी यात्रा', description: 'सीमाओं और संस्कृतियों की यात्रा का दस्तावेज़ीकरण' },
-      { title: 'व्यावसायिक साम्राज्य की कहानी', description: 'स्टार्टअप से सफलता तक का सफर' },
-      { title: 'विभाजन की यादें', description: '1947 की कहानियों और लचीलेपन का रिकॉर्ड' },
-      { title: 'प्रेम और विवाह की गाथा', description: 'प्यार और साझेदारी के जीवन का जश्न मनाएं' },
-      { title: 'गांव से शहर का प्रवास', description: 'ग्रामीण जड़ों से शहरी सपनों की यात्रा' },
-      { title: 'सैन्य सेवा संस्मरण', description: 'राष्ट्र की सेवा और बलिदान का सम्मान करें' },
-      { title: 'शिक्षक की ज्ञान पुस्तक', description: 'दशकों का ज्ञान और प्रेरणा साझा करें' },
-      { title: 'उद्यमी की यात्रा', description: 'जोखिम, असफलताओं और विजय का दस्तावेज़ीकरण' },
-      { title: 'पारिवारिक वृक्ष की विरासत', description: 'साझा इतिहास के माध्यम से पीढ़ियों को जोड़ें' }
+      { title: 'पारिवारिक विरासत', description: 'प्रेम, परंपराओं और कीमती यादों की पीढ़ियों का जश्न मनाएं।' },
+      { title: 'व्यक्तिगत संस्मरण', description: 'जीवन भर के अनुभवों, सीखों और अविस्मरणीय क्षणों को संजोएं।' },
+      { title: 'जीवनी', description: 'एक उल्लेखनीय जीवन को प्रामाणिकता, गहराई और उद्देश्य के साथ दर्ज करें।' },
+      { title: 'यात्रा पत्रिका', description: 'असाधारण यात्राओं को खूबसूरती से तैयार की गई यादों में बदलें।' },
+      { title: 'श्रद्धांजलि और स्मारक', description: 'किसी गहरे प्यारे व्यक्ति के जीवन, विरासत और यादों को सम्मानित करें।' },
+      { title: 'उद्यमी की यात्रा', description: 'हर सफलता के पीछे के विज़न, चुनौतियों और मील के पत्थरों को रिकॉर्ड करें।' },
+      { title: 'कॉर्पोरेट विरासत', description: 'किसी संगठन के इतिहास, संस्कृति और विकास को सुरक्षित रखें।' },
+      { title: 'पारिवारिक इतिहास', description: 'अपनी विरासत को जीवित रखने वाली कहानियों के माध्यम से पीढ़ियों को जोड़ें।' },
+      { title: 'विवाह और प्रेम कहानी', description: 'प्रेम, प्रतिबद्धता और साझा यादों की यात्रा का जश्न मनाएं।' },
+      { title: 'सैन्य और सार्वजनिक सेवा', description: 'साहस, कर्तव्य और सेवा के लिए समर्पित जीवन को पहचानें।' },
+      { title: 'शिक्षक की विरासत', description: 'उन शिक्षकों का जश्न मनाएं जिनका ज्ञान पीढ़ियों को प्रेरित करता रहता है।' },
+      { title: 'ऐतिहासिक और सामुदायिक कहानियां', description: 'उन लोगों और घटनाओं को सुरक्षित रखें जिन्होंने समुदायों और इतिहास को आकार दिया है।' }
     ],
-    topicsFooter: "अपनी कहानी का प्रकार नहीं दिखा? हम हर अनोखी यात्रा के लिए कस्टम संस्मरण तैयार करते हैं।"
+    topicsFooter: "आपकी यात्रा चाहे जो भी हो, आपकी कहानी उस देखभाल, प्रामाणिकता और शिल्प कौशल के साथ सहेजे जाने की हकदार है जिसकी वह हकदार है।"
   }
 };

@@ -1,422 +1,348 @@
 import { useState } from 'react';
-import { Check, ArrowRight, ArrowLeft, Sparkles, Award, User } from 'lucide-react';
-
-type Genre = 'family' | 'personal' | 'freedom' | 'business' | 'love' | '';
-type Language = 'english' | 'hindi' | 'hinglish' | 'regional' | '';
-type Tone = 'formal' | 'warm' | 'historical' | 'poetic' | '';
-
-interface Writer {
-  id: number;
-  name: string;
-  specialty: string;
-  experience: string;
-  languages: string[];
-  tones: string[];
-  genres: string[];
-}
-
-const WRITERS: Writer[] = [
-  {
-    id: 1,
-    name: "Dr. Rajesh Kumar",
-    specialty: "Historical & Freedom Fighter Narratives",
-    experience: "15+ years",
-    languages: ['english', 'hindi', 'hinglish'],
-    tones: ['formal', 'historical'],
-    genres: ['freedom', 'business', 'family'],
-  },
-  {
-    id: 2,
-    name: "Priya Sharma",
-    specialty: "Personal Memoirs & Love Stories",
-    experience: "12+ years",
-    languages: ['english', 'hindi', 'hinglish'],
-    tones: ['warm', 'poetic'],
-    genres: ['personal', 'love', 'family'],
-  },
-  {
-    id: 3,
-    name: "Amit Verma",
-    specialty: "Business & Entrepreneurial Journeys",
-    experience: "10+ years",
-    languages: ['english', 'hinglish'],
-    tones: ['formal', 'warm'],
-    genres: ['business', 'personal'],
-  },
-  {
-    id: 4,
-    name: "Kamal Singh",
-    specialty: "Regional Language Specialist",
-    experience: "18+ years",
-    languages: ['hindi', 'regional'],
-    tones: ['formal', 'historical', 'poetic'],
-    genres: ['freedom', 'family', 'personal'],
-  },
-  {
-    id: 5,
-    name: "Anjali Mehta",
-    specialty: "Warm Conversational Stories",
-    experience: "8+ years",
-    languages: ['english', 'hindi', 'hinglish'],
-    tones: ['warm', 'poetic'],
-    genres: ['love', 'personal', 'family'],
-  },
-];
+import { ArrowRight, ArrowLeft, Sparkles, Check, BookOpen } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 interface WriterMatchmakerProps {
   onMatchWriter?: (writerName: string) => void;
 }
 
 export default function WriterMatchmaker({ onMatchWriter }: WriterMatchmakerProps) {
-  const [step, setStep] = useState(1);
-  const [genre, setGenre] = useState<Genre>('');
-  const [language, setLanguage] = useState<Language>('');
-  const [tone, setTone] = useState<Tone>('');
-  const [matchedWriter, setMatchedWriter] = useState<Writer | null>(null);
+  const { lang } = useLanguage();
+  const isHindi = lang === 'HI';
 
-  const handleMatch = () => {
-    // Simple matching logic
-    const matched = WRITERS.find(writer => 
-      writer.genres.includes(genre) && 
-      writer.languages.includes(language) && 
-      writer.tones.includes(tone)
-    ) || WRITERS[0]; // Fallback to first writer
-    
-    setMatchedWriter(matched);
+  const [step, setStep] = useState(1);
+  const [whatPreserve, setWhatPreserve] = useState('');
+  const [whoAbout, setWhoAbout] = useState('');
+  const [howPreserve, setHowPreserve] = useState('');
+  const [storyDetails, setStoryDetails] = useState('');
+  const [isCompleted, setIsCompleted] = useState(false);
+
+  const step1Options = isHindi
+    ? [
+      'मेरी जीवन कहानी',
+      'माता-पिता की विरासत',
+      'दादा-दादी की यात्रा',
+      'पारिवारिक इतिहास',
+      'यात्रा के अनुभव',
+      'व्यावसायिक यात्रा',
+      'प्रेम कहानी',
+      'प्रियजन को श्रद्धांजलि',
+      'कॉर्पोरेट विरासत',
+      'कुछ और'
+    ]
+    : [
+      'My Life Story',
+      "A Parent's Legacy",
+      "A Grandparent's Journey",
+      'Family History',
+      'Travel Experiences',
+      'Business Journey',
+      'Love Story',
+      'Tribute to a Loved One',
+      'Corporate Legacy',
+      'Something Else'
+    ];
+
+  const step2Options = isHindi
+    ? [
+      'स्वयं',
+      'माता जी',
+      'पिता जी',
+      'दादा-दादी / नाना-नानी',
+      'दंपति',
+      'परिवार',
+      'संस्थापक',
+      'संगठन',
+      'कोई खास व्यक्ति'
+    ]
+    : [
+      'Myself',
+      'Mother',
+      'Father',
+      'Grandparent',
+      'Couple',
+      'Family',
+      'Founder',
+      'Organization',
+      'Someone Special'
+    ];
+
+  const step3Options = isHindi
+    ? [
+      'प्रीमियम संस्मरण',
+      'कॉफी टेबल बुक',
+      'यात्रा पत्रिका',
+      'जीवनी',
+      'विरासत पुस्तक',
+      'डॉक्यूमेंट्री फिल्म',
+      'डिजिटल आर्काइव'
+    ]
+    : [
+      'Premium Memoir',
+      'Coffee Table Book',
+      'Travel Journal',
+      'Biography',
+      'Legacy Book',
+      'Documentary Film',
+      'Digital Archive'
+    ];
+
+  const handleNext = () => {
+    if (step < 4) {
+      setStep(step + 1);
+    } else {
+      setIsCompleted(true);
+      if (onMatchWriter) {
+        onMatchWriter(`${whatPreserve} for ${whoAbout}`);
+      }
+    }
+  };
+
+  const handlePrev = () => {
+    if (step > 1) {
+      setStep(step - 1);
+    }
   };
 
   const resetForm = () => {
     setStep(1);
-    setGenre('');
-    setLanguage('');
-    setTone('');
-    setMatchedWriter(null);
+    setWhatPreserve('');
+    setWhoAbout('');
+    setHowPreserve('');
+    setStoryDetails('');
+    setIsCompleted(false);
   };
 
-  const progress = (step / 3) * 100;
-
-  if (matchedWriter) {
-    return (
-      <section className="bg-[#220E24] py-16 lg:py-24">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6">
-          <div className="text-center mb-8">
-            <div className="inline-flex items-center gap-2 px-4 py-2 border rounded-full mb-4" style={{ backgroundColor: '#341738', borderColor: 'rgba(46, 27, 93, 0.3)' }}>
-              <Sparkles className="h-4 w-4" style={{ color: '#A78BFA' }} />
-              <span className="text-xs font-semibold uppercase tracking-wider" style={{ color: '#A78BFA' }}>
-                Perfect Match Found
-              </span>
-            </div>
-            <h2 className="font-serif text-3xl lg:text-4xl font-bold text-white">
-              Your <span className="italic" style={{ color: '#A78BFA' }}>Ideal</span> Writer
-            </h2>
-          </div>
-
-          <div className="border rounded-2xl p-8 lg:p-10" style={{ backgroundColor: '#341738', borderColor: 'rgba(46, 27, 93, 0.3)' }}>
-            <div className="flex flex-col lg:flex-row items-center gap-8">
-              <div className="h-32 w-32 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: '#220E24', border: '4px solid rgba(46, 27, 93, 0.4)' }}>
-                <User className="h-16 w-16" style={{ color: '#A78BFA' }} />
-              </div>
-              
-              <div className="flex-1 text-center lg:text-left">
-                <h3 className="font-serif text-2xl lg:text-3xl font-bold text-white mb-2">
-                  {matchedWriter.name}
-                </h3>
-                <p className="text-lg font-semibold mb-4" style={{ color: '#A78BFA' }}>
-                  {matchedWriter.specialty}
-                </p>
-                <div className="flex flex-wrap gap-3 justify-center lg:justify-start">
-                  <div className="flex items-center gap-2 px-3 py-1.5 border rounded-full" style={{ backgroundColor: 'rgba(46, 27, 93, 0.1)', borderColor: 'rgba(46, 27, 93, 0.3)' }}>
-                    <Award className="h-4 w-4" style={{ color: '#A78BFA' }} />
-                    <span className="text-white text-sm">{matchedWriter.experience}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-              <button
-                onClick={() => {
-                  if (onMatchWriter) {
-                    onMatchWriter(matchedWriter.name);
-                  } else {
-                    window.scrollTo({ top: document.getElementById('contact')?.offsetTop || 0, behavior: 'smooth' });
-                  }
-                }}
-                className="px-8 py-4 hover:bg-[#A78BFA]/90 text-white font-semibold rounded-full transition-all duration-300 hover:scale-105 shadow-lg flex items-center justify-center gap-2"
-                style={{ backgroundColor: '#A78BFA' }}
-              >
-                <span>Book This Writer</span>
-                <ArrowRight className="h-5 w-5" />
-              </button>
-              <button
-                onClick={resetForm}
-                className="px-8 py-4 bg-transparent border-2 font-semibold rounded-full transition-all duration-300 hover:text-white"
-                style={{ 
-                  borderColor: 'rgba(167, 139, 250, 0.5)',
-                  color: '#A78BFA'
-                }}
-                onMouseEnter={(e) => e.currentTarget.style.borderColor = '#A78BFA'}
-                onMouseLeave={(e) => e.currentTarget.style.borderColor = 'rgba(167, 139, 250, 0.5)'}
-              >
-                Try Again
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-    );
-  }
+  const handleConsultationClick = () => {
+    const contactElem = document.getElementById('contact');
+    if (contactElem) {
+      contactElem.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
-    <section className="bg-[#220E24] py-16 lg:py-24">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6">
+    <section id="discover-story-quiz" className="bg-[#220E24] py-16 lg:py-24 text-white relative overflow-hidden">
+      {/* Background Decorative Ellipses */}
+      <div className="absolute top-1/3 left-1/4 w-96 h-96 bg-[#8B3CDC]/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-1/3 right-1/4 w-96 h-96 bg-[#D4AF37]/10 rounded-full blur-3xl pointer-events-none" />
+
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+
+        {/* Header Block */}
         <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-500/20 to-pink-500/20 border border-purple-400/30 rounded-full mb-4 backdrop-blur-sm">
-            <Sparkles className="h-4 w-4 text-purple-300" />
-            <span className="text-purple-300 text-xs font-semibold uppercase tracking-wider">
-              Writer Matchmaker Tool
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/10 border border-white/20 rounded-full mb-4">
+            <Sparkles className="w-3.5 h-3.5 text-[#E5C463]" />
+            <span className="text-[#E5C463] text-xs font-bold uppercase tracking-[2px]">
+              {isHindi ? 'अपनी कहानी खोजें' : 'DISCOVER YOUR STORY'}
             </span>
           </div>
-          <h2 className="font-serif text-3xl lg:text-4xl font-bold text-white">
-            Find Your <span className="italic bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Perfect</span> Writer
+
+          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
+            {isHindi ? 'आइए आपकी विरासत की शुरुआत करें' : "Let's Begin Your Legacy"}
           </h2>
-          <p className="text-white/60 mt-4 text-sm lg:text-base max-w-2xl mx-auto">
-            Answer a few questions to match with a writer who understands your story
+
+          <p className="text-white/70 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
+            {isHindi
+              ? 'आपकी कहानी को समझने में हमारी सहायता के लिए कुछ सरल प्रश्नों के उत्तर दें। हम सर्वोत्तम दृष्टिकोण की अनुशंसा करेंगे और आपकी यात्रा को जीवंत बनाने के लिए सही टीम को इकट्ठा करेंगे।'
+              : "Answer a few simple questions to help us understand your story. We'll recommend the best approach and assemble the right team to bring your journey to life."}
           </p>
         </div>
 
-        {/* Progress Bar */}
-        <div className="mb-8">
-          <div className="h-2 bg-[#341738] rounded-full overflow-hidden">
-            <div 
-              className="h-full bg-gradient-to-r from-purple-500 to-pink-500 transition-all duration-500"
-              style={{ width: `${progress}%` }}
-            />
-          </div>
-          <p className="text-purple-300 text-sm text-center mt-2">
-            Step {step} of 3
-          </p>
+        {/* Wizard Container */}
+        <div className="bg-gradient-to-b from-[#2B1638] via-[#200E2C] to-[#170820] border border-white/15 rounded-3xl p-6 sm:p-10 shadow-2xl relative">
+
+          {!isCompleted ? (
+            <>
+              {/* Progress Bar & Header */}
+              <div className="mb-8">
+                <div className="flex items-center justify-between text-xs font-sans font-bold uppercase tracking-wider text-white/60 mb-3">
+                  <span>{isHindi ? `प्रगति: चरण ${step} / 4` : `Step ${step} of 4`}</span>
+                  <span className="text-[#E5C463]">{Math.round((step / 4) * 100)}%</span>
+                </div>
+                <div className="w-full h-2 bg-white/10 rounded-full overflow-hidden">
+                  <div
+                    className="h-full bg-gradient-to-r from-[#D4AF37] via-[#E5C463] to-[#8B3CDC] transition-all duration-500 rounded-full"
+                    style={{ width: `${(step / 4) * 100}%` }}
+                  />
+                </div>
+              </div>
+
+              {/* Step 1: What would you like to preserve? */}
+              {step === 1 && (
+                <div>
+                  <h3 className="font-serif font-bold text-xl sm:text-2xl text-white mb-6">
+                    {isHindi ? 'आप क्या सहेजना चाहेंगे?' : 'What would you like to preserve?'}
+                  </h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                    {step1Options.map((opt) => {
+                      const isSelected = whatPreserve === opt;
+                      return (
+                        <button
+                          key={opt}
+                          onClick={() => setWhatPreserve(opt)}
+                          className={`p-4 rounded-xl border text-left font-sans text-sm font-medium transition-all duration-200 flex items-center justify-between cursor-pointer ${isSelected
+                              ? 'bg-gradient-to-r from-[#2E1B5D] to-[#45147A] border-[#E5C463] text-white shadow-lg'
+                              : 'bg-white/5 border-white/10 text-white/80 hover:bg-white/10 hover:border-white/30'
+                            }`}
+                        >
+                          <span>{opt}</span>
+                          {isSelected && <Check className="w-4 h-4 text-[#E5C463]" />}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+
+              {/* Step 2: Who is this story about? */}
+              {step === 2 && (
+                <div>
+                  <h3 className="font-serif font-bold text-xl sm:text-2xl text-white mb-6">
+                    {isHindi ? 'यह कहानी किसके बारे में है?' : 'Who is this story about?'}
+                  </h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
+                    {step2Options.map((opt) => {
+                      const isSelected = whoAbout === opt;
+                      return (
+                        <button
+                          key={opt}
+                          onClick={() => setWhoAbout(opt)}
+                          className={`p-4 rounded-xl border text-left font-sans text-sm font-medium transition-all duration-200 flex items-center justify-between cursor-pointer ${isSelected
+                              ? 'bg-gradient-to-r from-[#2E1B5D] to-[#45147A] border-[#E5C463] text-white shadow-lg'
+                              : 'bg-white/5 border-white/10 text-white/80 hover:bg-white/10 hover:border-white/30'
+                            }`}
+                        >
+                          <span>{opt}</span>
+                          {isSelected && <Check className="w-4 h-4 text-[#E5C463]" />}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+
+              {/* Step 3: How would you like to preserve it? */}
+              {step === 3 && (
+                <div>
+                  <h3 className="font-serif font-bold text-xl sm:text-2xl text-white mb-6">
+                    {isHindi ? 'आप इसे कैसे सहेजना चाहेंगे?' : 'How would you like to preserve it?'}
+                  </h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                    {step3Options.map((opt) => {
+                      const isSelected = howPreserve === opt;
+                      return (
+                        <button
+                          key={opt}
+                          onClick={() => setHowPreserve(opt)}
+                          className={`p-4 rounded-xl border text-left font-sans text-sm font-medium transition-all duration-200 flex items-center justify-between cursor-pointer ${isSelected
+                              ? 'bg-gradient-to-r from-[#2E1B5D] to-[#45147A] border-[#E5C463] text-white shadow-lg'
+                              : 'bg-white/5 border-white/10 text-white/80 hover:bg-white/10 hover:border-white/30'
+                            }`}
+                        >
+                          <span>{opt}</span>
+                          {isSelected && <Check className="w-4 h-4 text-[#E5C463]" />}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+
+              {/* Step 4: Tell us a little about your story */}
+              {step === 4 && (
+                <div>
+                  <h3 className="font-serif font-bold text-xl sm:text-2xl text-white mb-3">
+                    {isHindi ? 'हमें अपनी कहानी के बारे में थोड़ा बताएं।' : 'Tell us a little about your story.'}
+                  </h3>
+                  <p className="text-white/60 text-xs font-sans mb-6">
+                    {isHindi
+                      ? 'कोई विशेष मील के पत्थर, विचार या विचार साझा करें जिन्हें आप अपनी विरासत पुस्तक में शामिल करना चाहते हैं।'
+                      : 'Share any special milestones, ideas, or thoughts you wish to include in your legacy book.'}
+                  </p>
+                  <textarea
+                    rows={4}
+                    value={storyDetails}
+                    onChange={(e) => setStoryDetails(e.target.value)}
+                    placeholder={
+                      isHindi
+                        ? 'अपनी यादें या विचार यहाँ लिखें...'
+                        : 'Type any details, memories, or specific thoughts here...'
+                    }
+                    className="w-full p-4 rounded-xl bg-white/5 border border-white/15 text-white placeholder-white/40 focus:outline-none focus:border-[#E5C463] font-sans text-sm resize-none"
+                  />
+                </div>
+              )}
+
+              {/* Navigation Buttons */}
+              <div className="flex items-center justify-between mt-10 pt-6 border-t border-white/10">
+                {step > 1 ? (
+                  <button
+                    onClick={handlePrev}
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-white/20 text-white/80 hover:bg-white/10 text-xs font-sans font-bold uppercase tracking-wider transition-all cursor-pointer"
+                  >
+                    <ArrowLeft className="w-4 h-4" />
+                    <span>{isHindi ? 'पीछे' : 'Back'}</span>
+                  </button>
+                ) : <div />}
+
+                <button
+                  onClick={handleNext}
+                  disabled={
+                    (step === 1 && !whatPreserve) ||
+                    (step === 2 && !whoAbout) ||
+                    (step === 3 && !howPreserve)
+                  }
+                  className={`inline-flex items-center gap-2 px-8 py-3.5 rounded-full font-sans font-bold text-xs uppercase tracking-[2px] transition-all cursor-pointer ${((step === 1 && whatPreserve) ||
+                      (step === 2 && whoAbout) ||
+                      (step === 3 && howPreserve) ||
+                      step === 4)
+                      ? 'bg-gradient-to-r from-[#D4AF37] via-[#E5C463] to-[#D4AF37] text-[#1A1410] hover:brightness-110 shadow-lg hover:shadow-[#D4AF37]/30'
+                      : 'bg-white/10 text-white/30 cursor-not-allowed border border-white/10'
+                    }`}
+                >
+                  <span>{step === 4 ? (isHindi ? 'सबमिट करें' : 'Submit') : (isHindi ? 'आगे बढ़ें' : 'Next')}</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              </div>
+            </>
+          ) : (
+            /* Final Success Screen */
+            <div className="text-center py-8 space-y-6">
+              <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#D4AF37] to-[#8B3CDC] p-0.5 mx-auto mb-4">
+                <div className="w-full h-full bg-[#1A0B20] rounded-full flex items-center justify-center">
+                  <BookOpen className="w-8 h-8 text-[#E5C463]" />
+                </div>
+              </div>
+
+              <h3 className="font-serif font-bold text-3xl text-white">
+                {isHindi ? 'आपकी कहानी यहाँ से शुरू होती है।' : 'Your Story Begins Here.'}
+              </h3>
+
+              <p className="text-white/80 text-sm sm:text-base max-w-lg mx-auto font-sans leading-relaxed">
+                {isHindi
+                  ? 'अपनी यात्रा साझा करने के लिए धन्यवाद। हमारे स्टोरीटेलिंग विशेषज्ञ आपकी आवश्यकताओं की समीक्षा करेंगे और आपकी विरासत को सहेजने के सर्वोत्तम दृष्टिकोण की सिफारिश करेंगे।'
+                  : 'Thank you for sharing your journey. Our storytelling specialists will review your requirements and recommend the best approach to preserve your legacy.'}
+              </p>
+
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-6">
+                <button
+                  onClick={handleConsultationClick}
+                  className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-[#D4AF37] via-[#E5C463] to-[#D4AF37] text-[#1A1410] font-sans font-bold text-xs uppercase tracking-[2px] rounded-full hover:brightness-110 shadow-lg transition-all cursor-pointer"
+                >
+                  {isHindi ? 'मुफ्त परामर्श बुक करें' : 'Book a Free Consultation'}
+                </button>
+                <button
+                  onClick={resetForm}
+                  className="w-full sm:w-auto px-8 py-4 bg-white/10 border border-white/20 text-white font-sans font-bold text-xs uppercase tracking-[2px] rounded-full hover:bg-white/20 transition-all cursor-pointer"
+                >
+                  {isHindi ? 'अपनी यात्रा शुरू करें' : 'Start Your Journey'}
+                </button>
+              </div>
+            </div>
+          )}
+
         </div>
-
-        {/* Step 1: Genre */}
-        {step === 1 && (
-          <div className="bg-[#341738] border border-[#A78BFA]/30 rounded-2xl p-8 lg:p-10">
-            <h3 className="font-serif text-2xl font-bold text-white mb-6 text-center">
-              What type of story is this?
-            </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {[
-                { value: 'family', label: 'Family Legacy', color: 'purple' },
-                { value: 'personal', label: 'Personal Memoir', color: 'blue' },
-                { value: 'freedom', label: 'Freedom Fighter', color: 'amber' },
-                { value: 'business', label: 'Business Journey', color: 'emerald' },
-                { value: 'love', label: 'Love Story', color: 'rose' },
-              ].map((option) => {
-                const colorClasses = {
-                  purple: genre === option.value 
-                    ? 'border-purple-400 bg-gradient-to-br from-purple-500/20 to-purple-600/10 shadow-purple-500/20' 
-                    : 'border-purple-400/30 hover:border-purple-400/60 hover:bg-purple-500/5',
-                  blue: genre === option.value 
-                    ? 'border-blue-400 bg-gradient-to-br from-blue-500/20 to-blue-600/10 shadow-blue-500/20' 
-                    : 'border-blue-400/30 hover:border-blue-400/60 hover:bg-blue-500/5',
-                  amber: genre === option.value 
-                    ? 'border-amber-400 bg-gradient-to-br from-amber-500/20 to-amber-600/10 shadow-amber-500/20' 
-                    : 'border-amber-400/30 hover:border-amber-400/60 hover:bg-amber-500/5',
-                  emerald: genre === option.value 
-                    ? 'border-emerald-400 bg-gradient-to-br from-emerald-500/20 to-emerald-600/10 shadow-emerald-500/20' 
-                    : 'border-emerald-400/30 hover:border-emerald-400/60 hover:bg-emerald-500/5',
-                  rose: genre === option.value 
-                    ? 'border-rose-400 bg-gradient-to-br from-rose-500/20 to-rose-600/10 shadow-rose-500/20' 
-                    : 'border-rose-400/30 hover:border-rose-400/60 hover:bg-rose-500/5',
-                };
-                
-                const checkColors = {
-                  purple: 'bg-purple-500',
-                  blue: 'bg-blue-500',
-                  amber: 'bg-amber-500',
-                  emerald: 'bg-emerald-500',
-                  rose: 'bg-rose-500',
-                };
-
-                return (
-                  <button
-                    key={option.value}
-                    onClick={() => setGenre(option.value as Genre)}
-                    className={`p-4 rounded-xl border-2 text-left transition-all duration-300 ${colorClasses[option.color as keyof typeof colorClasses]} ${genre === option.value ? 'shadow-lg scale-105' : ''}`}
-                  >
-                    <div className="flex items-center justify-between">
-                      <span className="text-white font-semibold">{option.label}</span>
-                      {genre === option.value && (
-                        <div className={`h-6 w-6 rounded-full ${checkColors[option.color as keyof typeof checkColors]} flex items-center justify-center shadow-lg`}>
-                          <Check className="h-4 w-4 text-white" />
-                        </div>
-                      )}
-                    </div>
-                  </button>
-                );
-              })}
-            </div>
-            <div className="mt-8 flex justify-end">
-              <button
-                onClick={() => genre && setStep(2)}
-                disabled={!genre}
-                className="px-8 py-3 bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white font-semibold rounded-full transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 shadow-lg hover:shadow-purple-500/50 hover:scale-105"
-              >
-                <span>Next</span>
-                <ArrowRight className="h-5 w-5" />
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* Step 2: Language */}
-        {step === 2 && (
-          <div className="bg-[#341738] border border-[#A78BFA]/30 rounded-2xl p-8 lg:p-10">
-            <h3 className="font-serif text-2xl font-bold text-white mb-6 text-center">
-              Preferred language for your book?
-            </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {[
-                { value: 'english', label: 'English', color: 'blue' },
-                { value: 'hindi', label: 'Hindi', color: 'amber' },
-                { value: 'hinglish', label: 'Hinglish', color: 'purple' },
-                { value: 'regional', label: 'Regional (Urdu/Marathi/Tamil)', color: 'teal' },
-              ].map((option) => {
-                const colorClasses = {
-                  blue: language === option.value 
-                    ? 'border-blue-400 bg-gradient-to-br from-blue-500/20 to-blue-600/10 shadow-blue-500/20' 
-                    : 'border-blue-400/30 hover:border-blue-400/60 hover:bg-blue-500/5',
-                  amber: language === option.value 
-                    ? 'border-amber-400 bg-gradient-to-br from-amber-500/20 to-amber-600/10 shadow-amber-500/20' 
-                    : 'border-amber-400/30 hover:border-amber-400/60 hover:bg-amber-500/5',
-                  purple: language === option.value 
-                    ? 'border-purple-400 bg-gradient-to-br from-purple-500/20 to-purple-600/10 shadow-purple-500/20' 
-                    : 'border-purple-400/30 hover:border-purple-400/60 hover:bg-purple-500/5',
-                  teal: language === option.value 
-                    ? 'border-teal-400 bg-gradient-to-br from-teal-500/20 to-teal-600/10 shadow-teal-500/20' 
-                    : 'border-teal-400/30 hover:border-teal-400/60 hover:bg-teal-500/5',
-                };
-                
-                const checkColors = {
-                  blue: 'bg-blue-500',
-                  amber: 'bg-amber-500',
-                  purple: 'bg-purple-500',
-                  teal: 'bg-teal-500',
-                };
-
-                return (
-                  <button
-                    key={option.value}
-                    onClick={() => setLanguage(option.value as Language)}
-                    className={`p-4 rounded-xl border-2 text-left transition-all duration-300 ${colorClasses[option.color as keyof typeof colorClasses]} ${language === option.value ? 'shadow-lg scale-105' : ''}`}
-                  >
-                    <div className="flex items-center justify-between">
-                      <span className="text-white font-semibold">{option.label}</span>
-                      {language === option.value && (
-                        <div className={`h-6 w-6 rounded-full ${checkColors[option.color as keyof typeof checkColors]} flex items-center justify-center shadow-lg`}>
-                          <Check className="h-4 w-4 text-white" />
-                        </div>
-                      )}
-                    </div>
-                  </button>
-                );
-              })}
-            </div>
-            <div className="mt-8 flex justify-between">
-              <button
-                onClick={() => setStep(1)}
-                className="px-8 py-3 bg-transparent border-2 border-purple-400/50 hover:border-purple-400 text-purple-300 hover:text-white font-semibold rounded-full transition-all duration-300 flex items-center gap-2"
-              >
-                <ArrowLeft className="h-5 w-5" />
-                <span>Back</span>
-              </button>
-              <button
-                onClick={() => language && setStep(3)}
-                disabled={!language}
-                className="px-8 py-3 bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white font-semibold rounded-full transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 shadow-lg hover:shadow-purple-500/50 hover:scale-105"
-              >
-                <span>Next</span>
-                <ArrowRight className="h-5 w-5" />
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* Step 3: Tone */}
-        {step === 3 && (
-          <div className="bg-[#341738] border border-[#A78BFA]/30 rounded-2xl p-8 lg:p-10">
-            <h3 className="font-serif text-2xl font-bold text-white mb-6 text-center">
-              What tone do you prefer?
-            </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {[
-                { value: 'formal', label: 'Formal Literary', color: 'indigo' },
-                { value: 'warm', label: 'Warm Conversational', color: 'rose' },
-                { value: 'historical', label: 'Historical Epic', color: 'amber' },
-                { value: 'poetic', label: 'Poetic', color: 'pink' },
-              ].map((option) => {
-                const colorClasses = {
-                  indigo: tone === option.value 
-                    ? 'border-indigo-400 bg-gradient-to-br from-indigo-500/20 to-indigo-600/10 shadow-indigo-500/20' 
-                    : 'border-indigo-400/30 hover:border-indigo-400/60 hover:bg-indigo-500/5',
-                  rose: tone === option.value 
-                    ? 'border-rose-400 bg-gradient-to-br from-rose-500/20 to-rose-600/10 shadow-rose-500/20' 
-                    : 'border-rose-400/30 hover:border-rose-400/60 hover:bg-rose-500/5',
-                  amber: tone === option.value 
-                    ? 'border-amber-400 bg-gradient-to-br from-amber-500/20 to-amber-600/10 shadow-amber-500/20' 
-                    : 'border-amber-400/30 hover:border-amber-400/60 hover:bg-amber-500/5',
-                  pink: tone === option.value 
-                    ? 'border-pink-400 bg-gradient-to-br from-pink-500/20 to-pink-600/10 shadow-pink-500/20' 
-                    : 'border-pink-400/30 hover:border-pink-400/60 hover:bg-pink-500/5',
-                };
-                
-                const checkColors = {
-                  indigo: 'bg-indigo-500',
-                  rose: 'bg-rose-500',
-                  amber: 'bg-amber-500',
-                  pink: 'bg-pink-500',
-                };
-
-                return (
-                  <button
-                    key={option.value}
-                    onClick={() => setTone(option.value as Tone)}
-                    className={`p-4 rounded-xl border-2 text-left transition-all duration-300 ${colorClasses[option.color as keyof typeof colorClasses]} ${tone === option.value ? 'shadow-lg scale-105' : ''}`}
-                  >
-                    <div className="flex items-center justify-between">
-                      <span className="text-white font-semibold">{option.label}</span>
-                      {tone === option.value && (
-                        <div className={`h-6 w-6 rounded-full ${checkColors[option.color as keyof typeof checkColors]} flex items-center justify-center shadow-lg`}>
-                          <Check className="h-4 w-4 text-white" />
-                        </div>
-                      )}
-                    </div>
-                  </button>
-                );
-              })}
-            </div>
-            <div className="mt-8 flex justify-between">
-              <button
-                onClick={() => setStep(2)}
-                className="px-8 py-3 bg-transparent border-2 border-purple-400/50 hover:border-purple-400 text-purple-300 hover:text-white font-semibold rounded-full transition-all duration-300 flex items-center gap-2"
-              >
-                <ArrowLeft className="h-5 w-5" />
-                <span>Back</span>
-              </button>
-              <button
-                onClick={handleMatch}
-                disabled={!tone}
-                className="px-8 py-3 bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white font-semibold rounded-full transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 shadow-lg hover:shadow-purple-500/50 hover:scale-105"
-              >
-                <span>Find My Writer</span>
-                <Sparkles className="h-5 w-5" />
-              </button>
-            </div>
-          </div>
-        )}
       </div>
     </section>
   );
 }
-
-

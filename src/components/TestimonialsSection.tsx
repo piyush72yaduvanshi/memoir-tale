@@ -10,46 +10,87 @@ export default function TestimonialsSection() {
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const [showAudioDemo, setShowAudioDemo] = useState(false);
 
+  const customTestimonials = [
+    {
+      id: 1,
+      quote: isHindi 
+        ? "अपने पिता के जीवन को एक सुंदर ढंग से लिखे गए संस्मरण में बदलते देखना हमारे पूरे परिवार के लिए एक भावुक अनुभव था। यह सिर्फ एक किताब नहीं है—यह एक ऐसा उपहार है जो हमेशा हमारे साथ रहेगा।"
+        : "Watching my father's life transformed into a beautifully written memoir was an emotional experience for our entire family. It's more than a book—it's a gift that will stay with us forever.",
+      author: "Sunanda H.",
+      location: isHindi ? "बेंगलुरु" : "Bengaluru",
+      projectType: isHindi ? "यात्रा संस्मरण संग्रह" : "Travel Journal Collection",
+      initials: "SH"
+    },
+    {
+      id: 2,
+      quote: isHindi
+        ? "टीम ने हर याद को अद्भुत देखभाल और प्रामाणिकता के साथ सहेजा। उन्होंने केवल हमारी कहानी नहीं लिखी—उन्होंने हमारे परिवार की विरासत को हमेशा के लिए सुरक्षित कर दिया।"
+        : "The team captured every memory with incredible care and authenticity. They didn't just write our story—they preserved our family's legacy.",
+      author: "Rajesh K.",
+      location: isHindi ? "नई दिल्ली" : "New Delhi",
+      projectType: isHindi ? "जीवन कहानी संस्मरण" : "Life Story Memoir",
+      initials: "RK"
+    },
+    {
+      id: 3,
+      quote: isHindi
+        ? "पहले साक्षात्कार से लेकर अंतिम हार्डकवर पुस्तक तक, हर विवरण में व्यावसायिकता, सहानुभूति और कारीगरी झलकती थी। हम इससे अधिक सार्थक स्मृति चिह्न की उम्मीद नहीं कर सकते थे।"
+        : "From the first interview to the final hardcover, every detail reflected professionalism, empathy, and craftsmanship. We couldn't have asked for a more meaningful keepsake.",
+      author: "Priya S.",
+      location: isHindi ? "मुंबई" : "Mumbai",
+      projectType: isHindi ? "पारिवारिक विरासत पुस्तक" : "Family Legacy Book",
+      initials: "PS"
+    }
+  ];
+
+  const handleCtaClick = () => {
+    const contactEl = document.getElementById("contact");
+    if (contactEl) {
+      contactEl.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
-    <section 
+    <section
       id="testimonials-section"
-      className="py-20 md:py-28 bg-[#faf7f0] text-primary overflow-hidden relative"
+      className="py-20 md:py-28 bg-[#faf7f0] text-primary overflow-hidden relative border-b border-[#E3DDE9]/40"
     >
       <div className="absolute inset-0 opacity-[0.03] pointer-events-none paper-grain" />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
-        
+
         {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-16 md:mb-20">
-          <span className="font-sans text-[11px] font-bold tracking-[3px] uppercase text-accent-purple-light block mb-3">
-            {isHindi ? "ग्राहक आवाज़ें" : "CLIENT VOICES"}
+        <div className="text-center max-w-3xl mx-auto mb-16 md:mb-20">
+          <span className="font-sans text-[11px] font-bold tracking-[3px] uppercase text-[rgb(46,27,93)] block mb-3">
+            {isHindi ? "परिवारों द्वारा भरोसेमंद ⭐" : "TRUSTED BY FAMILIES ⭐"}
           </span>
-          <h2 className="font-serif font-bold text-3xl sm:text-4xl md:text-5xl leading-tight text-primary">
-            {isHindi ? "बहु-पीढ़ीगत" : "Loved by Multi-Generational"} <br />
-            <span className="font-serif italic text-accent-purple">
-              {isHindi ? "परिवारों द्वारा प्रिय" : "Families"}
-            </span>
+          <h2 className="font-serif font-bold text-3xl sm:text-4.5xl lg:text-[48px] text-[#190F26] tracking-tight leading-tight">
+            {isHindi ? "जो कहानियां हम संजोते हैं, वे स्थायी प्रभाव छोड़ती हैं" : "The Stories We Preserve Leave a Lasting Impact"}
           </h2>
+          <p className="font-sans text-sm sm:text-base text-[#554466] mt-4 leading-relaxed">
+            {isHindi 
+              ? "हमारे द्वारा बनाई जाने वाली हर बायोग्राफी गहराई से व्यक्तिगत होती है। यहाँ जानें कि व्यक्तियों और परिवारों ने सबसे महत्वपूर्ण कहानियों को सहेजने के अपने अनुभव के बारे में क्या कहा है।"
+              : "Every memoir we create is deeply personal. Here's what individuals and families have shared about their experience of preserving the stories that matter most."}
+          </p>
         </div>
 
         {/* 2-Column Layout: Video Left, Testimonials Right */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-          
+
           {/* Left Column - Video Player */}
           <div className="lg:col-span-5 flex flex-col">
-            <div className="rounded-xl overflow-hidden border shadow-xl relative aspect-video sm:aspect-square flex items-center justify-center max-h-[480px] group bg-[#fcedca]/20 border-accent-purple/20">
+            <div className="rounded-2xl overflow-hidden border shadow-xl relative aspect-video sm:aspect-square flex items-center justify-center max-h-[480px] group bg-[#fcedca]/20 border-[rgb(46,27,93)]/20">
               {/* Background image */}
               <img
                 src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=800"
-                alt="Happy elderly person reading memoir book"
-                className={`absolute inset-0 w-full h-full object-cover transition-all duration-[8s] select-none ${
-                  isVideoPlaying ? 'scale-105 brightness-50' : 'scale-100 group-hover:scale-102 brightness-[0.85]'
-                }`}
+                alt="Hear Their Story"
+                className={`absolute inset-0 w-full h-full object-cover transition-all duration-[8s] select-none ${isVideoPlaying ? 'scale-105 brightness-50' : 'scale-100 group-hover:scale-102 brightness-[0.85]'
+                  }`}
                 referrerPolicy="no-referrer"
               />
-              
-              {/* Purple atmospheric filter */}
-              <div className="absolute inset-0 bg-accent-purple/10 mix-blend-color-burn pointer-events-none" />
+
+              {/* Dark atmospheric overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
 
               {/* Play button */}
               <button
@@ -57,8 +98,8 @@ export default function TestimonialsSection() {
                   setIsVideoPlaying(!isVideoPlaying);
                   setShowAudioDemo(true);
                 }}
-                className="relative z-20 w-16 h-16 rounded-full bg-gradient-to-r from-accent-purple to-accent-purple-dark text-white shadow-lg flex items-center justify-center cursor-pointer transition-transform duration-300 active:scale-95"
-                title="Play Audio Interview"
+                className="relative z-20 w-16 h-16 rounded-full bg-[rgb(46,27,93)] text-white shadow-xl flex items-center justify-center cursor-pointer transition-transform duration-300 hover:scale-105 active:scale-95"
+                title={isHindi ? "उनकी कहानी सुनें" : "Hear Their Story"}
               >
                 {isVideoPlaying ? (
                   <Pause className="w-6 h-6 animate-pulse fill-current" />
@@ -68,68 +109,68 @@ export default function TestimonialsSection() {
               </button>
 
               {/* Video info overlay */}
-              <div className="absolute bottom-4 left-4 right-4 z-10 p-3.5 backdrop-blur-md bg-primary/80 border border-accent-purple/20 rounded-lg text-left">
-                <span className="font-sans text-[9px] font-bold uppercase tracking-[2px] text-accent-purple block">
-                  {isHindi ? "विशेष कथावाचक" : "FEATURED NARRATOR"}
+              <div className="absolute bottom-4 left-4 right-4 z-10 p-4 backdrop-blur-md bg-[#190F26]/85 border border-white/10 rounded-xl text-left">
+                <span className="font-sans text-[10px] font-bold uppercase tracking-widest text-[#C5A3ED] block mb-1">
+                  {isHindi ? "उनकी कहानी सुनें" : "HEAR THEIR STORY"}
                 </span>
-                <span className="font-serif font-bold text-sm text-white block">
-                  {isHindi ? "सरदार गुरदेव सिंह सिद्धू, 84" : "Sardar Gurdev Singh Sidhu, 84"}
-                </span>
-                <span className="font-sans text-[10px] text-white/50 block mt-0.5">
-                  {isHindi 
-                    ? '"1947 के विभाजन, लाहौर से लुधियाना की यात्रा को याद करते हैं।"'
-                    : '"Remembers the partition in 1947, Lahore to Ludhiana journey."'}
-                </span>
+                <p className="font-sans text-xs text-white/90 leading-relaxed">
+                  {isHindi
+                    ? "देखें कि मेमोयर टेल ने परिवारों को यादों को सहेजने, प्रियजनों का जश्न मनाने और ऐसी विरासत बनाने में कैसे मदद की जो पीढ़ियों तक संजोई जाएगी।"
+                    : "Watch how Memoir Tale helped families preserve memories, celebrate loved ones, and create legacies that will be cherished for generations."}
+                </p>
               </div>
             </div>
-            
-            {/* Info text */}
-            <span className="text-[11px] font-sans italic mt-3 select-none text-center text-text-muted">
-              {isHindi 
-                ? '*हमारे रीमास्टर किए गए 1947 विभाजन संस्मरण ऑडियो पूर्वावलोकन को सुनने के लिए ऊपर प्ले पर क्लिक करें।'
-                : '*Click play above to sample our remastered 1947 partition memoirs audio preview.'}
-            </span>
           </div>
 
           {/* Right Column - Testimonial Cards */}
           <div className="lg:col-span-7 flex flex-col gap-6">
-            {TESTIMONIALS.slice(0, 3).map((test, idx) => (
+            {customTestimonials.map((test, idx) => (
               <motion.div
                 key={test.id}
                 initial={{ opacity: 0, x: 25 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: '-50px' }}
                 transition={{ duration: 0.5, delay: idx * 0.1 }}
-                className="p-6 rounded-xl border-l-4 border-l-accent-purple border-t border-r border-b text-left shadow-sm transition-all duration-300 hover:translate-x-1 bg-[#faf7f0] border-primary/5 hover:border-r-accent-purple/20"
+                className="p-6 rounded-2xl border-l-4 border-l-[rgb(46,27,93)] border-t border-r border-b text-left shadow-sm transition-all duration-300 hover:-translate-y-1 bg-white border-[#E3DDE9]/60 hover:border-r-[rgb(46,27,93)]/30"
               >
                 {/* Rating Stars */}
-                <div className="flex items-center gap-1 mb-4 text-accent-purple">
-                  {[...Array(test.rating)].map((_, sIdx) => (
-                    <Star key={sIdx} className="w-4 h-4 fill-current" />
-                  ))}
-                  <span className="font-sans text-[9px] uppercase tracking-wider font-bold text-accent-purple ml-2.5">
-                    {test.service} {isHindi ? "सत्यापित" : "VERIFIED"}
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center gap-1 text-[#2E1B5D]">
+                    {[...Array(5)].map((_, sIdx) => (
+                      <Star key={sIdx} className="w-4 h-4 fill-current text-amber-500" />
+                    ))}
+                  </div>
+
+                  {/* Project Type Sub-Label */}
+                  <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-[rgb(46,27,93)] bg-[rgb(46,27,93)]/10 px-3 py-1 rounded-full border border-[rgb(46,27,93)]/20">
+                    {test.projectType}
                   </span>
                 </div>
 
                 {/* Quote */}
-                <p className="font-serif-sub italic text-base sm:text-lg font-light leading-relaxed mb-4 text-primary">
+                <p className="font-serif italic text-base sm:text-lg leading-relaxed mb-4 text-[#190F26]">
                   "{test.quote}"
                 </p>
 
-                {/* Author info */}
-                <div className="flex items-center gap-3">
-                  <div className="w-11 h-11 rounded-full bg-accent-purple/10 flex items-center justify-center border border-accent-purple/20 font-sans font-bold text-accent-purple">
-                    {test.initials}
+                {/* Author info & project label */}
+                <div className="flex items-center justify-between border-t border-[#E3DDE9]/50 pt-3">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-[rgb(46,27,93)]/10 flex items-center justify-center border border-[rgb(46,27,93)]/20 font-sans font-bold text-[rgb(46,27,93)] text-xs">
+                      {test.initials}
+                    </div>
+                    <div>
+                      <span className="font-sans font-bold text-sm block text-[#190F26]">
+                        {test.author}
+                      </span>
+                      <span className="font-sans text-[11px] block text-[#554466]">
+                        {test.location}
+                      </span>
+                    </div>
                   </div>
-                  <div>
-                    <span className="font-sans font-bold text-sm block text-primary">
-                      {test.author}
-                    </span>
-                    <span className="font-sans text-[10px] block text-text-muted">
-                      {test.location}
-                    </span>
-                  </div>
+
+                  <span className="font-sans text-xs italic text-[#554466]">
+                    {test.projectType}
+                  </span>
                 </div>
               </motion.div>
             ))}
@@ -185,7 +226,7 @@ export default function TestimonialsSection() {
                     {isHindi ? "सिद्धू विरासत श्रृंखला" : "Sidhu Legacy Series"}
                   </h3>
                   <p className="font-serif-sub italic text-sm text-text-muted mt-1">
-                    {isHindi 
+                    {isHindi
                       ? '"खंड 1: लंबी यात्रा घर — लुधियाना का विभाजन"'
                       : '"Vol 1: The Long Journey Home — Partition of Ludhiana"'}
                   </p>
@@ -206,7 +247,7 @@ export default function TestimonialsSection() {
 
                 <div className="p-4 rounded bg-black/5 text-left border border-accent-purple/15">
                   <span className="font-serif italic text-xs leading-relaxed block text-center select-text">
-                    {isHindi 
+                    {isHindi
                       ? '"हम आखिरी ट्रेन में सवार हुए... इंजन ने सीटी बजाई और कोयले की धूल उड़ी। मेरी माँ ने मुझे कसकर पकड़ा। मैं सिर्फ पाँच साल का था लेकिन मुझे लुधियाना की खामोशी याद है..."'
                       : '"We boarded the last train... the engine whistled and the coal dust blew. My mother held me tightly. I was only five years old but I remember the silence of Ludhiana..."'}
                   </span>
@@ -216,7 +257,7 @@ export default function TestimonialsSection() {
                   onClick={() => setIsVideoPlaying(!isVideoPlaying)}
                   className="w-full py-2.5 bg-accent-purple text-white font-sans font-bold text-xs uppercase tracking-widest rounded cursor-pointer hover:brightness-110"
                 >
-                  {isVideoPlaying 
+                  {isVideoPlaying
                     ? (isHindi ? 'ऑडियो विराम दें' : 'Pause Audio Player')
                     : (isHindi ? 'ऑडियो फिर से शुरू करें' : 'Resume Audio Player')}
                 </button>

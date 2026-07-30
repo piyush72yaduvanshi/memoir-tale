@@ -17,7 +17,7 @@ interface ContactSectionProps {
 export default function ContactSection({ selectedService, matchedWriter, onClearMatchedWriter, darkMode }: ContactSectionProps) {
   const { lang, t } = useLanguage();
   const isHindi = lang === "HI";
-  
+
   // Form input states
   const [fullName, setFullName] = useState("");
   const [phone, setPhone] = useState("");
@@ -57,27 +57,27 @@ export default function ContactSection({ selectedService, matchedWriter, onClear
   // Handle local file selections to Base64 with size validation
   const handleFileSelection = (files: FileList | null) => {
     if (!files) return;
-    
+
     const MAX_FILE_SIZE = 50 * 1024 * 1024; // 50MB
     const MAX_TOTAL_SIZE = 100 * 1024 * 1024; // 100MB total
-    
+
     let totalCurrentSize = attachedFiles.reduce((acc, f) => acc + f.size, 0);
-    
+
     Array.from(files).forEach((file) => {
       // Check individual file size
       if (file.size > MAX_FILE_SIZE) {
         setErrorMsg(`File "${file.name}" exceeds 50MB limit. Please choose a smaller file.`);
         return;
       }
-      
+
       // Check total size
       if (totalCurrentSize + file.size > MAX_TOTAL_SIZE) {
         setErrorMsg('Total attachment size exceeds 100MB. Please remove some files before adding more.');
         return;
       }
-      
+
       totalCurrentSize += file.size;
-      
+
       // Store the actual File object instead of base64
       setAttachedFiles((prev) => [...prev, file]);
     });
@@ -109,13 +109,13 @@ export default function ContactSection({ selectedService, matchedWriter, onClear
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMsg("");
-    
+
     // Check if Firebase is ready
     if (!isFirebaseReady()) {
       setErrorMsg(isHindi ? "Firebase सेवा उपलब्ध नहीं है। कृपया बाद में पुनः प्रयास करें।" : "Firebase service is not available. Please try again later.");
       return;
     }
-    
+
     // Additional null check for db
     if (!db) {
       setErrorMsg(isHindi ? 'सेवा वर्तमान में उपलब्ध नहीं है। कृपया सीधे 9889011174 पर कॉल करें।' : 'Service is currently unavailable. Please call us directly at 9889011174.');
@@ -124,18 +124,18 @@ export default function ContactSection({ selectedService, matchedWriter, onClear
 
     // Simple Form Validation
     if (!fullName.trim()) {
-      setErrorMsg(isHindi ? "कृपया अपना पूरा नाम दर्ज करें" : "Please enter your full name (Aapka pura naam)");
+      setErrorMsg(isHindi ? "कृपया अपना पूरा नाम दर्ज करें" : "Please enter your full name.");
       return;
     }
-    
+
     // Improved Indian phone validation
     const cleanPhone = phone.replace(/[\s\-\+]/g, '');
     const indianPhoneRegex = /^(\+91|91|0)?[6-9]\d{9}$/;
     if (!phone.trim() || !indianPhoneRegex.test(cleanPhone)) {
-      setErrorMsg(isHindi ? "कृपया एक मान्य भारतीय मोबाइल नंबर दर्ज करें (+91 XXXXX XXXXX)" : "Please enter a valid Indian mobile number (+91 XXXXX XXXXX)");
+      setErrorMsg(isHindi ? "कृपया एक मान्य भारतीय मोबाइल नंबर दर्ज करें (+91 XXXXX XXXXX)" : "Please enter a valid Indian mobile number (+91 XXXXX XXXXX).");
       return;
     }
-    
+
     if (!email.trim() || !email.includes("@")) {
       setErrorMsg(isHindi ? "कृपया एक मान्य ईमेल पता दर्ज करें" : "Please enter a valid email address.");
       return;
@@ -147,20 +147,20 @@ export default function ContactSection({ selectedService, matchedWriter, onClear
     try {
       // 1. Upload files to Firebase Storage and get download URLs
       const uploadedAttachments = [];
-      
+
       for (const file of attachedFiles) {
         try {
           // Create a unique filename with timestamp to avoid collisions
           const timestamp = Date.now();
           const fileName = `${timestamp}_${file.name}`;
           const storageRef = ref(storage, `inquiries/${ticket}/${fileName}`);
-          
+
           // Upload file to Firebase Storage
           await uploadBytes(storageRef, file);
-          
+
           // Get the download URL
           const downloadURL = await getDownloadURL(storageRef);
-          
+
           // Store file metadata with download URL
           uploadedAttachments.push({
             name: file.name,
@@ -241,14 +241,13 @@ export default function ContactSection({ selectedService, matchedWriter, onClear
       setCityState("");
       setBriefStory("");
       setAttachedFiles([]);
-      
+
       // Reset form dropdown fields
       setService('Life Story Book');
-      setAboutWhom('My Parent');
+      setAboutWhom('Myself');
       setPreferredTime('Anytime');
     } catch (dbErr: any) {
       console.error("Critical submission flow occurred:", dbErr);
-      setErrorMsg(isHindi ? "जमा करते समय एक त्रुटि हुई। कृपया पुनः प्रयास करें।" : "Database submission failed. Please try again.");
       handleFirestoreError(dbErr, OperationType.WRITE, `inquiries/${ticket}`);
     } finally {
       setIsSubmitting(false);
@@ -258,87 +257,17 @@ export default function ContactSection({ selectedService, matchedWriter, onClear
   return (
     <section
       id="contact"
-      className={`relative py-16 lg:py-24 overflow-hidden ${
-        darkMode 
-          ? 'bg-[#220E24] text-[#F5F0F8] border-b border-white/10' 
-          : 'bg-gradient-to-b from-[#FAF6F0] via-[#FCFBF7] to-[#FAF8F5] text-[#190F26] border-b border-[#E3DDE9]/40'
-      }`}
+      className={`relative py-16 lg:py-24 overflow-hidden ${darkMode
+        ? 'bg-[#220E24] text-[#F5F0F8] border-b border-white/10'
+        : 'bg-gradient-to-b from-[#FAF6F0] via-[#FCFBF7] to-[#FAF8F5] text-[#190F26] border-b border-[#E3DDE9]/40'
+        }`}
     >
       {/* Decorative Blur Ellipse per guidelines */}
       <div className="absolute bottom-[5%] right-[-120px] w-[500px] h-[500px] bg-[#2E1B5D]/4 rounded-full blurred-ellipse pointer-events-none" />
       <div className="absolute top-[10%] left-[-100px] w-[400px] h-[400px] bg-[#8B3CDC]/4 rounded-full blurred-ellipse pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-        
-        {/* SUB-SECTION A: Bold Stats Row with FadeIn */}
-        <FadeIn>
-          <div className={`grid grid-cols-2 lg:grid-cols-4 gap-6 rounded-2xl p-6 lg:p-8 mb-20 text-center relative z-10 shadow-[0_8px_30px_rgba(69,20,122,0.04)] ${
-            darkMode 
-              ? 'bg-[#220E24] border border-white/10'
-              : 'bg-white border border-[#E3DDE9]/60'
-          }`}>
-            
-            {/* Stat 1 */}
-            <div className="flex flex-col items-center justify-center p-3">
-              <div className={`p-2.5 rounded-full text-[#2E1B5D] mb-3 border ${
-                darkMode ? 'bg-[#341738] border-white/10' : 'bg-[#FAF6F0] border-[#E3DDE9]'
-              }`}>
-                <Phone className="h-5 w-5" />
-              </div>
-              <span className={`font-serif font-bold text-lg sm:text-xl lg:text-[22px] ${
-                darkMode ? 'text-white' : 'text-[#190F26]'
-              }`}>
-                9889011174
-              </span>
-              <span className="font-sans font-semibold text-[11px] sm:text-xs text-[#2E1B5D] uppercase tracking-wider mt-1">
-                {isHindi ? "कभी भी कॉल करें" : "Call Us Anytime"}
-              </span>
-            </div>
 
-            {/* Stat 2 */}
-            <div className={`flex flex-col items-center justify-center p-3 border-l lg:border-l ${
-              darkMode ? 'border-white/10' : 'border-[#E3DDE9]'
-            }`}>
-              <div className={`p-2.5 rounded-full text-[#2E1B5D] mb-3 border ${
-                darkMode ? 'bg-[#341738] border-white/10' : 'bg-[#FAF6F0] border-[#E3DDE9]'
-              }`}>
-                <Mail className="h-5 w-5" />
-              </div>
-              <span className="font-serif font-bold text-sm sm:text-base lg:text-[18px] text-[#190F26] truncate max-w-full">
-                support@memoirtale.com
-              </span>
-              <span className="font-sans font-semibold text-[11px] sm:text-xs text-[#2E1B5D] uppercase tracking-wider mt-1">
-                {isHindi ? "हमें ईमेल करें" : "Email Us"}
-              </span>
-            </div>
-
-            {/* Stat 3 */}
-            <div className="flex flex-col items-center justify-center p-3 border-l border-[#E3DDE9] lg:border-l">
-              <div className="bg-[#FAF6F0] p-2.5 rounded-full text-[#2E1B5D] mb-3 border border-[#E3DDE9]">
-                <MapPin className="h-5 w-5" />
-              </div>
-              <span className="font-serif font-bold text-lg sm:text-xl lg:text-[21px] text-[#190F26]">
-                {isHindi ? "झाँसी, उत्तर प्रदेश" : "Jhansi, UP"}
-              </span>
-              <span className="font-sans font-semibold text-[11px] sm:text-xs text-[#2E1B5D] uppercase tracking-wider mt-1">
-                {isHindi ? "हमारा केंद्र" : "Our Base"}
-              </span>
-            </div>
-
-            {/* Stat 4 */}
-            <div className="flex flex-col items-center justify-center p-3 border-l border-[#E3DDE9] lg:border-l">
-              <div className="bg-[#FAF6F0] p-2.5 rounded-full text-[#2E1B5D] mb-3 border border-[#E3DDE9]">
-                <Clock className="h-5 w-5 animate-pulse" />
-              </div>
-              <span className="font-serif font-bold text-lg sm:text-xl lg:text-[22px] text-[#190F26]">
-                {isHindi ? "तत्काल संपर्क" : "24 Hours"}
-              </span>
-              <span className="font-sans font-semibold text-[11px] sm:text-xs text-[#2E1B5D] uppercase tracking-wider mt-1">
-                {isHindi ? "प्रतिक्रिया समय" : "Response Time"}
-              </span>
-            </div>
-          </div>
-        </FadeIn>
 
         {/* SUB-SECTION B: Section Heading with FadeIn */}
         <FadeIn>
@@ -360,9 +289,9 @@ export default function ContactSection({ selectedService, matchedWriter, onClear
         <FadeIn delay={0.1}>
           <div className="max-w-3xl mx-auto relative z-10">
             <div className="bg-white border border-[#E3DDE9]/60 rounded-[28px] p-6 sm:p-10 lg:p-12 shadow-[0_12px_44px_rgba(69,20,122,0.05)] text-[#190F26]">
-              
+
               <form onSubmit={handleSubmit} className="space-y-6">
-                
+
                 {/* Error Box */}
                 {errorMsg && (
                   <div className="bg-red-500/10 border border-red-500/30 text-red-800 text-sm px-4 py-3 rounded-lg text-left font-sans font-semibold">
@@ -381,7 +310,7 @@ export default function ContactSection({ selectedService, matchedWriter, onClear
                       required
                       value={fullName}
                       onChange={(e) => setFullName(e.target.value)}
-                      placeholder={isHindi ? "यहाँ अपना पूरा नाम लिखें" : "Aapka pura naam"}
+                      placeholder={isHindi ? "यहाँ अपना पूरा नाम लिखें" : "Your Full Name"}
                       className="w-full bg-[#FAF8F5] border border-[#E3DDE9] rounded-xl h-[52px] px-4 text-[#190F26] placeholder-[#554466]/40 font-sans text-sm focus:outline-none focus:border-[#2E1B5D] focus:bg-white transition-colors"
                     />
                   </div>
@@ -412,7 +341,7 @@ export default function ContactSection({ selectedService, matchedWriter, onClear
                       required
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      placeholder="aapka@email.com"
+                      placeholder="your.email@example.com"
                       className="w-full bg-[#FAF8F5] border border-[#E3DDE9] rounded-xl h-[52px] px-4 text-[#190F26] placeholder-[#554466]/40 font-sans text-sm focus:outline-none focus:border-[#2E1B5D] focus:bg-white transition-colors"
                     />
                   </div>
@@ -425,7 +354,7 @@ export default function ContactSection({ selectedService, matchedWriter, onClear
                       type="text"
                       value={cityState}
                       onChange={(e) => setCityState(e.target.value)}
-                      placeholder={isHindi ? "जैसे: झाँसी, उत्तर प्रदेश" : "Jaise: Gorakhpur, UP"}
+                      placeholder={isHindi ? "जैसे: झाँसी, उत्तर प्रदेश" : "e.g. Mumbai, Maharashtra"}
                       className="w-full bg-[#FAF8F5] border border-[#E3DDE9] rounded-xl h-[52px] px-4 text-[#190F26] placeholder-[#554466]/40 font-sans text-sm focus:outline-none focus:border-[#2E1B5D] focus:bg-white transition-colors"
                     />
                   </div>
@@ -476,9 +405,9 @@ export default function ContactSection({ selectedService, matchedWriter, onClear
                       onChange={(e) => setAboutWhom(e.target.value)}
                       className="w-full bg-[#FAF8F5] border border-[#E3DDE9] rounded-xl h-[52px] px-4 text-[#190F26] font-sans text-sm focus:outline-none focus:border-[#2E1B5D] focus:bg-white transition-colors appearance-none cursor-pointer"
                     >
-                      <option value="Myself">{isHindi ? "मेरे अपने बारे में (अपनी कहानी)" : "About Myself (Apni Kahani)"}</option>
-                      <option value="My Parent">{isHindi ? "मेरे माता / पिता के लिए" : "My Parent (Mata / Pita Ke Liye)"}</option>
-                      <option value="My Grandparent">{isHindi ? "मेरे दादा-दादी / नाना-नानी के लिए" : "My Grandparent (Dada / Dadi Ke Liye)"}</option>
+                      <option value="Myself">{isHindi ? "मेरे अपने बारे में (अपनी कहानी)" : "About Myself"}</option>
+                      <option value="My Parent">{isHindi ? "मेरे माता / पिता के लिए" : "My Parents"}</option>
+                      <option value="My Grandparent">{isHindi ? "मेरे दादा-दादी / नाना-नानी के लिए" : "My Grandparents"}</option>
                       <option value="My Spouse">{isHindi ? "मेरे जीवनसाथी / पार्टनर के लिए" : "My Spouse / Partner"}</option>
                       <option value="My Child">{isHindi ? "मेरे बच्चों के लिए" : "My Child"}</option>
                       <option value="Other Family Member">{isHindi ? "परिवार के अन्य आदरणीय सदस्य के लिए" : "Other Respected Family Member"}</option>
@@ -495,7 +424,7 @@ export default function ContactSection({ selectedService, matchedWriter, onClear
                   <textarea
                     value={briefStory}
                     onChange={(e) => setBriefStory(e.target.value)}
-                    placeholder={isHindi ? "अपनी कहानी के बारे में संक्षेप में बताएं — वे कौन से मुख्य मील के पत्थर, उपलब्धियां या जीवन मूल्य हैं जिन्हें आप हमेशा के लिए सुरक्षित रखना चाहते हैं?" : "Aapki kahani ke baare mein thoda bataiye — key milestones, achievements, or values you wish to preserve forever?"}
+                    placeholder={isHindi ? "अपनी कहानी के बारे में संक्षेप में बताएं — वे कौन से मुख्य मील के पत्थर, उपलब्धियां या जीवन मूल्य हैं जिन्हें आप हमेशा के लिए सुरक्षित रखना चाहते हैं?" : "Tell us a bit about your story — key milestones, achievements, or life values you wish to preserve forever."}
                     className="w-full bg-[#FAF8F5] border border-[#E3DDE9] rounded-xl h-24 p-4 text-[#190F26] placeholder-[#554466]/40 font-sans text-sm focus:outline-none focus:border-[#2E1B5D] focus:bg-white transition-colors resize-none"
                   />
                 </div>
@@ -514,7 +443,7 @@ export default function ContactSection({ selectedService, matchedWriter, onClear
                       <option value="Morning (9am–12pm)">{isHindi ? "सुबह का समय (9 am – 12 pm)" : "Morning Slots (9 am – 12 pm)"}</option>
                       <option value="Afternoon (12pm–4pm)">{isHindi ? "दोपहर का समय (12 pm – 4 pm)" : "Afternoon Slots (12 pm – 4 pm)"}</option>
                       <option value="Evening (4pm–8pm)">{isHindi ? "शाम का समय (4 pm – 8 pm)" : "Evening Slots (4 pm – 8 pm)"}</option>
-                      <option value="Anytime">{isHindi ? "कभी भी (पूरे दिन में किसी भी समय)" : "Anytime (Pure Din Mein Kabhi Bhi)"}</option>
+                      <option value="Anytime">{isHindi ? "कभी भी (पूरे दिन में किसी भी समय)" : "Anytime"}</option>
                     </select>
                     <div className="absolute right-4 top-1/2 -translate-y-1/2 text-[#2E1B5D] pointer-events-none text-xs">▼</div>
                   </div>
@@ -532,11 +461,10 @@ export default function ContactSection({ selectedService, matchedWriter, onClear
                     onDragOver={handleDrag}
                     onDragLeave={handleDrag}
                     onDrop={handleDrop}
-                    className={`border-2 border-dashed rounded-2xl p-6 text-center cursor-pointer transition-all duration-200 relative ${
-                      dragActive
-                        ? "border-[#2E1B5D] bg-[#2E1B5D]/5 scale-[1.01]"
-                        : "border-[#E3DDE9] bg-[#FAF8F5] hover:border-[#2E1B5D]/50 hover:bg-[#FAF6F0]"
-                    }`}
+                    className={`border-2 border-dashed rounded-2xl p-6 text-center cursor-pointer transition-all duration-200 relative ${dragActive
+                      ? "border-[#2E1B5D] bg-[#2E1B5D]/5 scale-[1.01]"
+                      : "border-[#E3DDE9] bg-[#FAF8F5] hover:border-[#2E1B5D]/50 hover:bg-[#FAF6F0]"
+                      }`}
                   >
                     <input
                       type="file"
@@ -573,7 +501,7 @@ export default function ContactSection({ selectedService, matchedWriter, onClear
                           {attachedFiles.map((file, idx) => {
                             const isImg = file.type.startsWith("image/");
                             const previewUrl = isImg ? URL.createObjectURL(file) : null;
-                            
+
                             return (
                               <motion.div
                                 key={idx}
@@ -663,8 +591,8 @@ export default function ContactSection({ selectedService, matchedWriter, onClear
                           </h4>
                         </div>
                         <p className="font-sans text-[11px] text-[#554466] leading-relaxed">
-                          {isHindi 
-                            ? "आपकी यादें और तस्वीरें बिल्कुल सुरक्षित हैं। आपकी स्पष्ट सहमति के बिना कुछ भी प्रकाशित नहीं किया जाता।" 
+                          {isHindi
+                            ? "आपकी यादें और तस्वीरें बिल्कुल सुरक्षित हैं। आपकी स्पष्ट सहमति के बिना कुछ भी प्रकाशित नहीं किया जाता।"
                             : "Your deeply personal family stories, text drafts, and photobook files are kept in highly secured, private servers."}
                         </p>
                       </motion.div>
@@ -682,8 +610,8 @@ export default function ContactSection({ selectedService, matchedWriter, onClear
                           </h4>
                         </div>
                         <p className="font-sans text-[11px] text-[#554466] leading-relaxed">
-                          {isHindi 
-                            ? "हम पूर्ण कानूनी सुरक्षा अनुबंध प्रदान करते हैं ताकि सुनिश्चित हो सके कि आपकी धरोहर परिवार तक ही रहे।" 
+                          {isHindi
+                            ? "हम पूर्ण कानूनी सुरक्षा अनुबंध प्रदान करते हैं ताकि सुनिश्चित हो सके कि आपकी धरोहर परिवार तक ही रहे।"
                             : "We provide legally robust Non-Disclosure Agreements on request to guarantee that manuscripts never leave your close network."}
                         </p>
                       </motion.div>
@@ -701,8 +629,8 @@ export default function ContactSection({ selectedService, matchedWriter, onClear
                           </h4>
                         </div>
                         <p className="font-sans text-[11px] text-[#554466] leading-relaxed">
-                          {isHindi 
-                            ? "पुस्तक की सुरक्षित डिलीवरी के बाद, आप हमारे सर्वर से अपने सभी डिजिटल ड्राफ्ट स्थायी रूप से हटा सकते हैं।" 
+                          {isHindi
+                            ? "पुस्तक की सुरक्षित डिलीवरी के बाद, आप हमारे सर्वर से अपने सभी डिजिटल ड्राफ्ट स्थायी रूप से हटा सकते हैं।"
                             : "Complete control of your archive. Upon book completion and physical delivery, request to permanently purge all digital drafts."}
                         </p>
                       </motion.div>
@@ -744,12 +672,12 @@ export default function ContactSection({ selectedService, matchedWriter, onClear
                 className="bg-white border-2 border-[#2E1B5D] rounded-[28px] max-w-lg w-full p-8 shadow-[0_12px_50px_rgba(139, 92, 246,0.25)] relative overflow-hidden"
               >
                 <div className="absolute top-0 right-0 w-32 h-32 bg-[#E1D3F0]/10 rounded-full blurred-ellipse" />
-                
+
                 <div className="flex flex-col items-center text-center space-y-4">
                   <div className="h-16 w-16 bg-green-500/10 border border-green-500/30 rounded-full flex items-center justify-center text-green-600 mb-2">
                     <CheckCircle2 className="h-10 w-10 fill-current animate-bounce" />
                   </div>
-                  
+
                   <span className="text-xs uppercase tracking-widest text-[#2E1B5D] font-bold bg-[#FAF6F0] px-3 py-1 rounded-full border border-[#E3DDE9]">
                     {isHindi ? "बुकिंग टिकट:" : "REF TICKET:"} {submittedData.ticketNo}
                   </span>

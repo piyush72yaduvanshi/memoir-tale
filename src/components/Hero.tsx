@@ -1,17 +1,11 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
 
 import React from 'react';
 import { motion } from 'motion/react';
 import { ArrowRight, ChevronDown, Award } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
-const heroImage = "/src/assets/images/memoir_hero_book_1780399806683.png";
-
 interface HeroProps {
-  darkMode: boolean;
+  darkMode?: boolean;
   onStartStoryClick?: () => void;
   onViewBooksClick?: () => void;
   isMobilePreview?: boolean;
@@ -28,7 +22,7 @@ export default function Hero({ darkMode, onStartStoryClick, onViewBooksClick }: 
       const elementRect = element.getBoundingClientRect().top;
       const elementPosition = elementRect - bodyRect;
       const offsetPosition = elementPosition - offset;
-      
+
       window.scrollTo({
         top: offsetPosition,
         behavior: 'smooth'
@@ -53,29 +47,18 @@ export default function Hero({ darkMode, onStartStoryClick, onViewBooksClick }: 
   };
 
   return (
-    <section className="relative w-full h-screen min-h-[650px] overflow-hidden flex items-center justify-center">
-      
-      {/* Background Image Container */}
-      <div className="absolute inset-0 z-0">
-        <img
-          src={heroImage}
-          alt=""
-          className="w-full h-full object-cover select-none scale-102 hover:scale-105 transition-transform duration-[12s] ease-out"
-          referrerPolicy="no-referrer"
-        />
-        
-        {/* Dynamic Overlay Gradient - Dark purple tone */}
-        <div 
-          className="absolute inset-0 transition-colors duration-500" 
-          style={{
-            background: darkMode
-              ? 'linear-gradient(135deg, rgba(34, 14, 36, 0.95) 10%, rgba(34, 14, 36, 0.92) 40%, rgba(34, 14, 36, 0.96) 100%)'
-              : 'linear-gradient(135deg, rgba(34, 14, 36, 0.92) 10%, rgba(34, 14, 36, 0.88) 50%, rgba(34, 14, 36, 0.94) 100%)'
-          }}
-        />
+    <section className="relative w-full h-screen min-h-[650px] overflow-hidden flex items-center justify-center bg-[#220E24]">
+
+      {/* Background Container - Pure Signature #220E24 Color with Glows */}
+      <div className="absolute inset-0 z-0 bg-[#220E24]">
+        <div className="absolute inset-0 bg-[#220E24]" />
+
+        {/* Ambient Gold & Purple Glow Effects */}
+        <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-[#8B3CDC]/15 rounded-full blur-[140px] pointer-events-none" />
+        <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-[#D4AF37]/15 rounded-full blur-[120px] pointer-events-none" />
 
         {/* Soft paper fibers / noise overlay */}
-        <div className={`absolute inset-0 opacity-[0.25] pointer-events-none mix-blend-overlay ${darkMode ? 'paper-grain' : 'paper-grain'}`} />
+        <div className="absolute inset-0 opacity-[0.25] pointer-events-none mix-blend-overlay paper-grain" />
       </div>
 
       {/* Right side decoration */}
@@ -88,7 +71,7 @@ export default function Hero({ darkMode, onStartStoryClick, onViewBooksClick }: 
 
       {/* Main Content Container */}
       <div className="relative z-10 max-w-4xl mx-auto px-6 text-center select-text mt-12 flex flex-col items-center">
-        
+
         {/* Gold badge label */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
@@ -158,12 +141,12 @@ export default function Hero({ darkMode, onStartStoryClick, onViewBooksClick }: 
         animate={{ opacity: 0.7, y: [0, 8, 0] }}
         transition={{ duration: 2, repeat: Infinity, delay: 1.2 }}
         className="absolute bottom-6 left-1/2 -translate-x-1/2 p-2 hover:opacity-100 text-white z-10 transition-opacity cursor-pointer flex flex-col items-center gap-1"
+        aria-label="Scroll to next section"
       >
-        <span className="font-sans text-[9px] font-semibold tracking-[4px] uppercase text-white/60 z-10">
-          SCROLL
-        </span>
-        <ChevronDown className="w-5 h-5 text-white/60" />
+        <span className="text-[9px] uppercase tracking-[3px] font-sans text-[#D4AF37]/80">Scroll</span>
+        <ChevronDown className="w-4 h-4 text-[#D4AF37]" />
       </motion.button>
+
     </section>
   );
 }

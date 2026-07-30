@@ -5,163 +5,192 @@
 
 import React from 'react';
 import { motion } from 'motion/react';
-import { Sparkles, Brain } from 'lucide-react';
+import { Sparkles, Brain, Check, X } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 interface WhyMemoirProps {
   darkMode: boolean;
 }
 
 export default function WhyMemoirSection({ darkMode }: WhyMemoirProps) {
-  const fadingPoints = [
-    { text: 'Lost over time', desc: 'Oral details erode within two generations.' },
-    { text: 'Only in one mind', desc: 'Personal wisdom stays isolated in memory.' },
-    { text: 'Fragile, forgotten', desc: 'Old photographs decay in damp cardboard boxes.' },
-    { text: 'Moments disappear', desc: 'Daily triumphs dissolve from the family narrative.' }
+  const { lang } = useLanguage();
+  const isHindi = lang === 'HI';
+
+  const leftPoints = [
+    { text: 'Fade with time.' },
+    { text: 'Exist only in memory.' },
+    { text: 'Family stories become fragmented.' },
+    { text: 'Photographs lose their context.' },
+    { text: 'Future generations miss the journey behind the moments.' }
   ];
 
-  const bookPoints = [
-    { text: 'Preserved forever', desc: 'Archival paper stands resilient for over 300 years.' },
-    { text: 'Shared with all', desc: 'Distant relatives and descendants read the same stories.' },
-    { text: 'Printed, treasured', desc: 'Restored high-res photos nested inside leather-gilt binding.' },
-    { text: 'Stories live on', desc: 'Your philosophies, beliefs, and struggles inspire others.' }
+  const leftPointsHi = [
+    { text: 'समय के साथ धुंधली हो जाती हैं।' },
+    { text: 'केवल यादों में ही बनी रहती हैं।' },
+    { text: 'पारिवारिक कहानियाँ बिखर जाती हैं।' },
+    { text: 'तस्वीरें अपना संदर्भ खो देती हैं।' },
+    { text: 'आने वाली पीढ़ियाँ लम्हों के पीछे की यात्रा से चूक जाती हैं।' }
+  ];
+
+  const rightPoints = [
+    { text: 'Stories documented for generations.' },
+    { text: 'Beautifully crafted into timeless books.' },
+    { text: 'Shared across families and future generations.' },
+    { text: 'Memories connected with photographs and history.' },
+    { text: 'A legacy that continues to inspire long after we\'re gone.' }
+  ];
+
+  const rightPointsHi = [
+    { text: 'पीढ़ियों के लिए सहेजी गई कहानियाँ।' },
+    { text: 'कालजयी पुस्तकों में खूबसूरती से तैयार की गई।' },
+    { text: 'परिवारों और आने वाली पीढ़ियों के साथ साझा।' },
+    { text: 'तस्वीरों और इतिहास से जुड़ी यादें।' },
+    { text: 'एक ऐसी विरासत जो हमारे जाने के लंबे समय बाद भी प्रेरित करती रहती है।' }
   ];
 
   return (
-    <section 
+    <section
       id="difference-section"
-      className={`py-20 md:py-28 transition-colors duration-500 overflow-hidden relative ${
-        darkMode ? 'bg-[#1d0e24] text-[#F5F0F8]' : 'bg-[#FAF8F5] text-[#190F26]'
-      }`}
+      className={`py-20 md:py-28 transition-colors duration-500 overflow-hidden relative ${darkMode ? 'bg-[#1d0e24] text-[#F5F0F8]' : 'bg-[#FAF8F5] text-[#190F26]'
+        }`}
     >
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-stretch">
-          
-          {/* Left Column - 7 columns */}
-          <div className="lg:col-span-7 flex flex-col justify-center">
-            
-            {/* Tag */}
-            <span className="font-sans text-[11px] font-bold tracking-[3px] uppercase text-[rgb(46,27,93)] dark:text-[rgb(46,27,93)] block mb-3">
-              The Memoir Difference
-            </span>
-            
-            {/* Heading */}
-            <h2 className="font-serif font-bold text-3xl sm:text-4xl md:text-5xl leading-tight mb-6">
-              What fades from memory...<br />
-              <span className="font-serif italic text-[rgb(46,27,93)] dark:text-[rgb(46,27,93)]">lives forever in a book.</span>
-            </h2>
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
 
-            {/* Description */}
-            <p className={`font-serif-sub text-lg md:text-xl font-light leading-relaxed mb-10 italic ${
-              darkMode ? 'text-white/80' : 'text-[#190F26]/80'
+        {/* Section Header */}
+        <div className="text-center max-w-3xl mx-auto mb-16 md:mb-20">
+          <span className="font-sans text-[11px] font-bold tracking-[3px] uppercase text-[#2E1B5D] dark:text-[#E5C463] block mb-3">
+            {isHindi ? 'द मेमोयर टेल अंतर' : 'THE MEMOIR TALE DIFFERENCE'}
+          </span>
+
+          <h2 className="font-serif font-bold text-3xl sm:text-4xl md:text-5xl leading-tight mb-6">
+            {isHindi ? (
+              <>यादें धुंधली हो सकती हैं। <br /><span className="font-serif italic text-[#2E1B5D] dark:text-[#E5C463]">विरासत कभी नहीं होनी चाहिए।</span></>
+            ) : (
+              <>Memories May Fade. <br /><span className="font-serif italic text-[#2E1B5D] dark:text-[#E5C463]">A Legacy Never Should.</span></>
+            )}
+          </h2>
+
+          <p className={`font-sans text-xs md:text-sm leading-relaxed max-w-2xl mx-auto ${darkMode ? 'text-white/70' : 'text-[#554466]'
             }`}>
-              Wisdom is the most expensive wealth to waste. While a lifetime of experience is gathered in a single mind, it is fragile. Over time, names blur, timelines drift, and historical contexts vanish. MemoirTale acts as a secure scribe, crystallizing your life’s trials and achievements into standard library masterpieces.
-            </p>
+            {isHindi ? (
+              'समय सब कुछ बदल देता है। चेहरे बूढ़े हो जाते हैं, आवाजें दूर हो जाती हैं और यादें धीरे-धीरे धुंधली हो जाती हैं। लेकिन एक जीवन को परिभाषित करने वाली कहानियाँ केवल स्मरण से अधिक की हकदार हैं — वे संरक्षण की हकदार हैं। मेमोयर टेल में, हम व्यक्तिगत यात्राओं को कालजयी यादों में बदलते हैं।'
+            ) : (
+              'Time changes everything. Faces grow older, voices become distant, and memories slowly fade. But the stories that define a life deserve more than remembrance—they deserve preservation. At Memoir Tale, we transform personal journeys into timeless keepsakes, ensuring that future generations inherit not just photographs, but the wisdom, values, and experiences behind them.'
+            )}
+          </p>
+        </div>
 
-            {/* Comparison Cards Layout */}
+        {/* Layout Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
+
+          {/* Left Side: Comparison Cards (7 cols) */}
+          <div className="lg:col-span-7 flex flex-col justify-center gap-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              
-              {/* FADING MEMORY CARD */}
+
+              {/* Left Card: Memories Left Untold */}
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: '-100px' }}
-                transition={{ duration: 0.6 }}
-                className={`p-6 rounded-xl border transition-all duration-300 shadow-sm ${
-                  darkMode 
-                    ? 'bg-[#1d0e24] border-white/5 hover:border-red-500/20' 
-                    : 'bg-white border-[#E3DDE9]/60 hover:border-red-800/10'
-                }`}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className={`p-6 rounded-2xl border transition-all duration-300 shadow-sm flex flex-col justify-between ${darkMode
+                    ? 'bg-[#251829] border-white/10 hover:border-rose-500/30'
+                    : 'bg-white border-[#E3DDE9]/60 hover:border-rose-500/30'
+                  }`}
               >
-                <div className="mb-4 inline-flex p-3 rounded-full bg-red-500/10 text-red-500">
-                  <Brain className="w-5 h-5" />
-                </div>
-                <h3 className="font-serif font-bold text-lg mb-4 text-[#ff6b6b]">Fading Memory</h3>
-                <ul className="space-y-4">
-                  {fadingPoints.map((pt, idx) => (
-                    <li key={idx} className="flex gap-2.5 text-left">
-                      <span className="text-red-400 font-sans font-bold text-xs mt-0.5">•</span>
-                      <div>
-                        <span className={`font-sans font-bold text-xs uppercase tracking-wider block ${darkMode ? 'text-white/90' : 'text-[#190F26]'}`}>
+                <div>
+                  <div className="mb-4 inline-flex p-3 rounded-xl bg-rose-500/10 text-rose-500">
+                    <Brain className="w-5 h-5" />
+                  </div>
+                  <h3 className="font-serif font-bold text-xl mb-4 text-rose-600 dark:text-rose-400">
+                    {isHindi ? 'अनकही रह गई यादें' : 'Memories Left Untold'}
+                  </h3>
+                  <ul className="space-y-3.5">
+                    {(isHindi ? leftPointsHi : leftPoints).map((pt, idx) => (
+                      <li key={idx} className="flex items-start gap-3 text-left">
+                        <div className="p-0.5 rounded-full bg-rose-500/10 text-rose-500 shrink-0 mt-0.5">
+                          <X className="w-3.5 h-3.5" />
+                        </div>
+                        <span className={`font-sans text-xs leading-relaxed ${darkMode ? 'text-white/70' : 'text-[#554466]'}`}>
                           {pt.text}
                         </span>
-                        <span className={`font-sans text-[11px] block mt-0.5 ${darkMode ? 'text-[#a28da6]' : 'text-[#554466]'}`}>
-                          {pt.desc}
-                        </span>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </motion.div>
 
-              {/* MEMOIR BOOK CARD */}
+              {/* Right Card: Memoir Tale */}
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: '-100px' }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-                className={`p-6 rounded-xl border transition-all duration-300 shadow-md ${
-                  darkMode 
-                    ? 'bg-[#24152b] hover:scale-101 border-[rgb(46,27,93)]/30' 
-                    : 'bg-white hover:scale-101 border-[rgb(46,27,93)]/40'
-                }`}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                className={`p-6 rounded-2xl border transition-all duration-300 shadow-lg relative overflow-hidden flex flex-col justify-between ${darkMode
+                    ? 'bg-[#2B1638] border-[#A78BFA]/40 hover:border-[#A78BFA]'
+                    : 'bg-gradient-to-br from-white via-[#FAF6F0] to-[#FAF6F0] border-[#2E1B5D]/30 hover:border-[#2E1B5D]'
+                  }`}
               >
-                <div className="mb-4 inline-flex p-3 rounded-full bg-[rgb(46,27,93)]/15 text-[rgb(46,27,93)] dark:text-[rgb(46,27,93)]">
-                  <Sparkles className="w-5 h-5" />
-                </div>
-                <h3 className="font-serif font-bold text-lg mb-4 text-[rgb(46,27,93)] dark:text-[rgb(46,27,93)]">Memoir Book</h3>
-                <ul className="space-y-4">
-                  {bookPoints.map((pt, idx) => (
-                    <li key={idx} className="flex gap-2.5 text-left">
-                      <span className="text-[rgb(46,27,93)] dark:text-[rgb(46,27,93)] font-sans font-bold text-xs mt-0.5">✓</span>
-                      <div>
-                        <span className={`font-sans font-bold text-xs uppercase tracking-wider block ${darkMode ? 'text-white/90' : 'text-[#190F26]'}`}>
+                <div>
+                  <div className="mb-4 inline-flex p-3 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
+                    <Sparkles className="w-5 h-5" />
+                  </div>
+                  <h3 className="font-serif font-bold text-xl mb-4 text-[#2E1B5D] dark:text-[#E5C463]">
+                    {isHindi ? 'मेमोयर टेल' : 'Memoir Tale'}
+                  </h3>
+                  <ul className="space-y-3.5">
+                    {(isHindi ? rightPointsHi : rightPoints).map((pt, idx) => (
+                      <li key={idx} className="flex items-start gap-3 text-left">
+                        <div className="p-0.5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5">
+                          <Check className="w-3.5 h-3.5" />
+                        </div>
+                        <span className={`font-sans text-xs font-medium leading-relaxed ${darkMode ? 'text-white/90' : 'text-[#190F26]'}`}>
                           {pt.text}
                         </span>
-                        <span className={`font-sans text-[11px] block mt-0.5 ${darkMode ? 'text-[#FAF6F0]/70' : 'text-[#554466]'}`}>
-                          {pt.desc}
-                        </span>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </motion.div>
 
             </div>
           </div>
 
-          {/* Right Column - 5 columns (Full height layered image) */}
-          <div className="lg:col-span-5 relative mt-6 lg:mt-0 flex items-center justify-center min-h-[400px]">
+          {/* Right Side: Image with Quote Overlay (5 cols) */}
+          <div className="lg:col-span-5 relative flex items-center justify-center">
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="w-full h-full rounded-xl overflow-hidden relative border-l-4 border-[rgb(46,27,93)] dark:border-[rgb(46,27,93)] min-h-[450px] shadow-2xl group flex"
+              transition={{ duration: 0.7 }}
+              className="w-full h-full min-h-[420px] rounded-2xl overflow-hidden relative shadow-2xl group flex flex-col justify-end border border-white/10"
             >
               <img
-                src="https://picsum.photos/seed/mem_why/800/1000"
-                alt="Three generations of family hands holding nostalgic old black and white photograph"
-                className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 select-none brightness-95"
+                src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?q=80&w=800&auto=format&fit=crop"
+                alt="Memoir Tale heirloom book"
+                className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 select-none"
                 referrerPolicy="no-referrer"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[rgb(46,27,93)]/95 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-500" />
-              
-              {/* Decorative purple gradient overlay */}
-              <div className="absolute inset-0 bg-[#8b3cdc]/5 pointer-events-none mix-blend-color-burn" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-black/20" />
 
-              {/* Float narrative quote card on the image */}
-              <div className="absolute bottom-6 left-6 right-6 p-4 backdrop-blur-md bg-[rgb(46,27,93)]/80 rounded-lg border border-[rgb(46,27,93)]/25">
-                <span className="font-serif italic text-white text-xs block leading-relaxed">
-                  "We preserve the whispers of your childhood, the courage of your migration, and the deep, rich wisdom of your twilight years."
-                </span>
-                <span className="font-sans font-bold text-[9px] uppercase tracking-wider text-[rgb(46,27,93)] mt-2 block">
-                  — Lead Biographer, MemoirTale
+              {/* Quote Overlay Container */}
+              <div className="relative z-10 p-8 text-left space-y-3">
+                <div className="w-10 h-0.5 bg-[#E5C463] mb-2" />
+                <p className="font-serif italic text-lg sm:text-xl text-white font-light leading-relaxed">
+                  "{isHindi
+                    ? 'हम जो सबसे बड़ी विरासत छोड़ सकते हैं वह धन नहीं है — वह वे कहानियाँ हैं जिन्होंने हमें बनाया है।'
+                    : 'The greatest inheritance we can leave isn\'t wealth—it\'s the stories that shaped who we are.'
+                  }"
+                </p>
+                <span className="font-sans font-bold text-xs uppercase tracking-[2px] text-[#E5C463] block">
+                  — Memoir Tale
                 </span>
               </div>
             </motion.div>
           </div>
 
-          </div>
+        </div>
+
       </div>
     </section>
   );

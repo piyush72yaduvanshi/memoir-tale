@@ -16,7 +16,7 @@ const BOOK_COVERS = [
 export default function MarqueeSection() {
   const { lang } = useLanguage();
   const t = TRANSLATIONS[lang].marquee;
-  
+
   // Triple the array for seamless infinite scroll
   const booksRow1 = [...BOOK_COVERS, ...BOOK_COVERS, ...BOOK_COVERS];
   const booksRow2 = [...BOOK_COVERS, ...BOOK_COVERS, ...BOOK_COVERS];
@@ -28,7 +28,7 @@ export default function MarqueeSection() {
           <h2 className="font-serif text-3xl lg:text-4xl font-bold text-white">
             {t.heading} <span className="italic text-[#A78BFA]">{t.headingItalic}</span>
           </h2>
-          <p className="text-white/60 mt-4 text-sm lg:text-base max-w-2xl mx-auto">
+          <p className="text-white/60 mt-4 text-sm lg:text-base max-w-3xl mx-auto leading-relaxed">
             {t.subtitle}
           </p>
         </div>
@@ -44,7 +44,7 @@ export default function MarqueeSection() {
             >
               {/* Book Cover Design */}
               <div className="h-full w-full p-5 flex flex-col justify-between relative">
-                
+
                 {/* Top Label */}
                 <div className="text-left">
                   <span className="text-[#d4af37] text-[9px] font-sans uppercase tracking-[2px] font-bold">
@@ -72,7 +72,7 @@ export default function MarqueeSection() {
                 {/* Decorative corner elements */}
                 <div className="absolute top-3 right-3 w-8 h-8 border-t-2 border-r-2 border-[#d4af37]/30"></div>
                 <div className="absolute bottom-3 left-3 w-8 h-8 border-b-2 border-l-2 border-[#d4af37]/30"></div>
-                
+
                 {/* Year Badge */}
                 <div className="absolute top-3 left-3 px-2 py-1 bg-black/30 backdrop-blur-sm border border-[#d4af37]/30 rounded">
                   <span className="text-[#d4af37] text-[9px] font-semibold">
@@ -98,7 +98,7 @@ export default function MarqueeSection() {
             >
               {/* Book Cover Design */}
               <div className="h-full w-full p-5 flex flex-col justify-between relative">
-                
+
                 {/* Top Label */}
                 <div className="text-left">
                   <span className="text-[#d4af37] text-[9px] font-sans uppercase tracking-[2px] font-bold">
@@ -126,7 +126,7 @@ export default function MarqueeSection() {
                 {/* Decorative corner elements */}
                 <div className="absolute top-3 right-3 w-8 h-8 border-t-2 border-r-2 border-[#d4af37]/30"></div>
                 <div className="absolute bottom-3 left-3 w-8 h-8 border-b-2 border-l-2 border-[#d4af37]/30"></div>
-                
+
                 {/* Year Badge */}
                 <div className="absolute top-3 left-3 px-2 py-1 bg-black/30 backdrop-blur-sm border border-[#d4af37]/30 rounded">
                   <span className="text-[#d4af37] text-[9px] font-semibold">

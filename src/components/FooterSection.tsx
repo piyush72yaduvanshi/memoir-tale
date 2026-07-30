@@ -45,7 +45,7 @@ const footerTranslations = {
     terms: "Terms of Service",
     refund: "Refund Policy",
     madeWithLove: "Made with ❤️ in Gorakhpur & Jhansi, India",
-    emailPlaceholder: "Enter email / Email Likhiye",
+    emailPlaceholder: "Enter your email address",
     subscribeSuccess: "Subscribed successfully! Thank you."
   },
   HI: {
@@ -84,8 +84,8 @@ const footerTranslations = {
   }
 };
 
-export default function FooterSection({ 
-  onQuoteClick, 
+export default function FooterSection({
+  onQuoteClick,
   isMobilePreview,
   onScrollToAbout,
   onScrollToHowItWorks,
@@ -96,7 +96,7 @@ export default function FooterSection({
   const { lang, setLang, t } = useLanguage();
   const [emailValue, setEmailValue] = useState("");
   const [newsSubscribed, setNewsSubscribed] = useState(false);
-  
+
   const curTrans = footerTranslations[lang] || footerTranslations["EN"];
 
   const handleNewsSubmit = (e: React.FormEvent) => {
@@ -119,7 +119,7 @@ export default function FooterSection({
         {/* Decorative circles */}
         <div className="absolute -bottom-10 -left-10 w-48 h-48 rounded-full border border-white/5 pointer-events-none" />
         <div className="absolute top-10 right-10 w-40 h-40 rounded-full border border-white/5 pointer-events-none" />
-        
+
         {/* Large decorative quotation graphic */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none z-0">
           <span className="font-serif font-bold text-white/5 text-[300px] sm:text-[400px] leading-none select-none translate-y-[-20px]">
@@ -131,7 +131,7 @@ export default function FooterSection({
           <h2 className="font-serif font-bold text-3xl sm:text-5xl lg:text-[54px] text-white leading-tight">
             {curTrans.finalCtaHeading}
           </h2>
-          
+
           <p className="font-serif italic text-xl sm:text-2xl text-white/90">
             {curTrans.finalCtaSub}
           </p>
@@ -180,22 +180,22 @@ export default function FooterSection({
           ▶ SECTION 15 — FOOTER (Background: Very Dark Purple)
           ========================================== */}
       <footer className="bg-[#140a15] text-white py-16 overflow-hidden relative border-t border-white/10">
-        
+
         {/* Decorative organic background circle */}
         <div className="absolute -bottom-10 -left-10 w-48 h-48 rounded-full border border-white/5 pointer-events-none" />
-        
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          
+
           {/* Top 4-Column Layout */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12">
-            
+
             {/* Column 1: Brand details */}
             <div className="lg:col-span-4 space-y-4 text-left">
               <div className="flex items-center">
                 <div className="p-1.5 bg-white/10 rounded backdrop-blur-sm">
-                  <img 
-                    src={logoUrl} 
-                    alt={curTrans.logoAlt} 
+                  <img
+                    src={logoUrl}
+                    alt={curTrans.logoAlt}
                     className="h-12 w-12 object-contain"
                     referrerPolicy="no-referrer"
                   />
@@ -275,7 +275,7 @@ export default function FooterSection({
                 </a>
               </div>
 
-               {/* Language Switcher */}
+              {/* Language Switcher */}
               <div className="flex items-center space-x-2 pt-1">
                 <Globe className="h-4 w-4 text-white/70" />
                 <span className="text-xs text-white/65">{lang === "HI" ? "भाषा:" : "Language:"}</span>
@@ -334,7 +334,7 @@ export default function FooterSection({
             <div>
               <span>{t("rightsText")}</span>
             </div>
-            
+
             <div className="flex items-center gap-2">
               <span>Made with</span>
               <Heart className="w-3 h-3 text-red-500 fill-current animate-pulse" />

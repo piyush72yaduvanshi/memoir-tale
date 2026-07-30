@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import PhilosophyStrip from './components/PhilosophyStrip';
-import TrustStrip from './components/TrustStrip';
 import TrustStatsStrip from './components/TrustStatsStrip';
 import AboutSection from './components/AboutSection';
 import AboutStripSection from './components/AboutStripSection';
@@ -31,13 +30,13 @@ export default function App() {
     return saved !== null ? JSON.parse(saved) : false;
   });
   const [showAdmin, setShowAdmin] = useState<boolean>(false);
-  
+
   // Service selection state
   const [selectedService, setSelectedService] = useState('');
-  
+
   // Package highlighting state
   const [highlightedPackageId, setHighlightedPackageId] = useState<number | null>(null);
-  
+
   // Writer matchmaker state
   const [matchedWriter, setMatchedWriter] = useState<string | null>(null);
 
@@ -86,8 +85,8 @@ export default function App() {
 
   return (
     <div className={`min-h-screen overflow-x-hidden ${darkMode ? 'bg-[#220E24] text-[#F5F0F8]' : 'bg-[#faf7f0] text-[#1B101E]'}`}>
-      <Navbar 
-        darkMode={darkMode} 
+      <Navbar
+        darkMode={darkMode}
         setDarkMode={setDarkMode}
         onScrollToContact={() => scrollToSection('contact')}
         onScrollToHowItWorks={() => scrollToSection('how-it-works')}
@@ -100,54 +99,53 @@ export default function App() {
         isMobilePreview={false}
         announcementOpen={true}
       />
-      <Hero 
+      <Hero
         darkMode={darkMode}
         onStartStoryClick={() => scrollToSection('contact')}
         onViewBooksClick={() => scrollToSection('gallery')}
         isMobilePreview={false}
       />
-      
+
       {/* Philosophy Separator */}
       <PhilosophyStrip />
-      
-      <TrustStrip />
+
       <div id="about">
         <AboutSection onLearnMoreClick={() => scrollToSection('how-it-works')} />
       </div>
       <AboutStripSection darkMode={darkMode} />
       <MarqueeSection />
       <TopicsSection />
-      
+
       {/* The 5 Step Timeline Process */}
       <div id="how-it-works">
         <HowItWorksSection onCtaClick={() => scrollToSection('contact')} darkMode={darkMode} />
       </div>
-      
+
       {/* Feature Details Grid */}
       <FeatureIconsGrid darkMode={darkMode} />
-      
+
       {/* Writer Matchmaker */}
-      <WriterMatchmaker 
+      <WriterMatchmaker
         onMatchWriter={(writer) => {
           setMatchedWriter(writer);
           scrollToSection('contact');
         }}
       />
-      
+
       {/* Comparison & Difference Core */}
       <WhyMemoirSection darkMode={darkMode} />
-      
+
       {/* Trust Counters */}
       <TrustStatsStrip />
-      
+
       {/* Our Services Slider */}
       <div id="services">
-        <MemoirLifestyle 
-          darkMode={darkMode} 
-          onCtaClick={() => scrollToSection('contact')} 
+        <MemoirLifestyle
+          darkMode={darkMode}
+          onCtaClick={() => scrollToSection('contact')}
         />
       </div>
-      
+
       {/* Legacy Gallery */}
       <div id="gallery">
         <GallerySection darkMode={darkMode} />
@@ -158,7 +156,7 @@ export default function App() {
       <EventSection />
       <FAQSection />
       <div id="contact">
-        <ContactSection 
+        <ContactSection
           selectedService={selectedService}
           matchedWriter={matchedWriter}
           onClearMatchedWriter={() => setMatchedWriter(null)}
@@ -166,7 +164,7 @@ export default function App() {
         />
       </div>
       <FooterSection onQuoteClick={() => scrollToSection('contact')} isMobilePreview={false} />
-      
+
       {/* Floating Callback Button */}
       <FloatingCallbackButton />
     </div>

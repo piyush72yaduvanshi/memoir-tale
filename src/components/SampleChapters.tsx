@@ -27,12 +27,12 @@ interface SampleExcerpt {
 const SAMPLE_EXCERPTS: SampleExcerpt[] = [
   {
     id: 1,
-    category: "Family Heritage Memoir",
-    categoryHindi: "पारिवारिक संस्मरण",
+    category: "Life Memoirs",
+    categoryHindi: "जीवन संस्मरण",
     bookTitle: "Whispers of the Banyan",
     bookTitleHindi: "बरगद की फुसफुसाहट",
-    chapterNum: "Chapter I: Gwalior Childhood",
-    chapterNumHindi: "अध्याय १: ग्वालियर का बचपन",
+    chapterNum: "Chapter 1 — The Courtyard of Eternal Summers",
+    chapterNumHindi: "अध्याय १: सदाबहार गर्मियों का आंगन",
     excerptTitle: "The Courtyard of Eternal Summers",
     excerptTitleHindi: "सदाबहार गर्मियों का आंगन",
     dropCap: "T",
@@ -47,32 +47,72 @@ const SAMPLE_EXCERPTS: SampleExcerpt[] = [
   },
   {
     id: 2,
-    category: "Business Legacy Chapter",
-    categoryHindi: "व्यावसायिक विरासत",
+    category: "Family Legacies",
+    categoryHindi: "पारिवारिक विरासत",
+    bookTitle: "The House of Four Generations",
+    bookTitleHindi: "चार पीढ़ियों का निवास",
+    chapterNum: "Chapter 2 — Roots Beyond Borders",
+    chapterNumHindi: "अध्याय २: सीमाओं से परे जड़ें",
+    excerptTitle: "Roots Beyond Borders",
+    excerptTitleHindi: "सीमाओं से परे जड़ें",
+    dropCap: "F",
+    proseLeft: "or four generations, our family table was where decisions of destiny were made over hot chai and brass thalis. My great-grandmother kept a velvet box containing silver coins from three different centuries, each carrying the weight of hard-earned honor and migration across states.",
+    proseLeftHindi: "चार पीढ़ियों से, हमारे परिवार की डाइनिंग टेबल ही वह जगह थी जहाँ नियति के फैसले चाय और पीतल की थालियों के बीच हुआ करते थे। मेरी परदादी के पास मखमल की एक डिब्बी थी जिसमें तीन अलग-अलग सदियों के चाँदी के सिक्के रखे थे।",
+    proseRight: "Gathering these stories under one roof gave our children something money could never buy: a sense of belonging to an unbroken chain of courage, traditions, and unconditional warmth.",
+    proseRightHindi: "इन कहानियों को एक छत के नीचे सहेजने से हमारे बच्चों को वह मिला जो पैसा कभी नहीं खरीद सकता: साहस, परंपराओं और असीम प्यार की एक अटूट श्रृंखला।",
+    quote: "Family is not just who we come from; it is the living story we carry forward.",
+    quoteHindi: "परिवार सिर्फ वो नहीं जहाँ से हम आते हैं; यह वो जीवित कहानी है जिसे हम आगे ले जाते हैं।",
+    authorSign: "By Ananya Sharma, Senior Biographer",
+    authorSignHindi: "लेखक: अनन्या शर्मा"
+  },
+  {
+    id: 3,
+    category: "Founder Stories",
+    categoryHindi: "संस्थापक गाथा",
     bookTitle: "A Life in Steel & Ink",
     bookTitleHindi: "आधुनिक भारत का शिल्प",
-    chapterNum: "Chapter IV: Ranchi Foothills",
-    chapterNumHindi: "अध्याय ४: रांची की घाटियां",
+    chapterNum: "Chapter 4 — Of Coal Dust & Gilded Dreams",
+    chapterNumHindi: "अध्याय ४: कोयले की धूल और सुनहरे सपने",
     excerptTitle: "Of Coal Dust & Gilded Dreams",
     excerptTitleHindi: "कोयले की धूल और सुनहरे सपने",
     dropCap: "I",
     proseLeft: "n the bone-chilling winters of Jharkhand, 1974, the furnace at our first metallurgy workshop was our sole source of comfort and courage. I could feel the microscopic graphite dust settling in the lines of my hands—hands that had swapped corporate pens for rough hammers. My father worked eighteen-hour shifts, his eyes reflecting the molten gold of pure iron ore.",
-    proseLeftHindi: "झारखंड की हाड़ कंपाने वाली 1974 की सर्दियों में, हमारी पहली छोटी वर्कशॉप में लगातार धधकती हुई भट्टी ही हमारी हिम्मत और आराम का स्रोत थी। लोहे की गर्द मेरे हाथों की लकीरों में जम जाया करती थी—वे हाथ जिन्होंने बड़ी नौकरियाँ छोड़कर औजार चुन लिए थे। मेरे पिताजी अठारह-अठारह घंटे काम करते थे, उनकी आँखों में पिघले हुए लोहे सी चमक हुआ करती थी।",
-    proseRight: "Many mocked our humble ambitions, calling us foolish dreamers on barren soil. But father walked with a heavy, certain pace. He often said, 'Steel is not strengthened by quiet rooms, son. It is born in the agonizing white fire.' That single foundry laid the multi-million rupee foundation of the modern manufacturing empire we manage today.",
-    proseRightHindi: "बहुत से लोगों ने हमारी छोटी कोशिशों का मज़ाक उड़ाया, हमें बंजर भूमि पर महल बनाने वाले दीवाने कहा। लेकिन पिताजी के कदम अडिग थे। वे अक्सर कहते थे, 'लोहा शांत कमरों में मज़बूत आकार नहीं लेता बेटा, उसे सुलगती आग में तपना ही पड़ता है।' उसी एक भट्टी ने आज के इस विशाल औद्योगिक साम्राज्य की बुनियाद रखी थी।",
+    proseLeftHindi: "झारखंड की हाड़ कंपाने वाली 1974 की सर्दियों में, हमारी पहली छोटी वर्कशॉप में लगातार धधकती हुई भट्टी ही हमारी हिम्मत और आराम का स्रोत थी। लोहे की गर्द मेरे हाथों की लकीरों में जम जाया करती थी।",
+    proseRight: "Many mocked our humble ambitions, calling us foolish dreamers on barren soil. But father walked with a heavy, certain pace. He often said, 'Steel is not strengthened by quiet rooms, son. It is born in the agonizing white fire.' That single foundry laid the foundation of our modern enterprise.",
+    proseRightHindi: "बहुत से लोगों ने हमारी छोटी कोशिशों का मज़ाक उड़ाया। लेकिन पिताजी के कदम अडिग थे। वे अक्सर कहते थे, 'लोहा शांत कमरों में मज़बूत आकार नहीं लेता बेटा, उसे सुलगती आग में तपना ही पड़ता है।'",
     quote: "Values are the only currency that inflation cannot touch.",
     quoteHindi: "मूल्य ही एकमात्र ऐसी मुद्रा हैं जिसे महंगाई कभी छू नहीं सकती।",
     authorSign: "By Jayesh Narang, Lead Archivist",
     authorSignHindi: "लेखक: जयेश नारंग"
   },
   {
-    id: 3,
-    category: "Beloved Tribute Memoir",
-    categoryHindi: "श्रद्धांजलि संस्मरण",
+    id: 4,
+    category: "Travel Journals",
+    categoryHindi: "यात्रा संस्मरण",
+    bookTitle: "Across the Himalayan Pass",
+    bookTitleHindi: "हिमालय के पार",
+    chapterNum: "Chapter 3 — The Winds of Spiti",
+    chapterNumHindi: "अध्याय ३: स्पीति की हवाएं",
+    excerptTitle: "The Winds of Spiti Valley",
+    excerptTitleHindi: "स्पीति घाटी की हवाएं",
+    dropCap: "T",
+    proseLeft: "he high-altitude cold of the Spiti valley bit into our boots, but the vast expanse of azure sky made every painful step worthwhile. Backpacking through ancient monasteries at 14,000 feet, we recorded conversations with local elders whose smiles held centuries of serenity.",
+    proseLeftHindi: "स्पीति घाटी की ऊँचाई पर जमी ठंड हमारे जूतों तक महसूस हो रही थी, लेकिन नीले आसमान के विशाल विस्तार ने हर मुश्किल कदम को सार्थक बना दिया।",
+    proseRight: "Capturing these travels in a hardbound journal transformed fleeting travel photos into an enduring odyssey of discovery and personal growth.",
+    proseRightHindi: "इन यात्राओं को एक हार्डबाउंड जर्नल में सहेजने से हमारी ये छोटी-छोटी तस्वीरें एक यादगार जीवन-यात्रा बन गईं।",
+    quote: "We travel not to escape life, but for life not to escape us.",
+    quoteHindi: "हम जीवन से भागने के लिए नहीं, बल्कि जीवन को जी भर जीने के लिए यात्रा करते हैं।",
+    authorSign: "By Vikramaditya Roy, Author",
+    authorSignHindi: "लेखक: विक्रमादित्य रॉय"
+  },
+  {
+    id: 5,
+    category: "Tribute Books",
+    categoryHindi: "श्रद्धांजलि पुस्तक",
     bookTitle: "Seven Flights of Clay",
     bookTitleHindi: "मिट्टी के सात आसमान",
-    chapterNum: "Chapter III: The Lucknow Wedding",
-    chapterNumHindi: "अध्याय ३: लखनऊ की शादी",
+    chapterNum: "Chapter 3 — Under the Vermilion Canopy",
+    chapterNumHindi: "अध्याय ३: सिंदूरी मंडप के तले",
     excerptTitle: "Under the Vermilion Canopy",
     excerptTitleHindi: "सिंदूरी मंडप के तले",
     dropCap: "S",
@@ -90,13 +130,13 @@ const SAMPLE_EXCERPTS: SampleExcerpt[] = [
 export default function SampleChapters() {
   const { lang } = useLanguage();
   const isHindi = lang === "HI";
-  
+
   const [activeExcerptIndex, setActiveExcerptIndex] = useState<number>(0);
   const activeExcerpt = SAMPLE_EXCERPTS[activeExcerptIndex];
 
   const labels = {
     title: isHindi ? "साहित्यिक गुणवत्ता का पूर्वावलोकन" : "Preview Our Literary Standard",
-    subtitle: isHindi 
+    subtitle: isHindi
       ? "स्टोरीटेरेस की तरह, वास्तविक उत्कृष्ट संस्मरण कतरनें देखें। महसूस करें कि कैसे आपके माता-पिता के साधारण किस्से इतिहास बन जाते हैं।"
       : "Step into the pages of our actual handcrafted memoirs. Experience the meticulous prose, emotional depth, and elite design.",
     tagline: isHindi ? "पढ़ें उत्कृष्ट अंश" : "READ TIMLESS EXCERPTS",
@@ -107,8 +147,8 @@ export default function SampleChapters() {
   };
 
   return (
-    <section 
-      id="sample-chapters" 
+    <section
+      id="sample-chapters"
       className="bg-[#FCFBF7] py-16 lg:py-24 text-[#190F26] relative overflow-hidden"
     >
       {/* Decorative subtle background lighting lines */}
@@ -116,7 +156,7 @@ export default function SampleChapters() {
       <div className="absolute bottom-[10%] left-[-100px] w-96 h-96 bg-[#8B3CDC]/2 rounded-full blur-[110px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
+
         {/* Header Block */}
         <div className="flex flex-col items-center text-center mb-12">
           <div className="w-[60px] h-[3px] bg-[#2E1B5D] rounded-[2px] mb-4" />
@@ -138,11 +178,10 @@ export default function SampleChapters() {
               key={ex.id}
               type="button"
               onClick={() => setActiveExcerptIndex(idx)}
-              className={`px-5 py-2.5 rounded-full text-xs font-sans font-bold border transition-all cursor-pointer select-none outline-none focus:outline-none flex items-center space-x-1.5 ${
-                activeExcerptIndex === idx
+              className={`px-5 py-2.5 rounded-full text-xs font-sans font-bold border transition-all cursor-pointer select-none outline-none focus:outline-none flex items-center space-x-1.5 ${activeExcerptIndex === idx
                   ? "bg-[#2E1B5D] text-white border-[#2E1B5D] shadow-[0_6px_20px_rgba(139, 92, 246,0.25)] scale-105"
                   : "bg-white text-slate-600 border-[#E3DDE9]/60 hover:bg-[#FAF6F0] hover:text-[#190F26]"
-              }`}
+                }`}
             >
               <Bookmark className="h-3.5 w-3.5 shrink-0" />
               <span>{isHindi ? ex.categoryHindi : ex.category}</span>
@@ -179,7 +218,7 @@ export default function SampleChapters() {
 
               {/* Layout: Dual Column open book pages */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start relative">
-                
+
                 {/* Book Page Spine Center shadow in between (for large sizes) */}
                 <div className="hidden lg:block absolute left-1/2 top-0 bottom-0 w-[1px] bg-[#E3DDE9]/80 shadow-[0_0_8px_rgba(0,0,0,0.1)]" />
 
@@ -234,11 +273,10 @@ export default function SampleChapters() {
                       key={i}
                       type="button"
                       onClick={() => setActiveExcerptIndex(i)}
-                      className={`h-2.5 rounded-full transition-all duration-300 ${
-                        activeExcerptIndex === i 
-                          ? "w-8 bg-[#2E1B5D]" 
+                      className={`h-2.5 rounded-full transition-all duration-300 ${activeExcerptIndex === i
+                          ? "w-8 bg-[#2E1B5D]"
                           : "w-2.5 bg-[#E3DDE9] hover:bg-[#2E1B5D]/40"
-                      }`}
+                        }`}
                       aria-label={`Go to page ${i + 1}`}
                     />
                   ))}
