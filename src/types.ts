@@ -14,6 +14,7 @@ export interface Service {
   image: string;
   linkText: string;
   linkTextHi?: string;
+  isComingSoon?: boolean;
 }
 
 export interface Step {

@@ -38,14 +38,13 @@ function EventCard({ src, index, onClick }: { src: string; index: number; onClic
           <Sparkles className="h-5 w-5 text-[#2E1B5D]/40 animate-spin" style={{ animationDuration: '3s' }} />
         </div>
       )}
-      
+
       <img
         src={src}
         alt={`Event moment ${index + 1}`}
         onLoad={() => setLoaded(true)}
-        className={`w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-110 ${
-          loaded ? "opacity-100 scale-100" : "opacity-0 scale-95"
-        }`}
+        className={`w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-110 ${loaded ? "opacity-100 scale-100" : "opacity-0 scale-95"
+          }`}
       />
 
       {/* Hover overlay */}
@@ -79,9 +78,8 @@ function LightboxImage({ src, alt }: { src: string; alt: string }) {
         src={src}
         alt={alt}
         onLoad={() => setLoaded(true)}
-        className={`max-h-[60vh] sm:max-h-[70vh] object-contain mx-auto transition-all duration-350 ${
-          loaded ? "opacity-100 scale-100" : "opacity-0 scale-95"
-        }`}
+        className={`max-h-[60vh] sm:max-h-[70vh] object-contain mx-auto transition-all duration-350 ${loaded ? "opacity-100 scale-100" : "opacity-0 scale-95"
+          }`}
       />
     </div>
   );
@@ -134,11 +132,11 @@ export default function EventSection() {
   }, [activeImageIndex]);
 
   const labels = {
-    label: isHindi ? "हमारे आयोजन" : "OUR EVENTS",
-    heading: isHindi ? "यादगार पलों की झलकियां" : "Memorable Moments Captured",
-    subtitle: isHindi 
-      ? "हमारे विशेष कार्यक्रमों और समारोहों से कुछ खूबसूरत पल जहां हम परिवारों को उनकी यादों को संजोने में मदद करते हैं"
-      : "Beautiful moments from our special events and celebrations where we help families preserve their precious memories",
+    label: isHindi ? "हमारे आयोजन व मीडिया" : "EVENTS & MEDIA",
+    heading: isHindi ? "मेमोयर टेल इवेंट्स और मीडिया" : "Memoir Tale Events & Media",
+    subtitle: isHindi
+      ? "उन पलों का जश्न मनाना जहाँ परिवार, संस्थापक और समुदाय अपनी कहानियों को सहेजने के लिए एक साथ आते हैं।"
+      : "Celebrating the moments where families, founders, and communities come together to preserve their stories.",
     eventDate: isHindi ? "9 जून 2026" : "June 9, 2026",
     eventLocation: isHindi ? "मेमोयरटेल कार्यक्रम" : "MemoirTale Event",
     eventAttendees: isHindi ? "परिवार और मित्र" : "Families & Friends",
@@ -173,7 +171,7 @@ export default function EventSection() {
       <div className="absolute bottom-[10%] left-[-80px] w-80 h-80 bg-[#8B3CDC]/4 rounded-full blur-[80px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
+
         {/* Header Section */}
         <FadeIn>
           <div className="flex flex-col items-center text-center mb-12">
@@ -212,7 +210,7 @@ export default function EventSection() {
         <FadeIn delay={0.2}>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 min-h-[460px] transition-all duration-500">
             {EVENT_IMAGES.map((image, index) => (
-              <EventCard 
+              <EventCard
                 key={index}
                 src={image}
                 index={index}
@@ -249,9 +247,9 @@ export default function EventSection() {
             className="fixed inset-0 bg-black/98 backdrop-blur-md z-[100] flex flex-col items-center justify-center p-4 animate-fade-in"
           >
             <div className="relative max-w-5xl w-full flex flex-col items-center">
-              
+
               {/* Top Navigation Bar */}
-              <div 
+              <div
                 onClick={(e) => e.stopPropagation()}
                 className="w-full max-w-3xl flex items-center justify-between mb-4 px-2 sm:px-0 z-50 select-none"
               >
@@ -313,7 +311,7 @@ export default function EventSection() {
               </div>
 
               {/* Thumbnail Strip */}
-              <div 
+              <div
                 onClick={(e) => e.stopPropagation()}
                 className="flex justify-center gap-2 mt-4 overflow-x-auto py-1 max-w-full px-4 scrollbar-none"
               >
@@ -321,11 +319,10 @@ export default function EventSection() {
                   <button
                     key={index}
                     onClick={() => setActiveImageIndex(index)}
-                    className={`relative w-12 h-12 rounded-lg overflow-hidden border-2 transition-all duration-300 cursor-pointer shrink-0 ${
-                      index === activeImageIndex
+                    className={`relative w-12 h-12 rounded-lg overflow-hidden border-2 transition-all duration-300 cursor-pointer shrink-0 ${index === activeImageIndex
                         ? "border-[#2E1B5D] scale-110 shadow-lg shadow-[#2E1B5D]/20"
                         : "border-white/10 opacity-60 hover:opacity-100"
-                    }`}
+                      }`}
                   >
                     <img
                       src={image}
@@ -337,7 +334,7 @@ export default function EventSection() {
               </div>
 
               {/* Bottom Info Card */}
-              <div 
+              <div
                 onClick={(e) => e.stopPropagation()}
                 className="w-full max-w-2xl mt-5 p-5 sm:p-6 bg-[#190F26] border border-[#2E1B5D]/30 rounded-2xl text-left shadow-2xl mx-auto select-none"
               >
@@ -376,7 +373,7 @@ export default function EventSection() {
                       <span className="text-[#2E1B5D]">⌨️</span> {labels.escTip}
                     </div>
                   </div>
-                  
+
                   <span className="text-[9px] uppercase tracking-wider font-mono text-[#2E1B5D]/70 font-semibold bg-[#2E1B5D]/5 border border-[#2E1B5D]/20 px-2 py-1 rounded inline-block self-start sm:self-auto">
                     {isHindi ? "मेमोयरटेल" : "MEMOIRTALE"}
                   </span>

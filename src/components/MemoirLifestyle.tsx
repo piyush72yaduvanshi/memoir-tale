@@ -71,27 +71,24 @@ export default function MemoirLifestyle({ darkMode, onCtaClick }: MemoirLifestyl
   };
 
   // Gap between cards in pixels
-  const gap = 24; 
+  const gap = 24;
   // Calculate percentage shift based on current index and items per page
   const translatePercent = (currentIndex * 100) / itemsPerPage;
 
   return (
     <section
       id="services-section"
-      className={`py-16 md:py-24 transition-colors duration-500 overflow-hidden relative ${
-        darkMode ? 'bg-[#180B21]' : 'bg-[#FAF7F2]'
-      }`}
+      className={`py-16 md:py-24 transition-colors duration-500 overflow-hidden relative ${darkMode ? 'bg-[#180B21]' : 'bg-[#FAF7F2]'
+        }`}
     >
       {/* Subtle Ambient Glow Background Elements */}
-      <div 
-        className={`absolute top-0 left-1/4 w-96 h-96 rounded-full blur-3xl pointer-events-none ${
-          darkMode ? 'bg-[#3b1d54]/20' : 'bg-[#e2d5ed]/30'
-        }`} 
+      <div
+        className={`absolute top-0 left-1/4 w-96 h-96 rounded-full blur-3xl pointer-events-none ${darkMode ? 'bg-[#3b1d54]/20' : 'bg-[#e2d5ed]/30'
+          }`}
       />
-      <div 
-        className={`absolute bottom-0 right-1/4 w-96 h-96 rounded-full blur-3xl pointer-events-none ${
-          darkMode ? 'bg-[#2E1B5D]/25' : 'bg-[#ecd8ff]/20'
-        }`} 
+      <div
+        className={`absolute bottom-0 right-1/4 w-96 h-96 rounded-full blur-3xl pointer-events-none ${darkMode ? 'bg-[#2E1B5D]/25' : 'bg-[#ecd8ff]/20'
+          }`}
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -103,19 +100,17 @@ export default function MemoirLifestyle({ darkMode, onCtaClick }: MemoirLifestyl
               {isHindi ? "हमारी प्रमुख सेवाएं" : "OUR SIGNATURE SERVICES"}
             </span>
 
-            <h2 className={`font-serif font-bold text-3xl sm:text-4xl lg:text-5xl leading-[1.15] tracking-tight ${
-              darkMode ? 'text-[#F5F0F8]' : 'text-[#190F26]'
-            }`}>
+            <h2 className={`font-serif font-bold text-3xl sm:text-4xl lg:text-5xl leading-[1.15] tracking-tight ${darkMode ? 'text-[#F5F0F8]' : 'text-[#190F26]'
+              }`}>
               {isHindi ? "हर कहानी को सुंदरता से" : "Every Story Deserves to Be"} <br className="hidden sm:inline" />
               <span className="font-serif italic text-[rgb(46,27,93)] dark:text-[rgb(46,27,93)]">
                 {isHindi ? " संजोया जाना चाहिए" : " Preserved Beautifully"}
               </span>
             </h2>
 
-            <p className={`font-sans text-sm sm:text-base mt-3 max-w-2xl leading-relaxed ${
-              darkMode ? 'text-[#F5F0F8]/70' : 'text-[#554466]'
-            }`}>
-              {isHindi 
+            <p className={`font-sans text-sm sm:text-base mt-3 max-w-2xl leading-relaxed ${darkMode ? 'text-[#F5F0F8]/70' : 'text-[#554466]'
+              }`}>
+              {isHindi
                 ? "व्यक्तिगत संस्मरणों से लेकर पारिवारिक इतिहास और कॉर्पोरेट विरासत तक, प्रत्येक सेवा को प्रामाणिकता, लालित्य और स्थायी अर्थ के साथ आपकी कहानी को सहेजने के लिए विचारपूर्वक डिज़ाइन किया गया है।"
                 : "From personal memoirs to family histories and corporate legacies, each service is thoughtfully designed to preserve your story with authenticity, elegance, and lasting meaning."}
             </p>
@@ -126,22 +121,20 @@ export default function MemoirLifestyle({ darkMode, onCtaClick }: MemoirLifestyl
             <button
               onClick={scrollPrev}
               aria-label="Previous Service"
-              className={`w-11 h-11 rounded-full border flex items-center justify-center transition-all duration-300 cursor-pointer shadow-sm active:scale-95 ${
-                darkMode
+              className={`w-11 h-11 rounded-full border flex items-center justify-center transition-all duration-300 cursor-pointer shadow-sm active:scale-95 ${darkMode
                   ? 'border-white/15 hover:border-[#9D75D4] text-white hover:bg-[#341A47] bg-[#22102e]'
                   : 'border-[#E2D8E8] hover:border-[#2E1B5D] text-[#190F26] hover:bg-white bg-white hover:shadow-md'
-              }`}
+                }`}
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
             <button
               onClick={scrollNext}
               aria-label="Next Service"
-              className={`w-11 h-11 rounded-full border flex items-center justify-center transition-all duration-300 cursor-pointer shadow-sm active:scale-95 ${
-                darkMode
+              className={`w-11 h-11 rounded-full border flex items-center justify-center transition-all duration-300 cursor-pointer shadow-sm active:scale-95 ${darkMode
                   ? 'border-white/15 hover:border-[#9D75D4] text-white hover:bg-[#341A47] bg-[#22102e]'
                   : 'border-[#E2D8E8] hover:border-[#2E1B5D] text-[#190F26] hover:bg-white bg-white hover:shadow-md'
-              }`}
+                }`}
             >
               <ChevronRight className="w-5 h-5" />
             </button>
@@ -149,7 +142,7 @@ export default function MemoirLifestyle({ darkMode, onCtaClick }: MemoirLifestyl
         </div>
 
         {/* Carousel Slider Area */}
-        <div 
+        <div
           className="relative overflow-hidden w-full rounded-2xl pt-2 pb-6 px-1"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
@@ -168,12 +161,11 @@ export default function MemoirLifestyle({ darkMode, onCtaClick }: MemoirLifestyl
                   width: `calc((100% - ${(itemsPerPage - 1) * gap}px) / ${itemsPerPage})`
                 }}
               >
-                <div 
-                  className={`group rounded-2xl overflow-hidden shadow-sm hover:shadow-xl border flex flex-col justify-between h-full transition-all duration-300 transform hover:-translate-y-1.5 ${
-                    darkMode
+                <div
+                  className={`group rounded-2xl overflow-hidden shadow-sm hover:shadow-xl border flex flex-col justify-between h-full transition-all duration-300 transform hover:-translate-y-1.5 ${darkMode
                       ? 'bg-[#22122b] border-white/10 hover:border-[#9D75D4]/50'
                       : 'bg-white border-[#E9E1EE] hover:border-[#2E1B5D]/40'
-                  }`}
+                    }`}
                 >
                   {/* Card Image Banner */}
                   <div className="relative h-48 sm:h-52 overflow-hidden shrink-0">
@@ -189,8 +181,15 @@ export default function MemoirLifestyle({ darkMode, onCtaClick }: MemoirLifestyl
                     <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
 
                     {/* Tag Badge */}
-                    <div className="absolute top-3.5 left-3.5 py-1 px-3 bg-[#2E1B5D]/90 backdrop-blur-md rounded-full border border-white/20 text-[10px] uppercase tracking-widest font-sans font-bold text-white shadow-sm">
-                      {isHindi && svc.taglineHi ? svc.taglineHi : svc.tagline}
+                    <div className="absolute top-3.5 left-3.5 flex items-center gap-1.5">
+                      <span className="py-1 px-3 bg-[#2E1B5D]/90 backdrop-blur-md rounded-full border border-white/20 text-[10px] uppercase tracking-widest font-sans font-bold text-white shadow-sm">
+                        {isHindi && svc.taglineHi ? svc.taglineHi : svc.tagline}
+                      </span>
+                      {svc.isComingSoon && (
+                        <span className="py-1 px-2.5 bg-amber-500/90 backdrop-blur-md rounded-full border border-white/30 text-[9px] uppercase tracking-wider font-sans font-bold text-white shadow-sm">
+                          Coming Soon
+                        </span>
+                      )}
                     </div>
 
                     {/* Card Title Overlay */}
@@ -203,20 +202,25 @@ export default function MemoirLifestyle({ darkMode, onCtaClick }: MemoirLifestyl
 
                   {/* Card Body Info */}
                   <div className="p-5 flex flex-col justify-between flex-grow">
-                    <p className={`font-sans text-xs sm:text-sm leading-relaxed mb-4 flex-grow ${
-                      darkMode ? 'text-[#F5F0F8]/60' : 'text-[#554466]'
-                    }`}>
+                    <p className={`font-sans text-xs sm:text-sm leading-relaxed mb-4 flex-grow ${darkMode ? 'text-[#F5F0F8]/60' : 'text-[#554466]'
+                      }`}>
                       {isHindi && svc.descriptionHi ? svc.descriptionHi : svc.description}
                     </p>
 
                     <div className="pt-3 border-t border-[rgb(46,27,93)]/20 dark:border-white/10 flex items-center justify-between">
-                      <button
-                        onClick={handleCtaClick}
-                        className="inline-flex items-center gap-1.5 text-xs font-sans font-bold uppercase tracking-wider text-[rgb(46,27,93)] dark:text-[rgb(46,27,93)] cursor-pointer hover:brightness-110 group/btn"
-                      >
-                        <span>{isHindi && svc.linkTextHi ? svc.linkTextHi : svc.linkText}</span>
-                        <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
-                      </button>
+                      {svc.isComingSoon ? (
+                        <span className="inline-flex items-center gap-1 text-[11px] font-sans font-bold uppercase tracking-wider text-amber-500 dark:text-amber-400 bg-amber-500/10 px-2.5 py-1 rounded-full border border-amber-500/20">
+                          Coming Soon
+                        </span>
+                      ) : (
+                        <button
+                          onClick={handleCtaClick}
+                          className="inline-flex items-center gap-1.5 text-xs font-sans font-bold uppercase tracking-wider text-[rgb(46,27,93)] dark:text-[rgb(46,27,93)] cursor-pointer hover:brightness-110 group/btn"
+                        >
+                          <span>{isHindi && svc.linkTextHi ? svc.linkTextHi : svc.linkText}</span>
+                          <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
+                        </button>
+                      )}
                     </div>
                   </div>
 
@@ -232,11 +236,10 @@ export default function MemoirLifestyle({ darkMode, onCtaClick }: MemoirLifestyl
             <button
               key={i}
               onClick={() => setCurrentIndex(i)}
-              className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
-                currentIndex === i
+              className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${currentIndex === i
                   ? 'w-8 bg-[#2E1B5D] dark:bg-[#C5A3ED]'
                   : `w-2 ${darkMode ? 'bg-white/20 hover:bg-white/40' : 'bg-[#E0D5E5] hover:bg-[#2E1B5D]/40'}`
-              }`}
+                }`}
               title={`Go to slide ${i + 1}`}
               aria-label={`Go to slide ${i + 1}`}
             />

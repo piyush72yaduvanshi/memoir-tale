@@ -135,10 +135,11 @@ export default function SampleChapters() {
   const activeExcerpt = SAMPLE_EXCERPTS[activeExcerptIndex];
 
   const labels = {
-    title: isHindi ? "साहित्यिक गुणवत्ता का पूर्वावलोकन" : "Preview Our Literary Standard",
+    title: isHindi ? "वास्तविक विरासत पुस्तक का अन्वेषण करें" : "Explore a Real Legacy Book",
     subtitle: isHindi
       ? "स्टोरीटेरेस की तरह, वास्तविक उत्कृष्ट संस्मरण कतरनें देखें। महसूस करें कि कैसे आपके माता-पिता के साधारण किस्से इतिहास बन जाते हैं।"
       : "Step into the pages of our actual handcrafted memoirs. Experience the meticulous prose, emotional depth, and elite design.",
+    btn: isHindi ? "संपूर्ण नमूना देखें" : "View Complete Sample",
     tagline: isHindi ? "पढ़ें उत्कृष्ट अंश" : "READ TIMLESS EXCERPTS",
     signature: isHindi ? "गिल्डेड एडिशन बायोग्राफी" : "Gilded Heritage Edition",
     chooseStory: isHindi ? "विषय चुनें:" : "Choose Excerpt Type:",
@@ -169,6 +170,17 @@ export default function SampleChapters() {
           <p className="font-sans text-xs sm:text-sm text-[#554466] mt-3 max-w-xl leading-relaxed">
             {labels.subtitle}
           </p>
+
+          <button
+            onClick={() => {
+              const element = document.getElementById('contact');
+              if (element) element.scrollIntoView({ behavior: 'smooth' });
+            }}
+            className="mt-6 inline-flex items-center gap-2 px-6 py-3 bg-[#2E1B5D] hover:bg-[#3D257A] text-white font-sans font-semibold text-xs uppercase tracking-widest rounded-full shadow-lg shadow-[#2E1B5D]/20 transition-all cursor-pointer hover:scale-105"
+          >
+            <BookOpen className="w-4 h-4" />
+            <span>{labels.btn}</span>
+          </button>
         </div>
 
         {/* Category Selector Tabs */}
@@ -179,8 +191,8 @@ export default function SampleChapters() {
               type="button"
               onClick={() => setActiveExcerptIndex(idx)}
               className={`px-5 py-2.5 rounded-full text-xs font-sans font-bold border transition-all cursor-pointer select-none outline-none focus:outline-none flex items-center space-x-1.5 ${activeExcerptIndex === idx
-                  ? "bg-[#2E1B5D] text-white border-[#2E1B5D] shadow-[0_6px_20px_rgba(139, 92, 246,0.25)] scale-105"
-                  : "bg-white text-slate-600 border-[#E3DDE9]/60 hover:bg-[#FAF6F0] hover:text-[#190F26]"
+                ? "bg-[#2E1B5D] text-white border-[#2E1B5D] shadow-[0_6px_20px_rgba(139, 92, 246,0.25)] scale-105"
+                : "bg-white text-slate-600 border-[#E3DDE9]/60 hover:bg-[#FAF6F0] hover:text-[#190F26]"
                 }`}
             >
               <Bookmark className="h-3.5 w-3.5 shrink-0" />
@@ -274,8 +286,8 @@ export default function SampleChapters() {
                       type="button"
                       onClick={() => setActiveExcerptIndex(i)}
                       className={`h-2.5 rounded-full transition-all duration-300 ${activeExcerptIndex === i
-                          ? "w-8 bg-[#2E1B5D]"
-                          : "w-2.5 bg-[#E3DDE9] hover:bg-[#2E1B5D]/40"
+                        ? "w-8 bg-[#2E1B5D]"
+                        : "w-2.5 bg-[#E3DDE9] hover:bg-[#2E1B5D]/40"
                         }`}
                       aria-label={`Go to page ${i + 1}`}
                     />

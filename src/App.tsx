@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import LegacyPlatformExplainer from './components/LegacyPlatformExplainer';
 import PhilosophyStrip from './components/PhilosophyStrip';
 import TrustStatsStrip from './components/TrustStatsStrip';
 import AboutSection from './components/AboutSection';
@@ -11,6 +12,7 @@ import HowItWorksSection from './components/HowItWorksSection';
 import MemoirLifestyle from './components/MemoirLifestyle';
 import FeatureIconsGrid from './components/FeatureIconsGrid';
 import WriterMatchmaker from './components/WriterMatchmaker';
+import WhyMemoirCards from './components/WhyMemoirCards';
 import WhyMemoirSection from './components/WhyMemoirSection';
 import GallerySection from './components/GallerySection';
 import SampleChapters from './components/SampleChapters';
@@ -105,6 +107,7 @@ export default function App() {
         onViewBooksClick={() => scrollToSection('gallery')}
         isMobilePreview={false}
       />
+      <LegacyPlatformExplainer darkMode={darkMode} />
 
       {/* Philosophy Separator */}
       <PhilosophyStrip />
@@ -132,8 +135,14 @@ export default function App() {
         }}
       />
 
+      {/* Why Memoir Tale Core 4 Cards */}
+      <WhyMemoirCards darkMode={darkMode} />
+
       {/* Comparison & Difference Core */}
       <WhyMemoirSection darkMode={darkMode} />
+
+      {/* Real Legacy Book Sample Preview */}
+      <SampleChapters />
 
       {/* Trust Counters */}
       <TrustStatsStrip />
@@ -150,7 +159,6 @@ export default function App() {
       <div id="gallery">
         <GallerySection darkMode={darkMode} />
       </div>
-      <SampleChapters />
       <TestimonialsSection />
       <PortfolioGallery />
       <EventSection />

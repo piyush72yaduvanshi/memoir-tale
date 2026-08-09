@@ -84,7 +84,7 @@ export default function PortfolioGallery() {
   const [selectedStory, setSelectedStory] = useState<StoryItem | null>(null);
 
   return (
-    <section 
+    <section
       id="portfolio-gallery"
       className="py-20 md:py-28 bg-[#2d1e2f] text-white relative overflow-hidden"
     >
@@ -92,23 +92,40 @@ export default function PortfolioGallery() {
       <div className="absolute inset-0 opacity-[0.03] pointer-events-none paper-grain-dark" />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
-        
+
         {/* Section Header */}
-        <div className="max-w-2xl mx-auto mb-16 md:mb-20">
+        <div className="max-w-3xl mx-auto mb-12 text-center">
           <span className="font-sans text-[11px] font-bold tracking-[3px] uppercase text-accent-purple block mb-3">
             {isHindi ? "पोर्टफोलियो" : "PORTFOLIO"}
           </span>
-          <h2 className="font-serif font-bold text-3xl sm:text-4xl md:text-5xl leading-tight">
-            {isHindi ? "जो कहानियाँ हमने बताने में मदद की" : "Stories We've Helped"}{" "}
-            <span className="font-serif italic text-accent-purple">
-              {isHindi ? "" : "Tell"}
-            </span>
+          <h2 className="font-serif font-bold text-3xl sm:text-4xl md:text-5xl leading-tight text-[#D4AF37]">
+            {isHindi ? "जो कहानियाँ सहेजने का हमें सौभाग्य मिला" : "Stories We've Had The Privilege To Preserve"}
           </h2>
           <p className="mt-4 font-sans text-white/70 text-xs md:text-sm leading-relaxed">
-            {isHindi 
-              ? "हमारे इमर्सिव स्टोरीबुक इंटरैक्टिव रीडर को खोलने और एक समाप्त मेमोयरटेल अध्याय की साहित्यिक गहराई का अनुभव करने के लिए नीचे किसी भी वॉल्यूम पर क्लिक करें।"
-              : "Click on any volume below to open our immersive storybook interactive reader and experience the literary depth and formatting of a finished MemoirTale chapter."}
+            {isHindi
+              ? "हमारे इमर्सिव स्टोरीबुक इंटरैक्टिव रीडर को खोलने और एक समाप्त मेमोयरटेल अध्याय की साहित्यिक गहराई का अनुभव करने के लिए नीचे किसी भी कार्ड पर क्लिक करें।"
+              : "Click on any story card below to open our immersive reader and experience the literary depth of our preserved volumes."}
           </p>
+        </div>
+
+        {/* Verified Stats Bar */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto mb-16 p-6 rounded-2xl bg-[#3b273d]/60 border border-[#D4AF37]/30 backdrop-blur-md">
+          <div className="text-center">
+            <span className="block font-serif font-bold text-2xl md:text-3xl text-[#D4AF37]">Many</span>
+            <span className="font-sans text-[11px] uppercase tracking-wider text-white/70 font-medium">Legacy Books</span>
+          </div>
+          <div className="text-center border-l border-white/10">
+            <span className="block font-serif font-bold text-2xl md:text-3xl text-[#D4AF37]">100+</span>
+            <span className="font-sans text-[11px] uppercase tracking-wider text-white/70 font-medium">Hours of Interviews</span>
+          </div>
+          <div className="text-center border-l border-white/10">
+            <span className="block font-serif font-bold text-2xl md:text-3xl text-[#D4AF37]">4.9★</span>
+            <span className="font-sans text-[11px] uppercase tracking-wider text-white/70 font-medium">Client Rating</span>
+          </div>
+          <div className="text-center border-l border-white/10">
+            <span className="block font-serif font-bold text-2xl md:text-3xl text-[#D4AF37]">Worldwide</span>
+            <span className="font-sans text-[11px] uppercase tracking-wider text-white/70 font-medium">Delivery</span>
+          </div>
         </div>
 
         {/* Story Cards Grid */}
@@ -119,58 +136,60 @@ export default function PortfolioGallery() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.1 }}
-              whileHover={{ y: -8 }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              whileHover={{ scale: 1.03, y: -6 }}
               onClick={() => setSelectedStory(story)}
-              className="group rounded-xl overflow-hidden bg-[#3b273d]/40 border border-white/10 hover:border-accent-purple/45 transition-all duration-300 relative cursor-pointer shadow-lg"
+              className="group rounded-2xl overflow-hidden bg-[#3b273d]/40 border border-white/10 hover:border-[#D4AF37]/60 transition-all duration-300 relative cursor-pointer shadow-lg hover:shadow-2xl hover:shadow-[#D4AF37]/15 flex flex-col justify-between"
             >
               {/* Cover Image */}
               <div className="relative h-64 sm:h-72 overflow-hidden">
                 <img
                   src={story.image}
                   alt={story.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   referrerPolicy="no-referrer"
                 />
                 <div className="absolute inset-0 bg-[#2d1e2f]/50 opacity-40 group-hover:opacity-10 transition-opacity duration-300" />
-                
+
                 {/* Hover overlay */}
-                <div className="absolute inset-0 bg-primary/75 opacity-0 group-hover:opacity-90 flex flex-col items-center justify-center p-6 text-center transition-all duration-300">
-                  <div className="p-3 bg-accent-purple rounded-full text-white scale-90 group-hover:scale-100 transition-transform duration-300 mb-3 animate-float">
-                    <BookOpen className="w-5 h-5" />
+                <div className="absolute inset-0 bg-primary/80 opacity-0 group-hover:opacity-95 flex flex-col items-center justify-center p-6 text-center transition-all duration-300">
+                  <div className="p-3 bg-[#D4AF37] rounded-full text-black scale-90 group-hover:scale-105 transition-transform duration-300 mb-3 shadow-lg">
+                    <BookOpen className="w-6 h-6" />
                   </div>
-                  <span className="font-serif italic text-accent-purple text-lg block font-medium">
+                  <span className="font-serif italic text-[#D4AF37] text-lg block font-medium">
                     {isHindi ? "कहानी का अंश पढ़ें" : "Read Story Excerpt"}
                   </span>
-                  <span className="font-sans text-[10px] uppercase font-bold tracking-[2px] text-white/50 block mt-1">
+                  <span className="font-sans text-[10px] uppercase font-bold tracking-[2px] text-white/70 block mt-1">
                     {isHindi ? "खोलने के लिए क्लिक करें" : "Click to Open"}
                   </span>
                 </div>
               </div>
 
               {/* Card Content */}
-              <div className="p-6">
-                <div className="flex items-center justify-between gap-4 mb-3">
-                  <span className="font-sans text-[10px] uppercase font-bold tracking-[2px] text-accent-purple">
-                    {story.subject}
-                  </span>
-                  <span className="font-sans text-[10px] text-white/40 font-bold">
-                    {story.year}
-                  </span>
+              <div className="p-6 flex flex-col justify-between flex-grow">
+                <div>
+                  <div className="flex items-center justify-between gap-4 mb-3">
+                    <span className="font-sans text-[10px] uppercase font-bold tracking-[2px] text-[#D4AF37]">
+                      {story.subject}
+                    </span>
+                    <span className="font-sans text-[10px] text-white/50 font-bold">
+                      {story.year}
+                    </span>
+                  </div>
+
+                  <h3 className="font-serif font-bold text-lg text-white mb-3 group-hover:text-[#D4AF37] transition-colors">
+                    {story.title}
+                  </h3>
+
+                  <p className="font-sans text-xs text-white/60 leading-relaxed line-clamp-3">
+                    {story.excerpt}
+                  </p>
                 </div>
 
-                <h3 className="font-serif font-bold text-lg text-white mb-3 group-hover:text-accent-purple transition-colors">
-                  {story.title}
-                </h3>
-
-                <p className="font-sans text-xs text-white/60 leading-relaxed line-clamp-3">
-                  {story.excerpt}
-                </p>
-
                 {/* Footer stats */}
-                <div className="mt-5 pt-4 border-t border-white/5 flex items-center justify-between text-[11px] font-sans font-bold text-white/40">
+                <div className="mt-5 pt-4 border-t border-white/10 flex items-center justify-between text-[11px] font-sans font-bold text-white/50">
                   <span>{isHindi ? "कस्टम बाइंड" : "Custom Bind"}</span>
-                  <span>{story.pageCount}</span>
+                  <span className="text-[#D4AF37]">{story.pageCount}</span>
                 </div>
               </div>
             </motion.div>

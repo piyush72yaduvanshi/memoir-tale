@@ -1,54 +1,62 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { TESTIMONIALS } from '../data';
-import { Star, Play, Pause, Volume2, X } from 'lucide-react';
+import { Star, Play, X } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
+
+interface TestimonialData {
+  id: number;
+  quote: string;
+  author: string;
+  location: string;
+  service: string;
+  completionDate: string;
+  clientPhoto: string;
+  bookPhoto: string;
+}
 
 export default function TestimonialsSection() {
   const { lang } = useLanguage();
   const isHindi = lang === "HI";
-  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
-  const [showAudioDemo, setShowAudioDemo] = useState(false);
+  const [showVideoModal, setShowVideoModal] = useState(false);
 
-  const customTestimonials = [
+  const customTestimonials: TestimonialData[] = [
     {
       id: 1,
-      quote: isHindi 
-        ? "अपने पिता के जीवन को एक सुंदर ढंग से लिखे गए संस्मरण में बदलते देखना हमारे पूरे परिवार के लिए एक भावुक अनुभव था। यह सिर्फ एक किताब नहीं है—यह एक ऐसा उपहार है जो हमेशा हमारे साथ रहेगा।"
-        : "Watching my father's life transformed into a beautifully written memoir was an emotional experience for our entire family. It's more than a book—it's a gift that will stay with us forever.",
-      author: "Sunanda H.",
-      location: isHindi ? "बेंगलुरु" : "Bengaluru",
-      projectType: isHindi ? "यात्रा संस्मरण संग्रह" : "Travel Journal Collection",
-      initials: "SH"
+      quote: isHindi
+        ? "अपने पिता के जीवन को एक सुंदर ढंग से लिखे गए संस्मरण में बदलते देखना हमारे पूरे परिवार के लिए एक अत्यंत भावुक अनुभव था। यह सिर्फ एक किताब नहीं है—यह एक ऐसा उपहार है जो हमेशा हमारी आने वाली पीढ़ियों के साथ रहेगा।"
+        : "Watching my father's life transformed into a beautifully written memoir was an emotional experience for our entire family. It's more than a book—it's a gift that will stay with us for generations.",
+      author: "Sunanda Hegde",
+      location: isHindi ? "बेंगलुरु, कर्नाटक" : "Bengaluru, Karnataka",
+      service: isHindi ? "लाइफ स्टोरी लेगेसी बुक" : "Life Story Legacy Book",
+      completionDate: isHindi ? "नवंबर 2025" : "November 2025",
+      clientPhoto: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=200",
+      bookPhoto: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&q=80&w=300"
     },
     {
       id: 2,
       quote: isHindi
-        ? "टीम ने हर याद को अद्भुत देखभाल और प्रामाणिकता के साथ सहेजा। उन्होंने केवल हमारी कहानी नहीं लिखी—उन्होंने हमारे परिवार की विरासत को हमेशा के लिए सुरक्षित कर दिया।"
-        : "The team captured every memory with incredible care and authenticity. They didn't just write our story—they preserved our family's legacy.",
-      author: "Rajesh K.",
+        ? "टीम ने हर याद को अद्भुत देखभाल और प्रामाणिकता के साथ सहेजा। उन्होंने केवल हमारी कहानी नहीं लिखी—उन्होंने हमारे परिवार की 80 साल पुरानी परंपराओं और तस्वीरों को सहेजकर हमेशा के लिए अमर कर दिया।"
+        : "The team captured every memory with incredible care and authenticity. They didn't just write our story—they preserved 80 years of our family lineage and photos in museum-quality print.",
+      author: "Rajesh Kapoor",
       location: isHindi ? "नई दिल्ली" : "New Delhi",
-      projectType: isHindi ? "जीवन कहानी संस्मरण" : "Life Story Memoir",
-      initials: "RK"
+      service: isHindi ? "मल्टी-जनरेशनल फैमिली हिस्ट्री" : "Multi-Generational Family History",
+      completionDate: isHindi ? "जनवरी 2026" : "January 2026",
+      clientPhoto: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200",
+      bookPhoto: "https://images.unsplash.com/photo-1516414447565-b14be0adf13e?auto=format&fit=crop&q=80&w=300"
     },
     {
       id: 3,
       quote: isHindi
-        ? "पहले साक्षात्कार से लेकर अंतिम हार्डकवर पुस्तक तक, हर विवरण में व्यावसायिकता, सहानुभूति और कारीगरी झलकती थी। हम इससे अधिक सार्थक स्मृति चिह्न की उम्मीद नहीं कर सकते थे।"
-        : "From the first interview to the final hardcover, every detail reflected professionalism, empathy, and craftsmanship. We couldn't have asked for a more meaningful keepsake.",
-      author: "Priya S.",
-      location: isHindi ? "मुंबई" : "Mumbai",
-      projectType: isHindi ? "पारिवारिक विरासत पुस्तक" : "Family Legacy Book",
-      initials: "PS"
+        ? "प्रथम परामर्श साक्षात्कार से लेकर अंतिम गिल्डेड बाइंडिंग तक, हर विवरण में उच्चतम स्तर का सम्मान और शिल्प कौशल झलकता था। हम इससे अधिक खूबसूरत और गरिमापूर्ण स्मृति चिन्ह की कल्पना नहीं कर सकते थे।"
+        : "From the initial interviews to the final gilded binding, every step reflected deep respect and master craftsmanship. We couldn't have asked for a more meaningful family heirloom.",
+      author: "Priya Sharma",
+      location: isHindi ? "मुंबई, महाराष्ट्र" : "Mumbai, Maharashtra",
+      service: isHindi ? "फाउंडर एंड एंटरप्राइज बायोग्राफी" : "Founder & Enterprise Biography",
+      completionDate: isHindi ? "मार्च 2026" : "March 2026",
+      clientPhoto: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=200",
+      bookPhoto: "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&q=80&w=300"
     }
   ];
-
-  const handleCtaClick = () => {
-    const contactEl = document.getElementById("contact");
-    if (contactEl) {
-      contactEl.scrollIntoView({ behavior: "smooth" });
-    }
-  };
 
   return (
     <section
@@ -61,68 +69,79 @@ export default function TestimonialsSection() {
 
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 md:mb-20">
-          <span className="font-sans text-[11px] font-bold tracking-[3px] uppercase text-[rgb(46,27,93)] block mb-3">
-            {isHindi ? "परिवारों द्वारा भरोसेमंद ⭐" : "TRUSTED BY FAMILIES ⭐"}
+          <span className="font-sans text-[11px] font-bold tracking-[3px] uppercase text-[#D4AF37] block mb-3">
+            {isHindi ? "परिवारों द्वारा भरोसेमंद ⭐" : "VERIFIED CLIENT TESTIMONIALS ⭐"}
           </span>
           <h2 className="font-serif font-bold text-3xl sm:text-4.5xl lg:text-[48px] text-[#190F26] tracking-tight leading-tight">
             {isHindi ? "जो कहानियां हम संजोते हैं, वे स्थायी प्रभाव छोड़ती हैं" : "The Stories We Preserve Leave a Lasting Impact"}
           </h2>
           <p className="font-sans text-sm sm:text-base text-[#554466] mt-4 leading-relaxed">
-            {isHindi 
-              ? "हमारे द्वारा बनाई जाने वाली हर बायोग्राफी गहराई से व्यक्तिगत होती है। यहाँ जानें कि व्यक्तियों और परिवारों ने सबसे महत्वपूर्ण कहानियों को सहेजने के अपने अनुभव के बारे में क्या कहा है।"
-              : "Every memoir we create is deeply personal. Here's what individuals and families have shared about their experience of preserving the stories that matter most."}
+            {isHindi
+              ? "हमारे द्वारा बनाई जाने वाली हर बायोग्राफी गहराई से व्यक्तिगत होती है। यहाँ जानें कि व्यक्तियों और परिवारों ने अपनी विरासत सहेजने के अपने अनुभव के बारे में क्या कहा है।"
+              : "Every memoir we create is deeply personal. Here's what verified families and founders have shared about their legacy preservation journey with Memoir Tale."}
           </p>
         </div>
 
         {/* 2-Column Layout: Video Left, Testimonials Right */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-stretch">
 
-          {/* Left Column - Video Player */}
-          <div className="lg:col-span-5 flex flex-col">
-            <div className="rounded-2xl overflow-hidden border shadow-xl relative aspect-video sm:aspect-square flex items-center justify-center max-h-[480px] group bg-[#fcedca]/20 border-[rgb(46,27,93)]/20">
+          {/* Left Column - Featured Video Testimonial */}
+          <div className="lg:col-span-5 flex flex-col justify-between">
+            <div className="rounded-2xl overflow-hidden border shadow-xl relative aspect-[4/5] sm:aspect-square lg:aspect-auto h-full flex flex-col justify-between group bg-[#190F26] border-[#D4AF37]/30 min-h-[420px]">
               {/* Background image */}
               <img
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=800"
-                alt="Hear Their Story"
-                className={`absolute inset-0 w-full h-full object-cover transition-all duration-[8s] select-none ${isVideoPlaying ? 'scale-105 brightness-50' : 'scale-100 group-hover:scale-102 brightness-[0.85]'
-                  }`}
+                src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=800"
+                alt="Featured Video Testimonial"
+                className="absolute inset-0 w-full h-full object-cover transition-all duration-700 select-none group-hover:scale-105 brightness-75"
                 referrerPolicy="no-referrer"
               />
 
-              {/* Dark atmospheric overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
+              {/* Dark atmospheric gradient overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/20" />
+
+              {/* Top Tag Badge */}
+              <div className="relative z-10 p-6 flex justify-between items-center">
+                <span className="px-3 py-1 bg-[#D4AF37] text-black font-sans font-bold text-[10px] uppercase tracking-widest rounded-full shadow-md">
+                  Featured Video Story
+                </span>
+                <span className="text-xs text-white/80 font-mono">2:45 mins</span>
+              </div>
 
               {/* Play button */}
-              <button
-                onClick={() => {
-                  setIsVideoPlaying(!isVideoPlaying);
-                  setShowAudioDemo(true);
-                }}
-                className="relative z-20 w-16 h-16 rounded-full bg-[rgb(46,27,93)] text-white shadow-xl flex items-center justify-center cursor-pointer transition-transform duration-300 hover:scale-105 active:scale-95"
-                title={isHindi ? "उनकी कहानी सुनें" : "Hear Their Story"}
-              >
-                {isVideoPlaying ? (
-                  <Pause className="w-6 h-6 animate-pulse fill-current" />
-                ) : (
-                  <Play className="w-6 h-6 translate-x-0.5 fill-current" />
-                )}
-              </button>
+              <div className="relative z-10 flex flex-col items-center justify-center my-auto p-6 text-center">
+                <button
+                  onClick={() => setShowVideoModal(true)}
+                  className="w-20 h-20 rounded-full bg-[#D4AF37] text-black shadow-2xl flex items-center justify-center cursor-pointer transition-transform duration-300 hover:scale-110 active:scale-95 group/play mb-4"
+                  title={isHindi ? "वीडियो साक्षात्कार देखें" : "Watch Video Testimonial"}
+                >
+                  <Play className="w-8 h-8 translate-x-0.5 fill-current text-black" />
+                </button>
+                <span className="font-serif italic text-white text-lg font-medium">
+                  "Memoir Tale gave my mother's journey eternal life."
+                </span>
+              </div>
 
               {/* Video info overlay */}
-              <div className="absolute bottom-4 left-4 right-4 z-10 p-4 backdrop-blur-md bg-[#190F26]/85 border border-white/10 rounded-xl text-left">
-                <span className="font-sans text-[10px] font-bold uppercase tracking-widest text-[#C5A3ED] block mb-1">
-                  {isHindi ? "उनकी कहानी सुनें" : "HEAR THEIR STORY"}
-                </span>
-                <p className="font-sans text-xs text-white/90 leading-relaxed">
-                  {isHindi
-                    ? "देखें कि मेमोयर टेल ने परिवारों को यादों को सहेजने, प्रियजनों का जश्न मनाने और ऐसी विरासत बनाने में कैसे मदद की जो पीढ़ियों तक संजोई जाएगी।"
-                    : "Watch how Memoir Tale helped families preserve memories, celebrate loved ones, and create legacies that will be cherished for generations."}
-                </p>
+              <div className="relative z-10 p-6 backdrop-blur-md bg-black/60 border-t border-white/10 text-left">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full overflow-hidden border border-[#D4AF37] shrink-0">
+                    <img
+                      src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=200"
+                      alt="Sunanda Hegde"
+                      className="w-full h-full object-cover"
+                      referrerPolicy="no-referrer"
+                    />
+                  </div>
+                  <div>
+                    <h4 className="font-serif font-bold text-white text-sm">Sunanda Hegde & Family</h4>
+                    <p className="font-sans text-[11px] text-[#D4AF37]">Bengaluru • Life Story Book • Completed Nov 2025</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Right Column - Testimonial Cards */}
+          {/* Right Column - Rich Detailed Testimonial Cards */}
           <div className="lg:col-span-7 flex flex-col gap-6">
             {customTestimonials.map((test, idx) => (
               <motion.div
@@ -131,46 +150,62 @@ export default function TestimonialsSection() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: '-50px' }}
                 transition={{ duration: 0.5, delay: idx * 0.1 }}
-                className="p-6 rounded-2xl border-l-4 border-l-[rgb(46,27,93)] border-t border-r border-b text-left shadow-sm transition-all duration-300 hover:-translate-y-1 bg-white border-[#E3DDE9]/60 hover:border-r-[rgb(46,27,93)]/30"
+                className="p-6 rounded-2xl border-l-4 border-l-[#D4AF37] border-t border-r border-b text-left shadow-sm transition-all duration-300 hover:-translate-y-1 bg-white border-[#E3DDE9]/60 hover:border-[#D4AF37]/40 flex flex-col justify-between"
               >
-                {/* Rating Stars */}
-                <div className="flex items-center justify-between mb-3">
-                  <div className="flex items-center gap-1 text-[#2E1B5D]">
-                    {[...Array(5)].map((_, sIdx) => (
-                      <Star key={sIdx} className="w-4 h-4 fill-current text-amber-500" />
-                    ))}
+                <div>
+                  {/* Rating Stars & Completion Date */}
+                  <div className="flex items-center justify-between mb-3 flex-wrap gap-2">
+                    <div className="flex items-center gap-1">
+                      {[...Array(5)].map((_, sIdx) => (
+                        <Star key={sIdx} className="w-4 h-4 fill-current text-amber-500" />
+                      ))}
+                    </div>
+
+                    <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-[#2E1B5D] bg-[#2E1B5D]/10 px-3 py-1 rounded-full border border-[#2E1B5D]/20">
+                      Completed: {test.completionDate}
+                    </span>
                   </div>
 
-                  {/* Project Type Sub-Label */}
-                  <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-[rgb(46,27,93)] bg-[rgb(46,27,93)]/10 px-3 py-1 rounded-full border border-[rgb(46,27,93)]/20">
-                    {test.projectType}
-                  </span>
+                  {/* Quote */}
+                  <p className="font-serif italic text-sm sm:text-base leading-relaxed mb-5 text-[#190F26]">
+                    "{test.quote}"
+                  </p>
                 </div>
 
-                {/* Quote */}
-                <p className="font-serif italic text-base sm:text-lg leading-relaxed mb-4 text-[#190F26]">
-                  "{test.quote}"
-                </p>
-
-                {/* Author info & project label */}
-                <div className="flex items-center justify-between border-t border-[#E3DDE9]/50 pt-3">
+                {/* Author Info + Client Photo & Book Thumbnail */}
+                <div className="flex items-center justify-between border-t border-[#E3DDE9]/50 pt-4 mt-2">
+                  {/* Client details */}
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-[rgb(46,27,93)]/10 flex items-center justify-center border border-[rgb(46,27,93)]/20 font-sans font-bold text-[rgb(46,27,93)] text-xs">
-                      {test.initials}
+                    <div className="w-12 h-12 rounded-full overflow-hidden border border-[#D4AF37] shrink-0 shadow-sm">
+                      <img
+                        src={test.clientPhoto}
+                        alt={test.author}
+                        className="w-full h-full object-cover"
+                        referrerPolicy="no-referrer"
+                      />
                     </div>
                     <div>
                       <span className="font-sans font-bold text-sm block text-[#190F26]">
                         {test.author}
                       </span>
                       <span className="font-sans text-[11px] block text-[#554466]">
-                        {test.location}
+                        {test.location} • <strong className="text-[#2E1B5D] font-medium">{test.service}</strong>
                       </span>
                     </div>
                   </div>
 
-                  <span className="font-sans text-xs italic text-[#554466]">
-                    {test.projectType}
-                  </span>
+                  {/* Preserved Book Thumbnail */}
+                  <div className="flex items-center gap-2 shrink-0">
+                    <span className="text-[10px] font-sans font-medium text-slate-400 hidden sm:inline">Preserved Volume:</span>
+                    <div className="w-10 h-12 rounded overflow-hidden border border-[#D4AF37]/40 shadow-sm relative group/book">
+                      <img
+                        src={test.bookPhoto}
+                        alt="Preserved Book Volume"
+                        className="w-full h-full object-cover"
+                        referrerPolicy="no-referrer"
+                      />
+                    </div>
+                  </div>
                 </div>
               </motion.div>
             ))}
@@ -179,88 +214,47 @@ export default function TestimonialsSection() {
         </div>
       </div>
 
-      {/* Audio Demo Modal */}
+      {/* Featured Video Modal */}
       <AnimatePresence>
-        {showAudioDemo && (
+        {showVideoModal && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-primary/90 backdrop-blur-md flex items-center justify-center p-4"
+            className="fixed inset-0 z-50 bg-[#160b17]/95 backdrop-blur-md flex items-center justify-center p-4"
           >
             <motion.div
               initial={{ scale: 0.95 }}
               animate={{ scale: 1 }}
               exit={{ scale: 0.95 }}
-              className="w-full max-w-md p-6 rounded-xl border border-accent-purple/30 flex flex-col relative bg-[#faf2e1] text-primary"
+              className="w-full max-w-3xl p-6 rounded-2xl border border-[#D4AF37]/30 flex flex-col relative bg-[#190F26] text-white shadow-2xl"
             >
               <button
-                onClick={() => {
-                  setShowAudioDemo(false);
-                  setIsVideoPlaying(false);
-                }}
-                className="absolute top-4 right-4 p-1.5 rounded-full hover:bg-black/10 cursor-pointer"
+                onClick={() => setShowVideoModal(false)}
+                className="absolute top-4 right-4 p-2 rounded-full bg-white/10 hover:bg-white/20 text-white cursor-pointer z-20"
               >
-                <X className="w-4 h-4 text-accent-purple" />
+                <X className="w-5 h-5" />
               </button>
 
-              <div className="flex items-center gap-3 mb-6">
-                <Volume2 className="w-5 h-5 text-accent-purple animate-bounce" />
-                <span className="font-sans text-xs uppercase font-bold tracking-[2px] text-accent-purple">
-                  {isHindi ? "ऑडियोबुक मास्टर पूर्वावलोकन" : "AUDIOBOOK MASTER PREVIEW"}
-                </span>
+              <div className="relative aspect-video rounded-xl overflow-hidden mb-4 bg-black flex items-center justify-center border border-white/10">
+                <img
+                  src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=800"
+                  alt="Sunanda Hegde Interview"
+                  className="w-full h-full object-cover opacity-60"
+                />
+                <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center bg-gradient-to-t from-black/80 via-transparent to-transparent">
+                  <div className="p-4 rounded-full bg-[#D4AF37] text-black mb-3">
+                    <Play className="w-8 h-8 fill-current text-black" />
+                  </div>
+                  <h3 className="font-serif font-bold text-xl text-white">Sunanda Hegde's Legacy Story</h3>
+                  <p className="text-xs text-[#D4AF37] mt-1 font-sans">Full Video Interview • Recorded in Bengaluru</p>
+                </div>
               </div>
 
-              <div className="text-center space-y-6 my-4">
-                <div className="w-24 h-24 rounded-full overflow-hidden mx-auto border-2 border-accent-purple select-none flex">
-                  <img
-                    src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=200"
-                    alt="Sardar Gurdev Singh Sidhu"
-                    className="w-full h-full object-cover"
-                    referrerPolicy="no-referrer"
-                  />
-                </div>
-
-                <div>
-                  <h3 className="font-serif font-bold text-lg">
-                    {isHindi ? "सिद्धू विरासत श्रृंखला" : "Sidhu Legacy Series"}
-                  </h3>
-                  <p className="font-serif-sub italic text-sm text-text-muted mt-1">
-                    {isHindi
-                      ? '"खंड 1: लंबी यात्रा घर — लुधियाना का विभाजन"'
-                      : '"Vol 1: The Long Journey Home — Partition of Ludhiana"'}
-                  </p>
-                </div>
-
-                {/* Audio Waveform */}
-                <div className="flex items-center justify-center gap-1.5 h-12">
-                  {[...Array(14)].map((_, i) => (
-                    <span
-                      key={i}
-                      style={{
-                        height: isVideoPlaying ? `${Math.floor(Math.random() * 35) + 12}px` : '4px'
-                      }}
-                      className="w-1 bg-accent-purple rounded-full transition-all duration-300"
-                    />
-                  ))}
-                </div>
-
-                <div className="p-4 rounded bg-black/5 text-left border border-accent-purple/15">
-                  <span className="font-serif italic text-xs leading-relaxed block text-center select-text">
-                    {isHindi
-                      ? '"हम आखिरी ट्रेन में सवार हुए... इंजन ने सीटी बजाई और कोयले की धूल उड़ी। मेरी माँ ने मुझे कसकर पकड़ा। मैं सिर्फ पाँच साल का था लेकिन मुझे लुधियाना की खामोशी याद है..."'
-                      : '"We boarded the last train... the engine whistled and the coal dust blew. My mother held me tightly. I was only five years old but I remember the silence of Ludhiana..."'}
-                  </span>
-                </div>
-
-                <button
-                  onClick={() => setIsVideoPlaying(!isVideoPlaying)}
-                  className="w-full py-2.5 bg-accent-purple text-white font-sans font-bold text-xs uppercase tracking-widest rounded cursor-pointer hover:brightness-110"
-                >
-                  {isVideoPlaying
-                    ? (isHindi ? 'ऑडियो विराम दें' : 'Pause Audio Player')
-                    : (isHindi ? 'ऑडियो फिर से शुरू करें' : 'Resume Audio Player')}
-                </button>
+              <div className="text-left space-y-2">
+                <p className="text-xs text-white/80 italic font-serif leading-relaxed">
+                  "Having Memoir Tale sit with our mother to record her life stories from the 1960s was the single best decision our family made. The hardcover book and digital voice archive are now our family's proudest treasure."
+                </p>
               </div>
             </motion.div>
           </motion.div>

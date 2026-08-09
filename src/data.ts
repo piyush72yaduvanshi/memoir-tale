@@ -4,38 +4,50 @@ import { Service } from './types';
 
 export const SERVICES: Service[] = [
   {
-    id: 'life-story',
-    title: 'Life Story Books',
-    titleHi: 'जीवन कहानी पुस्तक',
+    id: 'legacy-books',
+    title: 'Legacy Books',
+    titleHi: 'विरासत पुस्तकें',
     tagline: 'Personal Memoir',
     taglineHi: 'व्यक्तिगत संस्मरण',
-    description: 'A beautifully written memoir that captures a lifetime of memories, milestones, and wisdom.',
-    descriptionHi: 'एक सुंदर ढंग से लिखा गया संस्मरण जो जीवन भर की यादों, मील के पत्थरों और ज्ञान को संजोता है।',
-    image: 'https://picsum.photos/seed/mem_lifestory/600/400',
+    description: 'A beautifully written memoir that captures a lifetime of personal memories, milestones, and wisdom.',
+    descriptionHi: 'एक सुंदर ढंग से लिखा गया संस्मरण जो जीवन भर की व्यक्तिगत यादों, मील के पत्थरों और ज्ञान को संजोता है।',
+    image: 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?q=80&w=600&auto=format&fit=crop',
     linkText: 'Learn More',
     linkTextHi: 'और जानें'
   },
   {
-    id: 'family-legacy',
-    title: 'Family Legacy Books',
-    titleHi: 'पारिवारिक विरासत पुस्तक',
-    tagline: 'Family Heritage',
-    taglineHi: 'पारिवारिक विरासत',
-    description: 'Preserve generations of stories, traditions, and family heritage in one timeless collection.',
-    descriptionHi: 'कहानियों, परंपराओं और पारिवारिक विरासत की पीढ़ियों को एक सदाबहार संग्रह में सुरक्षित रखें।',
-    image: 'https://picsum.photos/seed/mem_tree/600/400',
+    id: 'family-histories',
+    title: 'Family Histories',
+    titleHi: 'पारिवारिक इतिहास',
+    tagline: 'Multi-Generational',
+    taglineHi: 'बहु-पीढ़ीगत',
+    description: 'Preserve generations of family lineage, traditions, photographs, and shared heritage in one heirloom book.',
+    descriptionHi: 'कहानियों, परंपराओं, तस्वीरों और पारिवारिक विरासत को एक कालजयी संग्रह में सुरक्षित रखें।',
+    image: 'https://images.unsplash.com/photo-1516414447565-b14be0adf13e?q=80&w=600&auto=format&fit=crop',
     linkText: 'Learn More',
     linkTextHi: 'और जानें'
   },
   {
-    id: 'biography-autobiography',
-    title: 'Biography & Autobiography',
-    titleHi: 'जीवनी और आत्मकथा',
-    tagline: 'Remarkable Journeys',
-    taglineHi: 'अद्भुत यात्राएं',
-    description: 'Celebrate remarkable journeys with professionally written biographies that inspire future generations.',
-    descriptionHi: 'पेशेवर रूप से लिखी गई जीवनियों के साथ अद्भुत यात्राओं का जश्न मनाएं जो आने वाली पीढ़ियों को प्रेरित करती हैं।',
-    image: 'https://picsum.photos/seed/mem_biography/600/400',
+    id: 'founder-stories',
+    title: 'Founder Stories',
+    titleHi: 'संस्थापक गाथा',
+    tagline: 'Enterprise & Vision',
+    taglineHi: 'उद्यम और दृष्टिकोण',
+    description: 'Document the founding principles, struggle, breakthrough moments, and culture of business visionaries.',
+    descriptionHi: 'व्यवसाय के दूरदर्शियों के संस्थापक सिद्धांतों, संघर्षों, मील के पत्थरों और संस्कृति का दस्तावेजीकरण करें।',
+    image: 'https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=600&auto=format&fit=crop',
+    linkText: 'Learn More',
+    linkTextHi: 'और जानें'
+  },
+  {
+    id: 'memorial-editions',
+    title: 'Memorial Editions',
+    titleHi: 'स्मृति संस्करण',
+    tagline: 'Tribute Keepsakes',
+    taglineHi: 'श्रद्धांजलि यादगार',
+    description: "Honor a departed loved one's life through memories, letters, restored photos, and personal reflections.",
+    descriptionHi: 'यादों, तस्वीरों, पत्रों और संजोई हुई बातों के माध्यम से अपने प्रियजन के जीवन का अमर सम्मान करें।',
+    image: 'https://images.unsplash.com/photo-1566616213894-2d4e1baee5d8?q=80&w=600&auto=format&fit=crop',
     linkText: 'Learn More',
     linkTextHi: 'और जानें'
   },
@@ -44,60 +56,26 @@ export const SERVICES: Service[] = [
     title: 'Travel Journals',
     titleHi: 'यात्रा संस्मरण',
     tagline: 'Unforgettable Adventures',
-    taglineHi: 'अविस्मरणीय कारनामे',
-    description: 'Transform unforgettable adventures into beautifully designed keepsakes.',
+    taglineHi: 'अविस्मरणीय यात्राएं',
+    description: 'Transform unforgettable journeys and expeditions into custom illustrated keepsakes.',
     descriptionHi: 'अविस्मरणीय रोमांचकारी कारनामों को सुंदर ढंग से डिज़ाइन किए गए स्मृति चिन्हों में बदलें।',
     image: 'https://picsum.photos/seed/mem_travel/600/400',
-    linkText: 'Learn More',
-    linkTextHi: 'और जानें'
-  },
-  {
-    id: 'tribute-memorial',
-    title: 'Tribute & Memorial Books',
-    titleHi: 'श्रद्धांजलि व संस्मरण ग्रंथ',
-    tagline: 'Honor A Loved One',
-    taglineHi: 'प्रियजन का सम्मान',
-    description: "Honor a loved one's life through stories, photographs, letters, and cherished memories.",
-    descriptionHi: 'कहानियों, तस्वीरों, पत्रों और संजोई हुई यादों के माध्यम से अपने प्रियजन के जीवन का सम्मान करें।',
-    image: 'https://picsum.photos/seed/mem_tribute/600/400',
-    linkText: 'Learn More',
-    linkTextHi: 'और जानें'
+    linkText: 'Coming Soon',
+    linkTextHi: 'शीघ्र आ रहा है',
+    isComingSoon: true
   },
   {
     id: 'coffee-table',
-    title: 'Coffee Table Books',
-    titleHi: 'कॉफी टेबल बुक्स',
-    tagline: 'Visual Storytelling',
-    taglineHi: 'विज़ुअल स्टोरीटेलिंग',
-    description: 'Elegant visual storytelling crafted for families, founders, artists, and collectors.',
-    descriptionHi: 'परिवारों, संस्थापकों, कलाकारों और संग्रहकर्ताओं के लिए तैयार की गई सुंदर दृश्य कथा (विज़ुअल स्टोरीटेलिंग)।',
+    title: 'Coffee Table Visual Archives',
+    titleHi: 'कॉफी टेबल विजुअल आर्काइव्स',
+    tagline: 'Visual Heritage',
+    taglineHi: 'दृश्यात्मक विरासत',
+    description: 'Large format luxury visual volumes highlighting historical family photography and artwork.',
+    descriptionHi: 'ऐतिहासिक पारिवारिक फोटोग्राफी और कलाकृतियों को उजागर करने वाली बड़ी लग्जरी विजुअल पुस्तकें।',
     image: 'https://picsum.photos/seed/mem_coffeetable/600/400',
-    linkText: 'Learn More',
-    linkTextHi: 'और जानें'
-  },
-  {
-    id: 'corporate-founder',
-    title: 'Corporate & Founder Stories',
-    titleHi: 'कॉर्पोरेट और संस्थापक गाथाएं',
-    tagline: 'Business Heritage',
-    taglineHi: 'व्यावसायिक विरासत',
-    description: 'Document the vision, milestones, and legacy behind businesses and organizations.',
-    descriptionHi: 'व्यवसायों और संगठनों के पीछे के दृष्टिकोण, मील के पत्थरों और विरासत को दस्तावेज़ में संजोएं।',
-    image: 'https://picsum.photos/seed/mem_corporate/600/400',
-    linkText: 'Learn More',
-    linkTextHi: 'और जानें'
-  },
-  {
-    id: 'digital-legacy',
-    title: 'Digital Legacy Collection',
-    titleHi: 'डिजिटल आर्काइव संग्रह',
-    tagline: 'Digital Archive',
-    taglineHi: 'डिजिटल आर्काइव',
-    description: "Secure your family's stories, photographs, videos, and memories for generations to come.",
-    descriptionHi: 'आने वाली पीढ़ियों के लिए अपने परिवार की कहानियों, तस्वीरों, वीडियो और यादों को सुरक्षित रखें।',
-    image: 'https://picsum.photos/seed/mem_aibot/600/400',
-    linkText: 'Learn More',
-    linkTextHi: 'और जानें'
+    linkText: 'Coming Soon',
+    linkTextHi: 'शीघ्र आ रहा है',
+    isComingSoon: true
   }
 ];
 
@@ -148,12 +126,6 @@ export interface Testimonial {
   initials: string;
 }
 
-export interface FAQItem {
-  id: number;
-  question: string;
-  answer: string;
-  category: 'process' | 'pricing' | 'privacy' | 'shipping' | 'ownership' | 'support' | 'general';
-}
 
 export const TOPICS: Topic[] = [
   {
@@ -435,42 +407,74 @@ export const FAQS: FAQItem[] = [
   },
   {
     id: 4,
-    question: "Can the memoir be written in my preferred language?",
-    questionHi: "क्या संस्मरण मेरी पसंदीदा भाषा में लिखा जा सकता है?",
-    answer: "Yes. We offer multilingual storytelling and can create memoirs in multiple languages, depending on your preferences.",
-    answerHi: "हाँ। हम बहुभाषी कहानी सुनाने की सुविधा प्रदान करते हैं और आपकी प्राथमिकताओं के आधार पर कई भाषाओं (जैसे हिंदी, अंग्रेजी) में संस्मरण बना सकते हैं।",
+    question: "Can you write in Hindi?",
+    questionHi: "क्या आप हिंदी में लिख सकते हैं?",
+    answer: "Yes, absolutely! We write memoirs and family histories in Hindi, English, and Hinglish. Our team includes experienced writers fluent in regional nuances so your authentic voice and culture shine through.",
+    answerHi: "हाँ, बिल्कुल! हम हिंदी, अंग्रेजी और हिंग्लिश में संस्मरण और पारिवारिक इतिहास लिखते हैं। हमारी टीम में आपकी प्रामाणिक आवाज और संस्कृति को प्रस्तुत करने वाले अनुभवी लेखक शामिल हैं।",
     category: 'support'
   },
   {
     id: 5,
-    question: "Will my information remain private?",
-    questionHi: "क्या मेरी जानकारी निजी रहेगी?",
-    answer: "Absolutely. Every conversation, photograph, recording, and document is handled with complete confidentiality. Your story belongs to you.",
-    answerHi: "बिल्कुल। हर बातचीत, तस्वीर, रिकॉर्डिंग और दस्तावेज़ को पूर्ण गोपनीयता के साथ संभाला जाता है। आपकी कहानी केवल आपकी है।",
-    category: 'privacy'
-  },
-  {
-    id: 6,
-    question: "Who owns the copyright?",
-    questionHi: "कॉपीराइट का मालिक कौन है?",
-    answer: "You do. Once your project is complete, the story and its rights remain yours unless otherwise agreed in writing.",
-    answerHi: "आप हैं। एक बार जब आपका प्रोजेक्ट पूरा हो जाता है, तो कहानी और उसके अधिकार आपके पास रहते हैं।",
-    category: 'ownership'
-  },
-  {
-    id: 7,
-    question: "Can family members contribute?",
-    questionHi: "क्या परिवार के सदस्य योगदान दे सकते हैं?",
-    answer: "Yes. We encourage family members, friends, and colleagues to share memories, photographs, and stories to create a richer and more complete legacy.",
-    answerHi: "हाँ। हम एक समृद्ध और अधिक संपूर्ण विरासत बनाने के लिए परिवार के सदस्यों, दोस्तों और सहकर्मियों को यादें, तस्वीरें और कहानियां साझा करने के लिए प्रोत्साहित करते हैं।",
+    question: "Can multiple family members contribute?",
+    questionHi: "क्या परिवार के कई सदस्य योगदान दे सकते हैं?",
+    answer: "Yes! We encourage family members, siblings, children, and friends to share their perspectives, anecdotes, restored photographs, and audio memories to weave a rich, multi-dimensional family legacy.",
+    answerHi: "हाँ! हम परिवार के सदस्यों, भाई-बहनों, बच्चों और दोस्तों को अपनी यादें, तस्वीरें और किस्से साझा करने के लिए प्रोत्साहित करते हैं ताकि एक समृद्ध और संपूर्ण पारिवारिक विरासत बन सके।",
     category: 'support'
   },
   {
+    id: 6,
+    question: "Do you travel for in-person interviews?",
+    questionHi: "क्या आप व्यक्तिगत साक्षात्कार के लिए यात्रा करते हैं?",
+    answer: "Yes. While most of our interviews take place over comfortable phone/video sessions, our biographers travel across major cities and regions in India for in-person interview sessions upon request.",
+    answerHi: "हाँ। यद्यपि हमारे अधिकांश साक्षात्कार फोन/वीडियो कॉल पर होते हैं, अनुरोध करने पर हमारे जीवनी लेखक भारत के प्रमुख शहरों में व्यक्तिगत साक्षात्कार के लिए यात्रा करते हैं।",
+    category: 'process'
+  },
+  {
+    id: 7,
+    question: "Can grandparents simply speak instead of writing?",
+    questionHi: "क्या दादा-दादी/नाना-नानी लिखने के बजाय बस बोल सकते हैं?",
+    answer: "Absolutely. Grandparents don't need to write a single word or type anything. They simply speak comfortably during audio/video calls or in-person sessions, and we record, transcribe, and refine their spoken words into eloquent book chapters.",
+    answerHi: "बिल्कुल। दादा-दादी/नाना-नानी को एक भी शब्द लिखने की आवश्यकता नहीं है। वे बस साक्षात्कार के दौरान आराम से बोलते हैं, और हम उनकी कही बातों को सुंदर पुस्तक अध्यायों में बदल देते हैं।",
+    category: 'process'
+  },
+  {
     id: 8,
+    question: "How many interviews are included?",
+    questionHi: "कितने साक्षात्कार शामिल हैं?",
+    answer: "Depending on your selected package, projects include 3 to 8+ structured, guided interview sessions (approx. 60–90 minutes each). Additional sessions can easily be scheduled if needed.",
+    answerHi: "आपके द्वारा चुने गए पैकेज के आधार पर, प्रोजेक्ट्स में 3 से 8+ निर्देशित साक्षात्कार सत्र (लगभग 60-90 मिनट प्रत्येक) शामिल होते हैं। आवश्यकता पड़ने पर अतिरिक्त सत्र भी तय किए जा सकते हैं।",
+    category: 'process'
+  },
+  {
+    id: 9,
+    question: "Can I gift this to someone?",
+    questionHi: "क्या मैं इसे किसी को उपहार में दे सकता हूँ?",
+    answer: "Yes! A memoir is one of the most meaningful gifts for milestone birthdays, 50th wedding anniversaries, or retirement. We offer elegant digital & physical Gift Experience Boxes that you can present to your loved ones.",
+    answerHi: "हाँ! एक संस्मरण जन्मदिन, 50वीं शादी की सालगिरह या सेवानिवृत्ति के लिए सबसे खूबसूरत उपहारों में से एक है। हम सुरुचिपूर्ण गिफ्ट एक्सपीरियंस बॉक्स प्रदान करते हैं।",
+    category: 'pricing'
+  },
+  {
+    id: 10,
+    question: "Who owns my story and book copyright?",
+    questionHi: "मेरी कहानी और पुस्तक कॉपीराइट का मालिक कौन है?",
+    answer: "You retain 100% complete ownership and copyright of your story, photographs, and final manuscript. Memoir Tale claims zero rights—your book is entirely your personal heirloom.",
+    answerHi: "आप अपनी कहानी, तस्वीरों और अंतिम पांडुलिपि का 100% स्वामित्व और कॉपीराइट बनाए रखते हैं। मेमॉयर टेल का इस पर कोई अधिकार नहीं होता।",
+    category: 'ownership'
+  },
+  {
+    id: 11,
+    question: "Will my information remain private?",
+    questionHi: "क्या मेरी जानकारी निजी रहेगी?",
+    answer: "Absolutely. Every conversation, photograph, recording, and document is handled with complete confidentiality and strict Non-Disclosure Agreements (NDAs).",
+    answerHi: "बिल्कुल। हर बातचीत, तस्वीर, रिकॉर्डिंग और दस्तावेज़ को पूर्ण गोपनीयता के साथ संभाला जाता है।",
+    category: 'privacy'
+  },
+  {
+    id: 12,
     question: "Do you ship internationally?",
     questionHi: "क्या आप अंतरराष्ट्रीय स्तर पर शिप करते हैं?",
-    answer: "Yes. We deliver premium memoirs and legacy books to clients around the world.",
-    answerHi: "हाँ। हम दुनिया भर के ग्राहकों को प्रीमियम संस्मरण और विरासत पुस्तकें पहुंचाते हैं।",
+    answer: "Yes. We deliver premium hardcover memoirs and legacy books to clients across India as well as internationally.",
+    answerHi: "हाँ। हम भारत के साथ-साथ दुनिया भर में प्रीमियम हार्डकवर संस्मरण और विरासत पुस्तकें पहुंचाते हैं।",
     category: 'shipping'
   }
 ];

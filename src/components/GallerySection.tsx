@@ -24,6 +24,7 @@ function GalleryCard({ item, onClick, index, labelInspect }: { item: any; onClic
       <img
         src={item.url}
         alt={item.title}
+        loading="lazy"
         referrerPolicy="no-referrer"
         onLoad={() => setLoaded(true)}
         className={`w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-110 ${loaded ? "opacity-100 scale-100" : "opacity-0 scale-95"
@@ -119,7 +120,7 @@ export default function GallerySection() {
   const labels = {
     portfolio: isHindi ? "वास्तविक कहानियां। स्थायी विरासत। ⭐" : "REAL STORIES. LASTING LEGACIES. ⭐",
     heading: isHindi ? "कहानियां जिन्हें सहेजने का हमें सौभाग्य मिला" : "Stories We've Had the Privilege to Preserve",
-    desc: isHindi 
+    desc: isHindi
       ? "प्रत्येक प्रोजेक्ट एक गहराई से व्यक्तिगत यात्रा है। व्यक्तियों, परिवारों और संगठनों के लिए विचारपूर्वक बनाए गए संस्मरणों, विरासत पुस्तकों, यात्रा पुस्तिकाओं और विशेष कहानियों के चयन को एक्सप्लोर करें।"
       : "Every project is a deeply personal journey. Explore a selection of memoirs, legacy books, travel journals, and bespoke storytelling experiences thoughtfully created for individuals, families, and organizations.",
     all: isHindi ? "सभी प्रोजेक्ट्स" : "All Projects",
@@ -249,9 +250,9 @@ export default function GallerySection() {
           </div>
         </FadeIn>
 
-        {/* Highly Optimized Grid layout */}
+        {/* Optimized Grid layout with reduced spacing */}
         <FadeIn delay={0.2}>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 min-h-[460px] transition-all duration-500">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 min-h-[460px] transition-all duration-500">
             {filteredItems.map((item, index) => (
               <GalleryCard
                 key={item.id}
@@ -329,7 +330,7 @@ export default function GallerySection() {
             {/* Central Media Viewer & Navigation */}
             <div className="relative max-w-5xl w-full flex flex-col items-center my-auto py-4">
               <div className="relative w-full flex items-center justify-center min-h-[350px] sm:min-h-[460px]">
-                
+
                 {/* Prev Trigger */}
                 <button
                   type="button"
@@ -371,11 +372,10 @@ export default function GallerySection() {
                   <button
                     key={item.id}
                     onClick={() => setActiveImageId(item.id)}
-                    className={`relative w-14 h-14 rounded-xl overflow-hidden border-2 transition-all duration-300 cursor-pointer shrink-0 ${
-                      item.id === activeItem.id
+                    className={`relative w-14 h-14 rounded-xl overflow-hidden border-2 transition-all duration-300 cursor-pointer shrink-0 ${item.id === activeItem.id
                         ? "border-[#C5A3ED] scale-108 ring-2 ring-[#C5A3ED]/40 shadow-lg"
                         : "border-white/10 opacity-50 hover:opacity-90"
-                    }`}
+                      }`}
                   >
                     <img
                       src={item.url}

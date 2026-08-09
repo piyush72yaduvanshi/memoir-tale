@@ -45,9 +45,9 @@ export default function AboutSection({ onLearnMoreClick }: AboutSectionProps) {
               <div className="space-y-5 text-sm sm:text-base text-[#554466] font-sans leading-relaxed max-w-[620px]">
                 <p>
                   {lang === "HI" ? (
-                    <><strong>Memoir Tale</strong> एक लिगेसी स्टोरीटेलिंग कंपनी है जो हर व्यक्ति के जीवन, मूल्यों और यादों को सहेजने के लिए समर्पित है। असाधारण कहानी कहने की कला, विचारशील शिल्प कौशल और कालातीत डिज़ाइन के माध्यम से, हम व्यक्तिगत यात्राओं को आने वाली पीढ़ियों के लिए एक स्थायी विरासत में बदलते हैं।</>
+                    <><strong>Memoir Tale</strong> भारत का पहला लिगेसी प्लेटफॉर्म है जो व्यक्तियों, परिवारों, संस्थापकों और समुदायों के जीवन, यादों, मूल्यों और विरासतों को खूबसूरती से तैयार की गई पुस्तकों और कालातीत यादों के माध्यम से सहेजने के लिए समर्पित है।</>
                   ) : (
-                    <><strong>Memoir Tale</strong> is a legacy storytelling company dedicated to preserving the lives, values, and memories that define every individual. Through exceptional storytelling, thoughtful craftsmanship, and timeless design, we transform personal journeys into enduring legacies for generations to come.</>
+                    <><strong>Memoir Tale</strong> is India's First Legacy Platform dedicated to preserving the lives, memories, values, and legacies of individuals, families, founders, and communities through beautifully crafted books and timeless keepsakes.</>
                   )}
                 </p>
               </div>

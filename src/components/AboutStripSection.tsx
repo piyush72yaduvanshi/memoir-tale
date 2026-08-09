@@ -75,6 +75,14 @@ export default function AboutStripSection({ darkMode }: AboutStripSectionProps) 
               </p>
             )}
 
+            {/* Story addition */}
+            <p className={`font-sans text-xs md:text-sm leading-relaxed mb-6 font-medium ${darkMode ? 'text-[#D4AF37]' : 'text-[#2E1B5D]'}`}>
+              {lang === 'HI'
+                ? 'लोग घर, विरासत और तस्वीरें प्राप्त करते हैं, लेकिन अक्सर उनके पीछे की कहानियों को खो देते हैं। मेमोयर टेल इसलिए अस्तित्व में है ताकि वे कहानियाँ कभी न भूली जाएँ और विरासत हमेशा जीवित रहे।'
+                : 'People inherit homes, heirlooms, and photographs, but often lose the stories behind them. Memoir Tale exists so those stories are never forgotten and make the legacy live forever.'
+              }
+            </p>
+
             {/* Philosophy quotes */}
             <blockquote className="border-l-4 border-accent-purple pl-5 py-2 my-6">
               <p className={`font-serif-sub italic text-lg sm:text-xl font-light leading-relaxed ${darkMode ? 'text-white' : 'text-primary'

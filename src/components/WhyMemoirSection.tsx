@@ -94,8 +94,8 @@ export default function WhyMemoirSection({ darkMode }: WhyMemoirProps) {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5 }}
                 className={`p-6 rounded-2xl border transition-all duration-300 shadow-sm flex flex-col justify-between ${darkMode
-                    ? 'bg-[#251829] border-white/10 hover:border-rose-500/30'
-                    : 'bg-white border-[#E3DDE9]/60 hover:border-rose-500/30'
+                  ? 'bg-[#251829] border-white/10 hover:border-rose-500/30'
+                  : 'bg-white border-[#E3DDE9]/60 hover:border-rose-500/30'
                   }`}
               >
                 <div>
@@ -127,8 +127,8 @@ export default function WhyMemoirSection({ darkMode }: WhyMemoirProps) {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.1 }}
                 className={`p-6 rounded-2xl border transition-all duration-300 shadow-lg relative overflow-hidden flex flex-col justify-between ${darkMode
-                    ? 'bg-[#2B1638] border-[#A78BFA]/40 hover:border-[#A78BFA]'
-                    : 'bg-gradient-to-br from-white via-[#FAF6F0] to-[#FAF6F0] border-[#2E1B5D]/30 hover:border-[#2E1B5D]'
+                  ? 'bg-[#2B1638] border-[#A78BFA]/40 hover:border-[#A78BFA]'
+                  : 'bg-gradient-to-br from-white via-[#FAF6F0] to-[#FAF6F0] border-[#2E1B5D]/30 hover:border-[#2E1B5D]'
                   }`}
               >
                 <div>
