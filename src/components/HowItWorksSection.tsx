@@ -233,7 +233,9 @@ export default function HowItWorksSection({ darkMode = false, onCtaClick }: HowI
             </button>
           </div>
 
-          <h2 className="font-serif font-bold text-3xl sm:text-4xl md:text-5xl leading-tight text-[#D4AF37]">
+          <h2 className={`font-serif font-bold text-3xl sm:text-4xl md:text-5xl leading-tight ${
+            darkMode ? 'text-[#D4AF37]' : 'text-[#2E1B5D]'
+          }`}>
             {isHindi ? 'हम आपकी विरासत को कैसे सहेजते हैं' : 'How We Preserve Your Legacy'}
           </h2>
           <p className={`mt-4 font-sans text-xs md:text-sm leading-relaxed max-w-2xl mx-auto ${darkMode ? 'text-[#F5F0F8]/70' : 'text-[#554466]'

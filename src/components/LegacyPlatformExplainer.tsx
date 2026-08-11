@@ -53,10 +53,14 @@ export default function LegacyPlatformExplainer({ darkMode }: LegacyPlatformExpl
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#D4AF37]/40 bg-[#D4AF37]/10 backdrop-blur-md"
+            className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full border ${
+              darkMode 
+                ? 'border-[#D4AF37]/40 bg-[#D4AF37]/10 text-[#D4AF37]' 
+                : 'border-[#7A5000]/30 bg-[#7A5000]/10 text-[#7A5000]'
+            }`}
           >
-            <Sparkles className="w-4 h-4 text-[#D4AF37]" />
-            <span className="text-xs md:text-sm font-medium tracking-wide uppercase text-[#D4AF37]">
+            <Sparkles className={`w-4 h-4 ${darkMode ? 'text-[#D4AF37]' : 'text-[#7A5000]'}`} />
+            <span className="text-xs md:text-sm font-bold tracking-wide uppercase">
               Defining Our Category
             </span>
           </motion.div>
@@ -70,10 +74,14 @@ export default function LegacyPlatformExplainer({ darkMode }: LegacyPlatformExpl
           transition={{ delay: 0.1 }}
           className="text-center max-w-3xl mx-auto mb-10"
         >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-semibold tracking-tight text-[#D4AF37] mb-4">
+          <h2 className={`text-3xl md:text-4xl lg:text-5xl font-serif font-bold tracking-tight mb-4 ${
+            darkMode ? 'text-[#D4AF37]' : 'text-[#2D1230]'
+          }`}>
             What is a Legacy Platform?
           </h2>
-          <p className="text-base md:text-lg opacity-90 leading-relaxed font-light">
+          <p className={`text-base md:text-lg leading-relaxed ${
+            darkMode ? 'text-[#F5F0F8]/90 font-light' : 'text-[#1B101E] font-medium'
+          }`}>
             A Legacy Platform helps families preserve life stories, memories, photographs, voices, and milestones for future generations through books, digital archives, and meaningful storytelling.
           </p>
         </motion.div>
@@ -88,29 +96,41 @@ export default function LegacyPlatformExplainer({ darkMode }: LegacyPlatformExpl
             transition={{ delay: 0.2 }}
             className={`lg:col-span-7 p-8 rounded-2xl border flex flex-col justify-between ${
               darkMode 
-                ? 'bg-[#220E24]/80 border-[#D4AF37]/30 shadow-2xl' 
-                : 'bg-white/90 border-[#D4AF37]/30 shadow-xl'
+                ? 'bg-[#220E24]/80 border-[#D4AF37]/30 shadow-2xl text-[#F5F0F8]' 
+                : 'bg-white border-[#D4AF37]/30 shadow-xl text-[#1B101E]'
             }`}
           >
             <div>
               <div className="flex items-center gap-3 mb-4">
-                <div className="p-3 rounded-xl bg-[#D4AF37]/20 text-[#D4AF37]">
+                <div className={`p-3 rounded-xl ${
+                  darkMode ? 'bg-[#D4AF37]/20 text-[#D4AF37]' : 'bg-[#2D1230]/10 text-[#2D1230]'
+                }`}>
                   <Layers className="w-6 h-6" />
                 </div>
-                <h3 className="text-xl md:text-2xl font-serif font-medium">
+                <h3 className={`text-xl md:text-2xl font-serif font-bold ${
+                  darkMode ? 'text-white' : 'text-[#2D1230]'
+                }`}>
                   Beyond Printers & Publishers
                 </h3>
               </div>
-              <p className="text-sm md:text-base opacity-90 leading-relaxed mb-6">
+              <p className={`text-sm md:text-base leading-relaxed mb-6 ${
+                darkMode ? 'text-[#F5F0F8]/90 font-light' : 'text-[#1B101E] font-medium'
+              }`}>
                 Memoir Tale goes beyond traditional printing services and self-publishing houses. We provide an end-to-end ecosystem where personal history is gently extracted through conversational interviews, curated visually, and preserved across tangible heirlooms and permanent digital formats.
               </p>
             </div>
 
             {/* Key Differentiator Highlight */}
-            <div className="p-4 rounded-xl bg-[#D4AF37]/10 border border-[#D4AF37]/25">
+            <div className={`p-4 rounded-xl border ${
+              darkMode 
+                ? 'bg-[#D4AF37]/10 border-[#D4AF37]/30 text-[#D4AF37]' 
+                : 'bg-[#2D1230]/10 border-[#2D1230]/20 text-[#2D1230]'
+            }`}>
               <div className="flex items-start gap-3">
-                <Award className="w-5 h-5 text-[#D4AF37] shrink-0 mt-0.5" />
-                <p className="text-xs md:text-sm font-medium text-[#D4AF37]">
+                <Award className={`w-5 h-5 shrink-0 mt-0.5 ${
+                  darkMode ? 'text-[#D4AF37]' : 'text-[#7A5000]'
+                }`} />
+                <p className="text-xs md:text-sm font-semibold leading-relaxed">
                   This differentiates Memoir Tale from printers and publishers. We are complete custodians of your family lineage and life story.
                 </p>
               </div>
@@ -132,16 +152,22 @@ export default function LegacyPlatformExplainer({ darkMode }: LegacyPlatformExpl
                   key={idx}
                   className={`p-4 rounded-xl border flex items-start gap-4 transition-transform hover:-translate-y-0.5 ${
                     darkMode 
-                      ? 'bg-[#251028] border-[#D4AF37]/20 hover:border-[#D4AF37]/40' 
-                      : 'bg-white border-[#D4AF37]/20 hover:border-[#D4AF37]/40 shadow-sm'
+                      ? 'bg-[#251028] border-[#D4AF37]/20 hover:border-[#D4AF37]/40 text-white' 
+                      : 'bg-white border-[#D4AF37]/30 hover:border-[#D4AF37]/60 shadow-sm text-[#1B101E]'
                   }`}
                 >
-                  <div className="p-2.5 rounded-lg bg-[#D4AF37]/15 text-[#D4AF37] shrink-0">
+                  <div className={`p-2.5 rounded-lg shrink-0 ${
+                    darkMode ? 'bg-[#D4AF37]/15 text-[#D4AF37]' : 'bg-[#2D1230]/10 text-[#2D1230]'
+                  }`}>
                     <Icon className="w-5 h-5" />
                   </div>
                   <div>
-                    <h4 className="text-sm font-semibold mb-1 text-[#D4AF37]">{pillar.title}</h4>
-                    <p className="text-xs opacity-80 leading-relaxed">{pillar.description}</p>
+                    <h4 className={`text-sm font-bold mb-1 ${
+                      darkMode ? 'text-[#D4AF37]' : 'text-[#2D1230]'
+                    }`}>{pillar.title}</h4>
+                    <p className={`text-xs leading-relaxed ${
+                      darkMode ? 'text-white/80 font-light' : 'text-[#1B101E]/80 font-medium'
+                    }`}>{pillar.description}</p>
                   </div>
                 </div>
               );
@@ -155,12 +181,19 @@ export default function LegacyPlatformExplainer({ darkMode }: LegacyPlatformExpl
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.4 }}
-          className="pt-6 border-t border-[#D4AF37]/20 flex flex-wrap justify-center items-center gap-4 md:gap-8"
+          className="pt-6 border-t border-[#D4AF37]/20 flex flex-wrap justify-center items-center gap-3 md:gap-6"
         >
           {differentiators.map((diff, index) => (
-            <div key={index} className="flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-[#D4AF37] shrink-0" />
-              <span className="text-xs md:text-sm font-medium opacity-90">{diff}</span>
+            <div 
+              key={index} 
+              className={`flex items-center gap-2 px-3 py-1.5 rounded-lg border ${
+                darkMode 
+                  ? 'bg-white/5 border-white/10 text-[#F5F0F8]' 
+                  : 'bg-[#2D1230]/5 border-[#2D1230]/15 text-[#2D1230]'
+              }`}
+            >
+              <CheckCircle2 className={`w-4 h-4 shrink-0 ${darkMode ? 'text-[#D4AF37]' : 'text-[#7A5000]'}`} />
+              <span className="text-xs md:text-sm font-bold">{diff}</span>
             </div>
           ))}
         </motion.div>

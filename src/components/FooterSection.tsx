@@ -201,14 +201,6 @@ export default function FooterSection({
                   />
                 </div>
               </div>
-              <p className="font-serif italic text-xs sm:text-sm text-white/50 leading-relaxed">
-                {curTrans.brandDesc}
-              </p>
-              <div className="space-y-2 pt-2 text-xs font-sans text-white/60 leading-relaxed">
-                <p className="flex items-start"><span className="mr-2">📍</span><span>{curTrans.address.replace('📍 ', '')}</span></p>
-                <p className="flex items-center"><span className="mr-2">📞</span>{t("phoneText")} <a href="tel:9889011174" className="hover:text-white font-semibold ml-1 transition-colors">9889011174</a></p>
-                <p className="flex items-center"><span className="mr-2">✉️</span>{t("emailText")} <a href="mailto:support@memoirtale.com" className="hover:text-white font-semibold ml-1 transition-colors">support@memoirtale.com</a></p>
-              </div>
               <div className="flex items-center gap-3 text-white/70 pt-2">
                 <Facebook className="w-4 h-4 hover:text-white cursor-pointer transition-colors" />
                 <Instagram className="w-4 h-4 hover:text-white cursor-pointer transition-colors" />

@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { motion } from 'motion/react';
-import { ArrowRight, ChevronDown, Award, CheckCircle, ShieldCheck, Heart, Sparkles, BookOpen } from 'lucide-react';
+import { ArrowRight, Award, CheckCircle } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
 interface HeroProps {
@@ -24,27 +24,11 @@ const PARTICLES = Array.from({ length: 14 }).map((_, i) => ({
 export default function Hero({ darkMode, onStartStoryClick, onViewBooksClick }: HeroProps) {
   const { t } = useLanguage();
 
-  const scrollDown = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      const offset = 80;
-      const bodyRect = document.body.getBoundingClientRect().top;
-      const elementRect = element.getBoundingClientRect().top;
-      const elementPosition = elementRect - bodyRect;
-      const offsetPosition = elementPosition - offset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
-    }
-  };
-
   const handleStartClick = () => {
     if (onStartStoryClick) {
       onStartStoryClick();
     } else {
-      scrollDown('contact');
+      document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
@@ -52,7 +36,7 @@ export default function Hero({ darkMode, onStartStoryClick, onViewBooksClick }: 
     if (onViewBooksClick) {
       onViewBooksClick();
     } else {
-      scrollDown('gallery');
+      document.getElementById('gallery')?.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
@@ -199,51 +183,7 @@ export default function Hero({ darkMode, onStartStoryClick, onViewBooksClick }: 
 
       </div>
 
-      {/* Small "Featured In" / Trust Strip below hero section */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 1.0 }}
-        className="relative z-10 w-full max-w-5xl mx-auto px-6 mt-12 mb-4"
-      >
-        <div className="py-4 px-6 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-md flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
-          <div className="flex items-center gap-2">
-            <Sparkles className="w-4 h-4 text-[#D4AF37] shrink-0 hidden sm:block" />
-            <span className="text-xs font-sans font-semibold tracking-wider text-[#D4AF37] uppercase">
-              {t("trustedByHeading")}
-            </span>
-          </div>
 
-          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[11px] font-sans text-white/70">
-            <span className="flex items-center gap-1">
-              <BookOpen className="w-3 h-3 text-[#D4AF37]" /> Archival 200+ Year Quality
-            </span>
-            <span className="hidden sm:inline text-white/20">•</span>
-            <span className="flex items-center gap-1">
-              <ShieldCheck className="w-3 h-3 text-[#D4AF37]" /> 100% Privacy Protection
-            </span>
-            <span className="hidden sm:inline text-white/20">•</span>
-            <span className="flex items-center gap-1">
-              <Heart className="w-3 h-3 text-[#D4AF37]" /> Pan-India Senior Biographers
-            </span>
-          </div>
-        </div>
-      </motion.div>
-
-      {/* Floating Animated Scroll Hint */}
-      <motion.button
-        onClick={() => scrollDown('philosophy-strip')}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.85, y: [0, 6, 0] }}
-        transition={{ duration: 2.2, repeat: Infinity, delay: 1.2 }}
-        className="relative z-10 mt-2 p-2 hover:opacity-100 text-white transition-opacity cursor-pointer flex items-center gap-2 group"
-        aria-label="Scroll to next section"
-      >
-        <span className="text-xs font-sans font-medium text-[#D4AF37]/90 tracking-wider group-hover:text-[#D4AF37] transition-colors">
-          {t("scrollHint")}
-        </span>
-        <ChevronDown className="w-4 h-4 text-[#D4AF37] group-hover:translate-y-0.5 transition-transform" />
-      </motion.button>
 
     </section>
   );

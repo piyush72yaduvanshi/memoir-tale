@@ -48,10 +48,14 @@ export default function WhyMemoirCards({ darkMode }: WhyMemoirCardsProps) {
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-[#D4AF37]/40 bg-[#D4AF37]/10 mb-4"
+            className={`inline-flex items-center gap-2 px-3.5 py-1 rounded-full border mb-4 ${
+              darkMode 
+                ? 'border-[#D4AF37]/40 bg-[#D4AF37]/10 text-[#D4AF37]' 
+                : 'border-[#7A5000]/30 bg-[#7A5000]/10 text-[#7A5000]'
+            }`}
           >
-            <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" />
-            <span className="text-xs font-semibold tracking-wider uppercase text-[#D4AF37]">
+            <Sparkles className={`w-3.5 h-3.5 ${darkMode ? 'text-[#D4AF37]' : 'text-[#7A5000]'}`} />
+            <span className="text-xs font-bold tracking-wider uppercase">
               Our Core Pillars
             </span>
           </motion.div>
@@ -61,7 +65,9 @@ export default function WhyMemoirCards({ darkMode }: WhyMemoirCardsProps) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="font-serif font-bold text-3xl sm:text-4xl md:text-5xl tracking-tight text-[#D4AF37] mb-4"
+            className={`font-serif font-bold text-3xl sm:text-4xl md:text-5xl tracking-tight mb-4 ${
+              darkMode ? 'text-[#D4AF37]' : 'text-[#2D1230]'
+            }`}
           >
             WHY MEMOIR TALE
           </motion.h2>
@@ -71,7 +77,9 @@ export default function WhyMemoirCards({ darkMode }: WhyMemoirCardsProps) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-base md:text-lg opacity-80 max-w-2xl mx-auto font-light leading-relaxed"
+            className={`text-base md:text-lg max-w-2xl mx-auto leading-relaxed ${
+              darkMode ? 'text-[#F5F0F8]/80 font-light' : 'text-[#190F26] font-medium'
+            }`}
           >
             Empowering families with timeless storytelling, advanced organization, and unmatched heirloom quality.
           </motion.p>
@@ -90,32 +98,44 @@ export default function WhyMemoirCards({ darkMode }: WhyMemoirCardsProps) {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className={`p-7 rounded-2xl border transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1.5 ${
                   darkMode
-                    ? 'bg-[#25132d] border-[#D4AF37]/25 hover:border-[#D4AF37]/60 hover:shadow-2xl hover:shadow-[#D4AF37]/10'
-                    : 'bg-white border-[#D4AF37]/30 hover:border-[#D4AF37]/70 shadow-md hover:shadow-xl'
+                    ? 'bg-[#25132d] border-[#D4AF37]/25 hover:border-[#D4AF37]/60 hover:shadow-2xl hover:shadow-[#D4AF37]/10 text-white'
+                    : 'bg-white border-[#D4AF37]/30 hover:border-[#D4AF37]/70 shadow-md hover:shadow-xl text-[#190F26]'
                 }`}
               >
                 <div>
                   {/* Top Tag & Icon */}
                   <div className="flex items-center justify-between mb-6">
-                    <div className="p-3.5 rounded-xl bg-[#D4AF37]/15 text-[#D4AF37] group-hover:scale-110 transition-transform duration-300">
+                    <div className={`p-3.5 rounded-xl group-hover:scale-110 transition-transform duration-300 ${
+                      darkMode ? 'bg-[#D4AF37]/15 text-[#D4AF37]' : 'bg-[#2D1230]/10 text-[#2D1230]'
+                    }`}>
                       <Icon className="w-6 h-6" />
                     </div>
-                    <span className="text-[10px] font-semibold tracking-wider uppercase px-2.5 py-1 rounded-full bg-[#D4AF37]/10 text-[#D4AF37] border border-[#D4AF37]/20">
+                    <span className={`text-[10px] font-bold tracking-wider uppercase px-2.5 py-1 rounded-full border ${
+                      darkMode 
+                        ? 'bg-[#D4AF37]/10 text-[#D4AF37] border-[#D4AF37]/20' 
+                        : 'bg-[#7A5000]/10 text-[#7A5000] border-[#7A5000]/25'
+                    }`}>
                       {card.tag}
                     </span>
                   </div>
 
                   {/* Title & Description */}
-                  <h3 className="font-serif font-bold text-xl mb-3 text-[#D4AF37]">
+                  <h3 className={`font-serif font-bold text-xl mb-3 ${
+                    darkMode ? 'text-[#D4AF37]' : 'text-[#2D1230]'
+                  }`}>
                     {card.title}
                   </h3>
-                  <p className="text-sm opacity-85 leading-relaxed font-light">
+                  <p className={`text-sm leading-relaxed ${
+                    darkMode ? 'text-white/85 font-light' : 'text-[#190F26]/90 font-medium'
+                  }`}>
                     {card.description}
                   </p>
                 </div>
 
                 {/* Subtle Decorative Line at Bottom */}
-                <div className="w-10 h-0.5 bg-[#D4AF37]/30 group-hover:w-full transition-all duration-500 mt-6" />
+                <div className={`w-10 h-0.5 group-hover:w-full transition-all duration-500 mt-6 ${
+                  darkMode ? 'bg-[#D4AF37]/30' : 'bg-[#2D1230]/30'
+                }`} />
               </motion.div>
             );
           })}
