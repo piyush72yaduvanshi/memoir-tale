@@ -184,13 +184,13 @@ export default function SampleChapters() {
         </div>
 
         {/* Category Selector Tabs */}
-        <div className="flex flex-wrap justify-center gap-2 mb-8 sm:mb-10 max-w-3xl mx-auto px-2">
+        <div className="flex flex-wrap justify-center gap-2 mb-10 max-w-3xl mx-auto">
           {SAMPLE_EXCERPTS.map((ex, idx) => (
             <button
               key={ex.id}
               type="button"
               onClick={() => setActiveExcerptIndex(idx)}
-              className={`px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-full text-[11px] sm:text-xs font-sans font-bold border transition-all cursor-pointer select-none outline-none focus:outline-none flex items-center space-x-1.5 ${activeExcerptIndex === idx
+              className={`px-5 py-2.5 rounded-full text-xs font-sans font-bold border transition-all cursor-pointer select-none outline-none focus:outline-none flex items-center space-x-1.5 ${activeExcerptIndex === idx
                 ? "bg-[#2E1B5D] text-white border-[#2E1B5D] shadow-[0_6px_20px_rgba(139, 92, 246,0.25)] scale-105"
                 : "bg-white text-slate-600 border-[#E3DDE9]/60 hover:bg-[#FAF6F0] hover:text-[#190F26]"
                 }`}
@@ -210,7 +210,7 @@ export default function SampleChapters() {
               animate={{ opacity: 1, rotateY: 0, x: 0, filter: "blur(0px)" }}
               exit={{ opacity: 0, rotateY: 12, x: 30, filter: "blur(4px)" }}
               transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-              className="bg-[#FAF6F0] text-[#190F26] rounded-3xl p-6 sm:p-12 shadow-[0_30px_70px_rgba(0,0,0,0.55)] border-t-[8px] border-t-[#2E1B5D] relative transform-gpu"
+              className="bg-[#FAF6F0] text-[#190F26] rounded-3xl p-5 sm:p-12 shadow-[0_30px_70px_rgba(0,0,0,0.55)] border-t-[8px] border-t-[#2E1B5D] relative transform-gpu overflow-hidden sm:overflow-visible"
               style={{ perspective: 1200 }}
             >
               {/* Gold Ribbon Bookmarker Accent */}
@@ -241,7 +241,7 @@ export default function SampleChapters() {
                   </h3>
                   <p className="font-serif text-sm sm:text-base text-[#190F26]/90 leading-relaxed indent-0 first-line:tracking-wide">
                     {/* Large Drop Cap Accent */}
-                    <span className="float-left text-5xl sm:text-6xl font-serif font-bold text-[#2E1B5D] mr-3 mt-1.5 line-height-none bg-[#2E1B5D]/10 px-2 rounded-md border border-[#2E1B5D]/10 font-bold select-none">
+                    <span className="float-left text-4xl sm:text-6xl font-serif font-bold text-[#2E1B5D] mr-2.5 sm:mr-3 mt-1.5 line-height-none bg-[#2E1B5D]/10 px-1.5 sm:px-2 rounded-md border border-[#2E1B5D]/10 select-none">
                       {activeExcerpt.dropCap}
                     </span>
                     {isHindi ? activeExcerpt.proseLeftHindi : activeExcerpt.proseLeft}

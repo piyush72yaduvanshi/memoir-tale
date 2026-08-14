@@ -48,8 +48,8 @@ export default function Hero({ darkMode, onStartStoryClick, onViewBooksClick }: 
         <div className="absolute inset-0 bg-[#220E24]" />
 
         {/* Ambient Gold & Purple Glow Effects */}
-        <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-[#8B3CDC]/15 rounded-full blur-[140px] pointer-events-none" />
-        <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-[#D4AF37]/15 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute top-1/4 left-1/4 w-[500px] max-w-full h-[500px] bg-[#8B3CDC]/15 rounded-full blur-[140px] pointer-events-none" />
+        <div className="absolute bottom-1/4 right-1/4 w-[400px] max-w-full h-[400px] bg-[#D4AF37]/15 rounded-full blur-[120px] pointer-events-none" />
 
         {/* Minimal Floating Golden Particles */}
         {PARTICLES.map((particle) => (
@@ -93,7 +93,7 @@ export default function Hero({ darkMode, onStartStoryClick, onViewBooksClick }: 
       <div className="relative z-10 max-w-4xl mx-auto px-6 text-center select-text my-auto flex flex-col items-center">
 
         {/* Soft Glow behind H1 Heading */}
-        <div className="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[260px] bg-gradient-to-r from-[#8B3CDC]/20 via-[#D4AF37]/25 to-[#8B3CDC]/20 rounded-full blur-[100px] pointer-events-none opacity-80" />
+        <div className="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] max-w-[90vw] h-[260px] bg-gradient-to-r from-[#8B3CDC]/20 via-[#D4AF37]/25 to-[#8B3CDC]/20 rounded-full blur-[100px] pointer-events-none opacity-80" />
 
         {/* Gold badge label */}
         <motion.div
@@ -113,10 +113,10 @@ export default function Hero({ darkMode, onStartStoryClick, onViewBooksClick }: 
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="font-serif font-bold text-3xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.15] tracking-tight text-center max-w-full px-2"
+          className="font-serif font-bold text-3xl sm:text-6xl md:text-7xl leading-[1.15] tracking-tight text-center break-words max-w-full"
         >
           <span className="text-white block font-serif">{t("turnLifeInto")}</span>
-          <span className="block mt-2 text-4xl sm:text-6xl md:text-7xl lg:text-8xl">
+          <span className="block mt-2 text-4xl sm:text-7xl md:text-8xl">
             <span className="font-serif not-italic text-[#D4AF37] drop-shadow-[0_2px_20px_rgba(212,175,55,0.35)]">
               {lang === "HI" ? "कालजयी " : "Timeless "}
             </span>

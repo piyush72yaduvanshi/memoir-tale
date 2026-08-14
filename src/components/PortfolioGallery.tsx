@@ -88,7 +88,7 @@ export default function PortfolioGallery() {
       id="portfolio-gallery"
       className="py-20 md:py-28 bg-[#2d1e2f] text-white relative overflow-hidden"
     >
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-accent-purple/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] max-w-full h-[800px] bg-accent-purple/5 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute inset-0 opacity-[0.03] pointer-events-none paper-grain-dark" />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
@@ -196,7 +196,7 @@ export default function PortfolioGallery() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-[#160b17]/95 backdrop-blur-md flex items-center justify-center p-4"
+            className="fixed inset-0 z-50 bg-[#160b17]/95 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 overflow-y-auto"
             onClick={() => setSelectedStory(null)}
           >
             <motion.div
@@ -204,7 +204,7 @@ export default function PortfolioGallery() {
               animate={{ scale: 1 }}
               exit={{ scale: 0.95 }}
               onClick={(e) => e.stopPropagation()}
-              className="w-full max-w-2xl max-h-[90vh] overflow-y-auto bg-[#faf2e1] text-primary rounded-xl p-5 sm:p-8 relative"
+              className="w-full max-w-2xl bg-[#faf2e1] text-primary rounded-xl p-5 sm:p-8 relative max-h-[90vh] overflow-y-auto my-auto"
             >
               <button
                 onClick={() => setSelectedStory(null)}

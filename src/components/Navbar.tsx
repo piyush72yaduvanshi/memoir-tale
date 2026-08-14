@@ -306,7 +306,7 @@ export default function Navbar({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-[#1b101e]/98 backdrop-blur-lg flex flex-col justify-between p-6 overflow-hidden"
+            className="fixed inset-0 z-50 bg-[#1b101e]/98 backdrop-blur-lg flex flex-col justify-between p-6 overflow-y-auto max-h-screen"
           >
             {/* Mobile Drawer Header */}
             <div className="flex items-center justify-between">

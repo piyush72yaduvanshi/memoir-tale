@@ -281,8 +281,8 @@ export default function ContactSection({ selectedService, matchedWriter, onClear
         }`}
     >
       {/* Decorative Blur Ellipse */}
-      <div className="absolute bottom-[5%] right-[-120px] w-[500px] h-[500px] bg-[#2E1B5D]/4 rounded-full blurred-ellipse pointer-events-none" />
-      <div className="absolute top-[10%] left-[-100px] w-[400px] h-[400px] bg-[#8B3CDC]/4 rounded-full blurred-ellipse pointer-events-none" />
+      <div className="absolute bottom-[5%] right-[-120px] w-[500px] max-w-full h-[500px] bg-[#2E1B5D]/4 rounded-full blurred-ellipse pointer-events-none" />
+      <div className="absolute top-[10%] left-[-100px] w-[400px] max-w-full h-[400px] bg-[#8B3CDC]/4 rounded-full blurred-ellipse pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
 
