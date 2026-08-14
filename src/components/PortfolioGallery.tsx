@@ -108,26 +108,6 @@ export default function PortfolioGallery() {
           </p>
         </div>
 
-        {/* Verified Stats Bar */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto mb-16 p-6 rounded-2xl bg-[#3b273d]/60 border border-[#D4AF37]/30 backdrop-blur-md">
-          <div className="text-center">
-            <span className="block font-serif font-bold text-2xl md:text-3xl text-[#D4AF37]">Many</span>
-            <span className="font-sans text-[11px] uppercase tracking-wider text-white/70 font-medium">Legacy Books</span>
-          </div>
-          <div className="text-center border-l border-white/10">
-            <span className="block font-serif font-bold text-2xl md:text-3xl text-[#D4AF37]">100+</span>
-            <span className="font-sans text-[11px] uppercase tracking-wider text-white/70 font-medium">Hours of Interviews</span>
-          </div>
-          <div className="text-center border-l border-white/10">
-            <span className="block font-serif font-bold text-2xl md:text-3xl text-[#D4AF37]">4.9★</span>
-            <span className="font-sans text-[11px] uppercase tracking-wider text-white/70 font-medium">Client Rating</span>
-          </div>
-          <div className="text-center border-l border-white/10">
-            <span className="block font-serif font-bold text-2xl md:text-3xl text-[#D4AF37]">Worldwide</span>
-            <span className="font-sans text-[11px] uppercase tracking-wider text-white/70 font-medium">Delivery</span>
-          </div>
-        </div>
-
         {/* Story Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16 text-left">
           {STORIES.map((story, i) => (
@@ -224,7 +204,7 @@ export default function PortfolioGallery() {
               animate={{ scale: 1 }}
               exit={{ scale: 0.95 }}
               onClick={(e) => e.stopPropagation()}
-              className="w-full max-w-2xl bg-[#faf2e1] text-primary rounded-xl p-8 relative"
+              className="w-full max-w-2xl max-h-[90vh] overflow-y-auto bg-[#faf2e1] text-primary rounded-xl p-5 sm:p-8 relative"
             >
               <button
                 onClick={() => setSelectedStory(null)}

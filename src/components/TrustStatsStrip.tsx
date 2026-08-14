@@ -16,16 +16,16 @@ const STATS: Stat[] = [
     id: 1, 
     display: 'Hundreds of', 
     displayHi: 'सैकड़ों', 
-    label: 'Stories Preserved', 
-    labelHi: 'सहेजी गई कहानियां', 
+    label: 'Legacies Preserved', 
+    labelHi: 'सहेजी गई विरासतें', 
     icon: BookOpen 
   },
   { 
     id: 2, 
-    display: '12+', 
-    displayHi: '12+', 
-    label: 'Countries Served', 
-    labelHi: 'देशों में सेवाएं', 
+    display: 'Worldwide', 
+    displayHi: 'विश्वव्यापी', 
+    label: 'Delivery', 
+    labelHi: 'डिलिवरी', 
     icon: Globe 
   },
   { 
@@ -88,7 +88,7 @@ export default function TrustStatsStrip() {
       <div className="absolute inset-0 paper-grain-dark opacity-40" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 lg:gap-12">
           {STATS.map((stat, index) => {
             const Icon = stat.icon;
             const displayVal = isHindi ? stat.displayHi : stat.display;
@@ -97,7 +97,7 @@ export default function TrustStatsStrip() {
             return (
               <div 
                 key={stat.id} 
-                className="text-center relative group"
+                className="text-center relative group flex flex-col justify-between"
                 style={{
                   animation: isVisible ? `fade-in 0.6s ease-out ${index * 0.1}s forwards` : 'none',
                   opacity: isVisible ? 1 : 0,
@@ -105,20 +105,20 @@ export default function TrustStatsStrip() {
               >
                 <div className="flex flex-col items-center">
                   {/* Icon Container with Gold Glow */}
-                  <div className="relative h-14 w-14 mb-4 transition-transform duration-300 group-hover:scale-110">
+                  <div className="relative h-12 w-12 sm:h-14 sm:w-14 mb-3 sm:mb-4 transition-transform duration-300 group-hover:scale-110">
                     <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[#D4AF37] to-[#B8941F] opacity-20 blur-md group-hover:opacity-40 transition-opacity" />
                     <div className="relative h-full w-full rounded-full bg-[#2A211A] border-2 border-[#D4AF37]/50 flex items-center justify-center shadow-lg shadow-[#D4AF37]/20">
-                      <Icon className="h-6 w-6 text-[#E5C463]" />
+                      <Icon className="h-5 w-5 sm:h-6 sm:w-6 text-[#E5C463]" />
                     </div>
                   </div>
 
-                  {/* Stat Number / Display Text */}
-                  <div className="font-serif text-3xl sm:text-4xl lg:text-4xl font-bold bg-gradient-to-br from-[#E5C463] via-[#D4AF37] to-[#B8941F] bg-clip-text text-transparent mb-2 drop-shadow-[0_2px_8px_rgba(212,175,55,0.3)]">
+                  {/* Stat Number / Display Text - Uniform sizing across all stat items on phone */}
+                  <div className="font-serif text-xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-br from-[#E5C463] via-[#D4AF37] to-[#B8941F] bg-clip-text text-transparent mb-2 drop-shadow-[0_2px_8px_rgba(212,175,55,0.3)] h-9 sm:h-12 flex items-center justify-center text-center whitespace-nowrap">
                     {displayVal}
                   </div>
 
                   {/* Label */}
-                  <p className="text-white/80 text-xs sm:text-sm font-sans font-semibold tracking-wide uppercase group-hover:text-[#E5C463] transition-colors">
+                  <p className="text-white/80 text-[11px] sm:text-xs md:text-sm font-sans font-semibold tracking-wide uppercase group-hover:text-[#E5C463] transition-colors leading-snug">
                     {labelVal}
                   </p>
 

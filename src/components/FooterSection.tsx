@@ -44,7 +44,7 @@ const footerTranslations = {
     privacy: "Privacy Policy",
     terms: "Terms of Service",
     refund: "Refund Policy",
-    madeWithLove: "Made with ❤️ in Gorakhpur & Jhansi, India",
+    madeWithLove: "Made with ❤️ in India",
     emailPlaceholder: "Enter your email address",
     subscribeSuccess: "Subscribed successfully! Thank you."
   },
@@ -78,7 +78,7 @@ const footerTranslations = {
     privacy: "गोपनीयता नीति",
     terms: "सेवा की शर्तें",
     refund: "वापसी नीति",
-    madeWithLove: "गोरखपुर और झाँसी, भारत में ❤️ के साथ निर्मित",
+    madeWithLove: "भारत में ❤️ के साथ निर्मित",
     emailPlaceholder: "अपना ईमेल पता दर्ज करें",
     subscribeSuccess: "सफलतापूर्वक सब्सक्राइब किया गया! धन्यवाद।"
   }
@@ -201,7 +201,7 @@ export default function FooterSection({
                   />
                 </div>
               </div>
-              <div className="flex items-center gap-3 text-white/70 pt-2">
+              <div className="flex items-center gap-3 text-white/85 pt-2">
                 <Facebook className="w-4 h-4 hover:text-white cursor-pointer transition-colors" />
                 <Instagram className="w-4 h-4 hover:text-white cursor-pointer transition-colors" />
                 <Linkedin className="w-4 h-4 hover:text-white cursor-pointer transition-colors" />
@@ -211,37 +211,37 @@ export default function FooterSection({
 
             {/* Column 2: Services */}
             <div className="lg:col-span-2 space-y-4 text-left">
-              <h4 className="font-serif italic text-base text-white mb-5 block">
+              <h4 className="font-serif italic text-base text-white mb-5 block font-bold">
                 {curTrans.servicesCol}
               </h4>
-              <ul className="space-y-2.5 text-xs font-sans text-white/60">
+              <ul className="space-y-2.5 text-xs sm:text-sm font-sans text-white/85">
                 <li><button type="button" onClick={() => onScrollToServices ? onScrollToServices(2) : document.getElementById("services")?.scrollIntoView({ behavior: "smooth" })} className="hover:text-white transition-colors cursor-pointer text-left">{curTrans.lifeStory}</button></li>
                 <li><button type="button" onClick={() => onScrollToServices ? onScrollToServices(1) : document.getElementById("services")?.scrollIntoView({ behavior: "smooth" })} className="hover:text-white transition-colors cursor-pointer text-left">{curTrans.tributeBook}</button></li>
                 <li><button type="button" onClick={() => onScrollToServices ? onScrollToServices(3) : document.getElementById("services")?.scrollIntoView({ behavior: "smooth" })} className="hover:text-white transition-colors cursor-pointer text-left">{curTrans.anniversaryBook}</button></li>
-                <li className="text-white/45 flex items-center"><Sparkles className="h-3 w-3 mr-1 text-white/60" /> {curTrans.animatedShorts}</li>
-                <li className="text-white/45">{curTrans.audiobooks}</li>
-                <li className="text-white/45 text-xs">{curTrans.genealogy}</li>
+                <li className="text-white/75 flex items-center"><Sparkles className="h-3 w-3 mr-1 text-[#D4AF37]" /> {curTrans.animatedShorts}</li>
+                <li className="text-white/75">{curTrans.audiobooks}</li>
+                <li className="text-white/75 text-xs">{curTrans.genealogy}</li>
               </ul>
             </div>
 
             {/* Column 3: Company */}
             <div className="lg:col-span-2 space-y-4 text-left">
-              <h4 className="font-serif italic text-base text-white mb-5 block">
+              <h4 className="font-serif italic text-base text-white mb-5 block font-bold">
                 {curTrans.companyCol}
               </h4>
-              <ul className="space-y-2.5 text-xs font-sans text-white/60">
+              <ul className="space-y-2.5 text-xs sm:text-sm font-sans text-white/85">
                 <li><button type="button" onClick={() => onScrollToAbout ? onScrollToAbout() : document.getElementById("about-us")?.scrollIntoView({ behavior: "smooth" })} className="hover:text-white transition-colors cursor-pointer text-left">{curTrans.aboutUs}</button></li>
                 <li><button type="button" onClick={() => onScrollToHowItWorks ? onScrollToHowItWorks() : document.getElementById("how-it-works")?.scrollIntoView({ behavior: "smooth" })} className="hover:text-white transition-colors cursor-pointer text-left">{curTrans.howItWorks}</button></li>
                 <li><button type="button" onClick={() => onScrollToGallery ? onScrollToGallery() : document.getElementById("gallery")?.scrollIntoView({ behavior: "smooth" })} className="hover:text-white transition-colors cursor-pointer text-left">{curTrans.gallery}</button></li>
                 <li><button type="button" onClick={() => onScrollToTestimonials ? onScrollToTestimonials() : document.getElementById("testimonials")?.scrollIntoView({ behavior: "smooth" })} className="hover:text-white transition-colors cursor-pointer text-left">{curTrans.testimonials}</button></li>
-                <li className="text-white/40">{curTrans.careers} <span className="text-[9px] bg-white/10 text-white py-0.5 px-1.5 rounded ml-1 uppercase font-bold">{curTrans.hiring}</span></li>
-                <li className="text-white/35">{curTrans.blog}</li>
+                <li className="text-white/75">{curTrans.careers} <span className="text-[9px] bg-accent-purple text-white py-0.5 px-1.5 rounded ml-1 uppercase font-bold">{curTrans.hiring}</span></li>
+                <li className="text-white/75">{curTrans.blog}</li>
               </ul>
             </div>
 
             {/* Column 4: Chat / Action panel */}
             <div className="lg:col-span-4 space-y-5 text-left">
-              <h4 className="font-serif italic text-base text-white mb-5 block">
+              <h4 className="font-serif italic text-base text-white mb-5 block font-bold">
                 {curTrans.touchCol}
               </h4>
 
@@ -269,20 +269,20 @@ export default function FooterSection({
 
               {/* Language Switcher */}
               <div className="flex items-center space-x-2 pt-1">
-                <Globe className="h-4 w-4 text-white/70" />
-                <span className="text-xs text-white/65">{lang === "HI" ? "भाषा:" : "Language:"}</span>
-                <div className="inline-flex bg-[#2d1e2f] p-0.5 rounded-lg border border-white/10 text-xs">
+                <Globe className="h-4 w-4 text-[#D4AF37]" />
+                <span className="text-xs text-white/85 font-medium">{lang === "HI" ? "भाषा:" : "Language:"}</span>
+                <div className="inline-flex bg-[#2d1e2f] p-0.5 rounded-lg border border-white/20 text-xs">
                   <button
                     type="button"
                     onClick={() => setLang("EN")}
-                    className={`px-2.5 py-1 rounded-md font-sans tracking-wide cursor-pointer ${lang === "EN" ? "bg-white text-[#140a15] font-bold" : "text-white/60"}`}
+                    className={`px-2.5 py-1 rounded-md font-sans tracking-wide cursor-pointer ${lang === "EN" ? "bg-white text-[#140a15] font-bold" : "text-white/75 hover:text-white"}`}
                   >
                     English
                   </button>
                   <button
                     type="button"
                     onClick={() => setLang("HI")}
-                    className={`px-2.5 py-1 rounded-md font-sans tracking-wide cursor-pointer ${lang === "HI" ? "bg-white text-[#140a15] font-bold" : "text-white/60"}`}
+                    className={`px-2.5 py-1 rounded-md font-sans tracking-wide cursor-pointer ${lang === "HI" ? "bg-white text-[#140a15] font-bold" : "text-white/75 hover:text-white"}`}
                   >
                     हिन्दी
                   </button>
@@ -291,14 +291,14 @@ export default function FooterSection({
 
               {/* Newsletter signup */}
               <form onSubmit={handleNewsSubmit} className="space-y-1.5 max-w-sm pt-2">
-                <span className="text-xs text-white/60 font-sans block">{t("latestLaunches")}</span>
+                <span className="text-xs text-white/85 font-sans block font-medium">{t("latestLaunches")}</span>
                 <div className="flex">
                   <input
                     type="email"
                     value={emailValue}
                     onChange={(e) => setEmailValue(e.target.value)}
                     placeholder={curTrans.emailPlaceholder}
-                    className="flex-grow bg-[#2d1e2f] border border-white/10 rounded-l-lg h-9 px-3 text-xs text-white focus:outline-none focus:border-white/30"
+                    className="flex-grow bg-[#2d1e2f] border border-white/20 rounded-l-lg h-9 px-3 text-xs text-white placeholder:text-white/50 focus:outline-none focus:border-white/40"
                   />
                   <button
                     type="submit"
@@ -319,26 +319,26 @@ export default function FooterSection({
           </div>
 
           {/* Bottom Divider */}
-          <div className="h-[1px] w-full bg-white/10 my-6" />
+          <div className="h-[1px] w-full bg-white/15 my-6" />
 
           {/* Bottom Row Credits */}
-          <div className="flex flex-col md:flex-row items-center justify-between text-xs text-white/40 font-sans gap-4 text-center uppercase tracking-widest">
+          <div className="flex flex-col md:flex-row items-center justify-between text-xs text-white/75 font-sans gap-4 text-center uppercase tracking-widest">
             <div>
               <span>{t("rightsText")}</span>
             </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 text-white/85">
               <span>Made with</span>
               <Heart className="w-3 h-3 text-red-500 fill-current animate-pulse" />
-              <span>in Jhansi, India</span>
+              <span>in India</span>
             </div>
 
-            <div className="flex flex-wrap justify-center gap-x-4 gap-y-1">
-              <a href="#privacy" className="hover:text-white transition-colors">{curTrans.privacy}</a>
+            <div className="flex flex-wrap justify-center gap-x-4 gap-y-1 text-white/75">
+              <a href="#privacy" className="hover:text-white transition-colors font-medium">{curTrans.privacy}</a>
               <span>•</span>
-              <a href="#terms" className="hover:text-white transition-colors">{curTrans.terms}</a>
+              <a href="#terms" className="hover:text-white transition-colors font-medium">{curTrans.terms}</a>
               <span>•</span>
-              <a href="#refund" className="hover:text-white transition-colors">{curTrans.refund}</a>
+              <a href="#refund" className="hover:text-white transition-colors font-medium">{curTrans.refund}</a>
             </div>
           </div>
 

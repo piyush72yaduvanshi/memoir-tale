@@ -86,28 +86,28 @@ export default function Navbar({
             : 'bg-transparent'
           }`}
       >
-        <div className="max-w-7xl mx-auto h-full px-6 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto h-full px-3 sm:px-6 flex items-center justify-between gap-2 sm:gap-4">
 
           {/* Logo */}
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="flex items-center gap-3 cursor-pointer group text-left"
+            className="flex items-center gap-2 sm:gap-3 cursor-pointer group text-left min-w-0 shrink"
             id="nav-logo"
           >
             <img
               src={logoUrl}
               alt="MemoirTale Logo"
-              className="h-14 w-14 object-contain rounded-full group-hover:scale-105 transition-transform duration-300 shadow-lg"
+              className="h-10 w-10 sm:h-12 sm:w-12 md:h-14 md:w-14 shrink-0 object-contain rounded-full group-hover:scale-105 transition-transform duration-300 shadow-lg"
             />
-            <div>
-              <span className={`font-serif font-bold text-xl sm:text-2xl tracking-wide block transition-colors duration-300 ${scrolled
+            <div className="min-w-0">
+              <span className={`font-serif font-bold text-lg sm:text-2xl tracking-wide block transition-colors duration-300 truncate ${scrolled
                   ? darkMode ? 'text-white' : 'text-primary'
                   : 'text-white'
                 }`}>
                 Memoir<span className="text-accent-purple">Tale</span>
               </span>
-              <span className="font-sans text-[10px] font-bold text-[#D4AF37] tracking-wider block -mt-0.5">
-                🇮🇳 India's First Legacy Platform
+              <span className="font-sans text-[9px] sm:text-[10px] font-bold text-[#D4AF37] tracking-wider block -mt-0.5 truncate">
+                India's First Legacy Platform
               </span>
             </div>
           </button>
@@ -250,25 +250,33 @@ export default function Navbar({
           </div>
 
           {/* Mobile Right Controls */}
-          <div className="md:hidden flex items-center gap-3">
+          <div className="md:hidden flex items-center gap-1.5 sm:gap-3 shrink-0">
             {/* Language Toggle Button - Mobile */}
-            <div className="flex items-center gap-1 bg-white/10 backdrop-blur-sm px-1.5 py-0.5 rounded-lg border border-white/20">
-              <Globe className="w-3 h-3 text-[#D4AF37] shrink-0" />
+            <div className={`flex items-center gap-0.5 sm:gap-1 backdrop-blur-sm px-1.5 py-0.5 rounded-lg border transition-colors ${
+              scrolled && !darkMode
+                ? 'bg-black/5 border-black/10'
+                : 'bg-white/10 border-white/20'
+            }`}>
+              <Globe className={`w-3 h-3 shrink-0 ${scrolled && !darkMode ? 'text-accent-purple' : 'text-[#D4AF37]'}`} />
               <button
                 onClick={() => setLang("EN")}
-                className={`px-2 py-0.5 rounded-md font-sans text-[11px] font-bold tracking-wide cursor-pointer transition-all ${lang === "EN"
-                    ? 'bg-accent-purple text-white'
-                    : 'text-white/70'
+                className={`px-1.5 py-0.5 rounded-md font-sans text-[10px] sm:text-[11px] font-bold tracking-wide cursor-pointer transition-all ${lang === "EN"
+                    ? 'bg-accent-purple text-white shadow-sm'
+                    : scrolled && !darkMode
+                      ? 'text-gray-700 hover:text-black'
+                      : 'text-white/70 hover:text-white'
                   }`}
               >
                 EN
               </button>
-              <span className="text-white/30 text-[10px] select-none">|</span>
+              <span className={`${scrolled && !darkMode ? 'text-black/30' : 'text-white/30'} text-[10px] select-none`}>|</span>
               <button
                 onClick={() => setLang("HI")}
-                className={`px-2 py-0.5 rounded-md font-sans text-[11px] font-bold tracking-wide cursor-pointer transition-all ${lang === "HI"
-                    ? 'bg-accent-purple text-white'
-                    : 'text-white/70'
+                className={`px-1.5 py-0.5 rounded-md font-sans text-[10px] sm:text-[11px] font-bold tracking-wide cursor-pointer transition-all ${lang === "HI"
+                    ? 'bg-accent-purple text-white shadow-sm'
+                    : scrolled && !darkMode
+                      ? 'text-gray-700 hover:text-black'
+                      : 'text-white/70 hover:text-white'
                   }`}
               >
                 हिन्दी
@@ -278,13 +286,14 @@ export default function Navbar({
             {/* Mobile Hamburger */}
             <button
               onClick={() => setMobileMenuOpen(true)}
-              className={`p-2 rounded-md ${scrolled
-                  ? darkMode ? 'text-white' : 'text-white'
+              className={`p-1.5 sm:p-2 rounded-md transition-colors ${scrolled
+                  ? darkMode ? 'text-white' : 'text-primary'
                   : 'text-white'
                 }`}
               id="mobile-menu-trigger"
+              aria-label="Open Menu"
             >
-              <Menu className="w-6 h-6" />
+              <Menu className="w-5 h-5 sm:w-6 sm:h-6" />
             </button>
           </div>
         </div>

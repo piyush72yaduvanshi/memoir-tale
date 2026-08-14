@@ -29,11 +29,11 @@ const translations: Record<Language, Record<string, string>> = {
     moreSoon: "MORE COMING SOON",
 
     // Hero
-    preservingSince: "🇮🇳 India's First Legacy Platform",
+    preservingSince: "India's First Legacy Platform",
     turnLifeInto: "Turning Lives Into",
     masterpiece: "Timeless Legacies",
     tagline: '"Stories Unfolded, Memories Preserved."',
-    heroBody: "Memoir Tale is India's First Legacy Platform, helping families preserve life stories, memories, voices, photographs, and values through beautifully crafted legacy books and lasting digital experiences.",
+    heroBody: "We preserve life stories, memories, and values in beautifully crafted books and lasting digital experiences.",
     startStory: "Begin Your Legacy",
     viewBooks: "Explore Legacy Stories",
     badge1: "Human-Led Storytelling",
@@ -163,11 +163,11 @@ const translations: Record<Language, Record<string, string>> = {
     moreSoon: "जल्द ही और आ रहा है",
 
     // Hero
-    preservingSince: "🇮🇳 भारत का पहला लेगेसी प्लेटफॉर्म",
+    preservingSince: "भारत का पहला लेगेसी प्लेटफॉर्म",
     turnLifeInto: "जीवन को बदलते हैं",
     masterpiece: "कालजयी विरासतों में",
     tagline: '"अनकही कहानियाँ, सहेजी गयी यादें।"',
-    heroBody: "मेमोयर टेल (Memoir Tale) भारत का पहला लेगेसी प्लेटफॉर्म है, जो परिवारों को खूबसूरत लेगेसी किताबों और स्थायी डिजिटल अनुभवों के माध्यम से जीवन की कहानियों, यादों, आवाज़ों, तस्वीरों और मूल्यों को सहेजने में मदद करता है।",
+    heroBody: "हम जीवन की कहानियों, यादों और मूल्यों को खूबसूरती से तैयार की गई पुस्तकों और स्थायी डिजिटल अनुभवों में सहेजते हैं।",
     startStory: "अपनी विरासत शुरू करें",
     viewBooks: "लेगेसी कहानियां देखें",
     badge1: "मानवीय साक्षात्कार एवं लेखन",

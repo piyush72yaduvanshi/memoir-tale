@@ -92,33 +92,10 @@ export default function FloatingCallbackButton() {
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          style={{ 
-            position: 'fixed',
-            bottom: '32px',
-            right: '32px',
-            zIndex: 9999,
-            width: '64px',
-            height: '64px',
-            borderRadius: '50%',
-            background: 'linear-gradient(135deg, #D4AF37 0%, #E5C463 50%, #B8941F 100%)',
-            border: 'none',
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            boxShadow: '0 8px 32px rgba(212, 175, 55, 0.6)',
-            transition: 'all 0.3s ease'
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.transform = 'scale(1.1) rotate(5deg)';
-            e.currentTarget.style.boxShadow = '0 12px 40px rgba(212, 175, 55, 0.8)';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.transform = 'scale(1) rotate(0deg)';
-            e.currentTarget.style.boxShadow = '0 8px 32px rgba(212, 175, 55, 0.6)';
-          }}
+          className="fixed bottom-5 right-5 sm:bottom-8 sm:right-8 z-50 w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center cursor-pointer shadow-[0_8px_32px_rgba(212,175,55,0.6)] transition-all duration-300 hover:scale-110 active:scale-95 bg-gradient-to-br from-[#D4AF37] via-[#E5C463] to-[#B8941F]"
+          aria-label="Request Callback"
         >
-          <Phone style={{ width: '28px', height: '28px', color: 'white' }} />
+          <Phone className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
         </button>
       )}
 
@@ -132,17 +109,17 @@ export default function FloatingCallbackButton() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsOpen(false)}
-              className="fixed inset-0 bg-[#1B101E]/90 backdrop-blur-sm z-50"
+              className="fixed inset-0 bg-[#1B101E]/90 backdrop-blur-sm z-50 p-4"
             />
 
-            {/* Modal */}
+            {/* Modal Container */}
             <motion.div
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 w-full max-w-md"
+              className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 w-[92vw] max-w-md max-h-[90vh] overflow-y-auto"
             >
-              <div className="bg-[#1A1410] border border-[#D4AF37]/20 rounded-2xl p-8 shadow-2xl relative">
+              <div className="bg-[#1A1410] border border-[#D4AF37]/20 rounded-2xl p-5 sm:p-8 shadow-2xl relative">
                 {/* Close Button */}
                 <button
                   onClick={() => setIsOpen(false)}

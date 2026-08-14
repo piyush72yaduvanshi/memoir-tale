@@ -22,7 +22,7 @@ const PARTICLES = Array.from({ length: 14 }).map((_, i) => ({
 }));
 
 export default function Hero({ darkMode, onStartStoryClick, onViewBooksClick }: HeroProps) {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
 
   const handleStartClick = () => {
     if (onStartStoryClick) {
@@ -113,22 +113,48 @@ export default function Hero({ darkMode, onStartStoryClick, onViewBooksClick }: 
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="font-serif text-white font-bold text-4xl sm:text-6xl md:text-7xl leading-[1.1] tracking-tight text-center"
+          className="font-serif font-bold text-3xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.15] tracking-tight text-center max-w-full px-2"
         >
-          {t("turnLifeInto")} <br />
-          <span className="font-serif italic bg-gradient-to-r from-[#E5C463] via-[#D4AF37] to-[#B8941F] bg-clip-text text-transparent block mt-3 text-5xl sm:text-7xl md:text-8xl drop-shadow-[0_2px_20px_rgba(212,175,55,0.3)] pb-3">
-            {t("masterpiece")}
+          <span className="text-white block font-serif">{t("turnLifeInto")}</span>
+          <span className="block mt-2 text-4xl sm:text-6xl md:text-7xl lg:text-8xl">
+            <span className="font-serif not-italic text-[#D4AF37] drop-shadow-[0_2px_20px_rgba(212,175,55,0.35)]">
+              {lang === "HI" ? "कालजयी " : "Timeless "}
+            </span>
+            <span className="font-serif not-italic text-white drop-shadow-[0_2px_20px_rgba(255,255,255,0.2)]">
+              {lang === "HI" ? "विरासतों में" : "Legacies"}
+            </span>
           </span>
         </motion.h1>
+
+        {/* Gold Diamond Divider */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="relative flex items-center justify-center my-6 max-w-xs mx-auto w-full"
+        >
+          <div className="h-px bg-gradient-to-r from-transparent via-[#D4AF37]/60 to-transparent w-full" />
+          <div className="absolute bg-[#1B101E] px-3 flex items-center justify-center">
+            <span className="text-[#D4AF37] text-sm select-none">❖</span>
+          </div>
+        </motion.div>
 
         {/* Subtitle */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
-          className="mt-7 text-white/90 font-serif-sub text-xl sm:text-2xl md:text-[23px] lg:text-[24px] font-light leading-relaxed max-w-2xl mx-auto italic"
+          className="text-white/90 font-serif-sub text-lg sm:text-xl md:text-2xl font-light leading-relaxed max-w-2xl mx-auto"
         >
-          {t("heroBody")}
+          {lang === "HI" ? (
+            <>
+              हम <span className="text-[#D4AF37] font-normal">जीवन की कहानियों</span>, यादों और मूल्यों को खूबसूरती से तैयार की गई पुस्तकों और <span className="text-[#D4AF37] font-normal">स्थायी डिजिटल अनुभवों</span> में सहेजते हैं।
+            </>
+          ) : (
+            <>
+              We preserve <span className="text-[#D4AF37] font-normal">life stories</span>, memories, and values in beautifully crafted books and <span className="text-[#D4AF37] font-normal">lasting digital experiences</span>.
+            </>
+          )}
         </motion.p>
 
         {/* CTA Actions */}

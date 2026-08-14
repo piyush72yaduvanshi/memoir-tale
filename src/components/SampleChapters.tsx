@@ -184,13 +184,13 @@ export default function SampleChapters() {
         </div>
 
         {/* Category Selector Tabs */}
-        <div className="flex flex-wrap justify-center gap-2 mb-10 max-w-3xl mx-auto">
+        <div className="flex flex-wrap justify-center gap-2 mb-8 sm:mb-10 max-w-3xl mx-auto px-2">
           {SAMPLE_EXCERPTS.map((ex, idx) => (
             <button
               key={ex.id}
               type="button"
               onClick={() => setActiveExcerptIndex(idx)}
-              className={`px-5 py-2.5 rounded-full text-xs font-sans font-bold border transition-all cursor-pointer select-none outline-none focus:outline-none flex items-center space-x-1.5 ${activeExcerptIndex === idx
+              className={`px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-full text-[11px] sm:text-xs font-sans font-bold border transition-all cursor-pointer select-none outline-none focus:outline-none flex items-center space-x-1.5 ${activeExcerptIndex === idx
                 ? "bg-[#2E1B5D] text-white border-[#2E1B5D] shadow-[0_6px_20px_rgba(139, 92, 246,0.25)] scale-105"
                 : "bg-white text-slate-600 border-[#E3DDE9]/60 hover:bg-[#FAF6F0] hover:text-[#190F26]"
                 }`}

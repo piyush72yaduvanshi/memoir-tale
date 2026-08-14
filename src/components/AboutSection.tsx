@@ -1,10 +1,10 @@
 import React from "react";
-import { ArrowRight, Star, Heart, Award, Sparkles } from "lucide-react";
+import { Star, Award } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext";
 import FadeIn from "./FadeIn";
 
 interface AboutSectionProps {
-  onLearnMoreClick: () => void;
+  onLearnMoreClick?: () => void;
 }
 
 export default function AboutSection({ onLearnMoreClick }: AboutSectionProps) {
@@ -51,15 +51,6 @@ export default function AboutSection({ onLearnMoreClick }: AboutSectionProps) {
                   )}
                 </p>
               </div>
-
-              {/* CTA Arrow Link */}
-              <button
-                onClick={onLearnMoreClick}
-                className="mt-8 group inline-flex items-center space-x-2 font-sans font-semibold text-base text-[#2D0F52] hover:text-[#2E1B5D] transition-colors cursor-pointer"
-              >
-                <span className="group-hover:underline">{lang === "HI" ? "हमारे बारे में अधिक जानें" : "Learn More About Us"}</span>
-                <ArrowRight className="h-4 w-4 transform group-hover:translate-x-1.5 transition-transform" />
-              </button>
             </div>
 
             {/* Right Column (45% Desktop layout spacing - Stats Grid) */}
@@ -74,49 +65,17 @@ export default function AboutSection({ onLearnMoreClick }: AboutSectionProps) {
                   <div className="bg-[#FAF6F0] p-2 rounded-xl text-[#2E1B5D] w-fit mb-3">
                     <Award className="h-5 w-5" />
                   </div>
-                  <span className="block font-serif font-bold text-3xl sm:text-[46px] text-[#2E1B5D] leading-none mb-1">
-                    500+
+                  <span className="block font-serif font-bold text-2xl sm:text-[34px] text-[#2E1B5D] leading-tight mb-1">
+                    {lang === "HI" ? "सैकड़ों" : "Hundreds of"}
                   </span>
                   <span className="block font-sans font-medium text-xs sm:text-sm text-[#554466]">
-                    {lang === "HI" ? "बनाई गई पुस्तकें" : "Books Created"}
+                    {lang === "HI" ? "विरासतें सहेजी गईं" : "Legacies Preserved"}
                   </span>
                 </div>
 
                 {/* Stat Card 2 */}
                 <div
                   id="stat-card-2"
-                  className="bg-white p-6 rounded-[20px] shadow-[0_8px_40px_rgba(69,20,122,0.08)] border border-[#E3DDE9]/60 hover:border-[#2E1B5D]/50 transition-all duration-300 transform hover:scale-[1.03]"
-                >
-                  <div className="bg-[#FAF6F0] p-2 rounded-xl text-[#2E1B5D] w-fit mb-3">
-                    <Heart className="h-5 w-5 text-red-500" />
-                  </div>
-                  <span className="block font-serif font-bold text-3xl sm:text-[46px] text-[#2E1B5D] leading-none mb-1">
-                    100+
-                  </span>
-                  <span className="block font-sans font-medium text-xs sm:text-sm text-[#554466]">
-                    {lang === "HI" ? "खुशहाल परिवार" : "Happy Families"}
-                  </span>
-                </div>
-
-                {/* Stat Card 3 */}
-                <div
-                  id="stat-card-3"
-                  className="bg-white p-6 rounded-[20px] shadow-[0_8px_40px_rgba(69,20,122,0.08)] border border-[#E3DDE9]/60 hover:border-[#2E1B5D]/50 transition-all duration-300 transform hover:scale-[1.03]"
-                >
-                  <div className="bg-[#FAF6F0] p-2 rounded-xl text-[#2E1B5D] w-fit mb-3">
-                    <Sparkles className="h-5 w-5" />
-                  </div>
-                  <span className="block font-serif font-bold text-2xl sm:text-[40px] text-[#2E1B5D] leading-none mb-1">
-                    5 yrs+
-                  </span>
-                  <span className="block font-sans font-medium text-xs sm:text-sm text-[#554466]">
-                    {lang === "HI" ? "लेखन अनुभव" : "Writing Experience"}
-                  </span>
-                </div>
-
-                {/* Stat Card 4 */}
-                <div
-                  id="stat-card-4"
                   className="bg-white p-6 rounded-[20px] shadow-[0_8px_40px_rgba(69,20,122,0.08)] border border-[#E3DDE9]/60 hover:border-[#2E1B5D]/50 transition-all duration-300 transform hover:scale-[1.03]"
                 >
                   <div className="bg-[#FAF6F0] p-2 rounded-xl text-[#2E1B5D] w-fit mb-3 flex items-center justify-center">
@@ -139,6 +98,3 @@ export default function AboutSection({ onLearnMoreClick }: AboutSectionProps) {
     </section>
   );
 }
-
-
-

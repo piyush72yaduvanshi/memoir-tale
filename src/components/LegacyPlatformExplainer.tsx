@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { BookOpen, Sparkles, Image, Mic, Award, Compass, Layers, CheckCircle2 } from 'lucide-react';
+import { BookOpen, Sparkles, Image, Mic, Compass, Layers } from 'lucide-react';
 
 interface LegacyPlatformExplainerProps {
   darkMode?: boolean;
@@ -28,13 +28,6 @@ export default function LegacyPlatformExplainer({ darkMode }: LegacyPlatformExpl
       title: "Life Milestones",
       description: "Chronologically organized timelines celebrating wisdom, lineage, and personal journeys."
     }
-  ];
-
-  const differentiators = [
-    "Custom Ghostwriting & Oral Interviews",
-    "Professional Photo Restoration & Curations",
-    "Multi-Generational Digital & Audio Vaults",
-    "Heirloom Book Design (Not Automated Templates)"
   ];
 
   return (
@@ -87,7 +80,7 @@ export default function LegacyPlatformExplainer({ darkMode }: LegacyPlatformExpl
         </motion.div>
 
         {/* Core Definition Card & Pillars Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch mb-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           {/* Main Core Value Card */}
           <motion.div 
             initial={{ opacity: 0, x: -20 }}
@@ -113,27 +106,11 @@ export default function LegacyPlatformExplainer({ darkMode }: LegacyPlatformExpl
                   Beyond Printers & Publishers
                 </h3>
               </div>
-              <p className={`text-sm md:text-base leading-relaxed mb-6 ${
+              <p className={`text-sm md:text-base leading-relaxed ${
                 darkMode ? 'text-[#F5F0F8]/90 font-light' : 'text-[#1B101E] font-medium'
               }`}>
                 Memoir Tale goes beyond traditional printing services and self-publishing houses. We provide an end-to-end ecosystem where personal history is gently extracted through conversational interviews, curated visually, and preserved across tangible heirlooms and permanent digital formats.
               </p>
-            </div>
-
-            {/* Key Differentiator Highlight */}
-            <div className={`p-4 rounded-xl border ${
-              darkMode 
-                ? 'bg-[#D4AF37]/10 border-[#D4AF37]/30 text-[#D4AF37]' 
-                : 'bg-[#2D1230]/10 border-[#2D1230]/20 text-[#2D1230]'
-            }`}>
-              <div className="flex items-start gap-3">
-                <Award className={`w-5 h-5 shrink-0 mt-0.5 ${
-                  darkMode ? 'text-[#D4AF37]' : 'text-[#7A5000]'
-                }`} />
-                <p className="text-xs md:text-sm font-semibold leading-relaxed">
-                  This differentiates Memoir Tale from printers and publishers. We are complete custodians of your family lineage and life story.
-                </p>
-              </div>
             </div>
           </motion.div>
 
@@ -174,29 +151,6 @@ export default function LegacyPlatformExplainer({ darkMode }: LegacyPlatformExpl
             })}
           </motion.div>
         </div>
-
-        {/* Feature List Badges / Bullet Points */}
-        <motion.div 
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.4 }}
-          className="pt-6 border-t border-[#D4AF37]/20 flex flex-wrap justify-center items-center gap-3 md:gap-6"
-        >
-          {differentiators.map((diff, index) => (
-            <div 
-              key={index} 
-              className={`flex items-center gap-2 px-3 py-1.5 rounded-lg border ${
-                darkMode 
-                  ? 'bg-white/5 border-white/10 text-[#F5F0F8]' 
-                  : 'bg-[#2D1230]/5 border-[#2D1230]/15 text-[#2D1230]'
-              }`}
-            >
-              <CheckCircle2 className={`w-4 h-4 shrink-0 ${darkMode ? 'text-[#D4AF37]' : 'text-[#7A5000]'}`} />
-              <span className="text-xs md:text-sm font-bold">{diff}</span>
-            </div>
-          ))}
-        </motion.div>
       </div>
     </section>
   );
