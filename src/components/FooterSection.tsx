@@ -157,22 +157,6 @@ export default function FooterSection({
               <span>{curTrans.callUsBtn}</span>
             </a>
           </div>
-
-          {/* Social Row */}
-          <div className="flex justify-center items-center gap-5 pt-10 text-white/80">
-            <a href="https://facebook.com" aria-label="Facebook Link" className="hover:text-white transition-colors">
-              <Facebook className="h-6 w-6" />
-            </a>
-            <a href="https://instagram.com" aria-label="Instagram Link" className="hover:text-white transition-colors">
-              <Instagram className="h-6 w-6" />
-            </a>
-            <a href="https://linkedin.com" aria-label="LinkedIn Link" className="hover:text-white transition-colors">
-              <Linkedin className="h-6 w-6" />
-            </a>
-            <a href="https://twitter.com" aria-label="Twitter Link" className="hover:text-white transition-colors">
-              <Twitter className="h-6 w-6" />
-            </a>
-          </div>
         </div>
       </section>
 
@@ -202,10 +186,18 @@ export default function FooterSection({
                 </div>
               </div>
               <div className="flex items-center gap-3 text-white/85 pt-2">
-                <Facebook className="w-4 h-4 hover:text-white cursor-pointer transition-colors" />
-                <Instagram className="w-4 h-4 hover:text-white cursor-pointer transition-colors" />
-                <Linkedin className="w-4 h-4 hover:text-white cursor-pointer transition-colors" />
-                <Twitter className="w-4 h-4 hover:text-white cursor-pointer transition-colors" />
+                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="hover:text-white transition-colors">
+                  <Facebook className="w-4 h-4" />
+                </a>
+                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="hover:text-white transition-colors">
+                  <Instagram className="w-4 h-4" />
+                </a>
+                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="hover:text-white transition-colors">
+                  <Linkedin className="w-4 h-4" />
+                </a>
+                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="hover:text-white transition-colors">
+                  <Twitter className="w-4 h-4" />
+                </a>
               </div>
             </div>
 

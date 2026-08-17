@@ -25,6 +25,12 @@ import FooterSection from './components/FooterSection';
 import FloatingCallbackButton from './components/FloatingCallbackButton';
 import AdminDashboardSecure from './components/AdminDashboardSecure';
 
+// Legal & Careers Modals
+import PrivacyPolicyModal from './components/modals/PrivacyPolicyModal';
+import TermsModal from './components/modals/TermsModal';
+import RefundModal from './components/modals/RefundModal';
+import CareersModal from './components/modals/CareersModal';
+
 export default function App() {
   // Dark mode with localStorage persistence (defaults to light mode)
   const [darkMode, setDarkMode] = useState<boolean>(() => {
@@ -32,6 +38,12 @@ export default function App() {
     return saved !== null ? JSON.parse(saved) : false;
   });
   const [showAdmin, setShowAdmin] = useState<boolean>(false);
+
+  // Modal states
+  const [showPrivacyModal, setShowPrivacyModal] = useState<boolean>(false);
+  const [showTermsModal, setShowTermsModal] = useState<boolean>(false);
+  const [showRefundModal, setShowRefundModal] = useState<boolean>(false);
+  const [showCareersModal, setShowCareersModal] = useState<boolean>(false);
 
   // Service selection state
   const [selectedService, setSelectedService] = useState('');
@@ -42,24 +54,38 @@ export default function App() {
   // Writer matchmaker state
   const [matchedWriter, setMatchedWriter] = useState<string | null>(null);
 
-  // Check URL for admin path
+  // Check URL for admin and modal paths/hashes
   useEffect(() => {
-    const checkAdminRoute = () => {
+    const handleRouteAndHash = () => {
       const path = window.location.pathname;
-      if (path.includes('/admin') || window.location.hash === '#admin') {
+      const hash = window.location.hash;
+
+      // Admin route check
+      if (path.includes('/admin') || hash === '#admin') {
         setShowAdmin(true);
       } else {
         setShowAdmin(false);
       }
+
+      // Hash modal triggers
+      if (hash === '#privacy') {
+        setShowPrivacyModal(true);
+      } else if (hash === '#terms') {
+        setShowTermsModal(true);
+      } else if (hash === '#refund') {
+        setShowRefundModal(true);
+      } else if (hash === '#careers') {
+        setShowCareersModal(true);
+      }
     };
 
-    checkAdminRoute();
-    window.addEventListener('popstate', checkAdminRoute);
-    window.addEventListener('hashchange', checkAdminRoute);
+    handleRouteAndHash();
+    window.addEventListener('popstate', handleRouteAndHash);
+    window.addEventListener('hashchange', handleRouteAndHash);
 
     return () => {
-      window.removeEventListener('popstate', checkAdminRoute);
-      window.removeEventListener('hashchange', checkAdminRoute);
+      window.removeEventListener('popstate', handleRouteAndHash);
+      window.removeEventListener('hashchange', handleRouteAndHash);
     };
   }, []);
 
@@ -77,6 +103,16 @@ export default function App() {
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const closeModalsAndCleanHash = () => {
+    setShowPrivacyModal(false);
+    setShowTermsModal(false);
+    setShowRefundModal(false);
+    setShowCareersModal(false);
+    if (['#privacy', '#terms', '#refund', '#careers'].includes(window.location.hash)) {
+      history.pushState('', document.title, window.location.pathname + window.location.search);
     }
   };
 
@@ -159,10 +195,14 @@ export default function App() {
       <div id="gallery">
         <GallerySection darkMode={darkMode} />
       </div>
-      <TestimonialsSection />
+      <div id="testimonials">
+        <TestimonialsSection />
+      </div>
       <PortfolioGallery />
       <EventSection />
-      <FAQSection />
+      <div id="faq">
+        <FAQSection />
+      </div>
       <div id="contact">
         <ContactSection
           selectedService={selectedService}
@@ -171,10 +211,48 @@ export default function App() {
           darkMode={darkMode}
         />
       </div>
-      <FooterSection onQuoteClick={() => scrollToSection('contact')} isMobilePreview={false} />
+
+      {/* Redesigned Footer Section */}
+      <FooterSection 
+        onQuoteClick={() => scrollToSection('contact')} 
+        onScrollToAbout={() => scrollToSection('about')}
+        onScrollToHowItWorks={() => scrollToSection('how-it-works')}
+        onScrollToServices={(packageId) => {
+          scrollToSection('services');
+          if (packageId) setHighlightedPackageId(packageId);
+        }}
+        onScrollToGallery={() => scrollToSection('gallery')}
+        onScrollToTestimonials={() => scrollToSection('testimonials')}
+        onOpenPrivacy={() => setShowPrivacyModal(true)}
+        onOpenTerms={() => setShowTermsModal(true)}
+        onOpenRefund={() => setShowRefundModal(true)}
+        onOpenCareers={() => setShowCareersModal(true)}
+      />
 
       {/* Floating Callback Button */}
       <FloatingCallbackButton />
+
+      {/* Interactive Legal & Career Modals */}
+      <PrivacyPolicyModal
+        isOpen={showPrivacyModal}
+        onClose={closeModalsAndCleanHash}
+        darkMode={darkMode}
+      />
+      <TermsModal
+        isOpen={showTermsModal}
+        onClose={closeModalsAndCleanHash}
+        darkMode={darkMode}
+      />
+      <RefundModal
+        isOpen={showRefundModal}
+        onClose={closeModalsAndCleanHash}
+        darkMode={darkMode}
+      />
+      <CareersModal
+        isOpen={showCareersModal}
+        onClose={closeModalsAndCleanHash}
+        darkMode={darkMode}
+      />
     </div>
   );
 }
