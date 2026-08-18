@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { X, BookOpen } from 'lucide-react';
+import { X, BookOpen, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
 // Import local book images
@@ -82,114 +82,190 @@ export default function PortfolioGallery() {
   const { lang } = useLanguage();
   const isHindi = lang === "HI";
   const [selectedStory, setSelectedStory] = useState<StoryItem | null>(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [itemsPerPage, setItemsPerPage] = useState(3);
+
+  // Responsive items per page
+  useEffect(() => {
+    const updateItemsPerPage = () => {
+      if (window.innerWidth < 640) {
+        setItemsPerPage(1);
+      } else if (window.innerWidth < 1024) {
+        setItemsPerPage(2);
+      } else {
+        setItemsPerPage(3);
+      }
+    };
+
+    updateItemsPerPage();
+    window.addEventListener("resize", updateItemsPerPage);
+    return () => window.removeEventListener("resize", updateItemsPerPage);
+  }, []);
+
+  const maxIndex = Math.max(0, STORIES.length - itemsPerPage);
+
+  const slideNext = () => {
+    setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
+  };
+
+  const slidePrev = () => {
+    setCurrentIndex((prev) => (prev <= 0 ? maxIndex : prev - 1));
+  };
+
+  const gap = 24;
+  const translatePercent = (currentIndex * 100) / itemsPerPage;
 
   return (
     <section
       id="portfolio-gallery"
-      className="py-20 md:py-28 bg-[#2d1e2f] text-white relative overflow-hidden"
+      className="py-16 md:py-24 bg-[#2d1e2f] text-white relative overflow-hidden"
     >
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] max-w-full h-[800px] bg-accent-purple/5 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute inset-0 opacity-[0.03] pointer-events-none paper-grain-dark" />
 
-      <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
-        {/* Section Header */}
-        <div className="max-w-3xl mx-auto mb-12 text-center">
-          <span className="font-sans text-[11px] font-bold tracking-[3px] uppercase text-accent-purple block mb-3">
-            {isHindi ? "पोर्टफोलियो" : "PORTFOLIO"}
-          </span>
-          <h2 className="font-serif font-bold text-3xl sm:text-4xl md:text-5xl leading-tight text-[#D4AF37]">
-            {isHindi ? "जो कहानियाँ सहेजने का हमें सौभाग्य मिला" : "Stories We've Had The Privilege To Preserve"}
-          </h2>
-          <p className="mt-4 font-sans text-white/70 text-xs md:text-sm leading-relaxed">
-            {isHindi
-              ? "हमारे इमर्सिव स्टोरीबुक इंटरैक्टिव रीडर को खोलने और एक समाप्त मेमोयरटेल अध्याय की साहित्यिक गहराई का अनुभव करने के लिए नीचे किसी भी कार्ड पर क्लिक करें।"
-              : "Click on any story card below to open our immersive reader and experience the literary depth of our preserved volumes."}
-          </p>
+        {/* Section Header with Slide Controls */}
+        <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-6 mb-10 md:mb-12">
+          <div className="text-left max-w-2xl">
+            <span className="font-sans text-[11px] font-bold tracking-[3px] uppercase text-[#D4AF37] block mb-3">
+              {isHindi ? "पोर्टफोलियो" : "PORTFOLIO"}
+            </span>
+            <h2 className="font-serif font-bold text-3xl sm:text-4xl lg:text-[44px] leading-tight text-[#D4AF37]">
+              {isHindi ? "जो कहानियाँ सहेजने का हमें सौभाग्य मिला" : "Stories We've Had The Privilege To Preserve"}
+            </h2>
+            <p className="mt-3 font-sans text-white/70 text-xs md:text-sm leading-relaxed max-w-2xl">
+              {isHindi
+                ? "हमारे इमर्सिव स्टोरीबुक इंटरैक्टिव रीडर को खोलने और एक समाप्त मेमोयरटेल अध्याय की साहित्यिक गहराई का अनुभव करने के लिए नीचे किसी भी कार्ड पर क्लिक करें।"
+                : "Click on any story card below to open our immersive reader and experience the literary depth of our preserved volumes."}
+            </p>
+          </div>
+
+          {/* Navigation Chevron Controls */}
+          <div className="flex items-center gap-3 self-end md:self-auto shrink-0">
+            <button
+              onClick={slidePrev}
+              aria-label="Previous Book"
+              className="w-11 h-11 rounded-full border border-white/20 hover:border-[#D4AF37] text-white hover:bg-white/10 flex items-center justify-center transition-all duration-300 cursor-pointer shadow-sm active:scale-95"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+            <button
+              onClick={slideNext}
+              aria-label="Next Book"
+              className="w-11 h-11 rounded-full border border-white/20 hover:border-[#D4AF37] text-white hover:bg-white/10 flex items-center justify-center transition-all duration-300 cursor-pointer shadow-sm active:scale-95"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
+          </div>
         </div>
 
-        {/* Story Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16 text-left">
-          {STORIES.map((story, i) => (
-            <motion.div
-              key={story.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              whileHover={{ scale: 1.03, y: -6 }}
-              onClick={() => setSelectedStory(story)}
-              className="group rounded-2xl overflow-hidden bg-[#3b273d]/40 border border-white/10 hover:border-[#D4AF37]/60 transition-all duration-300 relative cursor-pointer shadow-lg hover:shadow-2xl hover:shadow-[#D4AF37]/15 flex flex-col justify-between"
-            >
-              {/* Cover Image */}
-              <div className="relative h-64 sm:h-72 overflow-hidden">
-                <img
-                  src={story.image}
-                  alt={story.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  referrerPolicy="no-referrer"
-                />
-                <div className="absolute inset-0 bg-[#2d1e2f]/50 opacity-40 group-hover:opacity-10 transition-opacity duration-300" />
+        {/* Compact Horizontal Slideshow Area */}
+        <div className="relative overflow-hidden w-full rounded-2xl pt-1 pb-4">
+          <motion.div
+            animate={{ x: `calc(-${translatePercent}% - ${(currentIndex * gap) / itemsPerPage}px)` }}
+            transition={{ type: "spring", stiffness: 240, damping: 28 }}
+            className="flex gap-6 w-full"
+          >
+            {STORIES.map((story) => (
+              <div
+                key={story.id}
+                className="shrink-0 flex flex-col cursor-pointer text-left"
+                style={{
+                  width: `calc((100% - ${(itemsPerPage - 1) * gap}px) / ${itemsPerPage})`,
+                }}
+                onClick={() => setSelectedStory(story)}
+              >
+                <div className="group rounded-2xl overflow-hidden bg-[#3b273d]/40 border border-white/10 hover:border-[#D4AF37]/60 transition-all duration-300 relative shadow-lg hover:shadow-2xl hover:shadow-[#D4AF37]/15 flex flex-col justify-between h-full transform hover:-translate-y-1.5">
+                  {/* Cover Image */}
+                  <div className="relative h-56 sm:h-64 overflow-hidden">
+                    <img
+                      src={story.image}
+                      alt={story.title}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      referrerPolicy="no-referrer"
+                    />
+                    <div className="absolute inset-0 bg-[#2d1e2f]/50 opacity-40 group-hover:opacity-10 transition-opacity duration-300" />
 
-                {/* Hover overlay */}
-                <div className="absolute inset-0 bg-primary/80 opacity-0 group-hover:opacity-95 flex flex-col items-center justify-center p-6 text-center transition-all duration-300">
-                  <div className="p-3 bg-[#D4AF37] rounded-full text-black scale-90 group-hover:scale-105 transition-transform duration-300 mb-3 shadow-lg">
-                    <BookOpen className="w-6 h-6" />
-                  </div>
-                  <span className="font-serif italic text-[#D4AF37] text-lg block font-medium">
-                    {isHindi ? "कहानी का अंश पढ़ें" : "Read Story Excerpt"}
-                  </span>
-                  <span className="font-sans text-[10px] uppercase font-bold tracking-[2px] text-white/70 block mt-1">
-                    {isHindi ? "खोलने के लिए क्लिक करें" : "Click to Open"}
-                  </span>
-                </div>
-              </div>
-
-              {/* Card Content */}
-              <div className="p-6 flex flex-col justify-between flex-grow">
-                <div>
-                  <div className="flex items-center justify-between gap-4 mb-3">
-                    <span className="font-sans text-[10px] uppercase font-bold tracking-[2px] text-[#D4AF37]">
-                      {story.subject}
-                    </span>
-                    <span className="font-sans text-[10px] text-white/50 font-bold">
-                      {story.year}
-                    </span>
+                    {/* Hover overlay */}
+                    <div className="absolute inset-0 bg-primary/80 opacity-0 group-hover:opacity-95 flex flex-col items-center justify-center p-6 text-center transition-all duration-300">
+                      <div className="p-3 bg-[#D4AF37] rounded-full text-black scale-90 group-hover:scale-105 transition-transform duration-300 mb-3 shadow-lg">
+                        <BookOpen className="w-6 h-6" />
+                      </div>
+                      <span className="font-serif italic text-[#D4AF37] text-base sm:text-lg block font-medium">
+                        {isHindi ? "कहानी का अंश पढ़ें" : "Read Story Excerpt"}
+                      </span>
+                      <span className="font-sans text-[10px] uppercase font-bold tracking-[2px] text-white/70 block mt-1">
+                        {isHindi ? "खोलने के लिए क्लिक करें" : "Click to Open"}
+                      </span>
+                    </div>
                   </div>
 
-                  <h3 className="font-serif font-bold text-lg text-white mb-3 group-hover:text-[#D4AF37] transition-colors">
-                    {story.title}
-                  </h3>
+                  {/* Card Content */}
+                  <div className="p-5 sm:p-6 flex flex-col justify-between flex-grow">
+                    <div>
+                      <div className="flex items-center justify-between gap-4 mb-2.5">
+                        <span className="font-sans text-[10px] uppercase font-bold tracking-[2px] text-[#D4AF37]">
+                          {story.subject}
+                        </span>
+                        <span className="font-sans text-[10px] text-white/50 font-bold">
+                          {story.year}
+                        </span>
+                      </div>
 
-                  <p className="font-sans text-xs text-white/60 leading-relaxed line-clamp-3">
-                    {story.excerpt}
-                  </p>
-                </div>
+                      <h3 className="font-serif font-bold text-lg text-white mb-2.5 group-hover:text-[#D4AF37] transition-colors line-clamp-1">
+                        {story.title}
+                      </h3>
 
-                {/* Footer stats */}
-                <div className="mt-5 pt-4 border-t border-white/10 flex items-center justify-between text-[11px] font-sans font-bold text-white/50">
-                  <span>{isHindi ? "कस्टम बाइंड" : "Custom Bind"}</span>
-                  <span className="text-[#D4AF37]">{story.pageCount}</span>
+                      <p className="font-sans text-xs text-white/60 leading-relaxed line-clamp-2">
+                        {story.excerpt}
+                      </p>
+                    </div>
+
+                    {/* Footer stats */}
+                    <div className="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-[11px] font-sans font-bold text-white/50">
+                      <span>{isHindi ? "कस्टम बाइंड" : "Custom Bind"}</span>
+                      <span className="text-[#D4AF37]">{story.pageCount}</span>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </motion.div>
+            ))}
+          </motion.div>
+        </div>
+
+        {/* Carousel Pagination Dots */}
+        <div className="flex justify-center items-center gap-1.5 mt-6 mb-10">
+          {Array.from({ length: maxIndex + 1 }).map((_, idx) => (
+            <button
+              key={idx}
+              onClick={() => setCurrentIndex(idx)}
+              aria-label={`Go to slide ${idx + 1}`}
+              className={`transition-all duration-300 rounded-full cursor-pointer ${
+                currentIndex === idx
+                  ? "w-7 h-2 bg-[#D4AF37]"
+                  : "w-2 h-2 bg-white/20 hover:bg-white/40"
+              }`}
+            />
           ))}
         </div>
 
         {/* CTA Button */}
-        <button
-          onClick={() => {
-            const element = document.getElementById('contact');
-            if (element) element.scrollIntoView({ behavior: 'smooth' });
-          }}
-          className="py-3.5 px-8 bg-gradient-to-r from-accent-purple to-accent-purple-dark text-white uppercase tracking-[3px] font-sans font-bold text-xs rounded-md shadow-lg shadow-accent-purple/25 active:scale-95 cursor-pointer hover:brightness-110 transition-all border border-accent-purple/20"
-        >
-          {isHindi ? "अपनी आत्मकथा बुक करें" : "Book Your Autobiography"}
-        </button>
+        <div className="text-center">
+          <button
+            onClick={() => {
+              const element = document.getElementById('contact');
+              if (element) element.scrollIntoView({ behavior: 'smooth' });
+            }}
+            className="py-3.5 px-8 bg-gradient-to-r from-accent-purple to-accent-purple-dark text-white uppercase tracking-[3px] font-sans font-bold text-xs rounded-md shadow-lg shadow-accent-purple/25 active:scale-95 cursor-pointer hover:brightness-110 transition-all border border-accent-purple/20"
+          >
+            {isHindi ? "अपनी आत्मकथा बुक करें" : "Book Your Autobiography"}
+          </button>
+        </div>
 
       </div>
 
-      {/* Simple Modal for Story Preview */}
+      {/* Modal for Story Preview */}
       <AnimatePresence>
         {selectedStory && (
           <motion.div
@@ -234,7 +310,7 @@ export default function PortfolioGallery() {
                 />
               </div>
 
-              <p className="font-serif-sub text-base leading-relaxed mb-6 italic">
+              <p className="font-serif-sub text-base leading-relaxed mb-6 italic text-[#190F26]">
                 {selectedStory.excerpt}
               </p>
 
@@ -248,7 +324,7 @@ export default function PortfolioGallery() {
                     const element = document.getElementById('contact');
                     if (element) element.scrollIntoView({ behavior: 'smooth' });
                   }}
-                  className="py-2 px-6 bg-accent-purple text-white hover:brightness-110 rounded text-xs font-sans font-bold uppercase tracking-wider transition-colors cursor-pointer"
+                  className="py-2.5 px-6 bg-accent-purple text-white hover:brightness-110 rounded text-xs font-sans font-bold uppercase tracking-wider transition-colors cursor-pointer"
                 >
                   {isHindi ? "मेरी पुस्तक कमीशन करें" : "Commission My Book"}
                 </button>

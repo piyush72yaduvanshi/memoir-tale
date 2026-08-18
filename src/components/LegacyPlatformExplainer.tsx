@@ -68,10 +68,10 @@ export default function LegacyPlatformExplainer({ darkMode }: LegacyPlatformExpl
             className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full border ${
               darkMode 
                 ? 'border-[#D4AF37]/40 bg-[#D4AF37]/10 text-[#D4AF37]' 
-                : 'border-[#7A5000]/30 bg-[#7A5000]/10 text-[#7A5000]'
+                : 'border-[#2E1B5D]/20 bg-[#2E1B5D]/5 text-[#2E1B5D]'
             }`}
           >
-            <Sparkles className={`w-4 h-4 ${darkMode ? 'text-[#D4AF37]' : 'text-[#7A5000]'}`} />
+            <Sparkles className={`w-4 h-4 ${darkMode ? 'text-[#D4AF37]' : 'text-[#2E1B5D]'}`} />
             <span className="text-xs md:text-sm font-bold tracking-wide uppercase">
               {isHindi ? "हमारी श्रेणी" : "Defining Our Category"}
             </span>
@@ -87,7 +87,7 @@ export default function LegacyPlatformExplainer({ darkMode }: LegacyPlatformExpl
           className="text-center max-w-3xl mx-auto mb-10"
         >
           <h2 className={`text-3xl md:text-4xl lg:text-5xl font-serif font-bold tracking-tight mb-4 ${
-            darkMode ? 'text-[#D4AF37]' : 'text-[#2D1230]'
+            darkMode ? 'text-[#D4AF37]' : 'text-[#2E1B5D]'
           }`}>
             {isHindi ? "लेगेसी प्लेटफॉर्म क्या है?" : "What is a Legacy Platform?"}
           </h2>

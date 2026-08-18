@@ -56,12 +56,12 @@ export default function AboutStripSection({ darkMode }: AboutStripSectionProps) 
 
           {/* Right Column - Story text detail (65%) */}
           <div className="w-full md:w-[65%] text-left">
-            <span className="font-sans text-[11px] font-bold tracking-[3px] uppercase text-accent-purple-light dark:text-accent-purple block mb-3">
+            <span className="font-sans text-[11px] font-bold tracking-[3px] uppercase text-[#2E1B5D] dark:text-[#E5C463] block mb-3">
               {t.label}
             </span>
 
             <h2 className="font-serif font-bold text-3xl sm:text-4xl leading-tight mb-6">
-              {t.heading} <span className="font-serif italic text-accent-purple">{t.headingItalic}</span>
+              {t.heading} <span className="font-serif italic text-[#2E1B5D] dark:text-[#E5C463]">{t.headingItalic}</span>
             </h2>
 
             <p className={`font-sans text-xs md:text-sm leading-relaxed mb-4 ${darkMode ? 'text-white/70' : 'text-black/80'
@@ -84,8 +84,8 @@ export default function AboutStripSection({ darkMode }: AboutStripSectionProps) 
             </p>
 
             {/* Philosophy quotes */}
-            <blockquote className="border-l-4 border-accent-purple pl-5 py-2 my-6">
-              <p className={`font-serif-sub italic text-lg sm:text-xl font-light leading-relaxed ${darkMode ? 'text-white' : 'text-primary'
+            <blockquote className={`border-l-4 pl-5 py-2 my-6 ${darkMode ? 'border-[#D4AF37]' : 'border-[#2E1B5D]'}`}>
+              <p className={`font-serif-sub italic text-lg sm:text-xl font-light leading-relaxed ${darkMode ? 'text-white' : 'text-[#190F26]'
                 }`}>
                 {t.quote}
               </p>
@@ -94,10 +94,10 @@ export default function AboutStripSection({ darkMode }: AboutStripSectionProps) 
             {/* Founder details */}
             <div className="flex items-center justify-between gap-6 mt-6">
               <div>
-                <span className={`font-serif font-bold text-base block ${darkMode ? 'text-white' : 'text-primary'}`}>
+                <span className={`font-serif font-bold text-base block ${darkMode ? 'text-white' : 'text-[#190F26]'}`}>
                   {t.founderName}
                 </span>
-                <span className={`font-sans text-[10px] uppercase font-bold tracking-[2px] transition-colors ${darkMode ? 'text-accent-purple' : 'text-accent-purple-light'
+                <span className={`font-sans text-[10px] uppercase font-bold tracking-[2px] transition-colors ${darkMode ? 'text-[#E5C463]' : 'text-[#2E1B5D]'
                   }`}>
                   {t.founderTitle}
                 </span>
@@ -107,8 +107,8 @@ export default function AboutStripSection({ darkMode }: AboutStripSectionProps) 
                 href={FOUNDER.linkedin}
                 target="_blank"
                 rel="noreferrer"
-                className="p-2 border border-accent-purple/30 hover:border-accent-purple rounded-full text-accent-purple hover:bg-accent-purple hover:text-white transition-all cursor-pointer"
-                title={`${FOUNDER.name} on LinkedIn`}
+                className={`p-2 border rounded-full transition-all cursor-pointer ${darkMode ? 'border-[#D4AF37]/30 text-[#D4AF37] hover:bg-[#D4AF37] hover:text-black' : 'border-[#2E1B5D]/30 text-[#2E1B5D] hover:bg-[#2E1B5D] hover:text-white'}`}
+                aria-label="Founder LinkedIn Profile"
               >
                 <Linkedin className="w-4 h-4" />
               </a>

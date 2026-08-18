@@ -19,7 +19,7 @@ const footerTranslations = {
     finalCtaSub: "— Start yours today.",
     finalCtaDesc: "Don't let the irreplaceable family stories fade into silence. Let us preserve them — beautifully, professionally, forever as a premium family heirloom.",
     freeQuoteBtn: "Begin Your Legacy",
-    callUsBtn: "Call Us: 9889011174",
+    textUsBtn: "Text Us: 9889011174",
     brandDesc: "Turning lived stories into lasting physical legacies.",
     address: "📍 Bundelkhand University, Kanpur Road, Jhansi, Uttar Pradesh, India - 284128",
     logoAlt: "Memoir Tale Logo",
@@ -53,7 +53,7 @@ const footerTranslations = {
     finalCtaSub: "— आज ही अपनी कहानी शुरू करें।",
     finalCtaDesc: "अपने परिवार की अनलोम और मूल्यवान कहानियों को समय के साथ ओझल न होने दें। आइए हम उन्हें संजोएं - एक बेहतरीन विरासत पुस्तक के रूप में, हमेशा के लिए।",
     freeQuoteBtn: "अपनी विरासत शुरू करें",
-    callUsBtn: "हमें कॉल करें: 9889011174",
+    textUsBtn: "हमें मैसेज करें: 9889011174",
     brandDesc: "जीये गए जीवन की कहानियों को लंबे समय तक चलने वाली भौतिक विरासतों में बदलना।",
     address: "📍 बुंदेलखंड विश्वविद्यालय, कानपुर रोड, झाँसी, उत्तर प्रदेश, भारत - 284128",
     logoAlt: "मेमोयर टेल लोगो",
@@ -150,11 +150,13 @@ export default function FooterSection({
             </button>
 
             <a
-              href="tel:9889011174"
-              className="h-14 px-8 rounded-full border-2 border-white bg-transparent hover:bg-white hover:text-[#2d1e2f] text-white font-sans font-semibold text-base flex items-center justify-center space-x-2 transition-all duration-300 hover:scale-105"
+              href="https://wa.me/919889011174?text=Hi%2C%20I%20would%20like%20to%20know%20more%20about%20Memoir%20Tale"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="h-14 px-8 rounded-full border-2 border-white bg-transparent hover:bg-white hover:text-[#2d1e2f] text-white font-sans font-semibold text-base flex items-center justify-center space-x-2 transition-all duration-300 hover:scale-105 cursor-pointer"
             >
-              <Phone className="h-4 w-4" />
-              <span>{curTrans.callUsBtn}</span>
+              <MessageCircle className="h-4 w-4" />
+              <span>{curTrans.textUsBtn}</span>
             </a>
           </div>
         </div>

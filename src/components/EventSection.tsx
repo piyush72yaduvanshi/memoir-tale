@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { Calendar, MapPin, Users, X, ChevronLeft, ChevronRight, Sparkles } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { Calendar, MapPin, Users, X, ChevronLeft, ChevronRight, Sparkles, Maximize2 } from "lucide-react";
+import { motion, AnimatePresence } from "motion/react";
 import { useLanguage } from "../context/LanguageContext";
 import FadeIn from "./FadeIn";
 
@@ -23,47 +24,10 @@ const EVENT_IMAGES = [
   event8, event9, event10, event11, event12, event13
 ];
 
-function EventCard({ src, index, onClick }: { src: string; index: number; onClick: () => void; key?: React.Key }) {
-  const [loaded, setLoaded] = useState(false);
-
-  return (
-    <div
-      onClick={onClick}
-      className="relative group overflow-hidden rounded-2xl border border-[#E3DDE9]/60 hover:border-[#2E1B5D]/60 shadow-[0_8px_30px_rgba(69,20,122,0.04)] hover:shadow-2xl cursor-pointer aspect-square transition-all duration-300 transform hover:-translate-y-2 bg-white select-none"
-      style={{ animationDelay: `${index * 40}ms` }}
-    >
-      {/* Loading state */}
-      {!loaded && (
-        <div className="absolute inset-0 bg-[#FAF6F0] animate-pulse flex items-center justify-center">
-          <Sparkles className="h-5 w-5 text-[#2E1B5D]/40 animate-spin" style={{ animationDuration: '3s' }} />
-        </div>
-      )}
-
-      <img
-        src={src}
-        alt={`Event moment ${index + 1}`}
-        onLoad={() => setLoaded(true)}
-        className={`w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-110 ${loaded ? "opacity-100 scale-100" : "opacity-0 scale-95"
-          }`}
-      />
-
-      {/* Hover overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-[#190F26]/95 via-[#190F26]/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-5">
-        <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-350 ease-out">
-          <div className="w-12 h-[2px] bg-[#2E1B5D] rounded mb-3" />
-          <p className="font-sans text-xs text-white/80 uppercase tracking-wide">
-            {index + 1} / {EVENT_IMAGES.length}
-          </p>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 function LightboxImage({ src, alt }: { src: string; alt: string }) {
   const [loaded, setLoaded] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setLoaded(false);
   }, [src]);
 
@@ -78,8 +42,9 @@ function LightboxImage({ src, alt }: { src: string; alt: string }) {
         src={src}
         alt={alt}
         onLoad={() => setLoaded(true)}
-        className={`max-h-[60vh] sm:max-h-[70vh] object-contain mx-auto transition-all duration-350 ${loaded ? "opacity-100 scale-100" : "opacity-0 scale-95"
-          }`}
+        className={`max-h-[60vh] sm:max-h-[70vh] object-contain mx-auto transition-all duration-350 ${
+          loaded ? "opacity-100 scale-100" : "opacity-0 scale-95"
+        }`}
       />
     </div>
   );
@@ -89,10 +54,41 @@ export default function EventSection() {
   const { lang } = useLanguage();
   const isHindi = lang === "HI";
   const [activeImageIndex, setActiveImageIndex] = useState<number | null>(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [itemsPerPage, setItemsPerPage] = useState(4);
   const lastScrollPosRef = React.useRef<number>(0);
 
+  // Responsive items per page
+  useEffect(() => {
+    const updateItemsPerPage = () => {
+      if (window.innerWidth < 640) {
+        setItemsPerPage(1);
+      } else if (window.innerWidth < 1024) {
+        setItemsPerPage(2);
+      } else if (window.innerWidth < 1280) {
+        setItemsPerPage(3);
+      } else {
+        setItemsPerPage(4);
+      }
+    };
+
+    updateItemsPerPage();
+    window.addEventListener("resize", updateItemsPerPage);
+    return () => window.removeEventListener("resize", updateItemsPerPage);
+  }, []);
+
+  const maxIndex = Math.max(0, EVENT_IMAGES.length - itemsPerPage);
+
+  const slideNext = () => {
+    setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
+  };
+
+  const slidePrev = () => {
+    setCurrentIndex((prev) => (prev <= 0 ? maxIndex : prev - 1));
+  };
+
   // Lock body scroll when lightbox is open
-  React.useEffect(() => {
+  useEffect(() => {
     if (activeImageIndex !== null) {
       lastScrollPosRef.current = window.scrollY;
       document.body.style.overflow = "hidden";
@@ -114,38 +110,35 @@ export default function EventSection() {
     };
   }, [activeImageIndex]);
 
-  // Keyboard navigation
-  React.useEffect(() => {
+  const labels = {
+    label: isHindi ? "विशेष कार्यक्रम एवं अनावरण" : "SPECIAL EVENT & UNVEILING",
+    heading: isHindi ? "मेमोयर टेल का भव्य उद्घाटन" : "Grand Inauguration of Memoir Tale",
+    subtitle: isHindi
+      ? "बुंदेलखंड विश्वविद्यालय, झाँसी में आयोजित हमारे आधिकारिक उद्घाटन समारोह के कुछ यादगार पल, जहाँ मुख्य अतिथि श्री योगेन्द्र उपाध्याय जी (उच्च शिक्षा मंत्री, उत्तर प्रदेश) ने अपनी उपस्थिति से कार्यक्रम की शोभा बढ़ाई।"
+      : "Memorable moments from our official inauguration at Bundelkhand University, Jhansi, graced by Chief Guest Shri Yogendra Upadhyaya Ji (Cabinet Minister of Higher Education, Govt of UP).",
+    eventDate: isHindi ? "9 जून 2026" : "June 9, 2026",
+    eventLocation: isHindi ? "झाँसी, उत्तर प्रदेश" : "Jhansi, Uttar Pradesh",
+    eventAttendees: isHindi ? "200+ प्रतिष्ठित अतिथि" : "200+ Distinguished Guests",
+    viewAll: isHindi ? "सभी तस्वीरें देखें" : "Explore Event Gallery",
+    back: isHindi ? "गैलरी पर वापस" : "Back to Gallery",
+  };
+
+  // Keyboard navigation for lightbox
+  useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (activeImageIndex === null) return;
       if (e.key === "Escape") {
         setActiveImageIndex(null);
       } else if (e.key === "ArrowRight") {
-        setActiveImageIndex((prev) => (prev! + 1) % EVENT_IMAGES.length);
+        setActiveImageIndex((prev) => (prev !== null ? (prev + 1) % EVENT_IMAGES.length : 0));
       } else if (e.key === "ArrowLeft") {
-        setActiveImageIndex((prev) => (prev! - 1 + EVENT_IMAGES.length) % EVENT_IMAGES.length);
+        setActiveImageIndex((prev) => (prev !== null ? (prev - 1 + EVENT_IMAGES.length) % EVENT_IMAGES.length : 0));
       }
     };
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [activeImageIndex]);
-
-  const labels = {
-    label: isHindi ? "हमारे आयोजन व मीडिया" : "EVENTS & MEDIA",
-    heading: isHindi ? "मेमोयर टेल इवेंट्स और मीडिया" : "Memoir Tale Events & Media",
-    subtitle: isHindi
-      ? "उन पलों का जश्न मनाना जहाँ परिवार, संस्थापक और समुदाय अपनी कहानियों को सहेजने के लिए एक साथ आते हैं।"
-      : "Celebrating the moments where families, founders, and communities come together to preserve their stories.",
-    eventDate: isHindi ? "9 जून 2026" : "June 9, 2026",
-    eventLocation: isHindi ? "मेमोयरटेल कार्यक्रम" : "MemoirTale Event",
-    eventAttendees: isHindi ? "परिवार और मित्र" : "Families & Friends",
-    viewAll: isHindi ? "सभी तस्वीरें देखें" : "View All Photos",
-    close: isHindi ? "बंद करें" : "Close",
-    back: isHindi ? "← गैलरी पर वापस" : "← Back to Gallery",
-    proTip: isHindi ? "💡 सुझाव: बदलने के लिए ← और → कुंजियों का उपयोग करें" : "💡 Pro tip: Use ← and → arrows to navigate",
-    escTip: isHindi ? "Esc दबाएं बंद करने के लिए" : "Press Esc to close"
-  };
 
   const handleNext = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -161,10 +154,13 @@ export default function EventSection() {
     setActiveImageIndex((activeImageIndex - 1 + EVENT_IMAGES.length) % EVENT_IMAGES.length);
   };
 
+  const gap = 20;
+  const translatePercent = (currentIndex * 100) / itemsPerPage;
+
   return (
     <section
       id="events"
-      className="bg-[#FCFBF7] py-20 lg:py-28 text-[#190F26] relative overflow-hidden border-b border-[#E3DDE9]/40"
+      className="bg-[#FCFBF7] py-16 md:py-24 text-[#190F26] relative overflow-hidden border-b border-[#E3DDE9]/40"
     >
       {/* Background decorative elements */}
       <div className="absolute top-[10%] right-[-80px] w-96 h-96 bg-[#2E1B5D]/4 rounded-full blur-[100px] pointer-events-none" />
@@ -172,69 +168,135 @@ export default function EventSection() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
-        {/* Header Section */}
-        <FadeIn>
-          <div className="flex flex-col items-center text-center mb-12">
-            <div className="w-[60px] h-[3px] bg-[#2E1B5D] rounded-[2px] mb-4" />
+        {/* Header Section with Navigation Controls */}
+        <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-6 mb-8 md:mb-10">
+          <div className="text-left max-w-2xl">
             <span className="font-sans font-semibold text-[11px] uppercase tracking-[3px] text-[#2E1B5D] mb-3 flex items-center gap-1.5">
               <Calendar className="h-4 w-4" /> {labels.label}
             </span>
-            <h2 className="font-serif font-bold text-3xl sm:text-4.5xl lg:text-[48px] text-[#190F26] tracking-tight leading-tight">
+            <h2 className="font-serif font-bold text-3xl sm:text-4xl lg:text-[44px] text-[#190F26] tracking-tight leading-tight">
               {labels.heading}
             </h2>
-            <p className="font-sans text-sm sm:text-base text-[#554466] mt-4 max-w-2xl leading-relaxed">
+            <p className="font-sans text-xs md:text-sm text-[#554466] mt-3 max-w-2xl leading-relaxed">
               {labels.subtitle}
             </p>
           </div>
-        </FadeIn>
 
-        {/* Event Info Bar */}
-        <FadeIn delay={0.1}>
-          <div className="flex flex-wrap justify-center gap-6 mb-12">
-            <div className="flex items-center gap-2 bg-white px-5 py-3 rounded-full border border-[#E3DDE9]/60 shadow-sm">
-              <Calendar className="h-4 w-4 text-[#2E1B5D]" />
-              <span className="font-sans text-sm font-medium text-[#190F26]">{labels.eventDate}</span>
-            </div>
-            <div className="flex items-center gap-2 bg-white px-5 py-3 rounded-full border border-[#E3DDE9]/60 shadow-sm">
-              <MapPin className="h-4 w-4 text-[#2E1B5D]" />
-              <span className="font-sans text-sm font-medium text-[#190F26]">{labels.eventLocation}</span>
-            </div>
-            <div className="flex items-center gap-2 bg-white px-5 py-3 rounded-full border border-[#E3DDE9]/60 shadow-sm">
-              <Users className="h-4 w-4 text-[#2E1B5D]" />
-              <span className="font-sans text-sm font-medium text-[#190F26]">{labels.eventAttendees}</span>
-            </div>
-          </div>
-        </FadeIn>
-
-        {/* Event Images Grid */}
-        <FadeIn delay={0.2}>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 min-h-[460px] transition-all duration-500">
-            {EVENT_IMAGES.map((image, index) => (
-              <EventCard
-                key={index}
-                src={image}
-                index={index}
-                onClick={() => setActiveImageIndex(index)}
-              />
-            ))}
-          </div>
-        </FadeIn>
-
-        {/* View All CTA */}
-        <FadeIn delay={0.25}>
-          <div className="flex justify-center mt-12 w-full">
+          {/* Navigation Buttons */}
+          <div className="flex items-center gap-3 self-end md:self-auto shrink-0">
             <button
-              type="button"
-              onClick={(e) => {
-                e.preventDefault();
-                setActiveImageIndex(0);
-              }}
-              className="px-8 py-3.5 rounded-full border border-[#2E1B5D] text-[#2E1B5D] font-sans font-bold text-sm hover:bg-[#2E1B5D] hover:text-[#FCFBF7] transition-all duration-300 shadow-[0_4px_12px_rgba(139,92,246,0.05)] hover:shadow-[0_8px_24px_rgba(139,92,246,0.2)] cursor-pointer hover:scale-105 select-none"
+              onClick={slidePrev}
+              aria-label="Previous Photo"
+              className="w-11 h-11 rounded-full border border-[#E2D8E8] hover:border-[#2E1B5D] text-[#190F26] hover:bg-white bg-white hover:shadow-md flex items-center justify-center transition-all duration-300 cursor-pointer shadow-sm active:scale-95"
             >
-              {labels.viewAll} ({EVENT_IMAGES.length}) →
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+            <button
+              onClick={slideNext}
+              aria-label="Next Photo"
+              className="w-11 h-11 rounded-full border border-[#E2D8E8] hover:border-[#2E1B5D] text-[#190F26] hover:bg-white bg-white hover:shadow-md flex items-center justify-center transition-all duration-300 cursor-pointer shadow-sm active:scale-95"
+            >
+              <ChevronRight className="w-5 h-5" />
             </button>
           </div>
-        </FadeIn>
+        </div>
+
+        {/* Event Info Bar */}
+        <div className="flex flex-wrap justify-start sm:justify-center gap-3 sm:gap-6 mb-8">
+          <div className="flex items-center gap-2 bg-white px-4 py-2 sm:px-5 sm:py-2.5 rounded-full border border-[#E3DDE9]/60 shadow-sm text-xs sm:text-sm">
+            <Calendar className="h-3.5 w-3.5 text-[#2E1B5D]" />
+            <span className="font-sans font-medium text-[#190F26]">{labels.eventDate}</span>
+          </div>
+          <div className="flex items-center gap-2 bg-white px-4 py-2 sm:px-5 sm:py-2.5 rounded-full border border-[#E3DDE9]/60 shadow-sm text-xs sm:text-sm">
+            <MapPin className="h-3.5 w-3.5 text-[#2E1B5D]" />
+            <span className="font-sans font-medium text-[#190F26]">{labels.eventLocation}</span>
+          </div>
+          <div className="flex items-center gap-2 bg-white px-4 py-2 sm:px-5 sm:py-2.5 rounded-full border border-[#E3DDE9]/60 shadow-sm text-xs sm:text-sm">
+            <Users className="h-3.5 w-3.5 text-[#2E1B5D]" />
+            <span className="font-sans font-medium text-[#190F26]">{labels.eventAttendees}</span>
+          </div>
+        </div>
+
+        {/* Compact Slideshow Area */}
+        <div className="relative overflow-hidden w-full rounded-2xl pt-1 pb-4">
+          <motion.div
+            animate={{ x: `calc(-${translatePercent}% - ${(currentIndex * gap) / itemsPerPage}px)` }}
+            transition={{ type: "spring", stiffness: 240, damping: 28 }}
+            className="flex gap-5 w-full"
+          >
+            {EVENT_IMAGES.map((image, index) => (
+              <div
+                key={index}
+                className="shrink-0 flex flex-col cursor-pointer"
+                style={{
+                  width: `calc((100% - ${(itemsPerPage - 1) * gap}px) / ${itemsPerPage})`,
+                }}
+                onClick={() => setActiveImageIndex(index)}
+              >
+                <div className="group rounded-2xl overflow-hidden shadow-sm hover:shadow-xl border border-[#E9E1EE] hover:border-[#2E1B5D]/40 bg-white transition-all duration-300 transform hover:-translate-y-1.5">
+                  <div className="relative aspect-[4/3] sm:aspect-square overflow-hidden bg-[#FAF6F0]">
+                    <img
+                      src={image}
+                      alt={`Event moment ${index + 1}`}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-108 select-none"
+                      loading="lazy"
+                    />
+
+                    {/* Hover Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#190F26]/90 via-[#190F26]/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-between p-4">
+                      <div className="flex justify-between items-start">
+                        <span className="text-[9px] uppercase tracking-widest text-white font-mono font-bold bg-[#2E1B5D]/90 border border-white/20 px-2 py-0.5 rounded-full backdrop-blur-sm">
+                          {index + 1} / {EVENT_IMAGES.length}
+                        </span>
+                        <div className="bg-[#2E1B5D] p-1.5 rounded-full text-white shadow-lg">
+                          <Maximize2 className="h-3.5 w-3.5" />
+                        </div>
+                      </div>
+
+                      <div className="text-left">
+                        <span className="font-sans text-[10px] text-white/80 uppercase tracking-wider block">
+                          Click to inspect full photo
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Tag badge */}
+                    <div className="absolute top-3 left-3 group-hover:opacity-0 transition-opacity duration-200">
+                      <span className="py-1 px-2.5 bg-[#2E1B5D]/85 backdrop-blur-md rounded-full border border-white/20 text-[9px] uppercase tracking-widest font-sans font-bold text-white shadow-sm">
+                        Photo {index + 1}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="p-3.5 text-left">
+                    <h3 className="font-serif font-bold text-sm text-[#190F26] line-clamp-1 group-hover:text-[#2E1B5D] transition-colors">
+                      Inauguration Moment {index + 1}
+                    </h3>
+                    <p className="font-sans text-[11px] text-[#554466] mt-0.5">
+                      Bundelkhand University • June 2026
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </motion.div>
+        </div>
+
+        {/* Carousel Pagination Dots */}
+        <div className="flex justify-center items-center gap-1.5 mt-6">
+          {Array.from({ length: maxIndex + 1 }).map((_, idx) => (
+            <button
+              key={idx}
+              onClick={() => setCurrentIndex(idx)}
+              aria-label={`Go to slide ${idx + 1}`}
+              className={`transition-all duration-300 rounded-full cursor-pointer ${
+                currentIndex === idx
+                  ? "w-7 h-2 bg-[#2E1B5D]"
+                  : "w-2 h-2 bg-[#E3DDE9] hover:bg-[#2E1B5D]/40"
+              }`}
+            />
+          ))}
+        </div>
 
         {/* Fullscreen Lightbox Modal */}
         {activeImageIndex !== null && (
@@ -267,7 +329,7 @@ export default function EventSection() {
                 </button>
 
                 <div className="flex items-center space-x-2 bg-white/10 border border-white/20 px-3.5 py-1.5 rounded-full text-white font-mono text-xs font-semibold backdrop-blur-sm select-none">
-                  <span className="text-[#2E1B5D] font-bold uppercase tracking-wider">
+                  <span className="text-[#E5C463] font-bold uppercase tracking-wider">
                     {isHindi ? "कार्यक्रम" : "EVENT"}
                   </span>
                   <span className="text-white/40">•</span>
@@ -278,20 +340,20 @@ export default function EventSection() {
               </div>
 
               {/* Main Image Display */}
-              <div className="relative w-full aspect-video sm:h-[65vh] flex items-center justify-center">
-                {/* Previous Button */}
+              <div className="relative w-full flex items-center justify-center min-h-[350px] sm:min-h-[500px]">
+                {/* Prev Button */}
                 <button
                   type="button"
                   onClick={handlePrev}
-                  className="absolute left-2 sm:left-[-70px] text-white/85 hover:text-[#2E1B5D] hover:bg-white/10 bg-black/40 p-3 sm:p-4 rounded-full transition-all cursor-pointer z-30"
-                  aria-label="Previous Image"
+                  className="absolute left-2 sm:left-[-20px] lg:left-[-60px] text-white hover:text-[#E5C463] hover:bg-black/80 bg-black/50 border border-white/20 p-3 sm:p-4 rounded-full transition-all cursor-pointer z-30 shadow-2xl backdrop-blur-sm active:scale-95"
+                  aria-label="Previous image"
                 >
-                  <ChevronLeft className="h-6 w-6 sm:h-8 sm:w-8" />
+                  <ChevronLeft className="h-6 w-6 sm:h-7 sm:w-7" />
                 </button>
 
                 <div
                   onClick={(e) => e.stopPropagation()}
-                  className="relative max-h-full max-w-full rounded-2xl border border-white/25 overflow-hidden bg-black shadow-2xl flex items-center justify-center w-full h-full"
+                  className="relative max-h-[60vh] sm:max-h-[70vh] rounded-2xl overflow-hidden bg-black/40 shadow-2xl flex items-center justify-center border border-white/10"
                 >
                   <LightboxImage
                     src={EVENT_IMAGES[activeImageIndex]}
@@ -303,83 +365,44 @@ export default function EventSection() {
                 <button
                   type="button"
                   onClick={handleNext}
-                  className="absolute right-2 sm:right-[-70px] text-white/85 hover:text-[#2E1B5D] hover:bg-white/10 bg-black/40 p-3 sm:p-4 rounded-full transition-all cursor-pointer z-30"
-                  aria-label="Next Image"
+                  className="absolute right-2 sm:right-[-20px] lg:right-[-60px] text-white hover:text-[#E5C463] hover:bg-black/80 bg-black/50 border border-white/20 p-3 sm:p-4 rounded-full transition-all cursor-pointer z-30 shadow-2xl backdrop-blur-sm active:scale-95"
+                  aria-label="Next image"
                 >
-                  <ChevronRight className="h-6 w-6 sm:h-8 sm:w-8" />
+                  <ChevronRight className="h-6 w-6 sm:h-7 sm:w-7" />
                 </button>
               </div>
 
-              {/* Thumbnail Strip */}
+              {/* Thumbnails Strip */}
               <div
                 onClick={(e) => e.stopPropagation()}
-                className="flex justify-center gap-2 mt-4 overflow-x-auto py-1 max-w-full px-4 scrollbar-none"
+                className="flex justify-center gap-2 mt-4 overflow-x-auto py-2 max-w-full px-4 scrollbar-none"
               >
-                {EVENT_IMAGES.map((image, index) => (
+                {EVENT_IMAGES.map((img, idx) => (
                   <button
-                    key={index}
-                    onClick={() => setActiveImageIndex(index)}
-                    className={`relative w-12 h-12 rounded-lg overflow-hidden border-2 transition-all duration-300 cursor-pointer shrink-0 ${index === activeImageIndex
-                        ? "border-[#2E1B5D] scale-110 shadow-lg shadow-[#2E1B5D]/20"
-                        : "border-white/10 opacity-60 hover:opacity-100"
-                      }`}
+                    key={idx}
+                    onClick={() => setActiveImageIndex(idx)}
+                    className={`relative w-12 h-12 rounded-lg overflow-hidden border-2 transition-all duration-200 cursor-pointer shrink-0 ${
+                      idx === activeImageIndex
+                        ? "border-[#E5C463] scale-110 shadow-lg"
+                        : "border-white/20 opacity-40 hover:opacity-80"
+                    }`}
                   >
                     <img
-                      src={image}
-                      alt=""
+                      src={img}
+                      alt={`Thumb ${idx + 1}`}
                       className="w-full h-full object-cover"
                     />
                   </button>
                 ))}
               </div>
 
-              {/* Bottom Info Card */}
+              {/* Bottom Caption */}
               <div
                 onClick={(e) => e.stopPropagation()}
-                className="w-full max-w-2xl mt-5 p-5 sm:p-6 bg-[#190F26] border border-[#2E1B5D]/30 rounded-2xl text-left shadow-2xl mx-auto select-none"
+                className="text-center mt-3 text-white/70 text-xs font-sans"
               >
-                <div className="flex items-center justify-between mb-3">
-                  <div className="flex items-center space-x-2">
-                    <span className="h-2 w-2 rounded-full bg-[#2E1B5D] animate-pulse" />
-                    <span className="text-[10px] font-mono font-bold tracking-widest text-[#2E1B5D] uppercase bg-[#2E1B5D]/10 px-2 py-0.5 rounded border border-[#2E1B5D]/20">
-                      {labels.eventDate}
-                    </span>
-                  </div>
-                  <span className="text-xs text-white/50 font-mono font-bold">
-                    {activeImageIndex + 1} {isHindi ? "का" : "of"} {EVENT_IMAGES.length}
-                  </span>
-                </div>
-
-                <div className="space-y-1">
-                  <h3 className="font-serif font-bold text-lg sm:text-2xl text-[#FCFBF7] tracking-tight">
-                    {labels.heading}
-                  </h3>
-                  <p className="text-[#2E1B5D] font-sans font-medium text-xs sm:text-sm tracking-wide">
-                    {labels.eventLocation}
-                  </p>
-                </div>
-
-                <p className="font-sans text-xs sm:text-sm text-white/80 mt-3.5 leading-relaxed border-t border-white/5 pt-3.5">
-                  {labels.subtitle}
-                </p>
-
-                {/* Keyboard Tips */}
-                <div className="mt-4 pt-4 border-t border-white/10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2.5">
-                  <div className="text-[10px] text-white/45 font-mono space-y-1">
-                    <div className="flex items-center gap-1.5">
-                      <span className="text-[#2E1B5D]">💡</span> {labels.proTip}
-                    </div>
-                    <div>
-                      <span className="text-[#2E1B5D]">⌨️</span> {labels.escTip}
-                    </div>
-                  </div>
-
-                  <span className="text-[9px] uppercase tracking-wider font-mono text-[#2E1B5D]/70 font-semibold bg-[#2E1B5D]/5 border border-[#2E1B5D]/20 px-2 py-1 rounded inline-block self-start sm:self-auto">
-                    {isHindi ? "मेमोयरटेल" : "MEMOIRTALE"}
-                  </span>
-                </div>
+                <span>💡 {isHindi ? "तस्वीरें बदलने के लिए ← → तीर कुंजियों का उपयोग करें" : "Use ← → arrow keys to navigate"} • {isHindi ? "बंद करने के लिए Esc दबाएं" : "Press Esc to exit"}</span>
               </div>
-
             </div>
           </div>
         )}
@@ -388,6 +411,3 @@ export default function EventSection() {
     </section>
   );
 }
-
-
-

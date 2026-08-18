@@ -57,7 +57,7 @@ export default function FeatureIconsGrid({ darkMode }: FeatureIconsGridProps) {
 
         {/* Section Header */}
         <div className="max-w-3xl mx-auto mb-16 md:mb-20">
-          <span className="font-sans text-[11px] font-bold tracking-[3px] uppercase text-accent-purple-light dark:text-accent-purple block mb-3">
+          <span className="font-sans text-[11px] font-bold tracking-[3px] uppercase text-[#2E1B5D] dark:text-[#E5C463] block mb-3">
             {t.label}
           </span>
           <h2 className={`font-serif font-bold text-3xl sm:text-4xl md:text-5xl leading-tight ${darkMode ? 'text-[#f2e9d2]' : 'text-primary'

@@ -69,7 +69,7 @@ export default function TestimonialsSection() {
 
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 md:mb-20">
-          <span className="font-sans text-[11px] font-bold tracking-[3px] uppercase text-[#D4AF37] block mb-3">
+          <span className="font-sans text-[11px] font-bold tracking-[3px] uppercase text-[#2E1B5D] dark:text-[#E5C463] block mb-3">
             {isHindi ? "परिवारों द्वारा भरोसेमंद ⭐" : "VERIFIED CLIENT TESTIMONIALS ⭐"}
           </span>
           <h2 className="font-serif font-bold text-3xl sm:text-4.5xl lg:text-[48px] text-[#190F26] tracking-tight leading-tight">

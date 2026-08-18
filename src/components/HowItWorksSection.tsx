@@ -101,7 +101,7 @@ const stepsDetails: DetailedStep[] = [
     statusHi: 'चरण 04 — संपादन',
     subValue: 'Manuscript refinement & family review.',
     subValueHi: 'पांडुलिपि शोधन और पारिवारिक समीक्षा।',
-    image: 'https://images.unsplash.com/photo-1484755560693-a4074577af3a?q=80&w=600&auto=format&fit=crop'
+    image: 'https://images.unsplash.com/photo-1457369804613-52c61a468e7d?q=80&w=800&auto=format&fit=crop'
   },
   {
     number: '05',
@@ -212,9 +212,13 @@ export default function HowItWorksSection({ darkMode = false, onCtaClick }: HowI
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 md:mb-24">
           <div className="inline-flex items-center justify-center gap-3 flex-wrap mb-4" id="process-timeline-status-badge">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#2E1B5D]/10 dark:bg-white/10 border border-[#2E1B5D]/20 dark:border-white/20 rounded-full">
-              <Compass className={`w-3.5 h-3.5 text-[#2E1B5D] dark:text-[#E5C463] ${autoplay ? 'animate-spin-slow' : ''}`} style={{ animationDuration: '8s' }} />
-              <span className="font-sans text-[11px] font-bold tracking-[2px] uppercase text-[#2E1B5D] dark:text-[#E5C463]">
+            <div className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full border ${
+              darkMode ? 'bg-white/10 border-white/20' : 'bg-[#2E1B5D]/10 border-[#2E1B5D]/20'
+            }`}>
+              <Compass className={`w-3.5 h-3.5 ${darkMode ? 'text-[#E5C463]' : 'text-[#2E1B5D]'} ${autoplay ? 'animate-spin-slow' : ''}`} style={{ animationDuration: '8s' }} />
+              <span className={`font-sans text-[11px] font-bold tracking-[2px] uppercase ${
+                darkMode ? 'text-[#E5C463]' : 'text-[#2E1B5D]'
+              }`}>
                 {isHindi ? 'द मेमोयर टेल प्रक्रिया' : 'THE MEMOIR TALE PROCESS'}
               </span>
             </div>
@@ -400,8 +404,8 @@ export default function HowItWorksSection({ darkMode = false, onCtaClick }: HowI
 
                   {/* Archival Guideline Box */}
                   <div className={`p-4 rounded-xl border border-dashed text-left transition-colors relative overflow-hidden flex items-start gap-3.5 ${darkMode
-                    ? 'bg-[#2E1B5D]/20 border-white/15 text-white/90'
-                    : 'bg-[#FAF6F0] border-[#2E1B5D]/20 text-[#190F26]'
+                    ? 'bg-[#2E1B5D]/30 border-white/15'
+                    : 'bg-[#2E1B5D]/5 border-[#2E1B5D]/25'
                     }`}>
                     <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-[#2E1B5D] to-[#8B3CDC]" />
 
@@ -410,10 +414,14 @@ export default function HowItWorksSection({ darkMode = false, onCtaClick }: HowI
                     </div>
 
                     <div className="space-y-1">
-                      <span className="font-sans text-[9px] uppercase tracking-[2px] font-bold text-[#2E1B5D] dark:text-[#E5C463] block">
+                      <span className={`font-sans text-[9px] uppercase tracking-[2px] font-bold block ${
+                        darkMode ? 'text-[#E5C463]' : 'text-[#2E1B5D]'
+                      }`}>
                         {isHindi ? 'पुरालेख निर्देशिका' : 'ARCHIVAL GUIDELINE'}
                       </span>
-                      <p className="font-serif-sub italic text-xs leading-normal font-light text-[#554466] dark:text-white/80">
+                      <p className={`font-serif-sub italic text-xs leading-normal font-medium ${
+                        darkMode ? 'text-white/90' : 'text-[#190F26]'
+                      }`}>
                         "{isHindi ? currentStepData.tipHi : currentStepData.tip}"
                       </p>
                     </div>
