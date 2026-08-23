@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Menu, X, ChevronDown, Sparkles, Globe, Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
+import { Menu, X, ChevronDown, Sparkles, Globe, Facebook, Instagram, Linkedin, Twitter, Youtube } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext";
 import { motion, AnimatePresence } from "motion/react";
 import logoUrl from "../assets/images/memoir_logo_1780375728663.png";
@@ -116,8 +116,11 @@ export default function Navbar({
           <nav className="hidden md:flex items-center gap-8">
             <button
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              className={`font-sans font-medium text-sm tracking-wide cursor-pointer hover:text-accent-purple transition-colors duration-200 outline-none ${scrolled ? (darkMode ? 'text-white' : 'text-primary') : 'text-white'
-                }`}
+              className={`font-sans font-medium text-sm tracking-wide cursor-pointer transition-colors duration-200 outline-none ${
+                scrolled
+                  ? (darkMode ? 'text-white hover:text-accent-purple' : 'text-primary hover:text-accent-purple')
+                  : 'text-white/90 hover:text-white'
+              }`}
             >
               {t("home")}
             </button>
@@ -127,11 +130,14 @@ export default function Navbar({
               <button
                 onClick={() => setDropdownOpen(!dropdownOpen)}
                 onMouseEnter={() => setDropdownOpen(true)}
-                className={`font-sans font-medium text-sm tracking-wide cursor-pointer flex items-center gap-1 hover:text-accent-purple transition-colors duration-200 outline-none ${scrolled ? (darkMode ? 'text-white' : 'text-primary') : 'text-white'
-                  }`}
+                className={`font-sans font-medium text-sm tracking-wide cursor-pointer flex items-center gap-1 transition-colors duration-200 outline-none ${
+                  scrolled
+                    ? (darkMode ? 'text-white hover:text-accent-purple' : 'text-primary hover:text-accent-purple')
+                    : 'text-white/90 hover:text-white'
+                }`}
               >
                 {t("services")}
-                <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${dropdownOpen ? 'rotate-180 text-accent-purple' : ''}`} />
+                <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${dropdownOpen ? 'rotate-180' : ''} ${scrolled ? 'text-accent-purple' : 'text-white'}`} />
               </button>
 
               <AnimatePresence>
@@ -188,22 +194,31 @@ export default function Navbar({
 
             <button
               onClick={onScrollToGallery}
-              className={`font-sans font-medium text-sm tracking-wide cursor-pointer hover:text-accent-purple transition-colors duration-200 outline-none ${scrolled ? (darkMode ? 'text-white' : 'text-primary') : 'text-white'
-                }`}
+              className={`font-sans font-medium text-sm tracking-wide cursor-pointer transition-colors duration-200 outline-none ${
+                scrolled
+                  ? (darkMode ? 'text-white hover:text-accent-purple' : 'text-primary hover:text-accent-purple')
+                  : 'text-white/90 hover:text-white'
+              }`}
             >
               {t("gallery")}
             </button>
             <button
               onClick={onScrollToAbout}
-              className={`font-sans font-medium text-sm tracking-wide cursor-pointer hover:text-accent-purple transition-colors duration-200 outline-none ${scrolled ? (darkMode ? 'text-white' : 'text-primary') : 'text-white'
-                }`}
+              className={`font-sans font-medium text-sm tracking-wide cursor-pointer transition-colors duration-200 outline-none ${
+                scrolled
+                  ? (darkMode ? 'text-white hover:text-accent-purple' : 'text-primary hover:text-accent-purple')
+                  : 'text-white/90 hover:text-white'
+              }`}
             >
               {t("aboutUs")}
             </button>
             <button
               onClick={onScrollToContact}
-              className={`font-sans font-medium text-sm tracking-wide cursor-pointer hover:text-accent-purple transition-colors duration-200 outline-none ${scrolled ? (darkMode ? 'text-white' : 'text-primary') : 'text-white'
-                }`}
+              className={`font-sans font-medium text-sm tracking-wide cursor-pointer transition-colors duration-200 outline-none ${
+                scrolled
+                  ? (darkMode ? 'text-white hover:text-accent-purple' : 'text-primary hover:text-accent-purple')
+                  : 'text-white/90 hover:text-white'
+              }`}
             >
               {t("contact")}
             </button>
@@ -368,17 +383,20 @@ export default function Navbar({
             {/* Mobile Drawer Footer */}
             <div className="flex flex-col items-center gap-4 text-center">
               <div className="flex items-center gap-4 text-white/80">
-                <a href="https://facebook.com/memoirtale" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                <a href="https://www.facebook.com/profile.php?id=61570540003417&sk=about" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
                   <Facebook className="w-5 h-5 hover:text-white transition-colors cursor-pointer" />
                 </a>
-                <a href="https://instagram.com/memoirtale" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <a href="https://www.instagram.com/memoirtale.co/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                   <Instagram className="w-5 h-5 hover:text-white transition-colors cursor-pointer" />
                 </a>
-                <a href="https://linkedin.com/company/memoirtale" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                <a href="https://www.linkedin.com/company/memoirtale/?viewAsMember=true" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                   <Linkedin className="w-5 h-5 hover:text-white transition-colors cursor-pointer" />
                 </a>
-                <a href="https://twitter.com/memoirtale" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+                <a href="https://x.com/Memoirtale91680" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
                   <Twitter className="w-5 h-5 hover:text-white transition-colors cursor-pointer" />
+                </a>
+                <a href="https://www.youtube.com/@Memoir_tale" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+                  <Youtube className="w-5 h-5 hover:text-white transition-colors cursor-pointer" />
                 </a>
               </div>
               <p className="text-white/40 text-xs font-sans">

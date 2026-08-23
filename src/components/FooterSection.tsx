@@ -1,16 +1,20 @@
 import React, { useState } from "react";
-import { Facebook, Instagram, Linkedin, Twitter, MessageCircle, Phone, Globe, Send, Sparkles, CheckCircle2, Heart } from "lucide-react";
+import { Facebook, Instagram, Linkedin, Twitter, Youtube, MessageCircle, Phone, Globe, Send, Sparkles, CheckCircle2, Heart } from "lucide-react";
 import logoUrl from "../assets/images/memoir_logo_1780375728663.png";
 import { useLanguage } from "../context/LanguageContext";
 
 interface FooterProps {
   onQuoteClick: () => void;
-  isMobilePreview: boolean;
+  isMobilePreview?: boolean;
   onScrollToAbout?: () => void;
   onScrollToHowItWorks?: () => void;
   onScrollToServices?: (packageId?: number) => void;
   onScrollToGallery?: () => void;
   onScrollToTestimonials?: () => void;
+  onOpenPrivacy?: () => void;
+  onOpenTerms?: () => void;
+  onOpenRefund?: () => void;
+  onOpenCareers?: () => void;
 }
 
 const footerTranslations = {
@@ -91,7 +95,11 @@ export default function FooterSection({
   onScrollToHowItWorks,
   onScrollToServices,
   onScrollToGallery,
-  onScrollToTestimonials
+  onScrollToTestimonials,
+  onOpenPrivacy,
+  onOpenTerms,
+  onOpenRefund,
+  onOpenCareers
 }: FooterProps) {
   const { lang, setLang, t } = useLanguage();
   const [emailValue, setEmailValue] = useState("");
@@ -188,17 +196,20 @@ export default function FooterSection({
                 </div>
               </div>
               <div className="flex items-center gap-3 text-white/85 pt-2">
-                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="hover:text-white transition-colors">
+                <a href="https://www.facebook.com/profile.php?id=61570540003417&sk=about" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="hover:text-white transition-colors">
                   <Facebook className="w-4 h-4" />
                 </a>
-                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="hover:text-white transition-colors">
+                <a href="https://www.instagram.com/memoirtale.co/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="hover:text-white transition-colors">
                   <Instagram className="w-4 h-4" />
                 </a>
-                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="hover:text-white transition-colors">
+                <a href="https://www.linkedin.com/company/memoirtale/?viewAsMember=true" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="hover:text-white transition-colors">
                   <Linkedin className="w-4 h-4" />
                 </a>
-                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="hover:text-white transition-colors">
+                <a href="https://x.com/Memoirtale91680" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)" className="hover:text-white transition-colors">
                   <Twitter className="w-4 h-4" />
+                </a>
+                <a href="https://www.youtube.com/@Memoir_tale" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="hover:text-white transition-colors">
+                  <Youtube className="w-4 h-4" />
                 </a>
               </div>
             </div>
@@ -228,7 +239,15 @@ export default function FooterSection({
                 <li><button type="button" onClick={() => onScrollToHowItWorks ? onScrollToHowItWorks() : document.getElementById("how-it-works")?.scrollIntoView({ behavior: "smooth" })} className="hover:text-white transition-colors cursor-pointer text-left">{curTrans.howItWorks}</button></li>
                 <li><button type="button" onClick={() => onScrollToGallery ? onScrollToGallery() : document.getElementById("gallery")?.scrollIntoView({ behavior: "smooth" })} className="hover:text-white transition-colors cursor-pointer text-left">{curTrans.gallery}</button></li>
                 <li><button type="button" onClick={() => onScrollToTestimonials ? onScrollToTestimonials() : document.getElementById("testimonials")?.scrollIntoView({ behavior: "smooth" })} className="hover:text-white transition-colors cursor-pointer text-left">{curTrans.testimonials}</button></li>
-                <li className="text-white/75">{curTrans.careers} <span className="text-[9px] bg-accent-purple text-white py-0.5 px-1.5 rounded ml-1 uppercase font-bold">{curTrans.hiring}</span></li>
+                <li>
+                  <button
+                    type="button"
+                    onClick={onOpenCareers}
+                    className="hover:text-white transition-colors cursor-pointer text-left text-white/75"
+                  >
+                    {curTrans.careers} <span className="text-[9px] bg-accent-purple text-white py-0.5 px-1.5 rounded ml-1 uppercase font-bold">{curTrans.hiring}</span>
+                  </button>
+                </li>
                 <li className="text-white/75">{curTrans.blog}</li>
               </ul>
             </div>
@@ -328,11 +347,29 @@ export default function FooterSection({
             </div>
 
             <div className="flex flex-wrap justify-center gap-x-4 gap-y-1 text-white/75">
-              <a href="#privacy" className="hover:text-white transition-colors font-medium">{curTrans.privacy}</a>
+              <button
+                type="button"
+                onClick={onOpenPrivacy}
+                className="hover:text-white transition-colors font-medium cursor-pointer"
+              >
+                {curTrans.privacy}
+              </button>
               <span>•</span>
-              <a href="#terms" className="hover:text-white transition-colors font-medium">{curTrans.terms}</a>
+              <button
+                type="button"
+                onClick={onOpenTerms}
+                className="hover:text-white transition-colors font-medium cursor-pointer"
+              >
+                {curTrans.terms}
+              </button>
               <span>•</span>
-              <a href="#refund" className="hover:text-white transition-colors font-medium">{curTrans.refund}</a>
+              <button
+                type="button"
+                onClick={onOpenRefund}
+                className="hover:text-white transition-colors font-medium cursor-pointer"
+              >
+                {curTrans.refund}
+              </button>
             </div>
           </div>
 

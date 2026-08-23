@@ -4,8 +4,8 @@ import { signOut } from "firebase/auth";
 import { db, auth } from "../lib/firebase";
 import { useAdminAuth } from "../hooks/useAdminAuth";
 import SecureAdminLogin from "./SecureAdminLogin";
-import { 
-  LogOut, Search, Clock, CheckCircle, AlertTriangle, FileText, Download, 
+import {
+  LogOut, Search, Clock, CheckCircle, AlertTriangle, FileText, Download,
   Trash2, Bookmark, Calendar, RefreshCw, Shield, Users, TrendingUp
 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
@@ -13,14 +13,14 @@ import { jsPDF } from "jspdf";
 
 export default function AdminDashboardSecure() {
   const { user, isAdmin, loading: authLoading, error: authError } = useAdminAuth();
-  
+
   // Firestore inquiries states
   const [inquiries, setInquiries] = useState<any[]>([]);
   const [loadingInquiries, setLoadingInquiries] = useState(true);
   const [searchText, setSearchText] = useState("");
   const [statusFilter, setStatusFilter] = useState<string>("All");
   const [typeFilter, setTypeFilter] = useState<string>("All");
-  
+
   // Selected inquiry for details
   const [selectedInquiry, setSelectedInquiry] = useState<any | null>(null);
   const [updatingTicket, setUpdatingTicket] = useState<string | null>(null);
@@ -28,15 +28,15 @@ export default function AdminDashboardSecure() {
   // Real-time Firestore sync
   useEffect(() => {
     if (!user || !isAdmin) return;
-    
+
     setLoadingInquiries(true);
 
     const qInquiries = query(collection(db, "inquiries"), orderBy("createdAt", "desc"));
     const unsubInquiries = onSnapshot(qInquiries, (snapshot) => {
       const inquiriesList: any[] = [];
       snapshot.forEach((doc) => {
-        inquiriesList.push({ 
-          id: doc.id, 
+        inquiriesList.push({
+          id: doc.id,
           ...doc.data(),
           collectionType: 'inquiry'
         });
@@ -46,8 +46,8 @@ export default function AdminDashboardSecure() {
       const unsubCallbacks = onSnapshot(qCallbacks, (snapshot) => {
         const callbacksList: any[] = [];
         snapshot.forEach((doc) => {
-          callbacksList.push({ 
-            id: doc.id, 
+          callbacksList.push({
+            id: doc.id,
             ...doc.data(),
             collectionType: 'callback'
           });
@@ -100,7 +100,7 @@ export default function AdminDashboardSecure() {
 
   const handleDeleteInquiry = async (inquiry: any) => {
     if (!window.confirm(`Are you sure you want to delete this ${inquiry.collectionType}?`)) return;
-    
+
     try {
       const collectionName = inquiry.collectionType === 'callback' ? 'callbacks' : 'inquiries';
       await deleteDoc(doc(db, collectionName, inquiry.id));
@@ -120,16 +120,16 @@ export default function AdminDashboardSecure() {
 
   // Filtering
   const filteredInquiries = inquiries.filter(i => {
-    const matchesSearch = 
+    const matchesSearch =
       (i.fullName || "").toLowerCase().includes(searchText.toLowerCase()) ||
       (i.ticketNo || "").toLowerCase().includes(searchText.toLowerCase()) ||
       (i.email || "").toLowerCase().includes(searchText.toLowerCase());
 
     const matchesStatus = statusFilter === "All" || i.status === statusFilter;
-    const matchesType = typeFilter === "All" || 
-                       (typeFilter === "Inquiries" && i.collectionType === "inquiry") ||
-                       (typeFilter === "Callbacks" && i.collectionType === "callback");
-    
+    const matchesType = typeFilter === "All" ||
+      (typeFilter === "Inquiries" && i.collectionType === "inquiry") ||
+      (typeFilter === "Callbacks" && i.collectionType === "callback");
+
     return matchesSearch && matchesStatus && matchesType;
   });
 
@@ -172,7 +172,7 @@ export default function AdminDashboardSecure() {
 
   // Not logged in or not admin
   if (!user || !isAdmin) {
-    return <SecureAdminLogin onLoginSuccess={() => {}} />;
+    return <SecureAdminLogin onLoginSuccess={() => { }} />;
   }
 
   // Auth error
@@ -197,7 +197,7 @@ export default function AdminDashboardSecure() {
   // Main Admin Dashboard
   return (
     <div className="min-h-screen bg-[#0F0C09] text-white font-sans">
-      
+
       {/* Header */}
       <header className="bg-[#1B101E] border-b border-[#D4AF37]/20 px-6 py-4 sticky top-0 z-40 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
@@ -266,7 +266,7 @@ export default function AdminDashboardSecure() {
 
       {/* Main Content */}
       <div className="max-w-7xl mx-auto p-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
-        
+
         {/* Left Column - Filters & List */}
         <div className="lg:col-span-1 space-y-4">
           {/* Search */}
@@ -288,11 +288,10 @@ export default function AdminDashboardSecure() {
                 <button
                   key={type}
                   onClick={() => setTypeFilter(type)}
-                  className={`flex-1 px-3 py-2 rounded-lg text-xs font-bold uppercase transition-all ${
-                    typeFilter === type
+                  className={`flex-1 px-3 py-2 rounded-lg text-xs font-bold uppercase transition-all ${typeFilter === type
                       ? "bg-[#D4AF37] text-[#1A1410]"
                       : "bg-[#2D1B36] text-white/60 hover:text-white"
-                  }`}
+                    }`}
                 >
                   {type}
                 </button>
@@ -305,11 +304,10 @@ export default function AdminDashboardSecure() {
                 <button
                   key={status}
                   onClick={() => setStatusFilter(status)}
-                  className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider transition-all ${
-                    statusFilter === status
+                  className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider transition-all ${statusFilter === status
                       ? "bg-[#D4AF37] text-[#1A1410]"
                       : "bg-[#2D1B36] text-white/60 border border-white/10 hover:text-white"
-                  }`}
+                    }`}
                 >
                   {status}
                 </button>
@@ -343,20 +341,18 @@ export default function AdminDashboardSecure() {
                   <button
                     key={inq.id}
                     onClick={() => setSelectedInquiry(inq)}
-                    className={`w-full text-left p-3 rounded-lg transition-all ${
-                      selectedInquiry?.id === inq.id
+                    className={`w-full text-left p-3 rounded-lg transition-all ${selectedInquiry?.id === inq.id
                         ? "bg-[#D4AF37]/20 border-2 border-[#D4AF37]"
                         : "bg-[#2D1B36] border border-white/10 hover:border-[#D4AF37]/50"
-                    }`}
+                      }`}
                   >
                     <p className="font-bold text-sm text-white truncate">{inq.fullName || "No name"}</p>
                     <p className="text-xs text-white/60 truncate">{inq.email || inq.phone}</p>
                     <div className="flex items-center justify-between mt-2">
-                      <span className={`text-[10px] px-2 py-0.5 rounded-full ${
-                        inq.collectionType === 'callback' 
-                          ? 'bg-blue-500/20 text-blue-300' 
+                      <span className={`text-[10px] px-2 py-0.5 rounded-full ${inq.collectionType === 'callback'
+                          ? 'bg-blue-500/20 text-blue-300'
                           : 'bg-purple-500/20 text-purple-300'
-                      }`}>
+                        }`}>
                         {inq.collectionType === 'callback' ? '📞 Call' : '📋 Inquiry'}
                       </span>
                       <span className="text-[10px] text-white/40">
@@ -529,11 +525,10 @@ export default function AdminDashboardSecure() {
                       key={status}
                       onClick={() => handleUpdateStatus(selectedInquiry, status)}
                       disabled={updatingTicket === selectedInquiry.id}
-                      className={`px-4 py-2 rounded-lg text-sm font-bold transition-all ${
-                        selectedInquiry.status === status
+                      className={`px-4 py-2 rounded-lg text-sm font-bold transition-all ${selectedInquiry.status === status
                           ? "bg-[#D4AF37] text-[#1A1410]"
                           : "bg-[#2D1B36] text-white hover:bg-[#D4AF37]/20 border border-white/10"
-                      }`}
+                        }`}
                     >
                       {updatingTicket === selectedInquiry.id ? "..." : status}
                     </button>
