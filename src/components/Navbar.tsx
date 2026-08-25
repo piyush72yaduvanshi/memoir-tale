@@ -104,7 +104,7 @@ export default function Navbar({
                   ? darkMode ? 'text-white' : 'text-primary'
                   : 'text-white'
                 }`}>
-                Memoir<span className="text-accent-purple">Tale</span>
+                Memoir<span className="text-[#D4AF37]">Tale</span>
               </span>
               <span className="font-sans text-[9px] sm:text-[10px] font-bold text-[#D4AF37] tracking-wider block -mt-0.5 truncate">
                 India's First Legacy Platform

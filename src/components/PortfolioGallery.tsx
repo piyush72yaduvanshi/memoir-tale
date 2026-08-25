@@ -4,12 +4,12 @@ import { X, BookOpen, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
 // Import local book images
-import book1 from '../assets/books/WhatsApp Image 2026-06-09 at 2.27.06 PM.jpeg';
-import book2 from '../assets/books/WhatsApp Image 2026-06-09 at 2.27.06 PMk.jpeg';
-import book3 from '../assets/books/WhatsApp Image 2026-06-09 at 2.27.06 PMl.jpeg';
-import book4 from '../assets/books/WhatsApp Image 2026-06-09 at 2.27.06 PMm.jpeg';
-import book5 from '../assets/books/WhatsApp Image 2026-06-09 at 2.27.06 PMn.jpeg';
-import book6 from '../assets/books/WhatsApp Image 2026-06-09 at 2.27.50 PMh.jpeg';
+import bookEkYatra from '../assets/books/WhatsApp Image 2026-06-09 at 2.27.06 PMm.jpeg';
+import bookHumareBabuJi from '../assets/books/WhatsApp Image 2026-06-09 at 2.27.06 PM.jpeg';
+import bookStormsStruggles from '../assets/books/WhatsApp Image 2026-06-09 at 2.27.06 PMk.jpeg';
+import bookUnveilingDimensions from '../assets/books/WhatsApp Image 2026-08-24 at 11.11.22 PM.jpeg';
+import bookMaheeshTrikha from '../assets/books/WhatsApp Image 2026-06-09 at 2.27.50 PMh.jpeg';
+import book95Countries from '../assets/books/WhatsApp Image 2026-08-24 at 11.11.23 PM.jpeg';
 
 interface StoryItem {
   id: string;
@@ -24,57 +24,57 @@ interface StoryItem {
 const STORIES: StoryItem[] = [
   {
     id: 'story-1',
-    title: 'The Whispering Pines of Jhansi',
-    subject: 'Rameshwar Nath Prasad',
-    year: '2024 Release',
-    excerpt: 'A brilliant account of an ambitious student finding his purpose in pre-independence UP, setting up a telegraph line across small villages.',
-    image: book1,
-    pageCount: '194 Pages'
+    title: 'Ek Yatra',
+    subject: 'The story that gave birth to Memoir Tale',
+    year: 'Published',
+    excerpt: 'Ek Yatra began with a deeply personal loss. Abhinav Shakya created this book in memory of his grandfather, with whom he wished he had spent more time while he was alive. After his grandfather passed away, Abhinav began gathering his memories and stories with the help of his father—and turned them into his first book. That experience made him realise that countless families carry the same feeling of losing someone before their story can be fully preserved. Ek Yatra became the inspiration behind Memoir Tale and the dream of building India\'s first legacy platform.',
+    image: bookEkYatra,
+    pageCount: '130 Pages'
   },
   {
     id: 'story-2',
-    title: 'Threads of the Silk Loom',
-    subject: 'Anjali Deshmukh',
-    year: '2025 Release',
-    excerpt: 'Three generations of silk weavers preserved in an epic tapestry of heirloom stories, color dye recipes, and family letters.',
-    image: book2,
-    pageCount: '240 Pages'
+    title: 'Humare Babu Ji',
+    subject: 'Shree Vishwanath Sharma Ji',
+    year: 'Coming Soon',
+    excerpt: 'Humare Babu Ji is a tribute to the life and legacy of Vishwanath Sharma, an Indian politician who served as a Member of Parliament from Jhansi and later Hamirpur. More than a record of public life, the book seeks to preserve the memories, values, relationships, and moments that made him who he was—so that his story continues to live within the generations that follow.',
+    image: bookHumareBabuJi,
+    pageCount: '250 Pages'
   },
   {
     id: 'story-3',
-    title: "The Navigator's Hourglass",
-    subject: 'Capt. Hector Sterling',
-    year: '2024 Release',
-    excerpt: "A sea captain's journals recounting ocean voyages, high-seas squalls, and the tranquil starlight of the Southern Hemisphere.",
-    image: book3,
-    pageCount: '312 Pages'
+    title: 'Storms & Struggles',
+    subject: 'Dr. Archana Lala',
+    year: 'Published',
+    excerpt: 'Storms & Struggles is a story of perseverance, self-belief, and unwavering dedication. Through the journey of a woman who faced obstacles at every stage of life, the book captures how courage, hard work, and the belief in oneself can transform struggles into strength and dreams into achievements.',
+    image: bookStormsStruggles,
+    pageCount: '130 Pages'
   },
   {
     id: 'story-4',
-    title: 'Echoes from the Railway Quarters',
-    subject: 'Balwant Singh Rathore',
-    year: '2025 Release',
-    excerpt: 'A railwayman\'s memoir spanning four decades of service, documenting the evolution of Indian Railways and countless journeys across the subcontinent.',
-    image: book4,
-    pageCount: '256 Pages'
+    title: 'Unveiling Many Dimensions',
+    subject: 'Nona Bhogal Preenja',
+    year: 'Published',
+    excerpt: 'Unveiling Many Dimensions follows the remarkable journey of Nona Bhogal Preenja—a woman whose life was shaped by an extraordinary family legacy and unexpected turns of fate. From the influence of her father, remembered as the youngest IAS officer in Maharashtra, to the challenges and transformations that followed, this is a story of discovering oneself, overcoming circumstances, and ultimately blooming into one\'s own identity.',
+    image: bookUnveilingDimensions,
+    pageCount: '105 Pages'
   },
   {
     id: 'story-5',
-    title: 'The Herbalist\'s Daughter',
-    subject: 'Dr. Meera Kulkarni',
-    year: '2024 Release',
-    excerpt: 'From traditional Ayurvedic remedies to modern medicine, a pioneering woman doctor\'s journey breaking barriers in rural Maharashtra.',
-    image: book5,
-    pageCount: '218 Pages'
+    title: 'Martyr Flight Lieutenant Maheesh Trikha',
+    subject: 'Flight Lieutenant Maheesh Trikha',
+    year: 'Published',
+    excerpt: 'A tribute to Flight Lieutenant Maheesh Trikha, whose life reflected discipline, courage, patriotism, and an unwavering commitment to service. From RIMC and NDA to the Air Force and the Siachen Pioneers, his journey traces the making of a young air warrior who gave his life in service of the nation. Told through memories, interviews, family stories, and tributes, this biography also honours the parents, brother, and comrades who continue to carry his legacy with pride and love.',
+    image: bookMaheeshTrikha,
+    pageCount: '110 Pages'
   },
   {
     id: 'story-6',
-    title: 'Letters from the Himalayan Outpost',
-    subject: 'Col. Rajendra Thapa',
-    year: '2025 Release',
-    excerpt: 'A decorated army officer\'s chronicles from the highest military posts, blending duty with deep spiritual reflection in the mountain solitude.',
-    image: book6,
-    pageCount: '289 Pages'
+    title: '95 Countries — Journeys & Memories',
+    subject: 'Sunanda & Hari',
+    year: 'Published',
+    excerpt: 'A lifetime of travel captured in one extraordinary story. Sunanda and Hari, both in their 60s, have travelled across nearly 95 countries, collecting experiences, friendships, cultures, and memories along the way. And their journey isn\'t over yet—they continue to explore the world, chasing their next destinations and working toward their dream of completing a century of countries.',
+    image: book95Countries,
+    pageCount: '250 Pages'
   }
 ];
 
@@ -315,7 +315,7 @@ export default function PortfolioGallery() {
               </p>
 
               <div className="flex items-center justify-between gap-4 pt-6 border-t border-accent-purple/15">
-                <span className="font-sans text-xs text-text-muted">
+                <span className="font-sans text-xs text-[#554466]">
                   {selectedStory.pageCount} • {selectedStory.year}
                 </span>
                 <button

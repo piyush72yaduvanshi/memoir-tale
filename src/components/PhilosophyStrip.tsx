@@ -27,10 +27,13 @@ export default function PhilosophyStrip() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="flex items-center gap-1.5 focus:outline-none"
+          className="flex flex-col items-center gap-3 focus:outline-none"
         >
           <span className="font-serif italic text-white text-xl sm:text-2xl md:text-3xl selection:bg-[#D4AF37] selection:text-[#220E24]">
             " Stories Unfolded, <span className="bg-gradient-to-r from-[#E5C463] via-[#D4AF37] to-[#B8941F] bg-clip-text text-transparent font-serif not-italic drop-shadow-[0_2px_12px_rgba(212,175,55,0.4)]">Memories</span> Preserved. "
+          </span>
+          <span className="font-serif italic text-white/70 text-sm sm:text-base md:text-lg tracking-wide">
+            In the end, we all become stories...
           </span>
         </motion.div>
 
