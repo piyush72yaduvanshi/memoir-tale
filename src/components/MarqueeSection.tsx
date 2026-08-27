@@ -48,7 +48,7 @@ export default function MarqueeSection() {
                 {/* Top Label */}
                 <div className="text-left">
                   <span className="text-[#d4af37] text-[9px] font-sans uppercase tracking-[2px] font-bold">
-                    MEMOIR
+                    MEMOIRTALE
                   </span>
                 </div>
 
@@ -76,7 +76,7 @@ export default function MarqueeSection() {
                 {/* Year Badge - top right */}
                 <div className="absolute top-3 right-3 px-2 py-1 bg-black/30 backdrop-blur-sm border border-[#d4af37]/30 rounded">
                   <span className="text-[#d4af37] text-[9px] font-semibold">
-                    2024
+                    2023
                   </span>
                 </div>
 
@@ -102,7 +102,7 @@ export default function MarqueeSection() {
                 {/* Top Label */}
                 <div className="text-left">
                   <span className="text-[#d4af37] text-[9px] font-sans uppercase tracking-[2px] font-bold">
-                    MEMOIR
+                    MEMOIRTALE
                   </span>
                 </div>
 
@@ -130,7 +130,7 @@ export default function MarqueeSection() {
                 {/* Year Badge - top right */}
                 <div className="absolute top-3 right-3 px-2 py-1 bg-black/30 backdrop-blur-sm border border-[#d4af37]/30 rounded">
                   <span className="text-[#d4af37] text-[9px] font-semibold">
-                    2024
+                    2023
                   </span>
                 </div>
 
