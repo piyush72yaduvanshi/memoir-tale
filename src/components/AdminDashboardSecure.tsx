@@ -491,15 +491,31 @@ export default function AdminDashboardSecure() {
                               </p>
                             </div>
                           </div>
-                          {file.url && (
-                            <a
-                              href={file.url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="px-3 py-1 bg-[#D4AF37]/20 hover:bg-[#D4AF37]/30 border border-[#D4AF37]/40 rounded-lg text-[#D4AF37] text-xs font-bold transition-all"
-                            >
-                              View
-                            </a>
+                          {file.url ? (
+                            <div className="flex gap-2">
+                              <a
+                                href={file.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="px-3 py-1.5 bg-[#D4AF37]/20 hover:bg-[#D4AF37]/30 border border-[#D4AF37]/40 rounded-lg text-[#D4AF37] text-xs font-bold transition-all cursor-pointer flex items-center gap-1"
+                              >
+                                View
+                              </a>
+                              <a
+                                href={file.url}
+                                download={file.name}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="px-3 py-1.5 bg-white/10 hover:bg-white/20 border border-white/20 rounded-lg text-white text-xs font-bold transition-all cursor-pointer flex items-center gap-1"
+                              >
+                                <Download className="h-3.5 w-3.5" />
+                                Download
+                              </a>
+                            </div>
+                          ) : (
+                            <span className="text-red-400 text-xs font-semibold bg-red-900/20 px-2.5 py-1 rounded border border-red-500/20">
+                              Upload Failed
+                            </span>
                           )}
                         </div>
                       ))}

@@ -214,7 +214,8 @@ export default function ContactSection({ selectedService, matchedWriter, onClear
 
       await setDoc(doc(db, "inquiries", ticket), dbPayload);
 
-      // 3. Trigger automatic SMS and Email notification dispatches
+      // 3. Trigger automatic SMS and Email notification dispatches (Temporarily disabled)
+      /*
       try {
         await fetch("/api/send-submission-notification", {
           method: "POST",
@@ -230,6 +231,7 @@ export default function ContactSection({ selectedService, matchedWriter, onClear
       } catch (notifyErr) {
         console.error("Sub-step automation alert dispatch failed:", notifyErr);
       }
+      */
 
       // 4. Update local user view to display receipt
       setSubmittedData({

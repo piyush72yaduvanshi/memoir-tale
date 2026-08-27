@@ -11,25 +11,23 @@ service firebase.storage {
              firestore.get(/databases/(default)/documents/users/$(request.auth.uid)).data.isActive == true;
     }
     
-    // Inquiries folder - Anyone can upload (public contact form attachments)
+    // Inquiries folder - Anyone can upload and read (required to generate download URL)
     match /inquiries/{ticketNo}/{fileName} {
       // Allow anyone to upload files (for contact form submissions)
-      allow create: if request.resource.size < 50 * 1024 * 1024 && // Max 50MB per file
-                       request.resource.contentType.matches('image/.*|video/.*|audio/.*|application/pdf|application/msword|application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+      allow create: if request.resource.size < 50 * 1024 * 1024; // Max 50MB per file
       
-      // Only admins can read, update, and delete
-      allow read: if isAdmin();
+      // Anyone can read (needed for client getDownloadURL)
+      allow read: if true;
       allow update, delete: if isAdmin();
     }
     
-    // Callbacks folder - Anyone can upload (public callback attachments if any)
+    // Callbacks folder - Anyone can upload and read
     match /callbacks/{ticketNo}/{fileName} {
       // Allow anyone to upload files
-      allow create: if request.resource.size < 50 * 1024 * 1024 && // Max 50MB per file
-                       request.resource.contentType.matches('image/.*|video/.*|audio/.*|application/pdf|application/msword|application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+      allow create: if request.resource.size < 50 * 1024 * 1024; // Max 50MB per file
       
-      // Only admins can read, update, and delete
-      allow read: if isAdmin();
+      // Anyone can read (needed for client getDownloadURL)
+      allow read: if true;
       allow update, delete: if isAdmin();
     }
     
