@@ -27,13 +27,25 @@ export default function AdminDashboardSecure() {
 
   // Real-time Firestore sync
   useEffect(() => {
-    if (!user || !isAdmin) return;
+    if (!user || !isAdmin || !db) return;
 
     setLoadingInquiries(true);
 
+    let inquiriesList: any[] = [];
+    let callbacksList: any[] = [];
+
+    const updateMergedList = () => {
+      const merged = [...inquiriesList, ...callbacksList].sort((a, b) => {
+        const dateA = new Date(a.createdAt || 0).getTime();
+        const dateB = new Date(b.createdAt || 0).getTime();
+        return dateB - dateA;
+      });
+      setInquiries(merged);
+    };
+
     const qInquiries = query(collection(db, "inquiries"), orderBy("createdAt", "desc"));
     const unsubInquiries = onSnapshot(qInquiries, (snapshot) => {
-      const inquiriesList: any[] = [];
+      inquiriesList = [];
       snapshot.forEach((doc) => {
         inquiriesList.push({
           id: doc.id,
@@ -41,32 +53,34 @@ export default function AdminDashboardSecure() {
           collectionType: 'inquiry'
         });
       });
-
-      const qCallbacks = query(collection(db, "callbacks"), orderBy("createdAt", "desc"));
-      const unsubCallbacks = onSnapshot(qCallbacks, (snapshot) => {
-        const callbacksList: any[] = [];
-        snapshot.forEach((doc) => {
-          callbacksList.push({
-            id: doc.id,
-            ...doc.data(),
-            collectionType: 'callback'
-          });
-        });
-
-        const merged = [...inquiriesList, ...callbacksList].sort((a, b) => {
-          const dateA = new Date(a.createdAt || 0).getTime();
-          const dateB = new Date(b.createdAt || 0).getTime();
-          return dateB - dateA;
-        });
-
-        setInquiries(merged);
-        setLoadingInquiries(false);
-      });
-
-      return () => unsubCallbacks();
+      updateMergedList();
+      setLoadingInquiries(false);
+    }, (err) => {
+      console.error("Firestore Inquiries sync error: ", err);
+      setLoadingInquiries(false);
     });
 
-    return () => unsubInquiries();
+    const qCallbacks = query(collection(db, "callbacks"), orderBy("createdAt", "desc"));
+    const unsubCallbacks = onSnapshot(qCallbacks, (snapshot) => {
+      callbacksList = [];
+      snapshot.forEach((doc) => {
+        callbacksList.push({
+          id: doc.id,
+          ...doc.data(),
+          collectionType: 'callback'
+        });
+      });
+      updateMergedList();
+      setLoadingInquiries(false);
+    }, (err) => {
+      console.error("Firestore Callbacks sync error: ", err);
+      setLoadingInquiries(false);
+    });
+
+    return () => {
+      unsubInquiries();
+      unsubCallbacks();
+    };
   }, [user, isAdmin]);
 
   const handleLogout = async () => {

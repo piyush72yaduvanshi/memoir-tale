@@ -19,6 +19,16 @@ export function useAdminAuth(): AdminAuthState {
   });
 
   useEffect(() => {
+    if (!auth) {
+      setState({
+        user: null,
+        isAdmin: false,
+        loading: false,
+        error: 'Firebase Auth is not initialized. Please verify your config.',
+      });
+      return;
+    }
+
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (!user) {
         setState({
