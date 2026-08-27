@@ -22,6 +22,11 @@ export default function MemoirLifestyle({ darkMode, onCtaClick }: MemoirLifestyl
   const [itemsPerPage, setItemsPerPage] = useState(3);
   const containerRef = useRef<HTMLDivElement>(null);
 
+  // Touch swipe state
+  const touchStartX = useRef<number>(0);
+  const touchStartY = useRef<number>(0);
+  const isSwiping = useRef<boolean>(false);
+
   // Responsive items-per-view calculator
   useEffect(() => {
     const updateItemsPerPage = () => {
@@ -68,6 +73,40 @@ export default function MemoirLifestyle({ darkMode, onCtaClick }: MemoirLifestyl
         element.scrollIntoView({ behavior: 'smooth' });
       }
     }
+  };
+
+  // Touch swipe handlers
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
+    isSwiping.current = false;
+    setIsPaused(true);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    const dx = Math.abs(e.touches[0].clientX - touchStartX.current);
+    const dy = Math.abs(e.touches[0].clientY - touchStartY.current);
+    // Mark as horizontal swipe if horizontal movement is dominant
+    if (dx > dy && dx > 10) {
+      isSwiping.current = true;
+    }
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    const deltaX = e.changedTouches[0].clientX - touchStartX.current;
+    const deltaY = Math.abs(e.changedTouches[0].clientY - touchStartY.current);
+    const SWIPE_THRESHOLD = 50;
+
+    // Only trigger slide if horizontal swipe dominates (prevents scroll conflict)
+    if (isSwiping.current && Math.abs(deltaX) > SWIPE_THRESHOLD && Math.abs(deltaX) > deltaY) {
+      if (deltaX < 0) {
+        scrollNext(); // swipe left → next
+      } else {
+        scrollPrev(); // swipe right → prev
+      }
+    }
+    setIsPaused(false);
+    isSwiping.current = false;
   };
 
   // Gap between cards in pixels
@@ -122,8 +161,8 @@ export default function MemoirLifestyle({ darkMode, onCtaClick }: MemoirLifestyl
               onClick={scrollPrev}
               aria-label="Previous Service"
               className={`w-11 h-11 rounded-full border flex items-center justify-center transition-all duration-300 cursor-pointer shadow-sm active:scale-95 ${darkMode
-                  ? 'border-white/15 hover:border-[#9D75D4] text-white hover:bg-[#341A47] bg-[#22102e]'
-                  : 'border-[#E2D8E8] hover:border-[#2E1B5D] text-[#190F26] hover:bg-white bg-white hover:shadow-md'
+                ? 'border-white/15 hover:border-[#9D75D4] text-white hover:bg-[#341A47] bg-[#22102e]'
+                : 'border-[#E2D8E8] hover:border-[#2E1B5D] text-[#190F26] hover:bg-white bg-white hover:shadow-md'
                 }`}
             >
               <ChevronLeft className="w-5 h-5" />
@@ -132,8 +171,8 @@ export default function MemoirLifestyle({ darkMode, onCtaClick }: MemoirLifestyl
               onClick={scrollNext}
               aria-label="Next Service"
               className={`w-11 h-11 rounded-full border flex items-center justify-center transition-all duration-300 cursor-pointer shadow-sm active:scale-95 ${darkMode
-                  ? 'border-white/15 hover:border-[#9D75D4] text-white hover:bg-[#341A47] bg-[#22102e]'
-                  : 'border-[#E2D8E8] hover:border-[#2E1B5D] text-[#190F26] hover:bg-white bg-white hover:shadow-md'
+                ? 'border-white/15 hover:border-[#9D75D4] text-white hover:bg-[#341A47] bg-[#22102e]'
+                : 'border-[#E2D8E8] hover:border-[#2E1B5D] text-[#190F26] hover:bg-white bg-white hover:shadow-md'
                 }`}
             >
               <ChevronRight className="w-5 h-5" />
@@ -146,6 +185,9 @@ export default function MemoirLifestyle({ darkMode, onCtaClick }: MemoirLifestyl
           className="relative overflow-hidden w-full rounded-2xl pt-2 pb-6 px-1"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
         >
           <motion.div
             animate={{ x: `calc(-${translatePercent}% - ${(currentIndex * gap) / itemsPerPage}px)` }}
@@ -163,8 +205,8 @@ export default function MemoirLifestyle({ darkMode, onCtaClick }: MemoirLifestyl
               >
                 <div
                   className={`group rounded-2xl overflow-hidden shadow-sm hover:shadow-xl border flex flex-col justify-between h-full transition-all duration-300 transform hover:-translate-y-1.5 ${darkMode
-                      ? 'bg-[#22122b] border-white/10 hover:border-[#9D75D4]/50'
-                      : 'bg-white border-[#E9E1EE] hover:border-[#2E1B5D]/40'
+                    ? 'bg-[#22122b] border-white/10 hover:border-[#9D75D4]/50'
+                    : 'bg-white border-[#E9E1EE] hover:border-[#2E1B5D]/40'
                     }`}
                 >
                   {/* Card Image Banner */}
@@ -237,8 +279,8 @@ export default function MemoirLifestyle({ darkMode, onCtaClick }: MemoirLifestyl
               key={i}
               onClick={() => setCurrentIndex(i)}
               className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${currentIndex === i
-                  ? 'w-8 bg-[#2E1B5D] dark:bg-[#C5A3ED]'
-                  : `w-2 ${darkMode ? 'bg-white/20 hover:bg-white/40' : 'bg-[#E0D5E5] hover:bg-[#2E1B5D]/40'}`
+                ? 'w-8 bg-[#2E1B5D] dark:bg-[#C5A3ED]'
+                : `w-2 ${darkMode ? 'bg-white/20 hover:bg-white/40' : 'bg-[#E0D5E5] hover:bg-[#2E1B5D]/40'}`
                 }`}
               title={`Go to slide ${i + 1}`}
               aria-label={`Go to slide ${i + 1}`}

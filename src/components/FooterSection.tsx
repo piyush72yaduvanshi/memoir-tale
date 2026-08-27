@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Facebook, Instagram, Linkedin, Twitter, Youtube, MessageCircle, Phone, Globe, Send, Sparkles, CheckCircle2, Heart } from "lucide-react";
+import { Facebook, Instagram, Linkedin, Twitter, Youtube, MessageCircle, Phone, Globe, Send, Sparkles, CheckCircle2, Heart, Calendar } from "lucide-react";
 import logoUrl from "../assets/images/memoir_logo_1780375728663.png";
 import { useLanguage } from "../context/LanguageContext";
 
@@ -15,6 +15,7 @@ interface FooterProps {
   onOpenTerms?: () => void;
   onOpenRefund?: () => void;
   onOpenCareers?: () => void;
+  onSelectTimeSlot?: () => void;
 }
 
 const footerTranslations = {
@@ -43,8 +44,8 @@ const footerTranslations = {
     hiring: "We're Hiring",
     blog: "Blog / Stories",
     touchCol: "Get In Touch",
-    whatsappBtn: "💬 Chat on WhatsApp",
-    callBtn: "📞 Call Us Now",
+    whatsappBtn: "Chat on WhatsApp",
+    callBtn: "Book Consultation",
     privacy: "Privacy Policy",
     terms: "Terms of Service",
     refund: "Refund Policy",
@@ -77,8 +78,8 @@ const footerTranslations = {
     hiring: "भर्ती जारी है",
     blog: "ब्लॉग / कहानियाँ",
     touchCol: "संपर्क में रहें",
-    whatsappBtn: "💬 व्हाट्सएप पर चैट करें",
-    callBtn: "📞 अभी कॉल करें",
+    whatsappBtn: "व्हाट्सएप पर चैट करें",
+    callBtn: "परामर्श बुक करें",
     privacy: "गोपनीयता नीति",
     terms: "सेवा की शर्तें",
     refund: "वापसी नीति",
@@ -99,7 +100,8 @@ export default function FooterSection({
   onOpenPrivacy,
   onOpenTerms,
   onOpenRefund,
-  onOpenCareers
+  onOpenCareers,
+  onSelectTimeSlot
 }: FooterProps) {
   const { lang, setLang, t } = useLanguage();
   const [emailValue, setEmailValue] = useState("");
@@ -270,14 +272,15 @@ export default function FooterSection({
                   <span>{curTrans.whatsappBtn}</span>
                 </a>
 
-                {/* Direct Line */}
-                <a
-                  href="tel:9889011174"
-                  className="flex items-center space-x-1.5 border border-white/30 hover:bg-white hover:text-[#140a15] text-white text-xs font-sans font-semibold px-3.5 py-2 rounded-full transition-colors"
+                {/* Book Consultation Button */}
+                <button
+                  type="button"
+                  onClick={onSelectTimeSlot}
+                  className="flex items-center space-x-1.5 border border-white/30 hover:bg-white hover:text-[#140a15] text-white text-xs font-sans font-semibold px-3.5 py-2 rounded-full transition-colors cursor-pointer bg-transparent active:scale-95"
                 >
-                  <Phone className="h-3.5 w-3.5" />
+                  <Calendar className="h-3.5 w-3.5" />
                   <span>{curTrans.callBtn}</span>
-                </a>
+                </button>
               </div>
 
               {/* Language Switcher */}

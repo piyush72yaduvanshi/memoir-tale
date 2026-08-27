@@ -10,10 +10,6 @@ interface AdminAuthState {
   error: string | null;
 }
 
-/**
- * Secure Admin Authentication Hook
- * Checks both Firebase Auth AND Firestore role
- */
 export function useAdminAuth(): AdminAuthState {
   const [state, setState] = useState<AdminAuthState>({
     user: null,

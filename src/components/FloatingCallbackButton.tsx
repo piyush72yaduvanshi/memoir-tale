@@ -4,8 +4,12 @@ import { motion, AnimatePresence } from 'motion/react';
 import { collection, addDoc } from 'firebase/firestore';
 import { db, isFirebaseReady } from '../lib/firebase';
 
-export default function FloatingCallbackButton() {
-  const [isOpen, setIsOpen] = useState(false);
+interface FloatingCallbackButtonProps {
+  isOpen: boolean;
+  setIsOpen: (open: boolean) => void;
+}
+
+export default function FloatingCallbackButton({ isOpen, setIsOpen }: FloatingCallbackButtonProps) {
   const [formData, setFormData] = useState({
     name: '',
     phone: '',

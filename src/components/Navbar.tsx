@@ -113,7 +113,7 @@ export default function Navbar({
           </button>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-8">
+          <nav className="hidden lg:flex items-center gap-8">
             <button
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               className={`font-sans font-medium text-sm tracking-wide cursor-pointer transition-colors duration-200 outline-none ${
@@ -225,7 +225,7 @@ export default function Navbar({
           </nav>
 
           {/* Action CTAs */}
-          <div className="hidden md:flex items-center gap-4">
+          <div className="hidden lg:flex items-center gap-4">
             {/* Language Toggle Button */}
             <div className="flex items-center gap-1 bg-white/10 backdrop-blur-sm px-2 py-1 rounded-lg border border-white/20">
               <Globe className="w-3.5 h-3.5 text-[#D4AF37] shrink-0" />
@@ -265,7 +265,7 @@ export default function Navbar({
           </div>
 
           {/* Mobile Right Controls */}
-          <div className="md:hidden flex items-center gap-1.5 sm:gap-3 shrink-0">
+          <div className="lg:hidden flex items-center gap-1.5 sm:gap-3 shrink-0">
             {/* Language Toggle Button - Mobile */}
             <div className={`flex items-center gap-0.5 sm:gap-1 backdrop-blur-sm px-1.5 py-0.5 rounded-lg border transition-colors ${
               scrolled && !darkMode

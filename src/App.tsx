@@ -54,6 +54,9 @@ export default function App() {
   // Writer matchmaker state
   const [matchedWriter, setMatchedWriter] = useState<string | null>(null);
 
+  // Callback modal visibility state
+  const [callbackModalOpen, setCallbackModalOpen] = useState(false);
+
   // Check URL for admin and modal paths/hashes
   useEffect(() => {
     const handleRouteAndHash = () => {
@@ -213,8 +216,8 @@ export default function App() {
       </div>
 
       {/* Redesigned Footer Section */}
-      <FooterSection 
-        onQuoteClick={() => scrollToSection('contact')} 
+      <FooterSection
+        onQuoteClick={() => scrollToSection('contact')}
         onScrollToAbout={() => scrollToSection('about')}
         onScrollToHowItWorks={() => scrollToSection('how-it-works')}
         onScrollToServices={(packageId) => {
@@ -227,10 +230,11 @@ export default function App() {
         onOpenTerms={() => setShowTermsModal(true)}
         onOpenRefund={() => setShowRefundModal(true)}
         onOpenCareers={() => setShowCareersModal(true)}
+        onSelectTimeSlot={() => setCallbackModalOpen(true)}
       />
 
       {/* Floating Callback Button */}
-      <FloatingCallbackButton />
+      <FloatingCallbackButton isOpen={callbackModalOpen} setIsOpen={setCallbackModalOpen} />
 
       {/* Interactive Legal & Career Modals */}
       <PrivacyPolicyModal

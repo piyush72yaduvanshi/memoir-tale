@@ -70,11 +70,11 @@ export default function MarqueeSection() {
                 </div>
 
                 {/* Decorative corner elements */}
-                <div className="absolute top-3 right-3 w-8 h-8 border-t-2 border-r-2 border-[#d4af37]/30"></div>
                 <div className="absolute bottom-3 left-3 w-8 h-8 border-b-2 border-l-2 border-[#d4af37]/30"></div>
+                <div className="absolute bottom-3 right-3 w-8 h-8 border-b-2 border-r-2 border-[#d4af37]/30"></div>
 
-                {/* Year Badge */}
-                <div className="absolute top-3 left-3 px-2 py-1 bg-black/30 backdrop-blur-sm border border-[#d4af37]/30 rounded">
+                {/* Year Badge - top right */}
+                <div className="absolute top-3 right-3 px-2 py-1 bg-black/30 backdrop-blur-sm border border-[#d4af37]/30 rounded">
                   <span className="text-[#d4af37] text-[9px] font-semibold">
                     2024
                   </span>
@@ -124,11 +124,11 @@ export default function MarqueeSection() {
                 </div>
 
                 {/* Decorative corner elements */}
-                <div className="absolute top-3 right-3 w-8 h-8 border-t-2 border-r-2 border-[#d4af37]/30"></div>
                 <div className="absolute bottom-3 left-3 w-8 h-8 border-b-2 border-l-2 border-[#d4af37]/30"></div>
+                <div className="absolute bottom-3 right-3 w-8 h-8 border-b-2 border-r-2 border-[#d4af37]/30"></div>
 
-                {/* Year Badge */}
-                <div className="absolute top-3 left-3 px-2 py-1 bg-black/30 backdrop-blur-sm border border-[#d4af37]/30 rounded">
+                {/* Year Badge - top right */}
+                <div className="absolute top-3 right-3 px-2 py-1 bg-black/30 backdrop-blur-sm border border-[#d4af37]/30 rounded">
                   <span className="text-[#d4af37] text-[9px] font-semibold">
                     2024
                   </span>

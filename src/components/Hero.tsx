@@ -113,10 +113,10 @@ export default function Hero({ darkMode, onStartStoryClick, onViewBooksClick }: 
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="font-serif font-bold text-3xl sm:text-6xl md:text-7xl leading-[1.15] tracking-tight text-center break-words max-w-full"
+          className="font-serif font-bold text-[2rem] sm:text-6xl md:text-7xl leading-[1.15] tracking-tight text-center break-words max-w-full"
         >
           <span className="text-white block font-serif">{t("turnLifeInto")}</span>
-          <span className="block mt-2 text-4xl sm:text-7xl md:text-8xl">
+          <span className="block mt-2 text-[2.5rem] sm:text-7xl md:text-8xl">
             <span className="font-serif not-italic text-[#D4AF37] drop-shadow-[0_2px_20px_rgba(212,175,55,0.35)]">
               {lang === "HI" ? "कालजयी " : "Timeless "}
             </span>

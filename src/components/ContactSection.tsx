@@ -312,8 +312,8 @@ export default function ContactSection({ selectedService, matchedWriter, onClear
                 <div className="flex items-center justify-between relative">
                   {/* Connecting Line Behind Buttons */}
                   <div className="absolute left-6 right-6 top-1/2 -translate-y-1/2 h-[2px] bg-[#E3DDE9] z-0" />
-                  <div 
-                    className="absolute left-6 top-1/2 -translate-y-1/2 h-[2px] bg-[#2E1B5D] z-0 transition-all duration-500 ease-in-out" 
+                  <div
+                    className="absolute left-6 top-1/2 -translate-y-1/2 h-[2px] bg-[#2E1B5D] z-0 transition-all duration-500 ease-in-out"
                     style={{
                       width: currentStep === 1 ? '0%' : currentStep === 2 ? '50%' : '100%'
                     }}
@@ -331,13 +331,12 @@ export default function ContactSection({ selectedService, matchedWriter, onClear
                             if (step.number < currentStep) setCurrentStep(step.number as 1 | 2 | 3);
                           }}
                           disabled={step.number > currentStep}
-                          className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-xs transition-all duration-300 ${
-                            isCompleted
+                          className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-xs transition-all duration-300 ${isCompleted
                               ? 'bg-[#2E1B5D] text-white shadow-md cursor-pointer'
                               : isCurrent
-                              ? 'bg-[#2E1B5D] text-white ring-4 ring-[#2E1B5D]/20 scale-110 shadow-lg'
-                              : 'bg-white text-[#554466] border border-[#E3DDE9]'
-                          }`}
+                                ? 'bg-[#2E1B5D] text-white ring-4 ring-[#2E1B5D]/20 scale-110 shadow-lg'
+                                : 'bg-white text-[#554466] border border-[#E3DDE9]'
+                            }`}
                         >
                           {isCompleted ? <Check className="h-4 w-4 stroke-[3]" /> : step.number}
                         </button>
